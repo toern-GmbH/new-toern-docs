@@ -1,8 +1,109 @@
 ---
 title: "Sendcloud"
-description: "Verbinde Sendcloud mit toern."
+description: "Erstelle Versandlabels für Umtauschartikel automatisch über dein Sendcloud-Konto."
 ---
 
+Mit der **Sendcloud-Integration** erstellt toern automatisch Versandlabels für Umtauschartikel. Tauscht ein Kunde im Rahmen seiner Retoure einen Artikel um, bekommt der Ersatzartikel ein eigenes Versandlabel. Du hast dabei keinen manuellen Aufwand.
+
+Das Label wird über dein eigenes Sendcloud-Konto erstellt. Es wird an die Bestellung in Shopify angehängt und in den Retourendetails angezeigt. So weißt du jederzeit, wie und wohin der Ersatzartikel verschickt wird.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Damit Sendcloud-Labels erstellt werden, muss die **Versandlabel-Erstellung in deinen Umtauscheinstellungen aktiviert** sein. Das verwaltest du in den [Umtauscheinstellungen](/returns/exchange).
 </Note>
+
+## Wann wird das Versandlabel erstellt?
+
+Das Label wird während des Umtauschprozesses erstellt. Der genaue Zeitpunkt hängt von deiner Umtauschkonfiguration ab. Sobald der Umtauschprozess läuft, passiert Folgendes:
+
+1. Das Label wird generiert.
+2. Die Ersatzbestellung wird als erfüllt markiert.
+3. Die Sendungsverfolgung ist verfügbar.
+
+Wo du das siehst, hängt von deiner Umtauschmethode ab. Mehr dazu findest du [weiter unten](#label-in-shopify-anzeigen).
+
+## Einrichtung
+
+### Sendcloud-Zugangsdaten hinterlegen
+
+Bevor Labels erstellt werden können, verbindest du dein Sendcloud-Konto. Dafür brauchst du deine Sendcloud-API-Zugangsdaten: einen **Public Key** und einen **Secret Key**.
+
+1. Erstelle im Menü **Integrationen** deines Sendcloud-Kontos einen API-Key. Der [Quick Start Guide von Sendcloud](https://support.sendcloud.com/hc/en-us/articles/360024967012-Sendcloud-API-documentation-and-Quick-Start-Guide) führt dich durch diesen Schritt.
+2. Kopiere den Public Key und den Secret Key aus den API-Einstellungen deines Kontos.
+3. Trage beide Keys in den Sendcloud-Einstellungen in toern ein und speichere.
+
+<Warning>
+  Ein Key ist nur direkt nach der Erstellung sichtbar. Kopiere ihn daher sofort.
+</Warning>
+
+Sobald du die Zugangsdaten gespeichert hast, ist dein Konto verbunden und bereit, Labels zu erstellen.
+
+<Frame caption="Das Menü Integrationen in Sendcloud">
+  <img src="/images/docs/Sendcloud/integrations-page.png" alt="Sendcloud-Konto mit dem Menü Integrationen, in dem API-Integrationen verwaltet werden" />
+</Frame>
+
+<Frame caption="Hier findest du deine API-Keys in Sendcloud">
+  <img src="/images/docs/Sendcloud/api-keys.png" alt="Sendcloud-Konto mit dem Public Key und Secret Key einer Integration" />
+</Frame>
+
+<Frame caption="Sendcloud-Zugangsdaten in den Einstellungen eintragen">
+  <img src="/images/docs/Sendcloud/access_credentials.png" alt="Einstellungsseite, auf der Public Key und Secret Key von Sendcloud eingetragen werden" />
+</Frame>
+
+### Länder konfigurieren
+
+Retouren können aus verschiedenen Ländern kommen. Ein Ersatzartikel für ein Land muss eventuell aus einem anderen Lager oder mit einem anderen Versanddienst verschickt werden als für ein anderes Land. Deshalb richtest du für **jedes Land**, in das du versendest, eine eigene Konfiguration ein. Nutzt du für alle Länder dieselbe Konfiguration, legst du einfach eine Standardadresse fest.
+
+Für jedes Land gibst du drei Werte aus deinem Sendcloud-Konto an:
+
+- **Absenderadresse**: Die ID der Adresse, von der der Ersatzartikel verschickt wird (dein Lager oder die in Sendcloud hinterlegte Absenderadresse).
+- **Versandoption**: Der Versanddienst oder die Versandmethode, mit der das Label erstellt wird.
+- **Vertrag**: Die ID des Carrier-Vertrags, der zur Versandoption gehört. Lässt du das Feld leer, wählt Sendcloud automatisch den passendsten Vertrag aus.
+
+Diese Werte ermittelst du über API-Aufrufe an dein Sendcloud-Konto. Nutze dafür dieselben API-Zugangsdaten wie oben.
+
+- **Absenderadressen-ID**: Sende einen `GET`-Request an [`/api/v3/addresses/sender-addresses`](https://sendcloud.dev/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses). Die Antwort listet alle Absenderadressen in deinem Konto auf. Jeder Eintrag hat ein `id`-Feld. Nutze die ID der Adresse, von der du versenden möchtest.
+- **Versandoption**: Sende einen `POST`-Request an [`/api/v3/shipping-options`](https://sendcloud.dev/api/v3/shipping-options/return-a-list-of-available-shipping-options) mit den Ländercodes von Absender und Empfänger. Die Antwort listet alle verfügbaren Versandmethoden für diese Route auf. Wähle die Methode, mit der du den Ersatzartikel verschicken möchtest.
+- **Vertrags-ID (optional)**: Sende einen `GET`-Request an [`/api/v3/contracts`](https://sendcloud.dev/api/v3/contracts/retrieve-a-list-of-contracts). Die Antwort listet alle Verträge in deinem Konto auf, jeweils mit `id`-Feld, Carrier und Land. Nutze die ID des Vertrags, der zu deiner Versandoption passt.
+
+<Frame caption="Die Zuordnung von Ländern zu Adressen in deinen Einstellungen">
+  <img src="/images/docs/Sendcloud/country-address-map.png" alt="Einstellungsseite mit der länderspezifischen Adresszuordnung nach der Konfiguration" />
+</Frame>
+
+## Label in Shopify anzeigen
+
+Sobald ein Label erstellt wurde, passieren in Shopify zwei Dinge:
+
+- Der Ersatzartikel wird als **fulfilled** markiert und bekommt **Sendungsnummer und Tracking-Link**.
+- Das **Versandlabel als PDF** wird in deine Shopify-Dateien hochgeladen und der Bestellung als **Metafeld** hinzugefügt. Du siehst es dort oder auf der Retourendetailseite.
+
+Nutzt du die **native Umtauschmethode von Shopify**, siehst du das direkt auf der Bestellseite, zu der die Retoure gehört.
+
+<Frame caption="Fulfillment und Tracking an der Bestellung (native Umtauschmethode von Shopify)">
+  <img src="/images/docs/Sendcloud/fulfillment-shopify-exchange.png" alt="Shopify-Bestellseite mit erfülltem Umtausch, Sendungsnummer und Tracking-Link" />
+</Frame>
+
+Nutzt du die Umtauschmethode **neue Bestellung**, siehst du den Fulfillment-Status auf der neu erstellten Bestellung für die Ersatzartikel.
+
+<Frame caption="Fulfillment und Tracking an der neuen Umtauschbestellung">
+  <img src="/images/docs/Sendcloud/fulfillment-new-exchange-order.png" alt="Neue Umtauschbestellung in Shopify mit erfüllten Ersatzartikeln, Sendungsnummer und Tracking-Link" />
+</Frame>
+
+Im Fulfillment-Status öffnest du den Tracking-Link mit einem Klick auf die Sendungsnummer.
+
+In beiden Fällen findest du das hochgeladene Label in den Metafeldern der Bestellung.
+
+<Frame caption="Das Versandlabel als Metafeld an der Bestellung">
+  <img src="/images/docs/Sendcloud/metafield-label.png" alt="Shopify-Bestellseite mit dem Versandlabel für den Umtausch als Metafeld" />
+</Frame>
+
+## Label auf der Retourendetailseite anzeigen
+
+Das Versandlabel für den Ersatzartikel und die Tracking-Informationen siehst du auch direkt auf der **Retourendetailseite** im toern Dashboard. Hat eine Retoure sowohl ein Rücksendelabel als auch ein Versandlabel für den Umtausch, werden beide untereinander angezeigt.
+
+<Frame caption="Versandlabel und Tracking für den Umtausch in den Retourendetails">
+  <img src="/images/docs/Sendcloud/return_details_shipping_label.png" alt="Retourendetailseite mit dem Versandlabel für den Umtausch und den Tracking-Informationen" />
+</Frame>
+
+## Einschränkungen
+
+- Das Versandlabel für den Umtausch kann aktuell nur erstellt werden, indem der Umtauschprozess ausgeführt wird.

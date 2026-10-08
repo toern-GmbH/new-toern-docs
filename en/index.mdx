@@ -1,16 +1,208 @@
 ---
 title: "Introduction"
-description: "Welcome to the toern documentation"
+description: "Welcome to toern: an overview of the return portal, dashboard, and integrations, and your path through onboarding to go-live."
 ---
+
+Great to have you on board. toern automates your return process: your customers register returns in the **return portal**, and you manage them in the **toern dashboard**. With **integrations**, you connect toern to your shop, your fulfillment, your shipping carriers, and other tools.
 
 Find everything you need to set up and use toern.
 
-<Card title="Connect your Shopify shop" icon="rocket" href="/en/getting-started/shopify-integration">
-  Get started with toern by connecting your Shopify shop.
-</Card>
-<Card title="FFN Connect (JTL Partner)" icon="plug" href="/en/fulfillment/ffn-connect-jtl-partner">
-  Connect your fulfillment to toern via FFN Connect.
-</Card>
-<Card title="API Reference" icon="code" href="/en/api-reference/introduction">
-  Access your returns via the REST API.
-</Card>
+## What does toern offer?
+
+### Return portal
+
+In the return portal, your customers register their returns themselves.
+
+<CardGroup cols={2}>
+  <Card title="Return portal" icon="box-open" href="/en/returns/return-portal">
+    Login, item selection, customer inputs, return confirmation, dynamic linking, and return tracking.
+  </Card>
+  <Card title="Return reasons" icon="list-check" href="/en/returns/return-reasons">
+    Which return reasons your customers can select.
+  </Card>
+  <Card title="Exchange" icon="arrows-rotate" href="/en/returns/exchange">
+    Exchange items directly in the return process.
+  </Card>
+  <Card title="Gift card" icon="gift" href="/en/returns/gift-card-refund">
+    A shop gift card instead of a regular refund.
+  </Card>
+  <Card title="Withdrawal portal" icon="file-signature" href="/en/withdrawal/withdrawal-portal">
+    A separate process for withdrawals, direct cancellations, and withdrawal returns.
+  </Card>
+</CardGroup>
+
+### toern dashboard
+
+In the dashboard, you keep track of all returns and process them.
+
+<CardGroup cols={2}>
+  <Card title="Analytics" icon="chart-line" href="/en/dashboard/analytics">
+    All relevant return data at a glance.
+  </Card>
+  <Card title="Manage Returns" icon="list" href="/en/dashboard/manage-returns">
+    Manage all returns, create manual returns, tagging, and notifications.
+  </Card>
+  <Card title="Customer Tickets" icon="ticket" href="/en/dashboard/customer-tickets">
+    Manage customer inputs and AI tickets.
+  </Card>
+  <Card title="User management" icon="users" href="/en/dashboard/user-management">
+    Add more users for your brand.
+  </Card>
+</CardGroup>
+
+### Integrations
+
+<CardGroup cols={2}>
+  <Card title="REST API & webhooks" icon="code" href="/en/api-reference/introduction">
+    Access your returns via the REST API.
+  </Card>
+  <Card title="Klaviyo" icon="envelope" href="/en/integrations/klaviyo">
+    Connection and email flows with Klaviyo.
+  </Card>
+  <Card title="Zendesk" icon="headset" href="/en/integrations/zendesk">
+    Connection and ticket management with Zendesk.
+  </Card>
+  <Card title="Xentral" icon="warehouse" href="/en/integrations/xentral">
+    Connection to Xentral.
+  </Card>
+  <Card title="Sendcloud" icon="truck" href="/en/integrations/sendcloud">
+    Connection to Sendcloud.
+  </Card>
+  <Card title="FFN Connect (JTL Partner)" icon="plug" href="/en/fulfillment/ffn-connect-jtl-partner">
+    Connect your fulfillment to toern via FFN Connect.
+  </Card>
+</CardGroup>
+
+## Your onboarding
+
+Follow these steps to make your start as smooth as possible.
+
+<Steps>
+  <Step title="Connect your Shopify shop">
+    Install the [toern Shopify app](/en/shopify/app) and set up the [shop integration](/en/getting-started/shopify-integration).
+  </Step>
+  <Step title="Set up fulfillment">
+    Connect your fulfillment to toern. Learn more in [Fulfillment integration](/en/fulfillment/fulfillment-integration).
+  </Step>
+  <Step title="Set up shipping">
+    Set up your shipping carrier, e.g. [DHL](/en/carriers/dhl), [DPD](/en/carriers/dpd), [GLS](/en/carriers/gls), or [PostNord](/en/carriers/postnord). Learn more in [Return methods](/en/returns/return-methods).
+  </Step>
+  <Step title="Set up return portal logic">
+    Configure the most important settings. Learn more in [Set up return portal logic](/en/getting-started/return-portal-logic) and [Brand your portal](/en/getting-started/brand-your-portal).
+  </Step>
+  <Step title="Add users">
+    Add more users for your brand. Learn more in [User management](/en/dashboard/user-management).
+  </Step>
+  <Step title="Set up integrations">
+    Set up more integrations, e.g. Klaviyo or Zendesk.
+  </Step>
+  <Step title="Test the return process">
+    Test the entire return process before you go live.
+  </Step>
+  <Step title="Go live">
+    Add the link to your return portal to your shop.
+  </Step>
+</Steps>
+
+## Test the return process
+
+Test the return process end to end before you add the link to your shop and your customers can use it. Below we describe a basic test. Ideally, you test several orders and all known edge cases.
+
+### 1. Create a test order
+
+First, create a test order in Shopify. Ideally, choose 2–3 items. This gives you a choice when registering the return, and you can test different things per item, e.g. gift card or exchange.
+
+<Info>
+  The order must be **fulfilled** before a return can be registered. Customer data must also be on file. To test refunds, use a real payment method or the test method **Bogus**.
+</Info>
+
+### 2. Register a return
+
+Now register a return. There are two ways:
+
+- Via your return portal with order number and email address. Learn more in [Return portal](/en/returns/return-portal).
+- Manually via **Create new Return** on the **Manage Returns** page. Learn more in [Manage Returns](/en/dashboard/manage-returns).
+
+### 3. Run through the return in the dashboard
+
+Registered returns appear under **Manage Returns** with the status **registered**. Select the return and go through the entire return timeline. You need to simulate the **Received** status, since nothing is actually shipped.
+
+Try out all functions, e.g. classifying items, creating a new label, processing manual refunds, or issuing a gift card.
+
+### Check your return policy
+
+Before adding the link to your shop, check your return policy. It should cover all information on return periods and return fees for each country. If you don't have a policy yet, use our integration templates as a starting point. You'll find them in [Return portal](/en/returns/return-portal).
+
+### Guideflows for the features
+
+Don't feel like reading all the descriptions? These guideflows briefly show you what you can do on each page in toern. We recommend watching them in this order:
+
+<Tabs>
+  <Tab title="Overview">
+    <Frame><iframe src="https://app.guideflow.com/embed/dr9l8n5snr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Manage Returns">
+    <Frame><iframe src="https://app.guideflow.com/embed/vkm5vmot2r" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Manual Refunds">
+    <Frame><iframe src="https://app.guideflow.com/embed/gkyvmg5t4k" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Create Returns">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkjyg7vswk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Items Overview">
+    <Frame><iframe src="https://app.guideflow.com/embed/8koo8ogfwk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Ticket System">
+    <Frame><iframe src="https://app.guideflow.com/embed/dkd8nmqbgr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Customer KPIs">
+    <Frame><iframe src="https://app.guideflow.com/embed/yr4yo0qa4r" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Test the return process">
+    <Frame><iframe src="https://app.guideflow.com/embed/0p0dylquvk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+### Guideflows for the settings
+
+Want to configure all other settings right away? These guideflows cover all settings:
+
+<Tabs>
+  <Tab title="Shop Integration">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkj3l84cwp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Branding">
+    <Frame><iframe src="https://app.guideflow.com/embed/lpxg48eh1k" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Return">
+    <Frame><iframe src="https://app.guideflow.com/embed/er576g5clk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Refund">
+    <Frame><iframe src="https://app.guideflow.com/embed/9r28mo8uzr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Exchange">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkl3mqwajk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Return Collections">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkj3z9lswp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+## Go live
+
+All tested? Then add the link to your return portal to your shop. From this moment on you're **live** and your customers can register returns via toern.
+
+```text
+https://app.re-toern.de/<name>
+```
+
+You create and copy the link under **Settings → Shop Integration → Return Portal Link**. Learn more in [Connect your Shopify shop](/en/getting-started/shopify-integration#return-portal-link).
+
+<Warning>
+  As soon as the link is live in your shop, please let [support@re-toern.de](mailto:support@re-toern.de) know.
+</Warning>
+
+<Tip>
+  Still have questions? Contact our customer support at any time at [support@re-toern.de](mailto:support@re-toern.de). You'll also find answers to common questions in the [FAQ](/en/faq) and the [Glossary](/en/glossary).
+</Tip>

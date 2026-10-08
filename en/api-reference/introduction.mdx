@@ -1,7 +1,15 @@
 ---
 title: "Introduction"
-description: "Access your returns programmatically with the toern External API v1."
+description: "Access your returns programmatically with the toern External API v1 and receive return events in real time via webhooks."
 ---
+
+The toern External API lets you and your fulfiller automate and integrate your returns processes. Typical use cases:
+
+- Pre-import registered returns to prepare the incoming goods inspection.
+- Report status changes back to toern (for example inspected, accepted).
+- Automatically assess and classify returned items (A/B/C/D).
+
+Your fulfillment gets access to all relevant return data via the API. At the same time, inspection results, comments, and status changes can be sent back to toern. Learn how to connect your fulfiller under [Fulfillment integration](/en/fulfillment/fulfillment-integration).
 
 The toern External API returns JSON for every request. The base URL is `https://api.retoern.com`.
 
@@ -13,14 +21,71 @@ Authenticate with a bearer token:
 Authorization: Bearer toern_<kid>.<secret>
 ```
 
-Create API keys in your toern dashboard under **Settings → REST API Keys**. Each key is scoped to one brand and only sees that brand's data.
+Each key is scoped to one brand and only sees that brand's data.
+
+## Create an API key
+
+Create API keys in your toern dashboard under **Settings → REST API Keys**.
+
+1. Open your toern dashboard.
+2. Go to **Settings → REST API Keys**.
+3. Click **New API Key**.
+4. Copy the generated key.
+
+<Frame><img src="/images/docs/Settings/APINew01.png" alt="API key settings" /></Frame>
+
+<Frame><img src="/images/docs/Settings/APINew02.png" alt="New API key" /></Frame>
 
 <Warning>
   The API key is only shown once, right after it is created. Copy it immediately and store it securely.
 </Warning>
+
+All REST API keys start with the prefix `toern_`. You can create new keys or delete existing ones at any time. Deleting a key revokes its access.
 
 ## Conventions
 
 - Every timestamp is ISO 8601 UTC.
 - Every URL in a response (label PDFs, feedback images, questionnaire images) is presigned and expires. Download the files rather than storing the URLs.
 - The returns resource answers per **order**, not per return. If a customer ships an order back in several packages, the returns are collapsed into one entry. See the `Return` schema for how fields are merged, and read the `pageSize` notes before you implement pagination.
+
+## Webhooks
+
+Webhooks let you receive return events in real time. toern sends a request to your callback URL whenever a subscribed event occurs.
+
+### Set up a webhook
+
+1. Open your toern dashboard.
+2. Go to the webhook subscriptions in the settings.
+3. Create a new webhook subscription.
+4. Select the event and enter your callback URL.
+
+<Frame><img src="/images/docs/Settings/APINew03.png" alt="Webhooks" /></Frame>
+
+<Frame><img src="/images/docs/Settings/APINew04.png" alt="Create new webhook" /></Frame>
+
+<Warning>
+  Your callback URL must already return a valid **HTTP 200** response when you create the webhook. Otherwise the subscription can't be saved.
+</Warning>
+
+You can set up several webhook listeners with different callback URLs per event, for example one for staging and one for production.
+
+A secret is generated for every webhook subscription. Use it to verify the authenticity of the webhook requests you receive (for example via signature verification).
+
+### Events
+
+| Event | Triggered when |
+| --- | --- |
+| `returns.created` | A return has completed the registration process and was initially processed by toern. |
+| `returns.updated` | The status of an existing return changes. |
+
+**`returns.created`** covers returns registered via the return portal (for example label created, draft created in the shop system, email/Klaviyo event triggered). It also covers manual returns created in the toern dashboard or via the API.
+
+<Note>
+  **Special case: withdrawal with a cancelled order.** If an order is cancelled via the withdrawal portal before it was shipped or fulfilled, the return doesn't go through the normal multi-step registration process. It's created directly in a completed state.
+
+  In this case, toern still triggers the `returns.created` event (and no other webhook) at the same time the return is created. The return reason is `Order canceled via withdrawal portal before fulfillment or shipping`, `is_widerruf` is `true`, and `canceled` is also `true`. Filter on `canceled` to identify a cancelled withdrawal.
+</Note>
+
+### Payload
+
+The webhook payload has the same structure as the return resource of the REST API. See the `Return` schema in this API reference for the detailed definition.

@@ -1,8 +1,323 @@
 ---
 title: "E-Mail-Vorlagen"
-description: "Passe die E-Mails an, die deine Kunden erhalten."
+description: "Passe mit dem E-Mail Editor Betreff, Inhalt, Cc und Bcc der E-Mails an, die deine Kunden erhalten."
 ---
 
+Mit dem **E-Mail Editor** passt du die transaktionalen E-Mails von toern an deine Brand an. Du bearbeitest immer eine Kombination aus **E-Mail-Event** und **Sprache**. Du kannst Cc- und Bcc-Empfänger, Betreff und Inhalt ändern, Variablen einfügen, eine Vorschau prüfen und eine Test-E-Mail senden.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Der Editor ist für E-Mails verfügbar, die über **Transactional E-Mails by toern** versendet werden. Ist unter **Notification Service** Klaviyo ausgewählt, verwaltest du Inhalt und Versand weiterhin in Klaviyo. Mehr dazu unter [Klaviyo](/integrations/klaviyo).
 </Note>
+
+## Voraussetzungen
+
+Bevor du loslegst, prüfe Folgendes:
+
+- Dein Benutzerkonto hat Zugriff auf die Return-Einstellungen und den E-Mail Editor.
+- Unter **Settings → Returns → Customer Notifications** ist als **Notification Service** die Option **Transactional E-Mails by toern** ausgewählt.
+- Du weißt, welches Event und welche Sprache du bearbeiten möchtest. Jede Sprache wird separat gespeichert.
+
+## Editor öffnen
+
+1. Öffne im toern Dashboard **Settings**.
+2. Wähle **Returns** und scrolle zu **Customer Notifications**.
+3. Prüfe, dass **Transactional E-Mails by toern** als Notification Service ausgewählt ist.
+4. Klicke auf **Open email editor**, um alle Templates zu sehen. Alternativ öffnest du mit dem Stift-Symbol in einer Event-Zeile direkt das passende Template.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-entry.png" alt="Customer Notifications mit Notification Service, Send-Toggles, Stift-Symbolen und dem Link zum E-Mail Editor" />
+</Frame>
+
+<Note>
+  Die **Send**-Schalter und der E-Mail-Inhalt sind voneinander getrennt. Ein bearbeitetes Template wird nicht automatisch aktiviert. Prüfe nach dem Speichern, ob das Event in **Customer Notifications** eingeschaltet ist.
+</Note>
+
+## Funktionen im Überblick
+
+Der Editor besteht aus einer Werkzeugleiste, einer Seitenleiste, den Feldern für Adressen und Betreff sowie dem geteilten Bereich für Editor und Vorschau.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-overview.png" alt="Übersicht des E-Mail Editors mit Templates, Sprachen, Betreff, HTML-Quelle und Live-Vorschau" />
+</Frame>
+
+Die wichtigsten Bedienelemente:
+
+1. **All templates**: Öffnet oder schließt die Seitenleiste.
+2. **Full screen**: Vergrößert den Editor auf das ganze Browserfenster. Mit demselben Symbol oder der Escape-Taste verlässt du den Vollbildmodus.
+3. **Template-Name**: Zeigt das aktuell ausgewählte E-Mail-Event.
+4. **Standard, Custom oder Empty**: Zeigt, woher der aktuelle Inhalt stammt.
+5. **Sprachflaggen**: Wechseln zwischen den Sprachen deiner Brand.
+6. **Show simplified text / Show HTML source**: Wechselt zwischen vereinfachter Textansicht und HTML-Quelltext.
+7. **Test parameters** mit dem `{}`-Symbol: Öffnet die Beispieldaten für Variablen.
+8. **Send test** mit dem Papierflieger: Öffnet den Dialog für eine Test-E-Mail.
+9. **Save as custom / Save changes** mit dem Speichern-Symbol: Speichert die Anpassung für das aktuelle Event und die aktuelle Sprache.
+10. **Editor und Preview**: Links bearbeitest du den Inhalt, rechts siehst du die laufend aktualisierte Vorschau. Die Trennlinie dazwischen kannst du verschieben.
+
+Die Werkzeugleiste nutzt hauptsächlich Symbole. Fährst du mit der Maus über ein Symbol, zeigt ein Tooltip dessen Funktion.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-fullscreen.png" alt="E-Mail Editor im Vollbildmodus mit Template-Liste, HTML-Editor und Vorschau" />
+</Frame>
+
+## E-Mail anpassen
+
+### 1. Template auswählen
+
+Öffne in der Seitenleiste den Tab **Templates** und wähle das Event, das du bearbeiten möchtest. Die Templates sind nach Bereichen gruppiert, zum Beispiel Return Portal oder Widerruf.
+
+Manche Einstellungen umfassen mehrere E-Mail-Varianten. Das Event **Return is registered with instructions** hat zum Beispiel eigene Templates für:
+
+- Anmeldung mit Label
+- Anmeldung ohne Label
+- fehlgeschlagene Label-Erstellung
+- ausstehenden Brand-Upload
+- In-Store-Retoure
+
+Wähle deshalb immer die konkrete Variante, die du ändern möchtest.
+
+Der Badge neben dem Namen zeigt den aktuellen Stand:
+
+- **Standard**: Es wird die Standardvorlage von toern verwendet.
+- **Custom**: Für deine Brand, dieses Event und diese Sprache ist bereits eine eigene Version gespeichert.
+- **Empty**: Für diese Kombination gibt es noch keinen Inhalt. Du kannst eine neue Version anlegen.
+
+### 2. Sprache auswählen
+
+Wähle oben rechts die gewünschte Sprachflagge. Eine Anpassung gilt nur für die ausgewählte Sprache. Das deutsche und das englische Template sind voneinander unabhängig. Welche Sprachen es gibt, erfährst du unter [Sprachen](/branding/languages).
+
+Hat eine Sprache den Status **Empty**, kannst du den Inhalt neu anlegen. Prüfe dann besonders sorgfältig Betreff, Variablen und Test-E-Mail.
+
+<Warning>
+  Speichere vor jedem Sprach- oder Template-Wechsel. Ungespeicherte Änderungen werden beim Wechsel verworfen.
+</Warning>
+
+### 3. Cc und Bcc festlegen
+
+Die Felder **Cc** und **Bcc** sind optional.
+
+- **Cc**-Empfänger sind für die anderen Empfänger der E-Mail sichtbar.
+- **Bcc**-Empfänger erhalten eine Kopie, bleiben aber für andere unsichtbar.
+- Mehrere Adressen trennst du mit Komma oder Semikolon.
+- Die Adressen werden mit dem Template gespeichert und bei echten E-Mails dieses Events verwendet.
+
+<Warning>
+  Cc- und Bcc-Adressen werden auch bei Test-E-Mails berücksichtigt. Prüfe vor dem Testversand, dass keine unbeabsichtigten Empfänger eine Kopie bekommen.
+</Warning>
+
+Eine Adresse, die du zusätzlich unter **Return Notification BCC** eingerichtet hast, bleibt davon unberührt. Empfänger aus beiden Einstellungen können also zusammenkommen.
+
+### 4. Betreff bearbeiten
+
+Das Feld **Subject** ist der Betreff der E-Mail. Es darf beim Speichern nicht leer sein. Du kannst Text und unterstützte Variablen kombinieren, zum Beispiel:
+
+```text
+{{ data.brandName }}: Wir haben deine Retoure erhalten
+```
+
+In der Vorschau werden Variablen durch Testwerte ersetzt. Nutze möglichst nur Variablen, die für das Event im Tab **Variables** angeboten werden.
+
+### 5. Inhalt bearbeiten
+
+Für den Inhalt gibt es zwei Ansichten.
+
+**Show simplified text** eignet sich für reine Textänderungen. HTML-Tags und viele Layoutdetails sind ausgeblendet, Variablen bleiben sichtbar.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-simplified.png" alt="Vereinfachte Textansicht mit Variablen und Live-Vorschau" />
+</Frame>
+
+Nutze diese Ansicht, wenn du Formulierungen ändern willst, ohne das Layout anzufassen. Beachte dabei:
+
+- Lass Variablen vollständig in ihren doppelten geschweiften Klammern stehen.
+- Verschiebe oder lösche keine Variablen, deren Bedeutung du nicht kennst.
+- Nimm größere Struktur- oder Layoutänderungen in der HTML-Quelle vor.
+- Wechsle vor dem Speichern einmal zu **Show HTML source** und prüfe dort die Vorschau.
+
+**Show HTML source** zeigt den vollständigen HTML-Inhalt. Hier bearbeitest du unter anderem Überschriften, Absätze, Links, Hervorhebungen und Inline-Styles.
+
+Typische HTML-Bausteine:
+
+```html
+<h1>Überschrift</h1>
+<p>Ein Absatz mit <strong>hervorgehobenem Text</strong>.</p>
+<a href="https://example.com">Link öffnen</a>
+<br />
+```
+
+Der Editor ist kein Drag-and-drop- oder Rich-Text-Builder. Für Layout, Farben oder komplexere Strukturen brauchst du Grundkenntnisse in HTML und E-Mail-kompatiblem CSS.
+
+Die Textalternative für E-Mail-Programme ohne HTML wird beim Speichern und beim Testversand automatisch aus dem HTML erzeugt. Du bearbeitest sie nicht in einem eigenen Feld.
+
+### 6. Variablen verwenden
+
+Variablen fügen echte Daten wie Brandname, Kundenname, Bestellnummer oder Retourenadresse in die Nachricht ein. Welche Variablen verfügbar sind, hängt vom Event ab.
+
+1. Öffne in der Seitenleiste **Variables**.
+2. Setze den Cursor im Betreff oder im Inhalt an die gewünschte Stelle.
+3. Klicke auf eine Variable oder ziehe sie per Drag-and-drop in den Editor.
+4. Alternativ tippst du `{{` und wählst eine Variable aus der Autovervollständigung.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-variables.png" alt="Variables-Tab mit den für das Event verfügbaren Variablen" />
+</Frame>
+
+Eine normale Variable sieht so aus:
+
+```text
+{{ data.customer.name }}
+```
+
+Fährst du mit der Maus über eine eingefügte Variable, siehst du ihren aktuellen Testwert. Ein Klick auf die Variable öffnet **Test value**. Dort trägst du einen anderen erfundenen Wert für Vorschau und Testversand ein.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-variable-test-value.png" alt="Testwert einer Variablen direkt im Editor bearbeiten" />
+</Frame>
+
+<Note>
+  Testwerte ändern keine echten Kundendaten und werden nicht mit dem Template gespeichert. Sie dienen nur der Vorschau und dem Testversand.
+</Note>
+
+#### Erweiterte Variablenblöcke
+
+In der HTML-Quelle kannst du auch Abschnitte nutzen, die nur bei vorhandenen Daten ausgegeben werden:
+
+```text
+{{#data.return_method.instructions}}
+  <p>{{ data.return_method.instructions }}</p>
+{{/data.return_method.instructions}}
+```
+
+Unterstützt werden normale Variablen, Abschnitte, umgekehrte Abschnitte und Listen. Konstrukte wie `#if`, `#unless` oder `else` werden nicht unterstützt. Nutze für neue Logik am besten bestehende Blöcke aus dem Standardtemplate als Vorlage.
+
+### 7. Testparameter anpassen
+
+Klicke auf das `{}`-Symbol **Test parameters**, um alle Beispieldaten des Events zu öffnen. Die Werte liegen in einer JSON-Struktur, normalerweise unter `data`.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-test-parameters.png" alt="Bereich Test parameters mit erfundenen JSON-Beispieldaten" />
+</Frame>
+
+Ein vereinfachtes Beispiel:
+
+```json
+{
+  "data": {
+    "brandName": "Example Shop",
+    "customer": {
+      "name": "Max Mustermann"
+    }
+  }
+}
+```
+
+Änderungen erscheinen sofort in der Vorschau und werden auch für Test-E-Mails verwendet. Sie werden nicht gespeichert und beim Wechsel zu einem anderen Template oder einer anderen Sprache neu erzeugt.
+
+<Warning>
+  Verwende nur erfundene Testwerte und keine echten Kundendaten. Achte darauf, dass das JSON gültig bleibt: Anführungszeichen, Kommata und Klammern müssen stimmen.
+</Warning>
+
+### 8. Vorschau prüfen
+
+Rechts siehst du eine laufend aktualisierte Vorschau des Inhalts. Ziehe die Trennlinie zwischen **Editor** und **Preview**, um einem Bereich mehr Platz zu geben.
+
+Prüfe in der Vorschau vor allem:
+
+- Sind alle Texte vollständig?
+- Werden Variablen an der richtigen Stelle ersetzt?
+- Sind Überschriften, Absätze und Links sinnvoll aufgebaut?
+- Erscheinen optionale Bereiche nur, wenn Testdaten vorhanden sind?
+- Ist der Inhalt in jeder aktiven Sprache vollständig?
+
+Die Vorschau zeigt hauptsächlich den Inhalt. Das vollständige Layout und die Darstellung in verschiedenen E-Mail-Programmen können abweichen. Die echte Test-E-Mail ist deshalb die verbindliche Endkontrolle.
+
+### 9. Warnungen und Fehler beheben
+
+Der Editor prüft den Inhalt automatisch beim Speichern und beim Testversand. Einen separaten Validate-Button gibt es nicht.
+
+- **Gelbe Markierung**: Eine Variable ist für dieses Event unbekannt oder nicht offiziell unterstützt. Speichern und Testen sind möglich, der Wert kann in echten E-Mails aber leer oder falsch sein. Ersetze die Variable möglichst durch eine angebotene Variable.
+- **Rote Markierung**: Der Inhalt enthält einen blockierenden Syntax- oder Renderingfehler. Das Speichern wird gestoppt. Bei einem Fehler im Inhalt wechselt der Editor zur HTML-Quelle und markiert die betroffene Zeile.
+
+Schlägt eine Prüfung fehl, fahre mit der Maus über die Markierung, lies den Hinweis, korrigiere die Stelle und starte Speichern oder Testversand erneut.
+
+### 10. Test-E-Mail senden
+
+Klicke auf das Papierflieger-Symbol **Send test**.
+
+1. Trage eine gültige Empfängeradresse ein. Die Adresse des angemeldeten Benutzers kann vorausgefüllt sein.
+2. Prüfe noch einmal Cc und Bcc.
+3. Klicke im Dialog auf **Send test**.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-send-test.png" alt="Dialog zum Senden einer Test-E-Mail an eine Beispieladresse" />
+</Frame>
+
+Die Test-E-Mail nutzt den aktuellen Inhalt im Editor, auch wenn er noch nicht gespeichert ist. Außerdem nutzt sie die aktuellen Testparameter sowie Cc und Bcc. Der Testversand speichert das Template nicht.
+
+Prüfe im echten Postfach:
+
+- Absender und Betreff
+- alle eingefügten Variablen
+- Links und Call-to-Actions
+- Darstellung auf Desktop und Smartphone
+- Abstände, Farben und Formatierungen
+- die automatisch erzeugte Textalternative, falls dein E-Mail-Programm sie anzeigt
+
+### 11. Speichern
+
+Nach einer Änderung wird das Speichern-Symbol aktiv.
+
+- Bei **Standard** oder **Empty** heißt die Aktion **Save as custom**. Damit legst du eine eigene Version für deine Brand an. Die Standardvorlage von toern bleibt unverändert.
+- Bei **Custom** heißt die Aktion **Save changes**. Damit aktualisierst du deine bestehende Version.
+
+So gehst du vor dem Speichern am besten vor:
+
+1. Wechsle zur **HTML source**.
+2. Prüfe die Vorschau.
+3. Sende eine Test-E-Mail.
+4. Korrigiere alle roten Fehler und möglichst auch gelbe Warnungen.
+5. Klicke auf **Save as custom** oder **Save changes**.
+6. Warte auf die Bestätigung und prüfe, dass der Badge danach **Custom** zeigt.
+
+Die gespeicherte Custom-Version wird für alle zukünftigen E-Mails des Events in der ausgewählten Sprache verwendet.
+
+### 12. Zur Standardvorlage zurückkehren
+
+Hat ein Template den Status **Custom**, steht **Revert to standard** zur Verfügung.
+
+1. Wähle das richtige Event.
+2. Wähle die richtige Sprache.
+3. Klicke auf **Revert to standard**.
+4. Bestätige die Rückkehr zur Standardvorlage.
+
+Dabei wird nur die Custom-Version dieser Kombination aus Event und Sprache entfernt. Andere Sprachen und Templates bleiben unverändert.
+
+## Häufige Probleme
+
+<AccordionGroup>
+  <Accordion title="Open email editor wird nicht angezeigt">
+    Prüfe den Notification Service. Bei Klaviyo bearbeitest du Templates in Klaviyo. Fehlt der Link auch beim toern Service, fehlt deinem Benutzerkonto eventuell die nötige Berechtigung.
+  </Accordion>
+  <Accordion title="Save ist deaktiviert">
+    Der Button wird erst aktiv, wenn sich ein speicherbarer Inhalt geändert hat. Außerdem dürfen Betreff und Inhalt nicht leer sein.
+  </Accordion>
+  <Accordion title="Eine Variable ist gelb markiert">
+    Die Variable gehört wahrscheinlich nicht zum ausgewählten Event. Nutze eine Variable aus dem Tab **Variables**, auch wenn der Editor das Speichern mit der Warnung zulässt.
+  </Accordion>
+  <Accordion title="Speichern oder Testversand wird mit einem roten Fehler gestoppt">
+    Öffne die HTML-Quelle, fahre über die markierte Stelle und korrigiere die Syntax. Prüfe auch, ob alle Variablenblöcke korrekt geöffnet und geschlossen sind.
+  </Accordion>
+  <Accordion title="Die Test-E-Mail sieht anders aus als die Vorschau">
+    Die Vorschau ist eine schnelle Inhaltskontrolle. Das vollständige Layout und die Regeln des jeweiligen E-Mail-Programms siehst du erst beim echten Versand. Richte dich deshalb nach der Test-E-Mail.
+  </Accordion>
+</AccordionGroup>
+
+## Checkliste vor dem Livegang
+
+- Richtiges Event und richtige Variante gewählt
+- Jede benötigte Sprache geprüft und gespeichert
+- Betreff vollständig und verständlich
+- Nur unterstützte Variablen verwendet
+- Cc und Bcc kontrolliert
+- Vorschau mit realistischen, erfundenen Testwerten geprüft
+- Custom-Version erfolgreich gespeichert
+- Event unter **Customer Notifications** eingeschaltet

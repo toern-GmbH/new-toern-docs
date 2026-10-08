@@ -1,8 +1,100 @@
 ---
 title: "Erstattung"
-description: "Allgemeine Einstellungen für Rückerstattungen."
+description: "Automatische Rückerstattungen, Erstattungslimit, Restock, Versandkostenerstattung und Klärfälle bei Rabattcodes."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+In den Refund-Einstellungen legst du fest, wie und wann toern Rückerstattungen durchführt. So kannst du Erstattungen automatisieren und behältst trotzdem die Kontrolle über höhere Beträge oder Sonderfälle.
+
+Du findest die Einstellungen unter **Settings → Refund**.
+
+## Automatische Erstattung (Automatic Refund)
+
+Unter **Automatic Refunds** schaltest du automatische Erstattungen an oder aus. Standardmäßig sind sie ausgeschaltet.
+
+Mit dem Toggle rechts aktivierst du die automatische Erstattung. Danach kannst du Trigger und Grenzen festlegen.
+
+![Automatic Refund Einstellungen](/images/docs/Settings/RefundNew01.png)
+
+Eine Erstattung kann automatisch nach einem von drei Status der Retouren-Timeline ausgelöst werden:
+
+- **After registration**
+- **After it is received**
+- **After inspection**
+
+![Refund Trigger](/images/docs/Settings/RefundSettings02.png)
+
+Sobald toern diesen Status erhält und kein Problem bei der Retoure vorliegt, wird die Rückerstattung in Shopify automatisch ausgelöst. Das Geld geht über das ursprüngliche Payment Gateway zurück.
+
+## Erstattungslimit (Automatic Refund Limit)
+
+Für automatische Erstattungen kannst du eine Grenze für den Erstattungsbetrag setzen, z. B. 500 Euro. Wird diese Grenze überschritten, erstellt toern automatisch einen Klärfall zur Retoure. Die Rückerstattung führst du dann manuell durch.
+
+Das ist hilfreich, wenn du höhere Erstattungen zu einem bestimmten Zeitpunkt und nicht sofort durchführen möchtest.
+
+![Refund Limit](/images/docs/Settings/RefundNew02.png)
+
+## Shopify Restock
+
+toern kann in Shopify auch den Restock durchführen, sodass dein Bestand angepasst wird. Das ist vor allem relevant, wenn du kein paralleles ERP-System nutzt.
+
+![Shopify Restock](/images/docs/Settings/RefundNew03.png)
+
+<Warning>
+  Sprich diese Funktion mit deinem Fulfiller ab, damit Restock und Erstattung jeweils nur von einem Akteur durchgeführt werden. Wenn dein Fulfiller den Restock übernimmt, schalte ihn hier aus. Wenn toern die Erstattung übernimmt, sollte dein Fulfiller die Erstattung deaktivieren. Das ist vor allem für Gutscheine wichtig, damit diese ausgeführt werden können.
+</Warning>
+
+## Shopify-Erstattungsbenachrichtigung (Shopify Refund Notifications)
+
+Ist dieser Toggle aktiv, löst toern die in Shopify hinterlegte Refund-Benachrichtigung aus und sendet sie an deine Kunden. Sie enthält alle Informationen zur Rückerstattung.
+
+Falls du die E-Mail über Shopify nicht möchtest, kannst du die Benachrichtigung auch über toern oder mit einem Event über Klaviyo versenden. Die Einstellungen dazu findest du unter **Customer Notifications** in den [Retouren-Einstellungen](/returns/return-settings).
+
+![Shopify Refund Notifications](/images/docs/Settings/RefundNew04.png)
+
+## Erstattung der Versandkosten (Shipping Cost Refund Rules)
+
+Du kannst separat festlegen, ob und in welchem Umfang die ursprünglichen Versandkosten bei einer Retoure erstattet werden. Dabei unterscheidest du zwischen einer globalen Einstellung für alle Retouren und Regeln pro Land.
+
+![Shipping Cost Refund Rules](/images/docs/Settings/RefundNew05.png)
+
+### Globale Einstellung
+
+Mit dem globalen Toggle legst du fest, ob Versandkosten bei einer vollständigen Retoure grundsätzlich erstattet werden. Die Einstellung gilt für alle Länder ohne eigene Regel:
+
+- **Toggle deaktiviert**: Versandkosten werden nie erstattet.
+- **Toggle aktiviert**: Versandkosten werden erstattet, wenn es sich um eine vollständige Retoure handelt, also alle Artikel der Bestellung zurückgeschickt werden.
+
+### Länderspezifische Regeln
+
+Zusätzlich kannst du pro Land eine eigene Regel festlegen. Eine länderspezifische Regel hat immer Vorrang vor der globalen Einstellung. Diese Regeln stehen zur Verfügung:
+
+- **Never**: Versandkosten werden für dieses Land nie erstattet.
+- **Full Return**: Versandkosten werden nur erstattet, wenn alle Artikel der Bestellung zurückgeschickt werden. In Deutschland besteht darauf ein rechtlicher Anspruch.
+- **Always**: Versandkosten werden immer erstattet, egal ob vollständige oder Teil-Retoure.
+- **Fixed Amount**: Bei einer vollständigen Retoure wird ein fester Betrag (in EUR) erstattet. Liegt der Betrag über den tatsächlichen Versandkosten, werden die Versandkosten vollständig erstattet. Der Betrag wird bei Bedarf automatisch in die Originalwährung der Bestellung umgerechnet.
+
+## Klärfälle bei Rabattcodes (Discount Code Clarifications)
+
+Bei manchen Gutschein-Aktionen weicht die automatische Rückerstattung von Shopify von der gewünschten Erstattung ab. Das kann vor allem passieren, wenn parallel Rabatt- und Gutscheinaktionen laufen.
+
+Damit solche Erstattungen nicht automatisch durchgeführt werden, kannst du bestimmte Rabattcodes **blockieren**. Alle Retouren, die einen blockierten Code enthalten, werden dann zu einem Klärfall.
+
+![Discount Code Clarifications](/images/docs/Settings/RefundNew06.png)
+
+1. Klicke auf **Discount Codes laden**, um die bestehenden und aktiven Codes deiner Brand zu laden.
+2. Füge die gewünschten Codes zur Liste der blockierten Codes hinzu.
+
+Du kannst Codes jederzeit wieder entfernen.
+
+## Gutscheine statt Erstattung
+
+Statt einer normalen Rückerstattung kannst du deinen Kunden auch einen Gutschein anbieten. Alle Infos dazu findest du unter [Erstattung per Gutschein](/returns/gift-card-refund).
+
+## Technische Einschränkungen
+
+Neben deinen eigenen Einstellungen gibt es bei der automatischen Erstattung weitere technische Grenzen:
+
+- Pro Retoure kann nur einmal eine automatische Rückerstattung durchgeführt werden.
+- Maximal kann die bezahlte Summe der Bestellung erstattet werden.
+
+Die automatischen Änderungen des Retourenstatus und die Erstattung werden in deinem Shopsystem geloggt. Details findest du auf der Seite zu deinem Shopsystem, z. B. [Shopify](/getting-started/shopify-integration).

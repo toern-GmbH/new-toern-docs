@@ -1,8 +1,165 @@
 ---
 title: "Withdrawal settings"
-description: "All settings specific to withdrawals."
+description: "All settings for the withdrawal portal: portal, period, cancellation, blacklist, fees, emails, links, and countries."
 ---
 
+The withdrawal settings control the separate withdrawal process in the toern dashboard. Withdrawals are separate from the regular return portal. They do, however, reuse many existing building blocks such as branding, login, return methods, refund logic, and processing in **Manage Returns**.
+
+You can find all settings under **Settings → Withdrawal**.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-overview.png" alt="Overview of the withdrawal settings in the toern dashboard" />
+</Frame>
+
+## Withdrawal Portal
+
+Use the **Withdrawal Portal** toggle to enable or disable the withdrawal portal for your brand. When the portal is active, the table shows the portal link.
+
+The link follows this pattern:
+
+```text
+https://app.re-toern.de/widerruf/<portal-name>
+```
+
+`<portal-name>` is your brand's existing portal name. It's the same name your regular return portal uses.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-enable.png" alt="Active withdrawal portal link in the settings" />
+</Frame>
+
 <Note>
-  This page is a work in progress.
+  The withdrawal portal is only reachable if the withdrawal feature is unlocked for your brand and the toggle is active. If the portal is disabled, your customers land on an error page.
 </Note>
+
+## Withdrawal Period
+
+The **Withdrawal Period** defines how many days after the start of the withdrawal period your customers can register a withdrawal. The default is **14 days**. Allowed values range from **14 to 365 days**.
+
+If no custom period is saved, toern uses 14 days. At login, the portal checks whether the period has expired. If it has expired and no withdrawal has been registered yet, the portal shows an error message.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-period.png" alt="Withdrawal period setting in the dashboard" />
+</Frame>
+
+<Warning>
+  Check the legal requirements for your brand. In Germany, consumers are generally entitled to a withdrawal period of at least 14 days.
+</Warning>
+
+## Unfulfilled Order Cancellation
+
+**Unfulfilled Order Cancellation** enables a special case: if a Shopify order hasn't been fulfilled, shipped, or cancelled yet, your customer can confirm the withdrawal directly as a cancellation. This way, the order never gets shipped.
+
+If the option is active and the order is eligible, the process works like this:
+
+1. Your customer logs in to the withdrawal portal.
+2. toern checks that the order has no fulfillments and no shipping data yet.
+3. The portal shows a dedicated cancellation confirmation.
+4. After confirmation, toern cancels the order in Shopify and requests the full refund.
+5. toern still creates a withdrawal case so the case stays traceable in the dashboard.
+
+If the order is already in transit or has arrived, the withdrawal doesn't run as a cancellation but continues as a withdrawal return. Learn more under [Withdrawal portal](/en/withdrawal/withdrawal-portal).
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-cancelation.png" alt="Setting for direct order cancellation" />
+</Frame>
+
+## Unarchive Orders After Cancellation
+
+**Unarchive Orders After Cancellation** controls whether directly cancelled Shopify orders are unarchived again after the cancellation. This setting is only relevant for direct cancellations.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-unarchive.png" alt="Setting for unarchiving cancelled orders" />
+</Frame>
+
+## Withdrawal Blacklist Rules
+
+**Withdrawal Blacklist Rules** controls whether your return blacklist rules also apply in the withdrawal portal.
+
+If the setting is active, variants you excluded under **Settings → Return → Blacklist Articles** are also blocked for withdrawals. If it's disabled, the withdrawal portal ignores the blacklist.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-blacklist.png" alt="Setting for blacklist rules in the withdrawal portal" />
+</Frame>
+
+## Waive Return Fee
+
+If **Waive Return Fee** is active, the return fee is waived for withdrawals. Regular returns are not affected.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-waive-return-fee.png" alt="Setting to waive the return fee for withdrawals" />
+</Frame>
+
+## Refund Shipping Fee
+
+If **Refund Shipping Fee** is active, shipping costs are **always refunded** for withdrawals. Your brand's regular shipping refund rule is then overridden for withdrawals.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-refund-shipping-fee.png" alt="Setting to refund shipping costs for withdrawals" />
+</Frame>
+
+## Withdrawal Customer Notifications
+
+Under **Withdrawal Customer Notifications**, you control the email events for withdrawals. The events are separate from the regular return process but use the same email service as your returns.
+
+These events are available:
+
+1. Confirmation of receipt for the withdrawal
+2. Customer forgot the order number
+3. Withdrawal registered without label or instructions
+4. Withdrawal registered with instructions, for example label or address
+5. Withdrawal is in transit
+6. Withdrawal has been received
+7. Withdrawal has been inspected
+8. Withdrawal has been refunded
+9. Withdrawal has been completed
+10. Withdrawal has been cancelled
+
+Some basic events are always enabled for non-admin users because they're required for the process.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-customer-notifications.png" alt="Withdrawal Customer Notifications in the dashboard" />
+</Frame>
+
+If **Transactional E-Mails by toern** is selected as the notification service, you can edit the withdrawal templates in the email editor. There, select the withdrawal event first and then the language. Each event-language combination is saved separately.
+
+<Card title="Email templates" icon="envelope" href="/en/branding/email-templates">
+  Customize, preview, and test withdrawal and return emails.
+</Card>
+
+## Withdrawal Reference URLs
+
+The **Withdrawal Reference URLs** are shown in the withdrawal portal. There are three fields:
+
+1. **Withdrawal policy URL**: Link on the login page of the withdrawal portal.
+2. **Privacy policy URL**: Link to the privacy policy.
+3. **Legal notice URL**: Link to the legal notice (imprint).
+
+Empty fields are not shown to your customers. These URLs only apply to the withdrawal portal. Your regular return portal keeps using the regular reference URLs.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-reference-urls.png" alt="Reference URLs for the withdrawal portal" />
+</Frame>
+
+## Withdrawal Countries
+
+Under **Withdrawal Countries**, you define from which countries your customers can register a withdrawal.
+
+EU countries are prepared by default. However, a country can only be used in the withdrawal portal if it's also supported in your brand's regular return countries. If a country isn't set up in the return countries, the table shows **No return assignment** and the toggle is disabled.
+
+Use **Add country** to add more countries, as long as they're available in your [return settings](/en/returns/return-settings). You can enable, disable, or remove individual countries from the list.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-countries.png" alt="Withdrawal Countries in the dashboard" />
+</Frame>
+
+## Withdrawal reasons
+
+You currently can't set up custom reasons for withdrawals in toern. The reason is legal uncertainty: it's unclear whether selecting a reason counts as an additional hurdle in the withdrawal process. Once this is clarified, selectable reasons will be available again.
+
+## Limitations
+
+- The withdrawal portal must be unlocked as a feature for your brand.
+- The countries in the withdrawal portal depend on your brand's regular return countries.
+- Direct cancellation only works for eligible Shopify orders that haven't been fulfilled or shipped.
+- Exchange and FlexShare are disabled in the withdrawal portal.
+- The withdrawal fee and shipping refund settings don't apply to regular returns.

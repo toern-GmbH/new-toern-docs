@@ -1,8 +1,100 @@
 ---
 title: "Refund"
-description: "General settings for refunds."
+description: "Automatic refunds, refund limit, restock, shipping cost refunds and clarification cases for discount codes."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+In the refund settings, you define how and when toern issues refunds. This lets you automate refunds while keeping control over higher amounts and special cases.
+
+You can find the settings under **Settings → Refund**.
+
+## Automatic refund
+
+Under **Automatic Refunds**, you turn automatic refunds on or off. They're turned off by default.
+
+Use the toggle on the right to activate automatic refunds. You can then set triggers and limits.
+
+![Automatic Refund settings](/images/docs/Settings/RefundNew01.png)
+
+A refund can be triggered automatically after one of three statuses in the return timeline:
+
+- **After registration**
+- **After it is received**
+- **After inspection**
+
+![Refund trigger](/images/docs/Settings/RefundSettings02.png)
+
+As soon as toern receives this status and there's no issue with the return, the refund is triggered automatically in Shopify. The money goes back via the original payment gateway.
+
+## Automatic refund limit
+
+You can set a limit for the amount of automatic refunds, e.g. 500 euros. If this limit is exceeded, toern automatically creates a clarification case for the return. You then process the refund manually.
+
+This is helpful if you want to process higher refunds at a specific time rather than immediately.
+
+![Refund limit](/images/docs/Settings/RefundNew02.png)
+
+## Shopify restock
+
+toern can also restock items in Shopify so your inventory is updated. This is mainly relevant if you don't use a parallel ERP system.
+
+![Shopify restock](/images/docs/Settings/RefundNew03.png)
+
+<Warning>
+  Agree on this feature with your fulfiller so that restock and refund are each handled by only one party. If your fulfiller handles restocking, turn it off here. If toern handles refunds, your fulfiller should disable refunds. This is especially important for gift cards so they can be issued.
+</Warning>
+
+## Shopify refund notifications
+
+If this toggle is active, toern triggers the refund notification set up in Shopify and sends it to your customers. It contains all information about the refund.
+
+If you don't want the email via Shopify, you can also send the notification via toern or with an event via Klaviyo. You'll find these settings under **Customer Notifications** in the [return settings](/en/returns/return-settings).
+
+![Shopify refund notifications](/images/docs/Settings/RefundNew04.png)
+
+## Shipping cost refund rules
+
+You can define separately whether and to what extent the original shipping costs are refunded for a return. You can choose between a global setting for all returns and rules per country.
+
+![Shipping cost refund rules](/images/docs/Settings/RefundNew05.png)
+
+### Global setting
+
+The global toggle defines whether shipping costs are generally refunded for a full return. It applies to all countries without their own rule:
+
+- **Toggle disabled**: Shipping costs are never refunded.
+- **Toggle enabled**: Shipping costs are refunded for a full return, meaning all items of the order are sent back.
+
+### Country-specific rules
+
+In addition, you can set a rule per country. A country-specific rule always takes precedence over the global setting. These rules are available:
+
+- **Never**: Shipping costs are never refunded for this country.
+- **Full Return**: Shipping costs are only refunded if all items of the order are sent back. In Germany, customers have a legal right to this.
+- **Always**: Shipping costs are always refunded, whether it's a full or partial return.
+- **Fixed Amount**: A fixed amount (in EUR) is refunded for a full return. If the amount is higher than the actual shipping costs, the shipping costs are refunded in full. The amount is automatically converted into the original currency of the order if needed.
+
+## Discount code clarifications
+
+For some gift card or discount campaigns, Shopify's automatic refund differs from the refund you want. This can happen especially when discount and gift card campaigns run in parallel.
+
+To prevent such refunds from being processed automatically, you can **block** specific discount codes. All returns containing a blocked code then become a clarification case.
+
+![Discount code clarifications](/images/docs/Settings/RefundNew06.png)
+
+1. Click **Discount Codes laden** to load your brand's existing and active codes.
+2. Add the codes you want to the list of blocked codes.
+
+You can remove codes again at any time.
+
+## Gift cards instead of refunds
+
+Instead of a regular refund, you can also offer your customers a gift card. You'll find everything about this under [Gift card refund](/en/returns/gift-card-refund).
+
+## Technical limitations
+
+In addition to your own settings, automatic refunds have further technical limits:
+
+- An automatic refund can only be processed once per return.
+- The maximum refund is the amount paid for the order.
+
+Automatic changes to the return status and the refund are logged in your shop system. You'll find details on the page for your shop system, e.g. [Shopify](/en/getting-started/shopify-integration).

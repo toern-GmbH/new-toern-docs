@@ -1,8 +1,146 @@
 ---
 title: "Return settings"
-description: "General settings for returns and incoming packages."
+description: "Set the return period, customer notifications, clarifications, and excluded items for your return process."
 ---
 
+Under **Settings → Return**, you adjust all general settings for your return process. This is where you decide how long customers can return items, which emails they receive, and when a return should be reviewed manually.
+
 <Note>
-  This page is a work in progress.
+  The shipping-related settings on this page (Return Countries, Fallback Label Sender Address, Label Order Identifier, and Return Slip Attachment) are described under [Return methods](/en/returns/return-methods).
 </Note>
+
+## Return Period
+
+The return period is the time in which your customers can register a return. You can set any number of days.
+
+toern automatically adds a **4-day buffer** to the period. From experience, shipping information often arrives late, and an order takes 4 days on average to reach the customer. This way, the period is counted from when the customer receives the order as far as possible, not from when it leaves the warehouse.
+
+<Frame><img src="/images/docs/Settings/ReturnNew01.png" alt="Return period setting" /></Frame>
+
+toern also checks via API whether there is a new fulfillment status for the order and adjusts the period accordingly. Since these statuses are not always 100% up to date, the 4-day buffer remains.
+
+<Warning>
+  Under German law, the minimum period for withdrawing from a purchase contract is 14 days.
+</Warning>
+
+## Customer Notifications
+
+The return process has many steps, from label creation to refund. To keep your customers informed, you can trigger emails at these steps:
+
+1. Customer forgot their order number
+2. Return was registered (it's not yet clear how the return continues, i.e. with or without label)
+3. Return was registered and the information for the next steps is ready
+4. Return is on its way to the fulfillment center
+5. Return has arrived at the fulfillment center
+6. Return was classified or inspected
+7. Return was refunded
+8. Return was completed
+9. Return was canceled
+
+<Frame><img src="/images/docs/Settings/ReturnNew03.png" alt="Email notification settings" /></Frame>
+
+Use the toggles to decide whether an email is triggered. By default, toern sends the emails using its standard templates.
+
+You can't turn off steps 1 and 3. They are essential for registering a return.
+
+<Warning>
+  When a refund is issued, Shopify usually sends an email anyway. Make sure emails aren't duplicated unless you want them to be.
+</Warning>
+
+### Customize email templates
+
+If **Transactional E-Mails by toern** is selected as the notification service, you can customize the templates via **Open email editor** or the pencil icon next to an event. Event, language, subject, Cc/Bcc, and content are saved separately. The editor doesn't change the event's send toggle.
+
+<CardGroup cols={2}>
+  <Card title="Email templates" icon="envelope" href="/en/branding/email-templates">
+    Step-by-step guide for templates, variables, preview, and test sending
+  </Card>
+  <Card title="Klaviyo" icon="plug" href="/en/integrations/klaviyo">
+    Alternative delivery and your own flows in Klaviyo
+  </Card>
+</CardGroup>
+
+<Warning>
+  As soon as you switch the notification service to Klaviyo, toern no longer sends any emails. Before saving, make sure the Klaviyo connection works and all flows are set up.
+</Warning>
+
+## Return Notification BCC
+
+For step 3 ("Return was registered and the information for the next steps is ready"), you can also add any email addresses in BCC. These addresses then receive an email for every registered return.
+
+1. Click **Add E-mail**.
+2. Enter the email address.
+3. Repeat for more addresses if needed.
+
+<Frame><img src="/images/docs/Settings/ReturnNew04.png" alt="Return notification BCC settings" /></Frame>
+
+<Note>
+  With a high return volume, this can lead to a lot of emails.
+</Note>
+
+## Inspection based Clarifications
+
+Here you define which classification from your fulfiller creates a clarification case. A clarification case stops the automation, so you can review the return manually.
+
+Fulfillers can send a classification from **A to D** to toern for each returned item. Usually:
+
+- **A**: resellable item
+- **B** and **C**: grades in between
+- **D**: defective, non-resellable item
+
+Which classifications trigger a clarification case depends on your agreements with your fulfillment provider. You can change the setting at any time.
+
+In the **Default Classification** drop-down, you can only select classification A. If A isn't enabled, the selection stays on **None** and the drop-down is disabled. Existing classifications are not overwritten. An automatic classification is documented in the activity timeline.
+
+<Frame><img src="/images/docs/Settings/ReturnNew10.png" alt="Clarifications based on classification" /></Frame>
+
+## Warn About Unclassified Items
+
+With this setting, a warning appears when you mark a return as inspected with **Mark inspected** although not all items are classified yet. You need to confirm a dialog before continuing.
+
+This makes sure every item of a return has been graded correctly (e.g. A–D) and the process isn't completed too early.
+
+<Frame><img src="/images/docs/Settings/ManageReturnsInspectionWarning.png" alt="Warning for unclassified items" width="600" /></Frame>
+
+## Fulfillment based Clarifications
+
+If there is an API connection to your fulfillment provider, they can send additional notes for each returned item. These refer to the item or the whole return. Examples:
+
+- The customer refused to accept the delivery.
+- The order couldn't be delivered.
+- The packaging is damaged.
+
+To keep such returns from running through automatically, you can have a clarification case created automatically for specific notes.
+
+1. Click **Add Reason**.
+2. Enter the text of the note your fulfiller sends to toern.
+3. Optional: Set a refund adjustment.
+
+<Warning>
+  The text must be spelled **exactly** like your fulfiller's note. Otherwise toern can't match it.
+</Warning>
+
+With the adjustment, you can reduce or increase the refund amount depending on the note. For example, you can increase the return fee if the customer refused the delivery and this causes extra work for you. Communicate such costs transparently in your shop.
+
+<Frame><img src="/images/docs/Settings/ReturnNew08.png" alt="Clarifications based on notes from the fulfiller" /></Frame>
+
+You can edit or remove all reasons later.
+
+## Blacklist Articles
+
+Here you exclude individual items from return registration and the entire return process. In the portal, your customers then see a notice that **no return is possible**.
+
+Search for items by their **SKU** and add them.
+
+<Frame><img src="/images/docs/Settings/ReturnNew09.png" alt="Exclude items from the return process" /></Frame>
+
+## Limitations
+
+<Warning>
+  **Email notifications**
+  - The available email events are predefined by toern. You can enable or disable them per event.
+  - The email editor is an HTML and variable editor, not a visual drag-and-drop builder.
+
+  **Clarifications**
+  - Automatic inspection-based clarification cases are defined only via the classification (A–D). You decide which classification creates a clarification case and coordinate this with your fulfillment provider. No clarification cases are created automatically based on return reasons or notes.
+</Warning>

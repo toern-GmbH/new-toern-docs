@@ -1,8 +1,93 @@
 ---
 title: "Zendesk"
-description: "Connect Zendesk to toern."
+description: "Show return information directly in Zendesk tickets and forward customer tickets from toern to Zendesk automatically."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With the **Zendesk integration**, your support team has all return information right in Zendesk. No need to switch between tools.
+
+## What does the integration do?
+
+toern offers a two-part integration with Zendesk:
+
+1. **toern app in Zendesk**: You install toern as a Zendesk app. If a ticket has a related return, you see the return information directly in the ticket.
+2. **Customer tickets in Zendesk**: All [customer tickets](/en/dashboard/customer-tickets) that toern creates automatically are forwarded to Zendesk and created there as tickets. This lets you respond to them directly in Zendesk.
+
+## Setup
+
+### Add your credentials in toern
+
+1. Open your toern dashboard.
+2. Go to [Settings → Third Party Services → Zendesk](https://www.admin.re-toern.de/settings/third-party/zendesk).
+3. Enter your **Zendesk Subdomain**. This is the beginning of your Zendesk URL. For `https://toerngmbh.zendesk.com/agent/home/tickets`, the subdomain is `toerngmbh`.
+4. Enter the **Zendesk User Email** of your admin user.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew01.png" alt="Zendesk access credentials in toern" /></Frame>
+
+### Create a Zendesk access token
+
+The **Zendesk Access Token** establishes the connection to Zendesk. You create it in the Zendesk Admin Center.
+
+1. Open the **Admin Center** in Zendesk.
+2. Go to **API → API tokens**.
+3. Create a new token and copy it.
+4. Add the token in the Zendesk settings in toern.
+
+<Warning>
+  The token is only shown once. Copy it right away.
+</Warning>
+
+<Warning>
+  For customer ticket management to work, the **Allow API token access** checkbox must be enabled in the Admin Center under **API → API configurations**.
+</Warning>
+
+### Enable Zendesk
+
+Once your credentials are saved, turn on the integration.
+
+- **Active**: Enables the integration with Zendesk.
+- **Create Tickets from Portal**: Forwards customer tickets from toern to Zendesk automatically, so you can handle them there.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew02.png" alt="Enable Zendesk" /></Frame>
+
+### Generate the API portal token
+
+To install the toern app in Zendesk, you need a **toern API Portal Token**. Zendesk uses this token to identify your brand.
+
+1. Generate the token in the Zendesk settings in toern.
+2. Copy it as soon as Zendesk asks for it during the app installation.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew03.png" alt="toern API portal token" /></Frame>
+
+### Install the toern app in Zendesk
+
+1. Open the **Admin Center** in Zendesk.
+2. Go to **Apps → Zendesk Support apps**.
+3. Click **Upload private app** and upload the `.zip` file of the toern app.
+4. Enter "toern Returns Integration" as the name and click **Upload**.
+5. Paste the **toern API Portal Token**.
+6. Paste the **allowed domain** (see below).
+7. Install the app. No further settings are needed.
+
+<Info>
+  The `.zip` file is named something like `toernReturnsIntegration-V28.zip` and is provided exclusively by toern. If you still need it, contact [support@re-toern.de](mailto:support@re-toern.de).
+</Info>
+
+### Whitelist the domain
+
+During installation, Zendesk asks for a domain to whitelist. You'll find the right toern domain at the bottom of the Zendesk settings in toern. Copy it and paste it into Zendesk. Only then will the app run without errors.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew04.png" alt="Domain to whitelist" /></Frame>
+
+### Interactive guide
+
+<Frame><iframe src="https://app.guideflow.com/embed/gky24j0u4r" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+
+## Using Zendesk
+
+Once the toern app is installed, you'll find it in your Zendesk tickets under **Apps**. There you see all relevant information on the returns related to the ticket.
+
+If **Create Tickets from Portal** is active, all customer tickets from toern also show up as new tickets in Zendesk.
+
+## Limitations
+
+- toern currently only offers a private app for the Zendesk integration. This requires at least the **Growth** plan in Zendesk.

@@ -1,8 +1,47 @@
 ---
 title: "Quivo"
-description: "Binde Quivo als Versanddienstleister für Retouren an."
+description: "Erstelle Retourenlabels über die Schnittstelle von QUIVO Logistics."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Quivo ist ein Fulfillment-Dienstleister, mit dem toern eine Partnerschaft hat. Viele Quivo-Kund:innen wickeln Versand und Retouren über die Carrier-Verträge von Quivo ab. Deshalb nutzt toern direkt die Quivo-Schnittstelle, um deine Retourenlabels zu erstellen.
+
+<Info>
+  Läuft dein Fulfillment über Quivo, laufen in der Regel auch Versand und Labelerstellung über Quivo. Eine DHL-Integration ist dann nicht nötig.
+</Info>
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+## Einrichtung
+
+### Zugangsdaten anfragen
+
+Für die Labelerstellung braucht toern diese Daten aus **Quivo Web Connect**:
+
+- **Username**
+- **Password**
+- **API Key**
+- **Hash**
+
+Du erhältst sie von deiner Ansprechperson bei Quivo.
+
+### Access Credentials in toern hinterlegen
+
+1. Öffne im toern Dashboard die [Quivo Shipping-Einstellungen](https://www.admin.re-toern.de/settings/third-party/quivo).
+2. Füge die Daten in die entsprechenden Felder ein.
+3. Klicke auf **Update Quivo**.
+
+![Quivo Access Credentials](/images/docs/Quivo/QuivoNew01.png)
+
+## Return Label Price Optimization
+
+Quivo kann je nach Land einen anderen Carrier über die Quivo API nutzen, damit immer das günstigste Label verwendet wird. Diesen Service kannst du auch über toern nutzen. Ist die Funktion aktiv, prüft toern bei jeder Retoure vorab, ob der günstigste Dienstleister verwendet wird.
+
+Du aktivierst die Funktion in den Quivo-Einstellungen über den Toggle.
+
+![Quivo Label Price Optimization](/images/docs/Quivo/QuivoNew02.png)
+
+![Quivo Label Price Optimization Toggle](/images/docs/Quivo/QuivoNew03.png)
+
+<Warning>
+  Die Funktion braucht ein spezielles Setup: In Quivo Web Connect müssen spezielle Retourenlinks pro Gruppen-ID erstellt werden. toern kann das über die Quivo API erledigen. Kontaktiere vor dem Aktivieren bitte support@re-toern.de, damit alle Gruppen-IDs richtig gesetzt und die zugehörigen Links aktiviert sind. Sonst funktioniert die Funktion nicht richtig.
+</Warning>

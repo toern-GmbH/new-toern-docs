@@ -1,8 +1,145 @@
 ---
 title: "Connect your Shopify shop"
-description: "Connect your Shopify shop to toern so orders and returns are synchronized."
+description: "Connect your Shopify shop to toern and set up the shop integration: links, support email, notifications, return portal link, and login."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+To let toern receive all data about your orders and send return information back to your shop, you first connect your Shopify shop. Then you set up the basic information for your return portal in the **Shop Integration** settings.
+
+## Connect your shop
+
+You connect your Shopify shop via the toern Shopify app. The installation only takes a few minutes. You also create your admin user for the toern dashboard and select your plan.
+
+<Card title="Install the Shopify app" icon="shopify" href="/en/shopify/app">
+  Step-by-step guide to the installation and the permissions in Shopify.
+</Card>
+
+## Shop Integration
+
+Under **Settings → Shop Integration** you see all technical information about your connected shop system. This is also where you manage the links, email addresses, and login options for your return portal.
+
+<Frame><iframe src="https://app.guideflow.com/embed/zkj3l84cwp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+
+### Return Portal Reference URLs
+
+These URLs are linked in the return portal and lead to your shop's pages. For the best customer experience, you should always fill them in.
+
+**Return Policy URL**: Always points to your current return policy.
+
+- Your customers can jump straight to your policy during the return process.
+- The URL is shown on the start page of the return portal, directly below the login button.
+- The URL is referenced in the exchange step and when selecting the refund option.
+
+**Privacy Policy URL**: Always points to your current privacy policy. The URL is shown in the footer of the return portal start page.
+
+**Legal Notice URL**: Always points to your current legal notice. The URL is shown in the footer of the return portal start page.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu01.png" alt="Return Portal Reference URLs" /></Frame>
+
+### Primary Support E-Mail
+
+All emails toern sends to your customers refer to your support email. Your customers can contact this address with problems or questions.
+
+Enter the email address of your customer support or a shared inbox. This way your customers' requests always reach someone.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu02.png" alt="Primary Support E-Mail" /></Frame>
+
+### Receive Notifications about Event Email
+
+toern processes returns automatically. Sometimes, though, there are critical inputs or returns you should review. To hear about them right away, you can get email notifications. There are two cases:
+
+1. **Urgent Customer Tickets**: toern AI creates a customer ticket when a customer input seems urgent. For example, when product quality is criticized or a negative experience is described. The ticket includes a recommended action. This way you can respond to your customer's experience right away.
+2. **Clarification cases / returns that need a review**: toern automatically triggers a clarification case when there are problems in the return process. For example, when no label can be created, a D return occurs, or the refund can't be processed. toern always adds a description of the case so you can solve the problem yourself.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu03.png" alt="Notification settings" /></Frame>
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu04.png" alt="Email addresses for notifications" /></Frame>
+
+You decide how many email addresses you add and which cases are active for each address. You also set the language of the emails: **German** or **English**.
+
+Learn more about customer tickets in [Customer Tickets](/en/dashboard/customer-tickets).
+
+### Return Portal Link
+
+Here you create the URL for your return portal. Currently only **one URL** per portal is possible at a time. If you need more, contact toern support.
+
+If you've already created a link, you can copy it here. To create a new URL, first delete the existing link.
+
+Simply enter the name you want. The URL then has this format:
+
+```text
+https://app.re-toern.de/<name>
+```
+
+- The name must not contain special characters that have a meaning in URLs. For example, `-` is allowed, `?` is not.
+- Maximum length: **50 characters**.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu05.png" alt="Creating the Return Portal Link" /></Frame>
+
+### Tracking Page Link
+
+Under **Tracking Page Link** you find the URL of the customer view for the return status. It's created automatically from the active return portal link:
+
+```text
+https://app.re-toern.de/<name>/tracking
+```
+
+- The tracking link is read-only. You can copy it, but you can't edit or delete it.
+- If the return portal link changes, the tracking link is updated accordingly.
+- The URL doesn't contain an order number or ZIP code. Customers who aren't logged in enter this data on the tracking page.
+
+Learn more in [Return portal](/en/returns/return-portal).
+
+### Return Portal Login Preferences
+
+Here you define which data your customers can use to log in to the return portal. The default is the **order number** and the **email address**.
+
+With marketplaces, the order often doesn't contain your customer's email address but an individual marketplace email address. That's what the **ZIP Login** is for. It lets your customers log in with their ZIP code instead of their email address. It's less individual than the private email address, but it makes you independent of the marketplaces.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu06.png" alt="Enabling ZIP Login" /></Frame>
+
+If ZIP Login is active and we can't find a private email address, we additionally ask for it during the return process. This way the return label can still be sent to your customers automatically.
+
+#### Additional Reference Number Login
+
+If this option is active, your customers can log in not only with order number and email address, but also with reference numbers from third-party systems such as Xentral.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu08.png" alt="Enabling Additional Reference Number Login" /></Frame>
+
+### Customer Traffic Light Indicator
+
+The **Customer Traffic Light Indicator** rates the return behavior of each of your customers. It's shown under **Manage Returns** and helps you assess customers and returns better.
+
+<Frame><img src="/images/docs/Dashboardprozess/Managereturns07.png" alt="Traffic light rating in Manage Returns" /></Frame>
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu07.png" alt="Traffic Light Indicator settings" /></Frame>
+
+You can adjust the traffic light for three KPIs. It's calculated as soon as a customer has placed at least **3 orders** with you.
+
+1. **Return Rate Threshold**: Ratio of returns to orders. This is the return rate on package level.
+2. **Return Metrics for Stick Items**: Ratio of returned to kept items across all orders. This is the return rate on item level.
+3. **Monetary Metric**: Ratio of returned to kept revenue in euros across all orders. This shows you directly how much revenue you've already made with a customer.
+
+For each KPI you set a lower and an upper threshold:
+
+- Below the lower threshold: **green**
+- Between the thresholds: **yellow**
+- Above the upper threshold: **red**
+
+## More integrations
+
+toern offers more integrations with third-party systems. To make them work automatically, fill in the settings of the respective integration and activate it.
+
+<CardGroup cols={2}>
+  <Card title="Quivo" icon="truck" href="/en/carriers/quivo">
+    Set up and customize Quivo.
+  </Card>
+  <Card title="Klaviyo" icon="envelope" href="/en/integrations/klaviyo">
+    Set up and customize Klaviyo.
+  </Card>
+  <Card title="Xentral" icon="warehouse" href="/en/integrations/xentral">
+    Set up and customize Xentral.
+  </Card>
+  <Card title="Zendesk" icon="headset" href="/en/integrations/zendesk">
+    Set up and customize Zendesk.
+  </Card>
+</CardGroup>

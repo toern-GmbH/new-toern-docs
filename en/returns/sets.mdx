@@ -1,8 +1,20 @@
 ---
 title: "Sets"
-description: "Define how sets and bundles are handled in returns."
+description: "How toern handles sets and bundles in returns."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+Sets (also called bundles) consist of several items sold together. In the return process, they are treated as one unit or as individual items, depending on your Shopify app.
+
+## Sets via Shopify bundle apps
+
+toern can currently only process sets automatically if you use an official bundle app in Shopify. The app stores the individual items of a set in the order. This lets your customers select the individual items in the return portal.
+
+## Clarification case for set items
+
+If toern can't process a set automatically, the clarification case **Return contains Set item requiring clarification** is created. In this case, process the return manually in the toern dashboard under [Manage returns](/en/dashboard/manage-returns).
+
+## Limitations
+
+<Warning>
+  Without a bundle app, toern can't automate sets. The return detail view doesn't show which set an item belongs to and doesn't handle it separately.
+</Warning>

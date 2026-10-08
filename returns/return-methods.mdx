@@ -1,8 +1,152 @@
 ---
 title: "Retourenmethoden"
-description: "Konfiguriere, wie Kunden ihre Retoure zurücksenden können."
+description: "Lege fest, wie Kunden ihre Retoure zurücksenden: Versanddienstleister, Retourenländer, Label-Einstellungen und Retourenschein."
 ---
 
+Damit deine Kunden ihre Retouren bequem zurückschicken können, erstellt toern idealerweise automatisch Versandlabels. Dafür verknüpfst du dein Dashboard direkt mit deinem Versanddienstleister. Alternativ kannst du auch ohne integrierten Versandservice arbeiten. In diesem Fall senden deine Kunden die Retoure selbst an eine Adresse, die du festlegst.
+
+## Unterstützte Versanddienstleister
+
+toern bietet native Integrationen für die gängigsten Carrier an. Wähle den Dienstleister aus, mit dem du einen aktiven Vertrag hast:
+
+1. **DHL**
+2. **DPD Web Connect**
+3. **GLS Shop Returns**
+4. **PostNord Return Drop Off**
+5. **Quivo Logistics**: Falls Quivo dein Fulfiller ist, nutzt toern direkt die Quivo Shipping API. Das beschleunigt den Setup-Prozess erheblich.
+
+Unter **Settings → Return Shipping Service** wählst du zwischen den verfügbaren Versanddienstleistern aus und kannst jederzeit zwischen ihnen wechseln.
+
+![Auswahl der Versanddienstleister](/images/docs/DHL/ShippingNew01.png)
+
+<Warning>
+  Bevor toern das erste Label generieren kann, ist eine aktive Integration zwingend erforderlich. Ohne deine Zugangsdaten (z. B. die EKP-Nummer bei DHL oder API-Credentials) kann toern keine Versanddaten an den Dienstleister übermitteln.
+</Warning>
+
+### Versanddienstleister einrichten
+
+Für jeden Dienstleister gibt es eine eigene Schritt-für-Schritt-Anleitung, mit der du die Zugangsdaten hinterlegst:
+
+<CardGroup cols={2}>
+  <Card title="DHL" icon="truck" href="/carriers/dhl">
+    Benutzerrollen und API-Zugang
+  </Card>
+  <Card title="DPD" icon="truck" href="/carriers/dpd">
+    Web Connect Integration
+  </Card>
+  <Card title="GLS" icon="truck" href="/carriers/gls">
+    Zugangsdaten und Berechtigungen
+  </Card>
+  <Card title="PostNord" icon="truck" href="/carriers/postnord">
+    Credentials, Adressen und QR-Code
+  </Card>
+  <Card title="Quivo" icon="truck" href="/carriers/quivo">
+    Credentials und Einrichtung
+  </Card>
+</CardGroup>
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Nur mit einem aktiven Versanddienstleister kann toern Retourenlabels automatisch im Retourenprozess erstellen.
+</Note>
+
+## Retourenländer (Return Countries)
+
+Über das Country-Mapping legst du fest, aus welchen Ländern Retouren überhaupt erlaubt sind. Pro Land bestimmst du außerdem, ob ein Label erstellt wird und welche Gebühren anfallen.
+
+Die Tabelle enthält folgende Spalten:
+
+1. **Country**: Das Land, aus dem über toern retourniert werden kann.
+2. **Type**: Die Art der Retourenanmeldung. Entweder erstellt toern automatisch ein Label, oder deine Kunden kümmern sich selbst um den Versand an eine bestimmte Adresse.
+3. **Description**: Entweder die Adresse, an die die Retoure gesendet wird, oder der Carrier.
+4. **Label Fee**: Die Labelgebühr, falls du eine berechnest.
+5. **Return Fee**: Die allgemeine Retourengebühr, falls du eine berechnest.
+6. **Actions**: Hier bearbeitest oder löschst du ein Mapping.
+
+**Label Fee**: Gebühr, die du deinen Kunden für die automatische Erstellung des Labels abziehst. So gibst du deine Labelkosten weiter.
+
+**Return Fee**: Gebühr, die du deinen Kunden für die Retoure an sich abziehst, weil dir dadurch Kosten entstehen. Sie ist unabhängig vom Label und den Labelkosten.
+
+Je nachdem, ob deine Kunden ein Label genutzt haben oder nicht, wird nur die Return Fee oder beide Gebühren vom Erstattungsbetrag abgezogen.
+
+![Country Mapping](/images/docs/Settings/ReturnNew02.png)
+
+### Land hinzufügen
+
+1. Klicke auf **Add New Country Mapping**.
+2. Suche das Land im Dropdown und wähle es aus.
+3. Wähle die Art der Retoure:
+   - **Digital Label**: Wähle den Carrier aus. Er sollte unter **Return Shipping Service** aktiviert sein.
+   - **No Label**: Gib die Adresse ein, an die deine Kunden die Retoure selbst schicken.
+4. Gib optional die Label Fee oder die allgemeine Return Fee an. Die Gebühr gibst du immer in Euro an, egal für welches Land.
+5. Klicke auf **Add Mapping**. Das Land steht jetzt für die Retourenanmeldung zur Verfügung.
+
+![Mapping hinzufügen](/images/docs/Settings/ReturnSettings04.png)
+
+<Warning>
+  Wenn du ein Land hinzugefügt hast, prüfe unbedingt unter **Return Shipping Service**, ob es beim jeweiligen Carrier eine passende Adresse gibt. Fehlt das Land beim Carrier, kann kein Label erstellt werden.
+</Warning>
+
+### Einschränkungen
+
+- Du musst jedes Land für die Retourenanmeldung einzeln im Country-Mapping hinzufügen.
+- Bei DHL und DPD musst du für jedes Land auch die zugehörigen Locations in den Einstellungen auswählen bzw. anlegen.
+- Bei Quivo müssen die entsprechenden Länder in den Einstellungen von Quivo hinterlegt sein.
+
+## Rückfalladresse für die Labelerstellung (Fallback Label Sender Address)
+
+Die **Fallback Label Sender Address** wird verwendet, wenn der Versanddienstleister die Adresse deines Kunden bei der Labelerstellung ablehnt. toern versucht die Labelerstellung dann automatisch ein zweites Mal mit der hinterlegten Rückfalladresse.
+
+Du findest die Einstellung unter **Settings → Return → Fallback Label Sender Address**.
+
+![Fallback Label Sender Address Einstellungen](/images/docs/Settings/FallbackSenderAddress01.png)
+
+Für die Rückfalladresse brauchst du folgende Angaben:
+
+1. **Company Name**: Firmen- oder Fulfillment-Name
+2. **Street**: Straße
+3. **House No.**: Hausnummer
+4. **Zipcode**: Postleitzahl
+5. **City**: Stadt
+6. **Country**: Land, ausgewählt über das Länder-Dropdown
+
+Änderungen werden automatisch gespeichert. Fülle die Adresse vollständig aus, damit toern sie für den zweiten Labelversuch verwenden kann.
+
+Auf dem Retourenlabel bleibt der Name deines Kunden erhalten. Der hinterlegte Firmenname steht darunter als `c/o`-Zeile:
+
+```text
+Max Mustermann
+c/o Muster Fulfillment GmbH
+Musterstraße 10
+12345 Musterstadt
+Deutschland
+```
+
+Wenn keine vollständige Rückfalladresse hinterlegt ist oder auch der zweite Versuch fehlschlägt, kann kein Label erstellt werden. Dann passiert Folgendes:
+
+- Dein Kunde erhält eine E-Mail zur fehlgeschlagenen Labelerstellung.
+- Ist eine primäre Support-E-Mail deiner Brand hinterlegt, geht diese E-Mail parallel in BCC an dich.
+- toern erstellt einen Klärfall zur Retoure in **Manage Returns**.
+
+## Bestellkennung auf dem Label (Label Order Identifier)
+
+toern kann auf dem Retourenlabel eine Nummer zur Identifikation der Bestellung mitgeben. Welche Nummer am besten passt, hängt von deinem Fulfillment-Prozess ab. Du kannst wählen zwischen:
+
+- **Shopify Order ID** (Standard)
+- **UUID**, die toern für jede Bestellung vergibt
+- **Shopify Order Number**: die Bestellnummer, die du z. B. mit Buchstaben individualisieren kannst
+
+![Label Order Identifier](/images/docs/Settings/ReturnNew06.png)
+
+## Retourenschein (Return Slip Attachment)
+
+Manche Fulfiller benötigen bei bestimmten Retouren einen beigelegten Retourenschein. Das betrifft vor allem Retouren ohne automatisches Label, bei denen deine Kunden nur die Zieladresse erhalten und selbst versenden.
+
+Ist der Retourenschein aktiv, sendet toern automatisch ein PDF in der E-Mail mit, die deine Kunden nach der Registrierung mit den Informationen zu den nächsten Schritten erhalten. Das PDF enthält einen QR-Code mit den relevanten Informationen für deinen Fulfiller. So lassen sich dessen Prozesse einhalten.
+
+![Retourenschein](/images/docs/Settings/ReturnNew05.png)
+
+Für den QR-Code kannst du statt der Bestellnummer die **UUID** verwenden, die toern für alle Bestellungen generiert. Zusätzlich kannst du einstellen, dass die Bestellnummer verwendet wird, falls keine UUID vorhanden ist.
+
+<Note>
+  Retourenscheine kannst du nur für Retouren aktivieren, bei denen kein Label erstellt wird.
 </Note>

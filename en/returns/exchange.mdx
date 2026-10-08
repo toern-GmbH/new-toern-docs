@@ -1,8 +1,247 @@
 ---
 title: "Exchange"
-description: "Let customers exchange items instead of returning them."
+description: "Let your customers exchange items for a different variant directly in the return portal instead of just returning them."
 ---
 
+With the exchange feature, your customers can swap an item that doesn't fit for a different variant of the same product right when registering the return, e.g. a different size or color. The new variant is shipped to them as a replacement. This way, you keep the revenue instead of refunding it.
+
+On this page, you'll learn what exchanges look like in the return portal, how they're processed in Shopify and how to set them up.
+
 <Note>
-  This page is a work in progress.
+  Exchanges are only available for Shopify stores. If you use a different shop system, the settings show a message that exchanges are only supported for Shopify stores.
 </Note>
+
+## Exchanges in the return portal
+
+Once exchanges are enabled, your customers can select available variants of the item in the return process or skip this step. If they choose to exchange an item, they select the replacement from the available options, such as color and size.
+
+The following rules apply to the options shown:
+
+- Inventory is checked in real time. Your customers only see variants that are actually available. Sold-out items aren't shown at all.
+- Only variants with the same price as the original item are shown. This ensures there's no price difference between the exchanged item and the replacement.
+
+![Selecting variants](/images/docs/Exchange/variant_options_selection.png)
+
+Once all options are selected, the chosen variant is shown with its image and your customer can continue.
+
+![Completed variant selection](/images/docs/Exchange/variant_options_selection_completed.png)
+
+toern also informs your customers about the next steps and refers them to your return policy.
+
+![Return policy notice](/images/docs/Exchange/return_policy_disclaimer_en.png)
+
+### Warning pop-up for the same item
+
+Optionally, you can show a pop-up that warns your customers when they select the same item in the same variant as the replacement. It appears right after the selection and only when the replacement matches the original item. This prevents accidental exchanges when customers click through too quickly.
+
+The pop-up is disabled by default. You activate it in the settings under [Exchange Warning](#exchange-warning).
+
+![Exchange confirmation pop-up](/images/docs/Exchange/exchange_popup_en.png)
+
+### Refund amount
+
+On the refund method selection page, exchanged items are deducted from the estimated refund amount, since they're replaced by the new variant.
+
+<Note>
+  If your customers exchange all items of an order, no return fee is charged. The refund amount is then 0 EUR, and a fee would create an unpaid balance. In this case, your customers see a message that they won't receive a refund because all items are being exchanged.
+</Note>
+
+![All items exchanged, no refund](/images/docs/Exchange/refund_dislacimer_all_exchanged_en.png)
+
+At the end of the return process, your customers receive a confirmation that the replacement will be shipped once your return requirements are met.
+
+![Exchange confirmation after completing the return process](/images/docs/Exchange/exchange_process_completion_en.png)
+
+<Warning>
+  Exchanged items can't be returned again via the return portal. If your customers want to return the replacement after all, they need to contact your customer support.
+</Warning>
+
+## Processing exchanges in Shopify
+
+There are two ways to process exchanges. You choose which one is used in the [settings](#setup).
+
+Regardless of the method, you always see the exchanged items and their replacements on the return details page.
+
+![Exchange items in the return details](/images/docs/Exchange/return_item_details.png)
+
+### Option 1: Shopify's default process (default)
+
+This option uses Shopify's native exchange process and is active by default. The replacements are created as exchange items within the return:
+
+1. Right after the return is registered, a new fulfillment order for the replacements is created in the original order. It initially has the status **ON_HOLD**.
+2. As soon as the exchange is triggered, the hold is removed. The fulfillment order is then unfulfilled and ready to ship.
+
+Shopify automatically reduces the refund amount based on the quantity and price of the replacements.
+
+![Fulfillment order on hold](/images/docs/Exchange/exchange_on_hold.png)
+
+![Fulfillment order unfulfilled and ready to ship](/images/docs/Exchange/fulfillment_unfulfilled.png)
+
+With this option, inventory for the replacements is claimed right after the return is registered:
+
+| Item type | After order | After return process | After exchange process | After refund process |
+| --- | --- | --- | --- | --- |
+| Exchanged item | 97 | 97 (no change) | 97 (no change) | 98 (+1 if restocking is enabled) |
+| Replacement item | 65 | 64 (-1) | 64 (no change) | Can't be refunded |
+
+### Option 2: Create a new order
+
+With this option, a new unfulfilled order of 0.00 EUR is created for the replacements with the status **PAID**. The new order is tagged as an exchange. In the additional details in Shopify, you'll find a link to the original order.
+
+![New exchange order overview](/images/docs/Exchange/new_exchange_order_overview.png)
+
+If not all items are exchanged, the refund amount is reduced by the exchanged items. You can see the adjusted amount on the order page in Shopify.
+
+![Adjusted refund amount](/images/docs/Exchange/refund_amount_adjusted.png)
+
+You can see the status of the exchange order on the return details page.
+
+![Exchange order pending](/images/docs/Exchange/exchange_order_awaiting.png)
+
+![Exchange order created](/images/docs/Exchange/exchange_order_created.png)
+
+The new order is only created when the exchange is triggered according to your configured trigger. So inventory is only claimed once the exchange process completes successfully:
+
+| Item type | After order | After return process | After exchange process | After refund process |
+| --- | --- | --- | --- | --- |
+| Exchanged item | 97 | 97 (no change) | 97 (no change) | 98 (+1 if restocking is enabled) |
+| Replacement item | 65 | 65 (no change) | 64 (-1) | Can't be refunded |
+
+If the replacement sells out between the return registration and the start of the exchange process, creating the exchange order fails. toern then creates a clarification case and shows a message explaining the situation. In this case, you need to get in touch with your customer.
+
+![Error message: inventory unavailable](/images/docs/Exchange/inventory_claim_unavailable.png)
+
+### Exchanges for discounted items
+
+If a discount was applied to the exchanged item, the replacement's price is automatically reduced by the same amount. For example, if the exchanged item has a 5.21 EUR discount, the replacement's original price of 22 EUR is also reduced by 5.21 EUR. This way, your customers don't pay more for the replacement and no unpaid balance occurs.
+
+![Discounted exchanged item](/images/docs/Exchange/item_discounted.png)
+
+![Discount applied to the replacement](/images/docs/Exchange/exchange_replacement_discounted.png)
+
+<Warning>
+  If unequal discounts apply to an order (e.g. "buy X get Y" or "3rd item gets 5 EUR off"), exchanges are blocked for that order. This prevents incorrect refund amounts from being paid out.
+</Warning>
+
+## Setup
+
+You'll find the settings under **Settings → Exchange**. The page is divided into three sections that you can reach via the links at the top:
+
+- **Exchange Settings**
+- **Blacklist Articles**
+- **Blacklist Countries**
+
+### Shopify permissions
+
+Exchanges need specific Shopify API permissions. If your Shopify integration is missing permissions, you'll see an orange warning box at the top of the **Exchange Settings** section.
+
+![Missing Shopify permissions warning](/images/docs/Exchange/settings_shopify_permission_alert.png)
+
+The warning shows you:
+
+- which permissions are missing
+- a link to the setup guide that shows you how to create the correct API key
+
+In this case, update your Shopify API key with the required permissions. Click **Setup Guide / Einrichtungsanleitung** to do so.
+
+<Note>
+  If there's a temporary connection issue with Shopify, you may see a different error message asking you to try again in a few minutes. This is a connection issue, not a permission problem.
+</Note>
+
+### Enable Exchange
+
+Use this toggle to turn exchanges on or off for your return portal. It's disabled by default. When enabled, your customers see the option to exchange items for other variants in the return process.
+
+By default, exchanges are created as exchange items within the return, since this is Shopify's standard process. If exchanges should be created as a new order, activate **Exchanges as New Order**.
+
+![Enable Exchange](/images/docs/Settings/ExchangesNew02.png)
+
+### Exchanges as New Order
+
+When this toggle is active, exchanges are created as a separate 0.00 EUR order in Shopify. The new orders are tagged as exchanges and linked to the original order.
+
+![Exchanges as New Order](/images/docs/Settings/ExchangesNew01.png)
+
+When **Exchanges as New Order** isn't active, the exchange is always triggered automatically after a refund. This applies both when you mark a return as refunded and for manual refunds.
+
+When **Exchanges as New Order** is active, you also choose in the dropdown when the new order is created in Shopify:
+
+| Trigger | Description |
+| --- | --- |
+| **After registration** | The exchange is processed right after the return registration is completed. |
+| **After it is received** | The exchange is processed after the return package arrives at your warehouse. |
+| **After inspection** | The exchange is processed after the returned goods have been inspected and approved. |
+
+![Selecting the exchange trigger](/images/docs/Exchange/settings_operations_trigger.png)
+
+### Restrict Exchange Stock to Original Warehouse
+
+Use this toggle to restrict stock checks to the warehouse that shipped the original item. When enabled, a replacement variant is only offered if it's available at that exact warehouse. This prevents exchanges that couldn't be fulfilled from the original warehouse. When disabled, stock is checked across all your warehouses.
+
+![Restrict Exchange Stock to Original Warehouse](/images/docs/Exchange/settings_original_warehouse_stock.png)
+
+### Shipping Label for Exchange Items
+
+Use this toggle to enable automatic shipping label creation for replacements. Labels are only created via Sendcloud. So make sure you've set up [Sendcloud](/en/integrations/sendcloud) correctly before activating this feature.
+
+When you enable it, toern automatically sets up a field in Shopify in the background that stores the shipping label as a PDF on the order. If this setup fails, e.g. due to missing Shopify permissions, the settings aren't saved. Check your Shopify permissions and try again. If the problem persists, contact support.
+
+![Shipping Label for Exchange Items](/images/docs/Exchange/settings_crate_shipping_label.png)
+
+### Exchange Warning
+
+When this setting is active, your customers see a warning pop-up if they select the same item in the same variant as the replacement. It appears right after the selection and only when the replacement matches the original item. The pop-up is disabled by default.
+
+![Exchange Warning](/images/docs/Settings/ExchangesNew04.png)
+
+## Exclude items from exchange (Blacklist Articles)
+
+In this section, you exclude specific product variants from exchanges. This makes sense for:
+
+- personalized or customized products
+- heavily discounted or sale items
+- limited edition products
+- items with special handling requirements
+
+![Blacklist Articles](/images/docs/Settings/ExchangesNew05.png)
+
+### Add variants to the blacklist
+
+1. Search for the product variant by SKU or product name.
+2. Select the variant.
+3. Click **Add to Blacklist**.
+4. To add all variants of an item at once, use the bulk add mode with **Add All Variants**.
+5. To remove a variant again, click **Remove** next to the variant in the table.
+
+![Blacklist Articles](/images/docs/Exchange/settings_blacklist_item.png)
+
+![Blacklist Articles in bulk add mode](/images/docs/Exchange/settings_bulk_add_variant.png)
+
+Blacklisted variants aren't shown to your customers as exchange options. If all variants of a product are blacklisted, the exchange step is skipped entirely for that product.
+
+## Exclude countries from exchange (Blacklist Countries)
+
+In this section, you exclude specific countries from exchanges. This is useful if:
+
+- shipping costs for exchanges to certain countries are too high
+- you want to limit exchanges to domestic orders
+- customs or import regulations make exchanges impractical in certain regions
+
+![Blacklist Countries](/images/docs/Settings/ExchangesNew06.png)
+
+<Note>
+  Only countries you've configured in your [return countries](/en/returns/return-methods) appear here. You can't exclude a country from exchanges if it isn't enabled for returns. If you haven't configured any return countries yet, you'll see the message **No countries in return settings yet**.
+
+  If a country code is on your blacklist but no longer in your return countries, it still appears at the bottom of the table. This lets you remove it if needed.
+</Note>
+
+## Limitations
+
+- Replacements received from an exchange can't be registered as a return via the return portal. Your customers need to contact your customer support for this.
+- If all items of a return are exchanged and there's therefore no refund amount, no return fee is charged.
+- Exchanges are blocked for orders with unequal discounts.
+- Limitations of exchanges as a new order:
+  - Replacement orders with a value of 0.00 EUR distort the statistics in Shopify.
+  - If time passes between creating the return and creating the order, the item may have sold out in the meantime. A clarification case is then created and you need to get in touch with your customer. This doesn't happen with Shopify's default process within the order.
+
+For questions about exchange settings or troubleshooting, contact support at [support@re-toern.de](mailto:support@re-toern.de).

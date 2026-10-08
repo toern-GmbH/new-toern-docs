@@ -1,8 +1,102 @@
 ---
 title: "Retourenlogik einrichten"
-description: "Lege fest, was Kunden zurücksenden dürfen und welche Optionen sie dabei erhalten."
+description: "Die wichtigsten Einstellungen, damit dein Retourenprozess funktioniert: Portal-Link, Rückgabefrist, Länder, Support-E-Mail und mehr."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit wenigen Einstellungen machst du deinen Retourenprozess startklar. Hier findest du die wichtigsten davon. Das sind noch nicht alle Möglichkeiten, aber alles, was du für den Start mit toern brauchst. Gehe die Schritte nacheinander durch und passe sie an deinen Bedarf an.
+
+## Die wichtigsten Einstellungen
+
+### 1. Retourenportal-Link erstellen
+
+Damit deine Kunden Retouren anmelden können, brauchst du den Link zu deinem Retourenportal. Du erstellst ihn unter **Settings → Shop Integration → Return Portal Link**. Der Link ist sofort nutzbar und enthält deine Branding-Einstellungen.
+
+Mehr dazu unter [Shopify-Shop verbinden](/getting-started/shopify-integration#return-portal-link).
+
+### 2. Rückgabefrist festlegen
+
+Lege unter **General return period** fest, wie viele Tage deine Kunden nach Erhalt der Bestellung Zeit haben, eine Retoure anzumelden. Danach können keine Retouren mehr erstellt werden.
+
+Die Frist beginnt mit dem letzten Fulfillment-Event (z. B. der Zustellung) und enthält zusätzlich einen kleinen Puffer.
+
+### 3. Länder für Retouren anlegen
+
+Wähle die Länder aus, aus denen deine Kunden Retouren anmelden können. Dafür füllst du die **Return country mapping** in den Return-Einstellungen. Jedes Land legst du einzeln an.
+
+1. Öffne **Settings → Return**.
+2. Klicke auf **Add New Country Mapping**.
+3. Suche das Land.
+4. Wähle aus, ob ein digitales Label erstellt werden soll.
+5. Lege optional eine **Label Fee** und/oder eine **Return Fee** fest.
+6. Klicke auf **Add Mapping**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings04.png" alt="Neues Country Mapping hinzufügen" /></Frame>
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings05.png" alt="Country Mapping ausfüllen" /></Frame>
+
+- **Label Fee**: Wird nur von der Rückerstattung abgezogen, wenn ein Label erstellt wurde.
+- **Return Fee**: Wird bei jeder Retoure abgezogen, unabhängig vom Label.
+
+<Warning>
+  Wenn du DHL oder DPD nutzt, füge die Länder aus dem Mapping auch in den Einstellungen deines Versanddienstleisters hinzu.
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Return-Einstellungen" icon="gear" href="/returns/return-settings">
+    Mehr zum Country Mapping und den Gebühren.
+  </Card>
+  <Card title="Rücksendemethoden" icon="truck" href="/returns/return-methods">
+    Mehr zu den Versandeinstellungen.
+  </Card>
+</CardGroup>
+
+### 4. Support-E-Mail hinterlegen
+
+toern sendet deinen Kunden E-Mails zum Status ihrer Retoure. Darin verweisen wir auf deinen Support, damit deine Kunden bei Fragen einen Kontakt haben. Hinterlege diese E-Mail-Adresse vor dem Start unter **Settings → Shop Integration**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings02.png" alt="Support-E-Mail hinterlegen" /></Frame>
+
+Wie viele E-Mails toern sendet, kannst du in den Einstellungen anpassen. Die Vorlagen passt du im [E-Mail-Editor](/branding/email-templates) an. Alternativ kannst du E-Mails über [Klaviyo](/integrations/klaviyo) versenden.
+
+### 5. Retourenrichtlinie verlinken
+
+toern verlinkt deine Retourenrichtlinie im Retourenportal, damit deine Kunden sie jederzeit nachlesen können. Hinterlege dafür die URL unter **Settings → Shop Integration**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings01.png" alt="Link zur Retourenrichtlinie hinterlegen" /></Frame>
+
+### 6. Logo und Hintergrundbild hochladen
+
+Passe dein Retourenportal von Anfang an deinem Corporate Design an. Wie das geht, erfährst du unter [Portal gestalten](/getting-started/brand-your-portal).
+
+### 7. Optional: Automatische Rückerstattungen aktivieren
+
+Wenn du möchtest, aktivierst du direkt automatische Rückerstattungen. Das geht unter **Settings → Refund**. Mit dem Toggle aktivierst du die Funktion und kannst Trigger festlegen.
+
+<Card title="Rückerstattungen" icon="money-bill" href="/returns/refund">
+  Alles zu den Refund-Einstellungen.
+</Card>
+
+### 8. Optional: Umtausch aktivieren
+
+Du kannst auch direkt den Umtausch aktivieren. Dann sehen deine Kunden alternative Varianten eines Produkts (z. B. andere Größen und Farben) und können daraus wählen. Das geht unter **Settings → Exchange**. Mit dem Toggle aktivierst du die Funktion und kannst Trigger festlegen.
+
+<Card title="Umtausch" icon="arrows-rotate" href="/returns/exchange">
+  Alles zu den Umtausch-Einstellungen und Abläufen.
+</Card>
+
+### 9. Klassifikation für Klärfälle festlegen
+
+Du kannst in toern jederzeit manuell Klärfälle erstellen. Bei einem Klärfall sind alle Automatisierungen ausgeschaltet und du schließt die Retoure manuell ab.
+
+Klärfälle können auch automatisch über die Klassifikation der Retourenartikel entstehen. Sprich dafür mit deinem Fulfillment-Partner ab, was die Klassifikationen **A–D** bedeuten. Unter **Settings → Return** wählst du dann aus, für welche Klassifikationen ein Klärfall erstellt wird.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings06.png" alt="Klärfall für Klassifikationen auswählen" /></Frame>
+
+Damit hast du die wichtigsten Einstellungen für einen funktionierenden Retourenprozess abgeschlossen.
+
+## Einschränkungen
+
+Damit die Automatisierung funktioniert, beachte folgende Punkte:
+
+- **Produktbundles**: Bundles können wir derzeit nur automatisieren, wenn du eine entsprechende Shopify App nutzt.
+- **Marktplätze**: Sollen Retouren von Marktplätzen auch über toern laufen, müssen die Bestellungen in Shopify vorhanden sein. Dann können auch Kunden von Marktplätzen über deinen Retourenportal-Link eine Retoure anmelden. Haben diese Kunden keine E-Mail-Adresse hinterlegt, aktivierst du den [ZIP Login](/getting-started/shopify-integration#return-portal-login-preferences).

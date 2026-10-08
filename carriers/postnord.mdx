@@ -1,8 +1,95 @@
 ---
 title: "PostNord"
-description: "Binde PostNord als Versanddienstleister für Retouren an."
+description: "Binde PostNord für digitale Retourenlabels, QR-Codes und Sendungsverfolgung an."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit PostNord erstellt toern digitale Retourenlabels und verfolgt deine Retouren. Die Integration erzeugt über die PostNord API ein PDF-Label und einen QR-Code. Dieselben Zugangsdaten nutzt toern später auch für das Tracking der Retoure.
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+## Voraussetzungen
+
+Du brauchst einen aktiven PostNord-Vertrag, der digitale Retourenlabels unterstützt. Außerdem brauchst du die API-Zugangsdaten für die Produktivumgebung:
+
+- **API Key**
+- **Organization ID**
+- **Customer ID** bzw. PostNord-Kundennummer
+- **Application ID**
+
+<Warning>
+  Die Kundennummer muss zu dem PostNord-Geschäftskonto passen, über das die Retouren gebucht werden. Laufen Retouren z. B. nach Schweden, muss die Vereinbarung zu PostNord Schweden passen. Hast du mehrere nordische Retourenadressen, prüfe das Setup gemeinsam mit PostNord und support@re-toern.de.
+</Warning>
+
+## Einrichtung
+
+Öffne im toern Dashboard die [PostNord Shipping-Einstellungen](https://www.admin.re-toern.de/settings/shipping-services?group=PostNord). Dort gibt es drei Bereiche:
+
+1. **Access Credentials**
+2. **Country Address Mapping**
+3. **Label Options**
+
+### Access Credentials
+
+Hinterlege zuerst die Produktiv-Zugangsdaten von PostNord. toern nutzt sie für die Labelerstellung und das Tracking. Sandbox-Zugangsdaten sind nur für interne Tests relevant.
+
+- **API Key**: API-Schlüssel für Labelerstellung und Tracking.
+- **Organization ID**: PostNord-Organisation, über die die API-Anfrage läuft.
+- **Customer ID**: PostNord-Kundennummer bzw. Vereinbarungsnummer für die Retourenbuchung.
+- **Application ID**: PostNord Application ID, die in der EDI-Anfrage verwendet wird.
+
+### Country Address Mapping
+
+Im Country Address Mapping hinterlegst du die Empfängeradresse der Retoure. An diese Adresse senden deine Kund:innen ihre Retoure zurück. PostNord nutzt sie als **Consignee** auf dem Retourenlabel.
+
+![PostNord Country Address Mapping](/images/docs/PostNord/PostNordCountryAddressMap.png)
+
+Lege mindestens den Eintrag **Default (Fallback)** an. Ohne ihn kann toern keine Labels erstellen. Der Default-Eintrag gilt für alle Länder ohne eigenen Eintrag. Brauchst du je Land eine andere Retourenadresse oder Vereinbarung, legst du zusätzliche Einträge pro Land an.
+
+![PostNord Retourenadresse hinzufügen](/images/docs/PostNord/PostNordCountryAddressDialog.png)
+
+Diese Felder sind beim Hinzufügen oder Bearbeiten einer Adresse relevant:
+
+- **Country**: Land, für das der Eintrag gilt. Beim Default-Eintrag ist das die Retouren-Zieladresse.
+- **Name, Street, House No., Postal Code, City**: Pflichtfelder der Retourenadresse.
+- **Recipient email** und **Recipient phone**: optionale Kontaktdaten der Retourenadresse.
+- **QR Language**: optionale Sprache für das PostNord-QR-Label. Ohne Auswahl wird die Sprache automatisch anhand des Landes gesetzt.
+
+<Info>
+  Das PostNord Country Address Mapping ist unabhängig von der allgemeinen Country Map in den Return Settings. Die allgemeine Country Map entscheidet, ob Kund:innen für ein Land ein digitales Label bekommen. Das PostNord Mapping entscheidet, welche Retourenadresse auf dem PostNord-Label steht.
+</Info>
+
+### Label Options
+
+In den Label Options kannst du aktivieren, dass PostNord den QR-Code zusätzlich per E-Mail an deine Kund:innen sendet.
+
+![PostNord Label Options](/images/docs/PostNord/PostNordLabelOptions.png)
+
+- PostNord sendet den QR-Code nur, wenn in der Retoure eine E-Mail-Adresse der Kundin oder des Kunden vorhanden ist.
+- PDF-Label und QR-Code werden unabhängig davon weiterhin in toern gespeichert.
+- Die toern-E-Mail zur Retourenanmeldung mit Label (falls genutzt) wird weiterhin verschickt. Deine Kund:innen erhalten also den QR-Code von PostNord und die E-Mail mit dem PDF-Label.
+
+## PostNord in der Country Map nutzen
+
+Nachdem du die PostNord-Einstellungen gespeichert hast, wählst du PostNord in den Return Settings für die gewünschten Länder aus:
+
+1. Öffne die Return Settings und gehe zur **Country Map**.
+2. Wähle für das jeweilige Land **Digital label**.
+3. Wähle als Shipping Provider **PostNord**.
+4. Speichere die Country Map.
+
+Mehr zur Country Map findest du unter [Rücksendemethoden](/returns/return-methods).
+
+<Warning>
+  Ohne passende PostNord Access Credentials und mindestens einen gültigen Default-Eintrag im PostNord Country Address Mapping kann toern kein PostNord-Retourenlabel erstellen.
+</Warning>
+
+## Setup testen
+
+Erstelle nach der Einrichtung eine Testretoure für ein Land, das in der Country Map auf PostNord zeigt. Prüfe dann:
+
+- ob ein PDF-Label erzeugt wurde,
+- ob ein QR-Code verfügbar ist,
+- ob eine Trackingnummer gespeichert wurde,
+- ob die Sendungsverfolgung nach der ersten PostNord-Aktualisierung in der Retoure sichtbar ist.
+
+Schlägt die Labelerstellung fehl, prüfe zuerst API Key, Organization ID, Customer ID, Application ID und die Pflichtfelder im PostNord Country Address Mapping.

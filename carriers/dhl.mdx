@@ -1,8 +1,101 @@
 ---
 title: "DHL"
-description: "Binde DHL als Versanddienstleister für Retouren an."
+description: "Binde DHL über einen Systembenutzer an und erstelle Retourenlabels automatisch."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit der DHL-Anbindung erstellt toern die Retourenlabels für deine Kund:innen automatisch. DHL ist der in Deutschland am weitesten verbreitete Versanddienstleister. Die Anbindung läuft über einen sogenannten **Systembenutzer**, den du für toern anlegst.
+
+Für klassische Rücksendungen nutzt toern die API-Schnittstelle **DHL Paket DE Retoure (Post & Paket Deutschland)**.
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+## Voraussetzungen
+
+- Ein aktiviertes DHL-Geschäftskundenkonto.
+- Ein Vertrag mit DHL für **DHL Paket DE Retoure**.
+- Die Länder, aus denen Retouren möglich sein sollen, sind bei DHL freigegeben und die passenden Adressen sind hinterlegt.
+
+<Warning>
+  Lege den Systembenutzer an, bevor du die DHL-Einstellungen in toern einrichtest oder anpasst.
+</Warning>
+
+## Einrichtung
+
+### Systembenutzer anlegen
+
+Den Systembenutzer erstellst du im [Post & DHL Geschäftskundenportal](https://geschaeftskunden.dhl.de/). Er braucht die Berechtigungen **Retoure** und optional **Internationale Retoure**.
+
+1. Öffne das [DHL Geschäftskundenportal](https://geschaeftskunden.dhl.de/).
+2. Öffne den Pfeil oben rechts.
+3. Klicke auf **Benutzer verwalten**.
+
+   ![DHL Benutzer verwalten](/images/docs/DHL/image.png)
+
+4. Klicke auf **Neuen Benutzer anlegen** und fülle die Felder aus:
+   - Vorname: dein eigener Vorname
+   - Nachname: dein eigener Nachname
+   - E-Mail-Adresse: deine eigene E-Mail (oder eine geteilte E-Mail)
+5. Wähle **Systembenutzer** aus.
+
+   ![DHL Systembenutzer](/images/docs/DHL/image-1.png)
+
+6. Weise unter **Berechtigungen** mindestens diese Berechtigungen zu:
+   - **Retoure**
+   - **Verfolgen Paket und Waren**
+   - falls vorhanden auch **Internationale Retoure**. Diese aktiviert der DHL-Kundenservice. Die Aktivierung dauert einige Tage.
+
+   <Note>
+     Wird die Option **Retoure** nicht angezeigt? Dann wende dich an DHL, damit die Einstellung freigeschaltet wird.
+   </Note>
+
+   ![DHL Berechtigungen](/images/docs/DHL/berechtigungen.png)
+
+7. Wähle bei Bedarf die passenden Benutzerrollen, Rechte und Konfigurationen aus.
+
+   ![DHL Benutzerrollen](/images/docs/DHL/8ea1dae4-497b-4d6a-8e60-309bc4296526.png)
+
+8. Hinterlege einen Verwendungszweck zur Zuordnung, z. B. **„toern Systembenutzer Shop1234“** (Schema: „toern Systembenutzer DEIN_SHOP_NAME“).
+
+   ![DHL Verwendungszweck](/images/docs/DHL/image-2.png)
+
+9. Lege den Benutzer an.
+
+Du erhältst jetzt eine E-Mail für den neuen Systembenutzer. Für toern brauchst du zwei Informationen:
+
+- den **Benutzernamen**, der jetzt in DHL zur Verfügung steht,
+- das **Passwort**, das du für den Benutzer erstellt hast.
+
+### Zugangsdaten in toern hinterlegen
+
+- **Im Onboarding:** Hinterlege Benutzername und Passwort im Schritt **Shipping** unter DHL.
+- **Nach dem Onboarding:** Öffne im [toern Dashboard](https://www.admin.re-toern.de/login) die [DHL-Einstellungen](https://www.admin.re-toern.de/settings/return-shipping-service/dhl-standard) (Settings → Return Shipping Services → DHL Paket Retoure).
+
+Trage unter **DHL Access Credentials** den Benutzernamen des Systembenutzers und das zugehörige Passwort ein.
+
+![DHL Access Credentials](/images/docs/DHL/DHLNew01.png)
+
+### Rücksendeadresse anlegen
+
+Im [Post & DHL Geschäftskundenportal](https://geschaeftskunden.dhl.de/) kannst du unter **Retouren → Einstellungen** zusätzliche Rücksendeadressen anlegen.
+
+## Einstellungen in toern
+
+In den Settings kannst du zwischen den verfügbaren Versanddienstleistern wechseln.
+
+![Return Shipping Services](/images/docs/DHL/ShippingNew01.png)
+
+### Return Location Mapping
+
+Sobald die Zugangsdaten gültig sind, fügst du die DHL-Länder hinzu, aus denen Retouren möglich sein sollen.
+
+1. Klicke auf **Query Locations**. toern lädt alle Länder und Adressen, die bei DHL für dich hinterlegt sind.
+2. Klicke bei jedem gewünschten Land auf **Use location**. Das Land wird für das Retourenportal aktiviert und der Liste hinzugefügt.
+3. Prüfe die Adressen. Stelle sicher, dass für jedes ausgewählte Land die richtige Adresse hinterlegt ist.
+
+![DHL Query Locations](/images/docs/DHL/Bildschirmfoto_2025-11-13_um_13.55.11.png)
+
+![DHL Location IDs](/images/docs/DHL/DHLNew03.png)
+
+<Warning>
+  Die DHL-Länder müssen mit den ausgewählten Ländern in der Country Map übereinstimmen. Fehlt für ein Land aus der Country Map das DHL-Land, kann kein Label erstellt werden und es kommt zu Problemen im Retourenprozess.
+</Warning>

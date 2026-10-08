@@ -1,8 +1,66 @@
 ---
 title: "GLS"
-description: "Connect GLS as a carrier for returns."
+description: "Connect GLS via a developer app and create return labels automatically."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With the GLS connection, toern creates return labels for your customers automatically. You need an active GLS customer contract and a developer app at GLS.
+
+For standard returns, toern uses the API **Shop Returns Customer API v3**.
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Setup
+
+### Create a developer account and app
+
+toern needs a developer app with a matching **Key** and **Secret**. GLS IT then connects these credentials to your customer account. You create the app on the [GLS Dev Platform](https://dev-portal.gls-group.net/).
+
+1. Open the [GLS Dev Platform](https://dev-portal.gls-group.net/).
+2. Click **Sign In** in the top right.
+3. If you don't have an account yet, click **Create an account**.
+
+   ![GLS Sign In](/images/docs/GLS/image.png)
+
+4. Fill in your company information and click **Create Account**.
+5. Once logged in, click your profile in the top right and then **Apps**.
+
+   ![GLS Apps](/images/docs/GLS/image-1.png)
+
+6. Click **New App**.
+
+   ![GLS New App](/images/docs/GLS/image-2.png)
+
+7. Give the app a name, e.g. "toern Retourenportal". Activate these APIs with **Enable**:
+   - **Authentication API v2**
+   - **Shop Returns Customer API v3**
+   - **Shop Returns Sandbox API v3** (optional)
+
+   ![GLS app name](/images/docs/GLS/image-3.png)
+
+   ![GLS API permissions](/images/docs/GLS/image-4.png)
+
+8. Click **Save**.
+
+### Add the credentials in toern
+
+You need this information from the app you created:
+
+- **App ID**
+- **Key** (Client ID)
+- **Secret** (Client secret)
+
+![GLS App ID](/images/docs/GLS/image-5.png)
+
+Enter it in the [GLS settings](https://www.admin.re-toern.de/settings/return-shipping-service/gls) in the toern dashboard. Alternatively, you can send it to us by email at support@re-toern.de.
+
+![GLS Integration](/images/docs/GLS/GLSNew01.png)
+
+### Connect the developer app to your customer account
+
+To activate the app and connect it to your customer account, a GLS IT employee in your region has to link it in the background. This requires your GLS customer number.
+
+We're happy to handle the contact with GLS. We already have the right contacts in the different regions.
+
+1. Enter App ID, Key and Secret in toern.
+2. Send your GLS customer number to support@re-toern.de.
+3. We take care of the rest.

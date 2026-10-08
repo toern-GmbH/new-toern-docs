@@ -1,8 +1,245 @@
 ---
 title: "Xentral"
-description: "Verbinde Xentral mit toern."
+description: "Verbinde dein Xentral-ERP mit toern und lege Retouren, Gutschriften und Ersatzaufträge automatisch in Xentral an."
 ---
 
+Mit der **Xentral-Integration** verbindest du dein Xentral-ERP mit toern. So sparst du dir manuelle Arbeit im ERP und beide Systeme bleiben synchron.
+
+## Was ermöglicht die Integration?
+
+- **Bestellungen synchronisieren**: toern ruft Bestelldaten aus Xentral ab.
+- **Retouren anlegen**: toern erstellt Retouren während des Retourenprozesses direkt in Xentral.
+- **Gutschriften erstellen**: Bei Rückerstattungen erstellt toern Gutschriften (Credit Notes) in Xentral.
+- **Ersatzaufträge anlegen**: Bei Umtauschvorgängen erstellt toern automatisch Ersatzaufträge in Xentral.
+- **Transparenz**: Alle Xentral-Referenzen und -Dokumente siehst du im toern Dashboard. Die gewohnten Logs werden auch für Aktivitäten in Xentral erstellt.
+
+## Einrichtung
+
+### Personal Access Token in Xentral erstellen
+
+Für die Verbindung brauchst du einen **Personal Access Token (PAT)** und deine **Xentral ID**. Die interaktive Anleitung zeigt dir, wie du den Token direkt in deinem Xentral-Konto erstellst und wo du die URL mit deiner Xentral ID findest.
+
+<Frame><iframe src="https://app.guideflow.com/embed/dr9m765fnp" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+
+### Zugangsdaten in toern hinterlegen
+
+1. Öffne dein toern Dashboard.
+2. Navigiere zu Settings → Third Party Services → Xentral.
+3. Trage unter **Access Credentials** deinen **Personal Access Token (PAT)** und deine **Xentral ID** ein.
+4. Klicke auf **Update Access**.
+
+Danach ist die Verbindung zwischen toern und Xentral hergestellt.
+
+<Frame><img src="/images/docs/Settings/XentralNew01.png" alt="Xentral Access Credentials in toern" /></Frame>
+
+### Funktionen konfigurieren
+
+Sobald die Zugangsdaten gespeichert sind, legst du fest, wie toern mit Xentral kommuniziert. Du kannst jede Funktion passend zu deinem internen Workflow aktivieren oder deaktivieren. Die Einstellungen sind unten nach Themen gruppiert.
+
+## Grundeinstellungen
+
+### Xentral Synchronization
+
+Wenn diese Funktion aktiv ist, ruft toern regelmäßig neue Bestellungen aus Xentral ab und synchronisiert sie mit den Retouren in Shopify. So kann jeder Artikel während des gesamten Retourenzyklus nachverfolgt und bei der Erstellung von Retouren oder Ersatzaufträgen korrekt referenziert werden.
+
+<Warning>
+  Diese Funktion ist die Grundlage für alle anderen Xentral-Funktionen. Ohne sie werden keine Bestellinformationen mit Xentral synchronisiert. Schalte sie daher immer ein.
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew02.png" alt="Xentral Synchronization" /></Frame>
+
+### Use Beta Endpoints
+
+toern ist über die API mit Xentral verbunden. Einige Funktionen basieren auf neueren Xentral-Endpunkten, unter anderem auf der teilweise freigegebenen v3-Schnittstelle. Wenn du diese Option aktivierst, kannst du alle Einstellungen nutzen, die mit **Beta** gekennzeichnet sind.
+
+## Retouren
+
+### Create Returns
+
+Wenn diese Einstellung aktiv ist, erstellt toern automatisch Retouren in Xentral, sobald eine Retoure über das toern-Kundenportal eingereicht oder manuell im Dashboard bearbeitet wird.
+
+Ist **Return Creation Draft** nicht aktiv, legt toern die Retoure erst bei der Rückerstattung in Xentral an.
+
+<Warning>
+  Wenn aktiv, musst du das [Return Reason Mapping](#return-reason-mapping) konfigurieren.
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew03.png" alt="Create Returns" /></Frame>
+
+### Return Creation Draft
+
+Mit dieser Funktion legt toern die Retoure schon bei der Anmeldung als **Entwurf (Draft)** in Xentral an.
+
+Mit aktiven Beta-Endpunkten überschreibt toern den Entwurf nach erfolgreicher Rückerstattung mit den finalen Retoureninformationen. Haben sich die Artikel im Retourenprozess geändert, passt toern sie dabei an und wandelt den Entwurf in die finale Retoure um. Ohne Beta-Endpunkte gibt es aktuell eine Einschränkung in der Xentral-Schnittstelle: Änderungen musst du dann manuell im Entwurf anpassen.
+
+<Warning>
+  Wenn aktiv, musst du das [Return Reason Mapping](#return-reason-mapping) konfigurieren.
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew04.png" alt="Return Creation Draft" /></Frame>
+
+### Return Reason Mapping
+
+Wenn du Retouren aus toern heraus in Xentral erstellst, musst du die Retourengründe zwischen Shopify und Xentral zuordnen. Shopify und Xentral nutzen unterschiedliche Referenz-IDs für die Kategorisierung von Retouren.
+
+So funktioniert es:
+
+1. Klicke auf **Load Return Reasons from Xentral**. Du siehst alle Retourengründe aus Xentral mit ihren IDs.
+2. Füge eine Zuordnung hinzu und wähle den Shopify-Retourengrund und die Xentral-ID aus. Die Shopify-Gründe stehen links, die Xentral-IDs rechts.
+3. Ordne jedem Shopify-Grund eine gültige Xentral-ID zu.
+4. Hinterlege einen **Standardgrund**. Er wird verwendet, wenn es keine direkte Zuordnung gibt.
+
+Du kannst Zuordnungen jederzeit bearbeiten oder löschen. Sobald sie gespeichert sind, wendet toern sie automatisch bei der Erstellung von Retouren in Xentral an. So hat jede Retoure in Xentral einen gültigen Retourengrund für Logistik, Qualitätskontrolle und Buchhaltung.
+
+<Frame><img src="/images/docs/Settings/XentralNew06.png" alt="Xentral Return Reason Mapping" /></Frame>
+
+### Return Closure
+
+Wenn diese Funktion aktiv ist, schließt toern die Retoure in Xentral automatisch, sobald die Rückerstattung erfolgreich war. Das reduziert den Aufwand für Kundenservice und Buchhaltung.
+
+<Warning>
+  Voraussetzung ist, dass **Create Returns** aktiv ist. Außerdem musst du das [Return Reason Mapping](#return-reason-mapping) konfigurieren.
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew05.png" alt="Return Closure" /></Frame>
+
+### Beta-Funktionen für Retouren
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Diese Einstellungen funktionieren nur, wenn **Use Beta Endpoints** aktiv ist.
 </Note>
+
+| Einstellung | Was sie macht | Voraussetzung |
+|---|---|---|
+| **Return Auto Send after Refund (Beta)** | Sendet die Retourendokumente nach erfolgreicher Rückerstattung automatisch mit den finalen Retoureninformationen an den Kunden. | – |
+| **Add Tags to Return Order (Beta)** | Hängt zusätzliche Tags an Retouren in Xentral an. So erkennst du Umtausch- oder Gift-Card-Retouren schneller. | – |
+| **Auto Restock Return Order Items (Beta)** | Bucht die Artikel einer Retoure nach Abschluss wieder in die Lagerbestände in Xentral ein. | **Restock Warehouse and Storage Location Map (Beta)** konfigurieren |
+| **Restock Warehouse and Storage Location Map (Beta)** | Legt fest, in welches Lager Retourenartikel eingebucht werden (siehe unten). | – |
+
+**Restock Warehouse and Storage Location Map (Beta)**: Du hinterlegst drei Lager. Welches genutzt wird, hängt von der Klassifizierung des Artikels ab.
+
+- **Default-Lager**: Wird genutzt, wenn keine der anderen Regeln greift.
+- **Sellable-Lager**: Für Artikel der Klassifizierungen A, B und C.
+- **Defective-Lager**: Für Artikel der Klassifizierung D.
+
+## Gutschriften
+
+### Credit Notes Creation
+
+Wenn diese Option aktiv ist, erstellt toern bei einer Rückerstattung eine Gutschrift (Credit Note) in Xentral. Grundlage sind die finalen Rückerstattungsdaten.
+
+<Frame><img src="/images/docs/Settings/XentralNew07.png" alt="Credit Notes Creation" /></Frame>
+
+### Beta-Funktionen für Gutschriften
+
+<Note>
+  Diese Einstellungen funktionieren nur, wenn **Use Beta Endpoints** aktiv ist.
+</Note>
+
+| Einstellung | Was sie macht | Voraussetzung |
+|---|---|---|
+| **Credit Notes auto release after refund (Beta)** | Gibt Credit Notes nach der erfolgreichen Erstellung automatisch frei. | – |
+| **Credit Notes auto send after refund (Beta)** | Sendet die Credit-Note-Dokumente nach erfolgreicher Rückerstattung automatisch mit den finalen Informationen an den Kunden. | – |
+| **Add Service Fees to Credit Note (Beta)** | Wendet die konfigurierten Service-Fee-Regeln auf Credit Notes an. | **Service Fees Credit Note (Beta)** konfigurieren |
+| **Service Fees Credit Note (Beta)** | Hier hinterlegst du Service Fees für Credit Notes (siehe unten). | **Add Service Fees to Credit Note (Beta)** aktiv |
+
+**Service Fees Credit Note (Beta)**: Für jede Service Fee hinterlegst du:
+
+- eine **Xentral-Produkt-ID**,
+- einen **beschreibenden Grund**, der in Xentral im Line Item der Credit Note erscheint,
+- die **Höhe** der Service Fee,
+- eine **Klassifizierung**, die festlegt, wann die Service Fee hinzugefügt wird.
+
+Du kannst jede Service Fee anpassen oder entfernen. So bildest du zum Beispiel Szenarien ab, in denen zusätzliche Services wie Bügeln als Service Fee berechnet werden.
+
+## Retourengebühren und Versandkosten
+
+<Note>
+  Diese Einstellungen funktionieren nur, wenn **Use Beta Endpoints** aktiv ist.
+</Note>
+
+Mit diesen Einstellungen bildest du Retourengebühren und erstattete Versandkosten in Xentral-Retouren und Credit Notes ab. Die Artikel werden nur hinzugefügt, wenn für die Retoure tatsächlich eine Gebühr angefallen ist oder Versandkosten erstattet werden.
+
+### Retourengebühr
+
+| Einstellung | Was sie macht | Voraussetzung |
+|---|---|---|
+| **Return Fee Default Item (Beta)** | Hier hinterlegst du einen Default-Artikel aus Xentral, mit dem Retourengebühren in Retouren oder Credit Notes abgebildet werden. | – |
+| **Add Return Fee to Credit Note (Beta)** | Stellt die Retourengebühr mit dem Default-Artikel in der Credit Note in Xentral dar. | **Return Fee Default Item (Beta)** und **Return Fee VAT Correction in Credit Note (Beta)** konfigurieren |
+| **Return Fee VAT Correction in Credit Note (Beta)** | Korrigiert den Betrag der Retourengebühr in der Credit Note um einen festen VAT-Satz, zum Beispiel 19 % als `0.19`. | – |
+| **Add Return Fee to Return Order (Beta)** | Stellt die Retourengebühr mit dem Default-Artikel in der Retoure in Xentral dar. | **Return Fee Default Item (Beta)** konfigurieren |
+
+### Versandkosten
+
+| Einstellung | Was sie macht | Voraussetzung |
+|---|---|---|
+| **Return Shipping Default Item (Beta)** | Hier hinterlegst du einen Default-Artikel aus Xentral, mit dem erstattete Versandkosten in Retouren oder Credit Notes abgebildet werden. | – |
+| **Add Shipping Fee to Credit Note (Beta)** | Stellt die erstatteten Versandkosten mit dem Default-Artikel in der Credit Note in Xentral dar. | **Return Shipping Default Item (Beta)** konfigurieren |
+| **Add Return Shipping Fee to Return Order (Beta)** | Stellt die erstatteten Versandkosten mit dem Default-Artikel in der Retoure in Xentral dar. | **Return Shipping Default Item (Beta)** konfigurieren |
+
+<Note>
+  Line Items in Xentral-Retouren enthalten keine Preisangaben.
+</Note>
+
+## Umtausch
+
+### Exchange Orders
+
+Mit dieser Option erstellt toern für Umtauschvorgänge automatisch Ersatzaufträge in Xentral. Der Ersatzauftrag übernimmt Artikel-, Preis- und Kundendaten aus dem Originalauftrag und ist direkt in Xentral sichtbar. Ersatzaufträge werden mit 0 Euro angelegt.
+
+Damit das funktioniert, füllst du die **Umtausch-Länderzuordnung** (Xentral Exchange Process Settings) aus:
+
+1. Klicke auf **Load Shipping Methods from Xentral**. Du siehst alle Versandarten aus Xentral mit ihren IDs.
+2. Weise jedem Zielland, in das Umtausch möglich sein soll, eine gültige Xentral-Versandart-ID zu.
+
+Damit legst du fest, welche Versandregel Xentral beim Erstellen eines Ersatzauftrags anwendet. Danach werden alle Ersatzaufträge aus toern direkt in Xentral erstellt, verknüpft und angezeigt. Das spart manuellen Aufwand im ERP und sorgt für einen einheitlichen Prozess in deinem Fulfillment-Team.
+
+<Frame><img src="/images/docs/Settings/XentralNew08.png" alt="Exchange Orders" /></Frame>
+
+### Exchange Orders - Auto Shipping
+
+Wenn diese Funktion aktiv ist, wählt toern für Ersatzaufträge in Xentral automatisch eine Versandmethode aus und löst den Versand direkt bei der Erstellung des Ersatzauftrags aus.
+
+<Frame><img src="/images/docs/Settings/XentralNew09.png" alt="Exchange Orders - Auto Shipping" /></Frame>
+
+### Exchange Orders - Fast Lane
+
+Wenn diese Funktion aktiv ist, werden alle Ersatzaufträge in Xentral automatisch priorisiert in der **Fast Lane** verarbeitet.
+
+<Frame><img src="/images/docs/Settings/XentralNew010.png" alt="Exchange Orders - Fast Lane" /></Frame>
+
+### Exchange Orders - Document Type
+
+Hier legst du fest, welche Dokumente Xentral für Ersatzaufträge automatisch erstellt:
+
+- keine Dokumente
+- Rechnung
+- Lieferschein
+- Rechnung und Lieferschein
+
+<Frame><img src="/images/docs/Settings/XentralNew011.png" alt="Exchange Orders - Document Type" /></Frame>
+
+## Anzeige im Dashboard
+
+### Display Xentral Return Info
+
+toern zeigt die relevanten Xentral-Links und Dokumentnummern in der Detailansicht der Retoure an. Du findest sie in einem Dropdown in den Bestellinformationen. Mit dieser Einstellung ist das Dropdown standardmäßig ausgeklappt, sodass du alle Nummern und Links direkt siehst.
+
+<Frame><img src="/images/docs/Settings/XentralNew012.png" alt="Display Xentral Return Info" /></Frame>
+
+## Einschränkungen
+
+toern bildet für Xentral ausschließlich folgende Funktionen ab:
+
+- Laden der vorhandenen Bestellungen, einmal am Tag
+- Anlegen von Retouren, entweder als Entwurf oder in finaler Form bei der Rückerstattung
+- Schließen von Retouren nach der Rückerstattung
+- Anlegen von Gutschriften
+- Anlegen von neuen Bestellungen für Umtausch
+- Anzeigen von Links zu Ressourcen in Xentral
+
+Außerdem musst du einen Standard-Retourengrund hinterlegen. Lade dazu die Retourengründe aus Xentral und wähle eine ID aus.
+
+<Tip>
+  Wenn beim Anlegen einer Retoure in Xentral ein Klärfall auftritt, findest du die Ursachen und Lösungen in den [FAQ](/faq).
+</Tip>

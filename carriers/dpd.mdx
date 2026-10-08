@@ -1,8 +1,53 @@
 ---
 title: "DPD"
-description: "Binde DPD als Versanddienstleister für Retouren an."
+description: "Binde DPD über DPD Web Connect an und erstelle Retourenlabels automatisch."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit **DPD Web Connect** erstellt toern deine DPD-Retourenlabels automatisch. Das ist die einfachste Methode, um DPD anzubinden. Du brauchst dafür nur deine Delis ID und dein DPD-Passwort.
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+## Einrichtung
+
+### Zugang zu DPD Web Connect beantragen
+
+Deine Zugangsdaten erhältst du von deinem DPD-Depot. Damit du eine Delis ID bekommst, muss dein Depot zuerst deinen Zugang zum DPD Web Service aktivieren.
+
+1. Fülle das [Registrierungsformular für DPD Web Services](/images/docs/DPD/RegistrationFormWebServicesDPD.pdf) aus.
+2. Sende das Formular an dein DPD-Depot.
+3. Das Depot beantragt den Zugang zu DPD Web Connect. Die Aktivierung erfolgt in der Regel am Tag nach der Beantragung.
+
+### Access Credentials in toern hinterlegen
+
+Hinterlege in den [DPD-Einstellungen](https://www.admin.re-toern.de/settings/return-shipping-service/dpd-webconnect) in toern:
+
+- **Delis ID** (= dein Benutzername bei DPD)
+- **dein DPD-Passwort**
+
+Sobald die Daten eingegeben und verifiziert sind, besteht eine aktive Verbindung zu DPD.
+
+![DPD Web Connect Access Credentials](/images/docs/DPD/DPDNew01.png)
+
+### Country Address Mapping
+
+Damit toern Retourenlabels über DPD erstellen kann, hinterlegst du die Retourenadressen pro Land im **DPD Country Address Mapping**.
+
+- Für jedes Land, das für Retouren zugelassen ist, braucht es einen Eintrag im DPD Country Address Mapping.
+- Jeder Eintrag braucht die korrekte Adresse.
+- Die Adresse kann je Land unterschiedlich sein, muss sie aber nicht.
+
+![DPD Country Address Mapping](/images/docs/DPD/DPDNew03.png)
+
+![DPD Country Map](/images/docs/DPD/DPD01.png)
+
+## Sendungsverfolgung (Shipment Tracking)
+
+Damit toern deine DPD-Retouren tracken kann, braucht es die **DPD Push URL** (Tracking Push Service). Diese musst du bei deiner DPD-Ansprechperson beantragen. Dafür sind spezielle Rechte nötig, die DPD genehmigen muss.
+
+1. Klicke in den DPD-Einstellungen in toern auf **Generate DPD URL and Download Form**. Du erhältst das benötigte Formular.
+2. Gehe mit dem Formular auf deine DPD-Ansprechperson zu.
+3. Sobald DPD bestätigt, dass die Push URL aktiv ist, kann toern deine Retouren tracken.
+
+![DPD Shipment Tracking](/images/docs/DPD/DPDNew02.png)
+
+Alternativ kannst du das [Anmeldeformular für den Tracking Push Service](/images/docs/DPD/Anmeldeformular_Tracking-Push-Service.pdf) herunterladen, dich bei den [DPD Webservices](https://esolutions.dpd.com/entwickler.aspx) anmelden und das ausgefüllte Formular an support@re-toern.de senden. Wir ergänzen den technischen Teil und schicken es dir zurück. Danach sendest du es an deine DPD-Ansprechperson.

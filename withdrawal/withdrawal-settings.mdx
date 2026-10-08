@@ -1,8 +1,165 @@
 ---
 title: "Widerrufseinstellungen"
-description: "Alle Einstellungen speziell für Widerrufe."
+description: "Alle Einstellungen für das Widerrufsportal: Portal, Frist, Stornierung, Blacklist, Gebühren, E-Mails, Links und Länder."
 ---
 
+Mit den Widerrufseinstellungen steuerst du den separaten Widerrufsprozess im toern Dashboard. Der Widerruf ist vom normalen Retourenportal getrennt. Er nutzt aber viele bestehende Grundlagen wie Branding, Login, Rücksendemethoden, Refund-Logik und die Bearbeitung in **Manage Returns**.
+
+Du findest alle Einstellungen unter **Settings → Withdrawal**.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-overview.png" alt="Übersicht der Widerrufseinstellungen im toern Dashboard" />
+</Frame>
+
+## Withdrawal Portal
+
+Mit dem Toggle **Withdrawal Portal** aktivierst oder deaktivierst du das Widerrufsportal für deine Brand. Ist das Portal aktiv, zeigt die Tabelle den Link zum Portal an.
+
+Der Link folgt diesem Schema:
+
+```text
+https://app.re-toern.de/widerruf/<portal-name>
+```
+
+`<portal-name>` ist der bestehende Portal-Name deiner Brand. Das ist derselbe Name, den auch dein normales Retourenportal nutzt.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-enable.png" alt="Aktivierter Link zum Widerrufsportal in den Settings" />
+</Frame>
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Das Widerrufsportal ist nur erreichbar, wenn die Widerrufsfunktion für deine Brand freigeschaltet und der Toggle aktiv ist. Ist das Portal deaktiviert, landen deine Kunden auf einer Fehlerseite.
 </Note>
+
+## Withdrawal Period
+
+Die **Withdrawal Period** legt fest, wie viele Tage nach Beginn der Widerrufsfrist deine Kunden einen Widerruf anmelden können. Der Standardwert ist **14 Tage**. Erlaubt sind Werte zwischen **14 und 365 Tagen**.
+
+Ist keine eigene Frist gespeichert, nutzt toern 14 Tage. Beim Login prüft das Portal, ob die Frist abgelaufen ist. Ist sie abgelaufen und wurde noch kein Widerruf registriert, zeigt das Portal eine Fehlermeldung.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-period.png" alt="Einstellung für die Widerrufsfrist im Dashboard" />
+</Frame>
+
+<Warning>
+  Prüfe die rechtlichen Anforderungen für deine Brand. In Deutschland gilt für Verbraucher grundsätzlich eine Widerrufsfrist von mindestens 14 Tagen.
+</Warning>
+
+## Unfulfilled Order Cancellation
+
+Mit **Unfulfilled Order Cancellation** aktivierst du einen Sonderfall: Wurde eine Shopify-Bestellung noch nicht ausgeführt, nicht versendet und nicht storniert, kann dein Kunde den Widerruf direkt als Stornierung bestätigen. So wird die Bestellung gar nicht erst versendet.
+
+Ist die Option aktiv und die Bestellung geeignet, läuft der Prozess so ab:
+
+1. Dein Kunde meldet sich im Widerrufsportal an.
+2. toern prüft, ob die Bestellung noch keine Fulfillments und keine Versanddaten hat.
+3. Das Portal zeigt eine eigene Stornierungsbestätigung.
+4. Nach der Bestätigung storniert toern die Bestellung in Shopify und fordert die vollständige Rückerstattung an.
+5. toern legt trotzdem einen Widerrufsvorgang an, damit der Vorgang im Dashboard nachvollziehbar bleibt.
+
+Ist die Bestellung bereits unterwegs oder angekommen, läuft der Widerruf nicht als Stornierung, sondern als Widerrufs-Retoure weiter. Mehr dazu findest du unter [Widerrufsportal](/withdrawal/withdrawal-portal).
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-cancelation.png" alt="Einstellung für die direkte Bestellstornierung" />
+</Frame>
+
+## Unarchive Orders After Cancellation
+
+Mit **Unarchive Orders After Cancellation** legst du fest, ob direkt stornierte Shopify-Bestellungen nach der Stornierung wieder entarchiviert werden. Diese Einstellung ist nur für die direkte Stornierung relevant.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-unarchive.png" alt="Einstellung für das Entarchivieren stornierter Bestellungen" />
+</Frame>
+
+## Withdrawal Blacklist Rules
+
+Mit **Withdrawal Blacklist Rules** legst du fest, ob deine Blacklist-Regeln für Retouren auch im Widerrufsportal gelten.
+
+Ist die Einstellung aktiv, werden Varianten, die du unter **Settings → Return → Blacklist Articles** ausgeschlossen hast, auch im Widerruf blockiert. Ist sie deaktiviert, ignoriert das Widerrufsportal die Blacklist.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-blacklist.png" alt="Einstellung für Blacklist-Regeln im Widerrufsportal" />
+</Frame>
+
+## Waive Return Fee
+
+Ist **Waive Return Fee** aktiv, wird die Return Fee für Widerrufe erlassen. Normale Retouren sind davon nicht betroffen.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-waive-return-fee.png" alt="Einstellung zum Erlassen der Return Fee für Widerrufe" />
+</Frame>
+
+## Refund Shipping Fee
+
+Ist **Refund Shipping Fee** aktiv, werden die Versandkosten bei Widerrufen **immer erstattet**. Die normale Regel deiner Brand für die Versandkostenerstattung wird für Widerrufe dann überschrieben.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-refund-shipping-fee.png" alt="Einstellung zur Erstattung der Versandkosten bei Widerrufen" />
+</Frame>
+
+## Withdrawal Customer Notifications
+
+Unter **Withdrawal Customer Notifications** steuerst du die E-Mail-Events für Widerrufe. Die Events sind vom normalen Retourenprozess getrennt, nutzen aber denselben E-Mail-Service wie deine Retouren.
+
+Diese Events sind verfügbar:
+
+1. Eingangsbestätigung für den Widerruf
+2. Kunde hat die Bestellnummer vergessen
+3. Widerruf wurde ohne Label oder Anweisungen angemeldet
+4. Widerruf wurde mit Anweisungen angemeldet, zum Beispiel Label oder Adresse
+5. Widerruf ist unterwegs
+6. Widerruf ist eingegangen
+7. Widerruf wurde geprüft
+8. Widerruf wurde erstattet
+9. Widerruf wurde abgeschlossen
+10. Widerruf wurde storniert
+
+Einige Basis-Events sind für Nicht-Admin-User fest aktiviert, weil sie für den Prozess notwendig sind.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-customer-notifications.png" alt="Withdrawal Customer Notifications im Dashboard" />
+</Frame>
+
+Ist **Transactional E-Mails by toern** als Notification Service ausgewählt, kannst du die Widerrufs-Vorlagen im E-Mail Editor bearbeiten. Wähle dort zuerst das Widerrufs-Event und dann die Sprache. Jede Kombination aus Event und Sprache wird separat gespeichert.
+
+<Card title="E-Mail-Vorlagen" icon="envelope" href="/branding/email-templates">
+  Widerrufs- und Retouren-E-Mails anpassen, prüfen und testen.
+</Card>
+
+## Withdrawal Reference URLs
+
+Die **Withdrawal Reference URLs** werden im Widerrufsportal angezeigt. Es gibt drei Felder:
+
+1. **URL zur Widerrufsbelehrung**: Link auf der Login-Seite des Widerrufsportals.
+2. **Privacy policy URL**: Link zur Datenschutzerklärung.
+3. **Legal notice URL**: Link zum Impressum.
+
+Leere Felder werden deinen Kunden nicht angezeigt. Diese URLs gelten nur für das Widerrufsportal. Dein normales Retourenportal nutzt weiterhin die normalen Referenz-URLs.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-reference-urls.png" alt="Reference URLs für das Widerrufsportal" />
+</Frame>
+
+## Withdrawal Countries
+
+Unter **Withdrawal Countries** legst du fest, aus welchen Ländern deine Kunden einen Widerruf anmelden können.
+
+EU-Länder sind standardmäßig vorbereitet. Ein Land kann im Widerrufsportal aber nur genutzt werden, wenn es auch in den normalen Retourenländern deiner Brand unterstützt wird. Ist ein Land nicht in den Return Countries hinterlegt, zeigt die Tabelle **Keine Retouren-Zuordnung** und der Toggle ist deaktiviert.
+
+Über **Land hinzufügen** kannst du weitere Länder ergänzen, sofern sie in deinen [Retoureneinstellungen](/returns/return-settings) verfügbar sind. Einzelne Länder kannst du aktivieren, deaktivieren oder aus der Liste entfernen.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-countries.png" alt="Withdrawal Countries im Dashboard" />
+</Frame>
+
+## Widerrufsgründe
+
+Aktuell kannst du keine eigenen Gründe für einen Widerruf in toern hinterlegen. Der Grund ist rechtliche Unklarheit: Es ist offen, ob die Auswahl eines Grundes als zusätzliche Hürde im Widerrufsprozess gilt. Sobald das geklärt ist, werden Gründe zur Auswahl wieder verfügbar.
+
+## Einschränkungen
+
+- Das Widerrufsportal muss für deine Brand als Feature freigeschaltet sein.
+- Die Länder im Widerrufsportal hängen von den normalen Return Countries deiner Brand ab.
+- Die direkte Stornierung funktioniert nur für geeignete, noch nicht ausgeführte und nicht versendete Shopify-Bestellungen.
+- Umtausch und FlexShare sind im Widerrufsportal deaktiviert.
+- Die Gebühren- und Versandkosten-Einstellungen für Widerrufe gelten nicht für normale Retouren.

@@ -1,8 +1,86 @@
 ---
 title: "Fulfillment integration"
-description: "How toern and your fulfillment work together on returns, withdrawals, and claims."
+description: "How toern and your fulfillment work together on returns: select your fulfiller, add a contact person, and choose the right data transfer method."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+A smooth returns process starts with logistics. For toern to receive status updates and process returns, your fulfiller (logistics provider) needs to be connected to toern. This is the basic requirement for any automated process.
+
+## Transfer methods at a glance
+
+There are three ways your fulfiller can communicate with toern:
+
+| Method | Level of automation | Effort |
+| --- | --- | --- |
+| toern **REST API** | High (fully automated) | If your fulfiller is already integrated, only you as a brand need to be connected. If not, your fulfiller needs to build a connection to toern. |
+| **toern dashboard** | Medium (manual classification in toern) | No IT resources required. |
+| **Excel parsing** | High (fully automated) | Requires individual effort and has to be agreed with toern support. |
+
+<Tip>
+  Does your fulfillment work with JTL-Wawi? Then you can easily connect it to toern via [FFN Connect](/en/fulfillment/ffn-connect-jtl-partner).
+</Tip>
+
+## Setup
+
+### 1. Select your return fulfiller
+
+toern needs to know which fulfiller supports you in the returns process.
+
+1. Open the fulfillment settings in your toern dashboard.
+2. In the **Return Fulfiller** dropdown, choose whether you handle **your own fulfillment** or select a fulfiller toern is in contact with.
+
+![Choose Fulfiller](/images/docs/Settings/Fulfillment01.png)
+
+![Choose Fulfiller 2](/images/docs/Settings/Fulfillment02.png)
+
+<Info>
+  toern is in contact with many fulfillment providers. Reach out to your contact at toern via [support@re-toern.de](mailto:support@re-toern.de). Together you can check whether an automated connection for transferring the return classification already exists for your fulfiller, or whether one can be developed.
+</Info>
+
+### 2. Fill in the fulfiller details
+
+Add the contact details of your contact person at the fulfiller. This lets toern reach the right person directly during development work or technical issues. If we detect errors in the integration, we can quickly get in touch with your fulfillment partner.
+
+![Set Fulfiller Details](/images/docs/Settings/Fulfillment03.png)
+
+The most important fields are **name**, **role**, and **contact**. A phone number is optional. If you don't have one, just enter `-`.
+
+### 3. Set the data transfer method
+
+Finally, define how your fulfiller passes the inspection data to toern.
+
+1. Check with your fulfillment provider which connection option is available (see below).
+2. Under **Data Transfer Method**, select the matching transfer method.
+3. If the connection doesn't exist yet, contact [support@re-toern.de](mailto:support@re-toern.de) for the next steps.
+
+![Fulfillment Method](/images/docs/Settings/Fulfillment04.png)
+
+## Connection options
+
+### Option A: Connection via the REST API (recommended)
+
+This is the most efficient way. Your fulfiller connects their system directly to the toern API.
+
+1. Create a new API key in your toern dashboard under **Settings → REST API Keys**.
+2. Share the API key and the [API documentation](/en/api-reference/introduction) with your fulfillment.
+3. Your fulfiller uses them to connect to toern.
+
+As soon as the fulfiller uses the API, return data is synchronized automatically. No further steps are required on your side.
+
+<Info>
+  Fulfillers must strictly follow the existing API structure. Individual extensions of the interface are possible. Due to the development effort, they come with additional integration costs that you need to agree on with toern support.
+</Info>
+
+### Option B: Working directly in the toern dashboard
+
+If your fulfiller (or you with your own warehouse) doesn't want an API connection, you can inspect and receive returns directly in the toern dashboard.
+
+- **Advantage:** No technical integration required.
+- **How to:** Add your warehouse staff as new users under **User Management**. Use the **Fulfillment User** role for this. This role has no access to settings or detailed analytics. Learn more under [User management](/en/dashboard/user-management).
+
+### Option C: Excel parsing
+
+If an automated solution isn't possible right now, toern offers parsing of Excel lists.
+
+<Warning>
+  This requires adapting individual formats. Please contact our customer support at [support@re-toern.de](mailto:support@re-toern.de) to set up this process.
+</Warning>

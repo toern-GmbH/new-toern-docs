@@ -1,8 +1,95 @@
 ---
 title: "PostNord"
-description: "Connect PostNord as a carrier for returns."
+description: "Connect PostNord for digital return labels, QR codes and shipment tracking."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With PostNord, toern creates digital return labels and tracks your returns. The integration creates a PDF label and a QR code via the PostNord API. toern later uses the same credentials to track the return.
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Requirements
+
+You need an active PostNord contract that supports digital return labels. You also need the API credentials for the production environment:
+
+- **API Key**
+- **Organization ID**
+- **Customer ID** or PostNord customer number
+- **Application ID**
+
+<Warning>
+  The customer number must match the PostNord business account the returns are booked through. If returns go to Sweden, for example, the agreement must match PostNord Sweden. If you have several Nordic return addresses, check the setup together with PostNord and support@re-toern.de.
+</Warning>
+
+## Setup
+
+In the toern dashboard, open the [PostNord shipping settings](https://www.admin.re-toern.de/settings/shipping-services?group=PostNord). There are three sections:
+
+1. **Access Credentials**
+2. **Country Address Mapping**
+3. **Label Options**
+
+### Access Credentials
+
+First, enter your PostNord production credentials. toern uses them for label creation and tracking. Sandbox credentials are only relevant for internal tests.
+
+- **API Key**: API key for label creation and tracking.
+- **Organization ID**: PostNord organization the API request runs through.
+- **Customer ID**: PostNord customer number or agreement number for booking returns.
+- **Application ID**: PostNord Application ID used in the EDI request.
+
+### Country Address Mapping
+
+In the Country Address Mapping you store the recipient address of the return. This is the address your customers send their return to. PostNord uses it as the **Consignee** on the return label.
+
+![PostNord Country Address Mapping](/images/docs/PostNord/PostNordCountryAddressMap.png)
+
+Create at least the **Default (Fallback)** entry. Without it, toern can't create labels. The default entry applies to all countries without their own entry. If you need a different return address or agreement per country, add extra entries per country.
+
+![Add a PostNord return address](/images/docs/PostNord/PostNordCountryAddressDialog.png)
+
+These fields matter when you add or edit an address:
+
+- **Country**: country the entry applies to. For the default entry, this is the return destination address.
+- **Name, Street, House No., Postal Code, City**: required fields of the return address.
+- **Recipient email** and **Recipient phone**: optional contact details for the return address.
+- **QR Language**: optional language for the PostNord QR label. If you leave it empty, the language is set automatically based on the country.
+
+<Info>
+  The PostNord Country Address Mapping is independent of the general Country Map in the Return Settings. The general Country Map decides whether customers get a digital label for a country. The PostNord mapping decides which return address appears on the PostNord label.
+</Info>
+
+### Label Options
+
+In the Label Options you can enable PostNord to also send the QR code to your customers by email.
+
+![PostNord Label Options](/images/docs/PostNord/PostNordLabelOptions.png)
+
+- PostNord only sends the QR code if the return contains a customer email address.
+- The PDF label and QR code are still stored in toern either way.
+- The toern email confirming the return registration with label (if used) is still sent. Your customers get the QR code from PostNord and the email with the PDF label.
+
+## Use PostNord in the Country Map
+
+After saving the PostNord settings, select PostNord in the Return Settings for the countries you want:
+
+1. Open the Return Settings and go to the **Country Map**.
+2. Select **Digital label** for the country.
+3. Select **PostNord** as the Shipping Provider.
+4. Save the Country Map.
+
+You can find more about the Country Map under [Return methods](/en/returns/return-methods).
+
+<Warning>
+  Without matching PostNord Access Credentials and at least one valid default entry in the PostNord Country Address Mapping, toern can't create a PostNord return label.
+</Warning>
+
+## Test the setup
+
+After the setup, create a test return for a country that points to PostNord in the Country Map. Then check:
+
+- whether a PDF label was created,
+- whether a QR code is available,
+- whether a tracking number was saved,
+- whether shipment tracking shows up in the return after the first PostNord update.
+
+If label creation fails, first check the API Key, Organization ID, Customer ID, Application ID and the required fields in the PostNord Country Address Mapping.

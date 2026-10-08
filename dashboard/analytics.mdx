@@ -1,8 +1,102 @@
 ---
 title: "Übersichten & Analysen"
-description: "Behalte Retouren und Kennzahlen im Blick."
+description: "Behalte Retourenrate, Retourenstatus, einbehaltenen Umsatz und die meistretournierten Artikel im Blick."
 ---
 
+Die **Overview**-Seite zeigt dir die wichtigsten Kennzahlen deiner Retouren auf einen Blick. Du siehst sofort, wie sich Retourenrate, Retouren und Bestellungen entwickeln. Über die Artikeldetails findest du heraus, welche Produkte und Varianten besonders oft zurückkommen und warum.
+
+Du erreichst das Dashboard unter [admin.re-toern.de](https://www.admin.re-toern.de/). Melde dich mit deinen Zugangsdaten (Nutzer und Passwort) an. Die Overview-Seite ist die erste Seite, die du nach dem Login siehst.
+
+## Overview
+
+Oben auf der Seite siehst du die aktuelle **Retourenrate**, die **Anzahl der Retouren** und die **Anzahl der Bestellungen**. Standardmäßig ist ein Monat als Zeitraum eingestellt. Du kannst den Zeitraum individuell anpassen. Alle Daten werden auf **Paketebene** und auf **Artikelebene** angezeigt.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Bei einer Monatsauswertung (z. B. vom 01. bis 31. eines Monats) rechnet toern immer von 00:00 Uhr bis 23:59:59 Uhr. Das kann von Shopify abweichen. Deshalb stimmen die Zahlen nicht immer zu 100 % überein.
 </Note>
+
+![Kennzahlen auf der Overview-Seite](/images/docs/Dashboardprozess/Overview01.png)
+
+Darunter zeigt ein Graph die Anzahl der Bestellungen und Retouren im Zeitverlauf. Auch hier kannst du jederzeit zwischen **Paketebene** und **Artikelebene** wechseln.
+
+![Bestellungen und Retouren im Zeitverlauf](/images/docs/Dashboardprozess/Overview02.png)
+
+### Return shipment status
+
+Der **Return Shipment Status** zeigt dir, wie viele Retouren sich gerade in welchem Schritt befinden:
+
+- **Registered**: Die Retoure wurde im toern Retourenportal angemeldet und ist unter **Manage Returns** gelistet. Das Paket ist noch bei deinen Kunden.
+- **Pre-Transit**: Die Retoure wurde im Paketshop abgegeben und wartet auf den Versand.
+- **In-Transit**: Der Versanddienstleister bringt die Retoure gerade zu deinem Fulfillment.
+- **Received**: Die Retoure ist im Fulfillment angekommen und kann bearbeitet werden.
+- **Processed**: Die Retoure ist vollständig abgeschlossen.
+
+Die Zwischenschritte der Bearbeitung siehst du im Detail in der jeweiligen Retoure.
+
+![Return Shipment Status](/images/docs/Dashboardprozess/Overview03.png)
+
+### Retention rate
+
+Die **Retention Overview** zeigt dir, wie viel Umsatz du durch **Umtausch** und **Gutscheine** einbehalten hast. Du siehst jeweils das Volumen in Euro und die Gesamtanzahl. Dieses Volumen wird mit dem Volumen der Rückerstattungen verrechnet. So erkennst du, wie hoch der einbehaltene Umsatz im Verhältnis zu den Rückerstattungen ist.
+
+Umtauschartikel, die später über den Kundenservice zurückgegeben werden, sind dabei nicht berücksichtigt.
+
+![Retention Rate](/images/docs/Dashboardprozess/Overview04.png)
+
+### Return details
+
+Ganz unten findest du Statistiken auf Artikelebene und zu den Retourengründen:
+
+- **Top 20 returned Items**: Die Artikel, die im gewählten Zeitraum am häufigsten retourniert wurden. Sowohl nach Anzahl der Retouren als auch nach Retourenrate.
+- **Retourengründe**: Im zweiten Reiter siehst du die Retourengründe produktübergreifend ausgewertet.
+
+![Return Details mit den meistretournierten Artikeln](/images/docs/Dashboardprozess/Overview05.png)
+
+Klicke auf einen Artikel in der Liste, um die Artikeldetails zu öffnen.
+
+## Artikeldetails
+
+Die **Artikeldetails** zeigen dir alle relevanten Daten zu einem Artikel. Der Zeitraum ist standardmäßig auf einen Monat eingestellt und lässt sich anpassen. Oben findest du eine Zusammenfassung mit den wichtigsten Informationen zum Produkt.
+
+![Zusammenfassung des Artikels](/images/docs/Dashboardprozess/ItemDetails01.png)
+
+Die Farben der Varianten zeigen dir die Retourenquote pro Variante. Ein Beispiel: Größe S hat im gewählten Zeitraum 25 Bestellungen und 17 Retouren. Mit 68 % liegt sie damit im dunkelroten Bereich.
+
+Darunter findest du:
+
+- **Nutzereingaben**: Alle Inputs deiner Kunden zu diesem Artikel in einer Liste. Dazu das Verhältnis von Feedback-Inputs zu allen Retouren des Artikels. Das hilft dir einzuschätzen, wie viele Kunden zusätzlich etwas mitteilen wollten und wie dringend das Thema ist.
+- **Retourengründe** auf Artikelebene.
+- **Varianten** mit zusätzlichen Informationen.
+
+![Nutzereingaben auf Artikelebene](/images/docs/Dashboardprozess/ItemDetails02.png)
+
+![Retourengründe auf Artikelebene](/images/docs/Dashboardprozess/ItemDetails03.png)
+
+![Zusätzliche Informationen auf Variantenebene](/images/docs/Dashboardprozess/ItemDetails04.png)
+
+Du kannst jede Variante öffnen. Dort siehst du detaillierte Statistiken und die Retourengründe auf Variantenebene. Das ist besonders hilfreich, wenn einzelne Varianten eine auffällig hohe Retourenquote haben.
+
+![Detailstatistiken einer Variante](/images/docs/Dashboardprozess/ItemDetails06.png)
+
+## Interaktive Anleitung
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/dr9l8n5snr" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Einschränkungen
+
+- **Return Statistics**
+  - Die Retourendaten basieren nur auf den in toern gesammelten Daten. Andere Quellen fließen nicht in die Berechnung ein.
+  - Die Berechnung kann von Shopify abweichen.
+- **Return Shipment Status**
+  - Detaillierte Updates (Pre-Transit und In-Transit) gibt es nur für die DHL-Sendungsverfolgung.
+  - Für DHL, DPD und GLS gibt es ein Update beim Status **Received**.
+- **Retention Overview**
+  - Nur abgeschlossene Retouren werden berücksichtigt.
+  - Umgetauschte Artikel, die danach erneut retourniert werden, werden nicht wieder herausgerechnet.
+- **Return Details**
+  - Hier werden nur die Top 20 retournierten Artikel angezeigt. Alle anderen findest du unter **Items Overview**.
+  - Den Zeitraum legst du oben auf der Seite fest.
+- **Retourengründe (produktübergreifend)**
+  - Die Retourengründe werden in der produktübergreifenden Analyse nach Varianten ausgewertet, nicht nach Artikeln. Alle angemeldeten Retourengründe werden also auf einzelne Varianten heruntergebrochen.

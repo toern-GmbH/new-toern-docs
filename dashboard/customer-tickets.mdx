@@ -1,8 +1,93 @@
 ---
 title: "Kundeneingaben & Ticketsystem"
-description: "Bearbeite Kundeneingaben und Anfragen im Ticketsystem."
+description: "Sieh dir alle Kundeneingaben an und bearbeite dringende Anliegen im Customer Ticket System."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Deine Kunden können im Retourenportal neben dem Retourengrund weitere Details mitgeben: Text, Bilder oder Sprachnachrichten. Im Dashboard siehst du diese Eingaben gesammelt. Das **Customer Ticket System** zeigt dir zusätzlich die Fälle, bei denen du wirklich handeln musst.
+
+## User Inputs
+
+Unter **User Inputs** siehst du alle Retouren, bei denen dein Kunde mehr angegeben hat als nur einen Retourengrund. Das kann ein Text, ein Bild oder eine Sprachnachricht sein. Wie der Prozess auf Kundenseite funktioniert, liest du im [Retourenportal](/returns/return-portal).
+
+Die Übersicht hilft dir:
+
+- die Eingaben den Retouren zuzuordnen,
+- die aktuellen Herausforderungen deiner Kunden zu verstehen,
+- zu erkennen, ob es bei einer Retoure konkreten Handlungsbedarf gibt.
+
+Alle Eingaben im gewählten Zeitraum werden chronologisch angezeigt, über alle Produkte hinweg. Klicke auf die **Order-ID**, um direkt zur zugehörigen Retoure zu springen.
+
+![User Inputs im Dashboard](/images/docs/Dashboardprozess/UserInputsDashboard.png)
+
+Du willst die Eingaben zu einem bestimmten Artikel sehen? Öffne die [Artikeldetails](/dashboard/analytics#artikeldetails). Du erreichst sie über die **Top 20 returned Items** auf der Overview-Seite oder indem du den Artikel im **Items Overview** suchst.
+
+## Customer Ticket System
+
+Im **Customer Ticket System** siehst du Kundenfeedback, das sofortiges Handeln erfordert. Es geht um echte Service-Probleme, Fulfillment-Fehler oder spezielle Anfragen. Zum Beispiel falsch gelieferte oder beschädigte Artikel, aber auch Standardanfragen wie Umtausch oder Fragen zu deinen Richtlinien.
+
+Die Tickets erstellt die **toern-AI**. Sie analysiert die Nutzereingaben automatisch und prüft, ob Handlungsbedarf besteht und wie dringend er ist. Eingaben, die auf unzufriedene Kunden hinweisen, werden als dringend eingestuft. Alle anderen erscheinen als normale Tickets. Jedes Ticket enthält eine empfohlene Lösung, passende Tags und eine Dringlichkeitsstufe. So kannst du schnell priorisieren.
+
+### Ticketübersicht
+
+Links siehst du die Ticketliste mit ID, Erstellungsdatum, Dringlichkeit und Status. Die Tickets werden chronologisch für den gewählten Zeitraum angezeigt. Du kannst filtern nach:
+
+- **Urgency**: Wie dringend die toern-AI das Anliegen einstuft: **standard** oder **urgent**.
+- **Status**: Der Bearbeitungsstand des Tickets: **open**, **in progress** oder **done**.
+- **Datum**: Zeigt Tickets aus einem bestimmten Zeitraum.
+
+![Liste der Customer Tickets](/images/docs/Dashboardprozess/CustomerTickets01.png)
+
+### Ticketdetails
+
+Klicke auf ein Ticket, um rechts die Details zu öffnen:
+
+- **Date**: Erstellungsdatum des Tickets
+- **Ticket ID**: Eindeutige ID des Tickets
+- **Associated Return**: Link zur zugehörigen Retoure
+- **Product**: Das Produkt, um das es geht
+- **AI Tags**: Tags, die die toern-AI zum Inhalt passend vergibt
+- **Recommended Action**: Ein Vorschlag der toern-AI, wie du das Anliegen lösen kannst
+- **Input**: Die tatsächliche Eingabe deines Kunden
+
+![Detailansicht eines Tickets](/images/docs/Dashboardprozess/CustomerTickets02.png)
+
+<Tip>
+  Nutze die Daumen-hoch- und Daumen-runter-Buttons. So teilst du uns mit, ob das Ticket sinnvoll war und die Empfehlung passt. Mit deinem Feedback verbessern wir die toern-AI laufend.
+</Tip>
+
+### Tickets bearbeiten
+
+Den Status änderst du direkt in der Detailansicht unter **Status Management**:
+
+1. Setze das Ticket auf **In Progress**, sobald du startest.
+2. Setze es auf **Done**, wenn das Problem gelöst ist.
+
+Statusänderungen kannst du jederzeit rückgängig machen. Hast du ein Ticket versehentlich abgeschlossen, öffne es einfach wieder. toern protokolliert, wer wann den Status geändert hat.
+
+![Status eines Tickets ändern](/images/docs/notion/customer-tickets-status-management.png)
+
+### E-Mail-Benachrichtigungen
+
+Damit du keine dringenden Fälle verpasst, kann toern dich per E-Mail benachrichtigen. In den Settings unter **Customer Tickets** legst du fest:
+
+- **Enable email notifications**: Schaltet die Benachrichtigungen ein oder aus.
+- **Notification email**: Die Empfängeradresse.
+- **Email language**: Die Sprache der E-Mails (Deutsch oder Englisch).
+
+Speichere deine Änderungen mit **Update**.
+
+![E-Mail-Einstellungen für Customer Tickets](/images/docs/notion/customer-tickets-email-settings.png)
+
+E-Mails gehen nur raus, wenn ein Ticket als **urgent** eingestuft ist und die Benachrichtigungen aktiviert sind. So wirst du nicht mit E-Mails überflutet, verpasst aber keine kritischen Fälle.
+
+![Beispiel einer E-Mail zu einem dringenden Ticket](/images/docs/notion/customer-tickets-urgent-email.png)
+
+### Interaktive Anleitung
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/dkd8nmqbgr" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Einschränkungen
+
+- Die toern-AI erstellt Tickets nur für dringende Fälle auf Artikelebene. Eine Auswertung der Eingaben über mehrere Artikel oder Produkte hinweg findet nicht statt.

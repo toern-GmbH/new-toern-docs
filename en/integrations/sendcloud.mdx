@@ -1,8 +1,109 @@
 ---
 title: "Sendcloud"
-description: "Connect Sendcloud to toern."
+description: "Create shipping labels for exchange items automatically through your Sendcloud account."
 ---
 
+With the **Sendcloud integration**, toern automatically creates shipping labels for exchange items. Whenever a customer exchanges an item during their return, the replacement gets its own shipping label. No manual work needed.
+
+The label is created through your own Sendcloud account. It's attached to the order in Shopify and shown in the return details. This way, you always know how and where the replacement is being shipped.
+
 <Note>
-  This page is a work in progress.
+  For Sendcloud labels to be created, **shipping label creation must be enabled in your exchange settings**. You manage this in the [exchange settings](/en/returns/exchange).
 </Note>
+
+## When is the shipping label created?
+
+The label is created during the exchange process. The exact moment depends on your exchange configuration. Once the exchange process runs, the following happens:
+
+1. The label is generated.
+2. The replacement order is marked as fulfilled.
+3. Tracking becomes available.
+
+Where you see this depends on your exchange method. You'll find more details [further below](#view-the-label-in-shopify).
+
+## Setup
+
+### Add your Sendcloud credentials
+
+Before any labels can be created, you connect your Sendcloud account. For this, you need your Sendcloud API credentials: a **public key** and a **secret key**.
+
+1. Create an API key in the **Integrations** menu of your Sendcloud account. Sendcloud's [Quick Start Guide](https://support.sendcloud.com/hc/en-us/articles/360024967012-Sendcloud-API-documentation-and-Quick-Start-Guide) walks you through this step.
+2. Copy the public key and the secret key from the API settings of your account.
+3. Enter both keys in the Sendcloud settings in toern and save.
+
+<Warning>
+  A key is only visible right after it's generated. Copy it right away.
+</Warning>
+
+Once your credentials are saved, your account is connected and ready to create labels.
+
+<Frame caption="The Integrations menu in Sendcloud">
+  <img src="/images/docs/Sendcloud/integrations-page.png" alt="Sendcloud account showing the Integrations menu where API integrations are managed" />
+</Frame>
+
+<Frame caption="Where to find your API keys in Sendcloud">
+  <img src="/images/docs/Sendcloud/api-keys.png" alt="Sendcloud account showing the public and secret API keys of an integration" />
+</Frame>
+
+<Frame caption="Entering your Sendcloud credentials in the settings">
+  <img src="/images/docs/Sendcloud/access_credentials.png" alt="Settings page where the Sendcloud public key and secret key are entered" />
+</Frame>
+
+### Configure countries
+
+Returns can come from different countries. A replacement shipped to a customer in one country may need to go out from a different warehouse or use a different carrier service than one in another country. That's why you set up a separate configuration for **each country** you ship to. If you use the same configuration for all countries, simply set the default address.
+
+For every country, you provide three values from your Sendcloud account:
+
+- **Sender address**: The ID of the address the replacement is shipped from (your warehouse or the sender address registered in Sendcloud).
+- **Shipping option**: The carrier service or shipping method used to create the label.
+- **Contract**: The ID of the carrier contract tied to the shipping option. If you leave this blank, Sendcloud automatically picks the most suitable contract.
+
+You find these values through API calls to your Sendcloud account. Use the same API credentials as above.
+
+- **Sender address ID**: Make a `GET` request to [`/api/v3/addresses/sender-addresses`](https://sendcloud.dev/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses). The response lists all sender addresses in your account. Each entry has an `id` field. Use the ID of the address you want to ship from.
+- **Shipping option**: Make a `POST` request to [`/api/v3/shipping-options`](https://sendcloud.dev/api/v3/shipping-options/return-a-list-of-available-shipping-options) with your origin and destination country codes. The response lists all available shipping methods for that route. Pick the one you want to use for the replacement.
+- **Contract ID (optional)**: Make a `GET` request to [`/api/v3/contracts`](https://sendcloud.dev/api/v3/contracts/retrieve-a-list-of-contracts). The response lists all contracts in your account, each with an `id` field, carrier and country. Use the ID of the contract that matches your shipping option.
+
+<Frame caption="The country-to-address mapping in your settings">
+  <img src="/images/docs/Sendcloud/country-address-map.png" alt="Settings page showing the per-country address mapping after configuration" />
+</Frame>
+
+## View the label in Shopify
+
+Once a label is created, two things happen in Shopify:
+
+- The replacement is marked as **fulfilled**, with the **tracking number and tracking link** added.
+- The **shipping label PDF** is uploaded to your Shopify Files and attached to the order as a **metafield**. You can view it there or on the return detail page.
+
+If you use **Shopify's native exchange method**, you see this directly on the order page the return belongs to.
+
+<Frame caption="Fulfillment and tracking on the order (Shopify's native exchange method)">
+  <img src="/images/docs/Sendcloud/fulfillment-shopify-exchange.png" alt="Shopify order page showing the exchange fulfilled with a tracking number and tracking link" />
+</Frame>
+
+If you use the **new order** exchange method, you see the fulfillment information on the new order created for the replacement items.
+
+<Frame caption="Fulfillment and tracking on the new exchange order">
+  <img src="/images/docs/Sendcloud/fulfillment-new-exchange-order.png" alt="New exchange order in Shopify showing the replacement items fulfilled with a tracking number and tracking link" />
+</Frame>
+
+In the fulfillment information, click the tracking number to open the tracking link.
+
+In both cases, you find the uploaded label in the order's metafields.
+
+<Frame caption="The shipping label attached to the order as a metafield">
+  <img src="/images/docs/Sendcloud/metafield-label.png" alt="Shopify order page showing the exchange shipping label attached as a metafield" />
+</Frame>
+
+## View the label on the return detail page
+
+The shipping label for the replacement and its tracking information are also shown directly on the **return detail page** in your toern dashboard. If a return has both a return label and an exchange shipping label, both are shown stacked one above the other.
+
+<Frame caption="The exchange shipping label and tracking in the return details">
+  <img src="/images/docs/Sendcloud/return_details_shipping_label.png" alt="Return detail page displaying the exchange shipping label with its tracking information" />
+</Frame>
+
+## Limitations
+
+- Currently, the only way to create the exchange shipping label is by running the exchange process.

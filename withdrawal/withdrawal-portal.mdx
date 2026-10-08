@@ -1,8 +1,171 @@
 ---
 title: "Widerrufsportal"
-description: "So funktioniert das Widerrufsportal und der Widerrufsprozess."
+description: "So funktioniert das Widerrufsportal: Prüfung beim Login, direkte Stornierung, Rücksendung, Status und Darstellung im Dashboard."
 ---
 
+Das Widerrufsportal ist ein eigener Rückgabeprozess für Kunden, die einen Kaufvertrag widerrufen möchten. Es nutzt Teile des normalen Retourenportals. Damit der Prozess den rechtlichen Rahmenbedingungen entspricht, sind einige Funktionen deaktiviert: **Umtausch**, **Gutscheine** und **FlexShare** stehen nicht zur Verfügung. Die Rückerstattung läuft immer über die ursprüngliche Zahlungsmethode.
+
+Der Link zum Portal hat dieses Format:
+
+```text
+https://app.re-toern.de/widerruf/<portal-name>
+```
+
+Du findest den Link im Dashboard unter **Settings → Withdrawal → Withdrawal Portal**.
+
+## Einstieg und Prüfung
+
+Beim Login prüft toern zuerst, ob die Bestellung im Widerrufsportal verarbeitet werden darf. Diese Prüfung entscheidet, in welchem Szenario dein Kunde landet.
+
+toern prüft unter anderem:
+
+1. Ist das Widerrufsportal für deine Brand aktiviert?
+2. Ist das Bestellland für Widerrufe freigegeben?
+3. Stimmen Bestellnummer und E-Mail-Adresse oder Postleitzahl?
+4. Ist die Widerrufsfrist noch gültig?
+5. Ist die Bestellung nicht bereits storniert?
+6. Gibt es für diese Bestellung noch keine normale Retoure?
+7. Ist die Bestellung keine Umtauschbestellung?
+8. Kann die Bestellung eventuell noch direkt storniert werden?
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-login.png" alt="Login im Widerrufsportal" />
+</Frame>
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Gibt es für eine Bestellung bereits eine normale Retoure, kann dieselbe Bestellung nicht noch einmal als Widerruf angemeldet werden. Gibt es bereits einen Widerruf, bleibt dein Kunde im Widerrufs-Kontext.
 </Note>
+
+## Szenario 1: Direkte Bestellstornierung
+
+Dieses Szenario greift nur, wenn **Unfulfilled Order Cancellation** in den [Widerrufseinstellungen](/withdrawal/withdrawal-settings) aktiv ist und die Bestellung noch nicht im Versandprozess ist.
+
+Eine Bestellung kann direkt storniert werden, wenn in Shopify Folgendes zutrifft:
+
+1. Sie ist nicht storniert.
+2. Sie wurde noch nicht ausgeführt.
+3. Sie wurde noch nicht für den Versand vorbereitet.
+4. Es liegen noch keine Versandinformationen vor.
+5. Sie kann direkt im Shopsystem storniert werden.
+6. Sie ist keine Umtauschbestellung.
+
+In diesem Fall startet nach dem Login keine Artikelauswahl. Stattdessen bestätigt dein Kunde die direkte Stornierung. toern storniert dann die Bestellung in Shopify, fordert die vollständige Rückerstattung an und legt einen Widerrufsvorgang an. So bleibt der Vorgang im Dashboard nachvollziehbar.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation.png" alt="Direkte Bestellstornierung im Widerrufsportal" />
+</Frame>
+
+Nach einer erfolgreichen Stornierung ist der Widerruf abgeschlossen. Es gibt keinen Rücksendeprozess, weil die Bestellung noch nicht versendet wurde.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation-confirmation.png" alt="Bestätigung der direkten Stornierung" />
+</Frame>
+
+Im Shopsystem siehst du anschließend, dass die Bestellung storniert und die Rückerstattung angefordert wurde.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation-shopify.png" alt="Stornierte Widerrufsbestellung in Shopify" />
+</Frame>
+
+<Warning>
+  Schlägt die Stornierung in Shopify fehl, wird der Vorgang nicht als erfolgreich abgeschlossen. Dein Kunde sieht eine Fehlermeldung, und du musst den Fall manuell prüfen.
+</Warning>
+
+## Szenario 2: Bestellung ist nicht direkt stornierbar
+
+Kann eine Bestellung nicht direkt storniert werden, läuft der Widerruf als reduzierter Retourenprozess. Das betrifft zum Beispiel Bestellungen, die schon für den Versand vorbereitet wurden, unterwegs sind oder bereits zugestellt wurden.
+
+Der Prozess besteht dann aus diesen Schritten:
+
+1. Artikelauswahl
+2. Rücksendemethode
+3. Bestätigung
+4. Status- und E-Mail-Kommunikation
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-selection.png" alt="Artikelauswahl im Widerrufsportal" />
+</Frame>
+
+Für deinen Kunden ist der Widerruf keine normale Retoure. In toern wird er aber über denselben operativen Ablauf weiterverarbeitet. Ausgewählte Artikel, Rücksendemethode, Rückerstattung und Status werden deshalb im Dashboard gespeichert.
+
+### Artikelauswahl und Rücksendemethode
+
+Im Widerrufsportal ist der Retourengrund optional. Wird kein Grund abgefragt, ordnet toern den Vorgang trotzdem als Widerruf ein. So bleiben Dashboard und Auswertungen konsistent.
+
+Die Auswahl der Rücksendemethode ist so kurz wie möglich:
+
+1. Gibt es nur eine Methode, wird sie automatisch ausgewählt.
+2. Gibt es eine Standardmethode, wird sie automatisch ausgewählt.
+3. Nur wenn es mehrere Methoden ohne Standard gibt, wählt dein Kunde selbst.
+
+Ist **Withdrawal Blacklist Rules** aktiv, gelten die Blacklist-Regeln für Retouren auch im Widerrufsportal. Ist die Einstellung deaktiviert, blockiert die Blacklist den Widerruf nicht.
+
+### Rückerstattung und Gebühren
+
+Widerrufe werden über die ursprüngliche Zahlungsmethode erstattet. Eine Erstattung als Gutschein wird im Widerrufsportal nicht angeboten.
+
+Zwei Einstellungen beeinflussen die Rückerstattung:
+
+1. **Waive Return Fee**: Rücksendegebühren werden für Widerrufe erlassen.
+2. **Refund Shipping Fee**: Für Widerrufe werden die Versandkosten immer vollständig erstattet.
+
+Beide Regeln gelten nur für Widerrufe. Normale Retouren bleiben davon unberührt.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-confirmation.png" alt="Bestätigungsseite im Widerrufsportal" />
+</Frame>
+
+## Szenario 3: Blockierte Bestellung
+
+Ein Widerruf kann schon vor dem Start blockiert werden. Typische Gründe sind:
+
+1. Das Widerrufsportal ist deaktiviert.
+2. Das Bestellland ist nicht für Widerrufe freigegeben.
+3. Die Widerrufsfrist ist abgelaufen.
+4. Die Bestellung wurde bereits storniert.
+5. Es gibt bereits eine normale Retoure.
+6. Es handelt sich um eine Umtauschbestellung.
+7. Die Login-Daten passen nicht zur Bestellung.
+
+In diesen Fällen wird kein Widerrufsvorgang angelegt.
+
+## Status-Szenarien
+
+Auf der Statusseite zeigt toern deinem Kunden, was nach der Anmeldung mit dem Widerruf passiert. Die Information hängt vom Zustand des Widerrufs ab.
+
+Die wichtigsten Szenarien:
+
+1. **Noch nicht versendet, aber keine direkte Stornierung**: Der Widerruf ist registriert und wird als Rückgabe weiterbearbeitet.
+2. **Versandprozess bereits gestartet**: Eine direkte Stornierung ist nicht mehr möglich. Der Widerruf wird als Retoure behandelt.
+3. **Bestellung unterwegs**: Die Ware muss nach Erhalt zurückgeschickt werden.
+4. **Bestellung bereits zugestellt**: Der Widerruf läuft operativ wie eine Retoure.
+5. **Direkt ans Shopsystem weitergegeben**: Die Bestellung wurde direkt storniert und die Rückerstattung angefordert.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-success.png" alt="Abschlussseite im Widerrufsportal" />
+</Frame>
+
+Diese Kommunikation ist wichtig. Sonst könnten deine Kunden erwarten, dass jeder Widerruf sofort eine Stornierung auslöst. Das geht aber nur, solange die Bestellung noch nicht im Versandprozess ist.
+
+## Darstellung im Dashboard
+
+Jeder erfolgreiche Widerruf erscheint im Dashboard als eigener Vorgangstyp. So kannst du Widerrufe getrennt von normalen Retouren filtern, zählen und bearbeiten.
+
+Bei einer direkten Stornierung siehst du im Dashboard, dass sie über das Widerrufsportal ausgelöst wurde. So unterscheidest du sie von normalen Stornierungen oder Retouren.
+
+<CardGroup cols={2}>
+  <Card title="Widerrufseinstellungen" icon="gear" href="/withdrawal/withdrawal-settings">
+    Portal, Länder, Frist, E-Mails und Gebührenregeln konfigurieren.
+  </Card>
+  <Card title="Retoureneinstellungen" icon="sliders" href="/returns/return-settings">
+    Länder, Rücksendemethoden und Blacklist pflegen.
+  </Card>
+</CardGroup>
+
+## Einschränkungen
+
+- Das Widerrufsportal nutzt denselben Portal-Namen wie dein Retourenportal, aber mit dem Pfad `/widerruf/`.
+- Eine direkte Stornierung ist nur möglich, solange die Bestellung noch nicht ausgeführt oder versendet wurde.
+- Ist eine Bestellung bereits im Versandprozess, läuft der Widerruf als Rückgabeprozess.
+- Umtausch, Gutscheine und FlexShare sind im Widerrufsportal deaktiviert.
+- Eine bestehende normale Retoure blockiert einen neuen Widerruf für dieselbe Bestellung.

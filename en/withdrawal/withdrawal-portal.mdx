@@ -1,8 +1,171 @@
 ---
 title: "Withdrawal portal"
-description: "How the withdrawal portal and the withdrawal process work."
+description: "How the withdrawal portal works: login checks, direct cancellation, return shipment, status, and how withdrawals appear in the dashboard."
 ---
 
+The withdrawal portal is a separate return process for customers who want to withdraw from a purchase contract. It reuses parts of the regular return portal. To comply with the legal requirements, some features are disabled: **exchange**, **gift cards**, and **FlexShare** are not available. Refunds always go to the original payment method.
+
+The portal link has this format:
+
+```text
+https://app.re-toern.de/widerruf/<portal-name>
+```
+
+You can find the link in the dashboard under **Settings → Withdrawal → Withdrawal Portal**.
+
+## Entry and checks
+
+At login, toern first checks whether the order may be processed in the withdrawal portal. This check decides which scenario your customer ends up in.
+
+Among other things, toern checks:
+
+1. Is the withdrawal portal enabled for your brand?
+2. Is the order country enabled for withdrawals?
+3. Do the order number and email address or postal code match?
+4. Is the withdrawal period still valid?
+5. Is the order not already cancelled?
+6. Is there no regular return for this order yet?
+7. Is the order not an exchange order?
+8. Can the order possibly still be cancelled directly?
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-login.png" alt="Login in the withdrawal portal" />
+</Frame>
+
 <Note>
-  This page is a work in progress.
+  If a regular return already exists for an order, the same order can't be registered as a withdrawal. If a withdrawal already exists, your customer stays in the withdrawal context.
 </Note>
+
+## Scenario 1: Direct order cancellation
+
+This scenario only applies if **Unfulfilled Order Cancellation** is active in the [withdrawal settings](/en/withdrawal/withdrawal-settings) and the order hasn't entered the shipping process yet.
+
+An order can be cancelled directly if the following applies in Shopify:
+
+1. It is not cancelled.
+2. It hasn't been fulfilled yet.
+3. It hasn't been prepared for shipping yet.
+4. No shipping information exists yet.
+5. It can be cancelled directly in the shop system.
+6. It is not an exchange order.
+
+In this case, no item selection starts after login. Instead, your customer confirms the direct cancellation. toern then cancels the order in Shopify, requests the full refund, and creates a withdrawal case. This keeps the case traceable in the dashboard.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation.png" alt="Direct order cancellation in the withdrawal portal" />
+</Frame>
+
+After a successful cancellation, the withdrawal is complete. There is no return shipment, because the order hasn't been shipped yet.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation-confirmation.png" alt="Confirmation of the direct cancellation" />
+</Frame>
+
+In your shop system, you can then see that the order was cancelled and the refund was requested.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-cancelation-shopify.png" alt="Cancelled withdrawal order in Shopify" />
+</Frame>
+
+<Warning>
+  If the cancellation fails in Shopify, the case is not marked as completed. Your customer sees an error message, and you need to check the case manually.
+</Warning>
+
+## Scenario 2: Order can't be cancelled directly
+
+If an order can't be cancelled directly, the withdrawal runs as a reduced return process. This applies, for example, to orders that have already been prepared for shipping, are in transit, or have already been delivered.
+
+The process then consists of these steps:
+
+1. Item selection
+2. Return method
+3. Confirmation
+4. Status and email communication
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-selection.png" alt="Item selection in the withdrawal portal" />
+</Frame>
+
+For your customer, the withdrawal is not a regular return. In toern, however, it's processed through the same operational flow. Selected items, return method, refund, and status are therefore stored in the dashboard.
+
+### Item selection and return method
+
+In the withdrawal portal, the return reason is optional. If no reason is requested, toern still classifies the case as a withdrawal. This keeps the dashboard and analytics consistent.
+
+Choosing the return method is kept as short as possible:
+
+1. If only one method is available, it's selected automatically.
+2. If a default method exists, it's selected automatically.
+3. Only if there are several methods without a default does your customer choose.
+
+If **Withdrawal Blacklist Rules** is active, the return blacklist rules also apply in the withdrawal portal. If the setting is disabled, the blacklist doesn't block withdrawals.
+
+### Refund and fees
+
+Withdrawals are refunded to the original payment method. A refund as a gift card is not offered in the withdrawal portal.
+
+Two settings affect the refund:
+
+1. **Waive Return Fee**: Return fees are waived for withdrawals.
+2. **Refund Shipping Fee**: For withdrawals, shipping costs are always fully refunded.
+
+Both rules apply only to withdrawals. Regular returns are not affected.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-confirmation.png" alt="Confirmation page in the withdrawal portal" />
+</Frame>
+
+## Scenario 3: Blocked order
+
+A withdrawal can be blocked before it starts. Typical reasons are:
+
+1. The withdrawal portal is disabled.
+2. The order country is not enabled for withdrawals.
+3. The withdrawal period has expired.
+4. The order has already been cancelled.
+5. A regular return already exists.
+6. It's an exchange order.
+7. The login data doesn't match the order.
+
+In these cases, no withdrawal case is created.
+
+## Status scenarios
+
+On the status page, toern shows your customer what happens with the withdrawal after registration. The information depends on the state of the withdrawal.
+
+The most important scenarios:
+
+1. **Not shipped yet, but no direct cancellation**: The withdrawal is registered and processed further as a return.
+2. **Shipping process already started**: A direct cancellation is no longer possible. The withdrawal is handled as a return.
+3. **Order in transit**: The goods must be sent back after they arrive.
+4. **Order already delivered**: The withdrawal runs operationally like a return.
+5. **Passed directly to the shop system**: The order was cancelled directly and the refund was requested.
+
+<Frame>
+  <img src="/images/docs/Widerruf/widerruf-portal-success.png" alt="Completion page in the withdrawal portal" />
+</Frame>
+
+This communication matters. Otherwise, your customers might expect every withdrawal to trigger an immediate cancellation. That's only possible as long as the order isn't in the shipping process yet.
+
+## How withdrawals appear in the dashboard
+
+Every successful withdrawal appears in the dashboard as its own case type. This lets you filter, count, and process withdrawals separately from regular returns.
+
+For a direct cancellation, the dashboard shows that it was triggered through the withdrawal portal. This lets you tell it apart from regular cancellations or returns.
+
+<CardGroup cols={2}>
+  <Card title="Withdrawal settings" icon="gear" href="/en/withdrawal/withdrawal-settings">
+    Configure the portal, countries, period, emails, and fee rules.
+  </Card>
+  <Card title="Return settings" icon="sliders" href="/en/returns/return-settings">
+    Manage countries, return methods, and the blacklist.
+  </Card>
+</CardGroup>
+
+## Limitations
+
+- The withdrawal portal uses the same portal name as your return portal, but with the path `/widerruf/`.
+- A direct cancellation is only possible as long as the order hasn't been fulfilled or shipped.
+- If an order is already in the shipping process, the withdrawal runs as a return process.
+- Exchange, gift cards, and FlexShare are disabled in the withdrawal portal.
+- An existing regular return blocks a new withdrawal for the same order.

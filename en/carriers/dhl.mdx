@@ -1,8 +1,101 @@
 ---
 title: "DHL"
-description: "Connect DHL as a carrier for returns."
+description: "Connect DHL via a system user and create return labels automatically."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With the DHL connection, toern creates return labels for your customers automatically. DHL is the most widely used carrier in Germany. The connection works through a so-called **system user** that you create for toern.
+
+For standard returns, toern uses the API **DHL Paket DE Retoure (Post & Paket Deutschland)**.
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Requirements
+
+- An activated DHL business customer account.
+- A contract with DHL for **DHL Paket DE Retoure**.
+- The countries you want to accept returns from are enabled in DHL and the matching addresses are stored there.
+
+<Warning>
+  Create the system user before you set up or change the DHL settings in toern.
+</Warning>
+
+## Setup
+
+### Create a system user
+
+You create the system user in the [Post & DHL business customer portal](https://geschaeftskunden.dhl.de/). It needs the permissions **Retoure** and optionally **Internationale Retoure**.
+
+1. Open the [DHL business customer portal](https://geschaeftskunden.dhl.de/).
+2. Open the arrow in the top right.
+3. Click **Benutzer verwalten** (manage users).
+
+   ![DHL manage users](/images/docs/DHL/image.png)
+
+4. Click **Neuen Benutzer anlegen** (create new user) and fill in the fields:
+   - First name: your own first name
+   - Last name: your own last name
+   - Email address: your own email (or a shared email)
+5. Select **Systembenutzer** (system user).
+
+   ![DHL system user](/images/docs/DHL/image-1.png)
+
+6. Under **Berechtigungen** (permissions), assign at least these permissions:
+   - **Retoure**
+   - **Verfolgen Paket und Waren** (track parcels and goods)
+   - if available, also **Internationale Retoure**. The DHL customer service activates it. Activation takes a few days.
+
+   <Note>
+     Is the **Retoure** option not shown? Contact DHL so they can enable it for you.
+   </Note>
+
+   ![DHL permissions](/images/docs/DHL/berechtigungen.png)
+
+7. Select the user roles, rights and configurations you need.
+
+   ![DHL user roles](/images/docs/DHL/8ea1dae4-497b-4d6a-8e60-309bc4296526.png)
+
+8. Add a purpose for reference, e.g. **"toern Systembenutzer Shop1234"** (pattern: "toern Systembenutzer YOUR_SHOP_NAME").
+
+   ![DHL purpose](/images/docs/DHL/image-2.png)
+
+9. Create the user.
+
+You now receive an email for the new system user. toern needs two pieces of information:
+
+- the **username**, which is now available in DHL,
+- the **password** you created for the user.
+
+### Add the credentials in toern
+
+- **During onboarding:** Enter username and password in the **Shipping** step under DHL.
+- **After onboarding:** Open the [DHL settings](https://www.admin.re-toern.de/settings/return-shipping-service/dhl-standard) in the [toern dashboard](https://www.admin.re-toern.de/login) (Settings → Return Shipping Services → DHL Paket Retoure).
+
+Under **DHL Access Credentials**, enter the system user's username and password.
+
+![DHL Access Credentials](/images/docs/DHL/DHLNew01.png)
+
+### Create return addresses
+
+In the [Post & DHL business customer portal](https://geschaeftskunden.dhl.de/) you can add more return addresses under **Retouren → Einstellungen** (returns → settings).
+
+## Settings in toern
+
+In the settings you can switch between the available carriers.
+
+![Return Shipping Services](/images/docs/DHL/ShippingNew01.png)
+
+### Return Location Mapping
+
+Once the credentials are valid, add the DHL countries you want to accept returns from.
+
+1. Click **Query Locations**. toern loads all countries and addresses stored for you in DHL.
+2. Click **Use location** for each country you want. The country is activated for the return portal and added to the list.
+3. Check the addresses. Make sure the correct address is stored for every selected country.
+
+![DHL Query Locations](/images/docs/DHL/Bildschirmfoto_2025-11-13_um_13.55.11.png)
+
+![DHL Location IDs](/images/docs/DHL/DHLNew03.png)
+
+<Warning>
+  The DHL countries must match the countries selected in the Country Map. If a country from the Country Map has no DHL country, no label can be created and the return process runs into problems.
+</Warning>

@@ -1,8 +1,86 @@
 ---
 title: "Fulfillment-Anbindung"
-description: "So arbeiten toern und dein Fulfillment bei Retouren, Widerrufen und Reklamationen zusammen."
+description: "So arbeiten toern und dein Fulfillment bei Retouren zusammen: Fulfiller hinterlegen, Ansprechpartner pflegen und die passende Datenübertragung wählen."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Ein reibungsloser Retourenprozess beginnt bei der Logistik. Damit toern Status-Updates empfangen und Retouren verarbeiten kann, muss dein Fulfiller (Logistikdienstleister) an toern angebunden sein. Das ist die Grundvoraussetzung für jeden automatisierten Prozess.
+
+## Übertragungsmethoden im Überblick
+
+Es gibt drei Wege, wie dein Fulfiller mit toern kommunizieren kann:
+
+| Methode | Automatisierungsgrad | Aufwand |
+| --- | --- | --- |
+| **REST API** von toern | Hoch (vollautomatisch) | Ist dein Fulfiller bereits integriert, musst nur du als Brand angebunden werden. Ist er noch nicht integriert, muss er eine Anbindung zu toern herstellen. |
+| **toern Dashboard** | Mittel (manuelle Klassifizierung in toern) | Keine IT-Ressourcen notwendig. |
+| **Excel Parsing** | Hoch (vollautomatisch) | Erfordert individuellen Aufwand und muss mit dem toern Support abgesprochen werden. |
+
+<Tip>
+  Arbeitet dein Fulfillment mit JTL-Wawi? Dann kannst du es über [FFN Connect](/fulfillment/ffn-connect-jtl-partner) einfach an toern anbinden.
+</Tip>
+
+## Einrichtung
+
+### 1. Return Fulfiller auswählen
+
+toern muss wissen, welcher Fulfiller dich im Retourenprozess unterstützt.
+
+1. Öffne die Fulfillment-Einstellungen in deinem toern Dashboard.
+2. Wähle im Dropdown **Return Fulfiller** aus, ob du dein **eigenes Fulfillment** machst oder einen Fulfiller, zu dem toern Kontakt hat.
+
+![Choose Fulfiller](/images/docs/Settings/Fulfillment01.png)
+
+![Choose Fulfiller 2](/images/docs/Settings/Fulfillment02.png)
+
+<Info>
+  toern hat Kontakt zu vielen Fulfillment-Dienstleistern. Melde dich bei deinem Ansprechpartner bei toern unter [support@re-toern.de](mailto:support@re-toern.de). Gemeinsam klärt ihr, ob es zu deinem Fulfiller schon eine automatisierte Anbindung für die Übertragung der Retouren-Klassifizierung gibt oder ob eine Entwicklung möglich ist.
+</Info>
+
+### 2. Fulfiller Details ausfüllen
+
+Hinterlege die Kontaktdaten deines Ansprechpartners beim Fulfiller. So kann toern bei Entwicklungsarbeiten oder technischen Problemen direkt auf die richtige Person zugehen. Erkennen wir Fehler in der Integration, können wir so schnell mit deinem Fulfillment-Partner Kontakt aufnehmen.
+
+![Set Fulfiller Details](/images/docs/Settings/Fulfillment03.png)
+
+Wichtig sind vor allem **Name**, **Rolle** und **Kontakt**. Eine Telefonnummer ist nicht zwingend. Hast du keine, trage einfach `-` ein.
+
+### 3. Data Transfer Method festlegen
+
+Lege zum Schluss fest, wie dein Fulfiller die Inspektionsdaten an toern übergibt.
+
+1. Kläre mit deinem Fulfillment-Dienstleister, welche Anbindungsoption verfügbar ist (siehe unten).
+2. Wähle unter **Data Transfer Method** die passende Übertragungsmethode aus.
+3. Besteht die Anbindung noch nicht, kontaktiere [support@re-toern.de](mailto:support@re-toern.de) für die nächsten Schritte.
+
+![Fulfillment Method](/images/docs/Settings/Fulfillment04.png)
+
+## Anbindungsoptionen
+
+### Option A: Anbindung über die REST API (empfohlen)
+
+Das ist der effizienteste Weg. Dein Fulfiller verbindet sein System direkt mit der toern API.
+
+1. Erstelle in deinem toern Dashboard einen neuen API-Key unter **Settings → REST API Keys**.
+2. Gib den API-Key und die [API-Dokumentation](/api-reference/introduction) an dein Fulfillment weiter.
+3. Dein Fulfiller verbindet sich damit mit toern.
+
+Sobald der Fulfiller die API nutzt, werden Retourendaten automatisch synchronisiert. Du musst nichts weiter tun.
+
+<Info>
+  Fulfiller müssen sich strikt an die bestehende API-Struktur halten. Individuelle Erweiterungen der Schnittstelle sind möglich. Wegen des Entwicklungsaufwands fallen dafür aber zusätzliche Integrationskosten an, die du mit dem toern Support absprechen musst.
+</Info>
+
+### Option B: Zusammenarbeit direkt im toern Dashboard
+
+Wünscht dein Fulfiller (oder du mit deinem eigenen Lager) keine API-Anbindung, könnt ihr Retouren direkt im toern Dashboard prüfen und vereinnahmen.
+
+- **Vorteil:** Keine technische Integration notwendig.
+- **Vorgehen:** Füge die Mitarbeitenden im Lager unter **User Management** als neue Nutzer hinzu. Nutze dafür die Rolle **Fulfillment User**. Diese Rolle hat keinen Zugriff auf Einstellungen und tiefere Analyse-Übersichten. Mehr dazu unter [Nutzerverwaltung](/dashboard/user-management).
+
+### Option C: Excel Parsing
+
+Ist eine automatisierte Lösung aktuell nicht möglich, bietet toern das Parsing von Excel-Listen an.
+
+<Warning>
+  Dabei müssen individuelle Formate angepasst werden. Kontaktiere bitte unseren Kundensupport unter [support@re-toern.de](mailto:support@re-toern.de), um diesen Prozess aufzusetzen.
+</Warning>

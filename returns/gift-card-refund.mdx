@@ -1,8 +1,62 @@
 ---
 title: "Erstattung per Gutschein"
-description: "Biete Erstattungen als Gutschein an."
+description: "Biete deinen Kunden einen Gutschein statt einer Rückerstattung an und halte den Umsatz in deinem Shop."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit Gutscheinen bietest du deinen Kunden eine Alternative zur normalen Rückerstattung. So bleibt der Umsatz in deinem Shop, statt direkt zurückerstattet zu werden. Mit Anreizen wie einem höheren Gutscheinwert oder dem Erlass der Retourengebühr machst du den Gutschein attraktiver.
+
+## So funktioniert's
+
+Deine Kunden wählen den Gutschein im zweiten Schritt des Retourenprozesses aus. Standardmäßig ist die **originale Rückerstattung** ausgewählt. Deine Kunden müssen sich also aktiv für den Gutschein entscheiden.
+
+So sieht die Auswahl im Retourenportal aus:
+
+![Auswahl des Gutscheins im Retourenportal](/images/docs/Retourenportal---Standardprozess/Gutscheine01.png)
+
+![Gutschein ausgewählt](/images/docs/Retourenportal---Standardprozess/Gutschein02.png)
+
+Danach bestätigen deine Kunden die Retoure in einem finalen Schritt. Bis dahin können sie noch zur [Artikelauswahl](/returns/return-portal) zurück und die Retoure ändern.
+
+Wie eine normale Rückerstattung wird der Gutschein in der Regel automatisch erstellt, sobald die Klassifizierung der Retoure abgeschlossen ist:
+
+1. toern erstellt den Gutschein in Shopify.
+2. Shopify sendet eine E-Mail-Benachrichtigung an deinen Kunden. Das Layout dafür konfigurierst du in Shopify.
+3. Der Gutschein wird in Shopify gespeichert. toern verlinkt ihn in der Retoure in Shopify, damit du ihn bei Bedarf einsehen kannst.
+
+Du kannst einen Gutschein auch manuell bei einer manuellen Rückerstattung erstellen. Der Gutschein gilt immer als Erstattungsmethode für die gesamte Retoure, nicht pro Artikel.
+
+<Warning>
+  Wenn toern die Erstattung übernimmt, sollte dein Fulfiller die Erstattung deaktivieren. Sonst können die Gutscheine nicht ausgeführt werden. Mehr dazu unter [Erstattung](/returns/refund#shopify-restock).
+</Warning>
+
+## Einrichtung
+
+Gutscheine aktivierst und konfigurierst du unter **Settings → Refund**.
+
+### Gutscheine aktivieren (Gift Card Refunds)
+
+Mit dem Toggle unter **Gift Card Refunds** aktivierst du Gutscheine grundsätzlich.
+
+![Gift Card Einstellungen](/images/docs/Settings/RefundNew07.png)
+
+### Gutscheine konfigurieren (Gift Card Configuration)
+
+Unter **Gift Card Configuration** legst du fest, wie attraktiv und wie lange gültig deine Gutscheine sind:
+
+- **Bonus in Prozent**: Dieser Prozentsatz wird auf den Erstattungsbetrag aufgeschlagen. So wird der Gutschein im Vergleich zum Cash-back für deine Kunden interessanter.
+- **Maximaler Betrag**: Wird dieser Betrag überschritten, kann kein Gutschein gewählt werden.
+- **Ablaufdatum**: Wird der Gutschein nicht innerhalb dieser Zeit eingelöst, verliert er seine Gültigkeit.
+
+![Gift Card Configuration](/images/docs/Settings/RefundNew08.png)
+
+![Ablauf des Gutscheins](/images/docs/Settings/RefundSettings03.png)
+
+### Retourengebühr bei Gutscheinen erlassen (Remove Returnfee for Giftcards)
+
+Als zusätzlichen Anreiz kannst du die Retourengebühr erlassen, wenn sich deine Kunden für einen Gutschein entscheiden. Der Gutscheinbetrag wird dann ohne Abzug der Return Fee berechnet.
+
+![Remove Returnfee for Giftcards](/images/docs/Settings/RefundNew09.png)
+
+## Einschränkungen
+
+- Deine Kunden können zwischen der ursprünglichen Rückerstattung und einem Gutschein wählen. Ein Store Credit, der als Guthaben wieder ausgezahlt werden kann, ist nicht möglich.

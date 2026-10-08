@@ -1,8 +1,145 @@
 ---
 title: "Shopify-Shop verbinden"
-description: "Verbinde deinen Shopify-Shop mit toern, damit Bestellungen und Retouren synchronisiert werden."
+description: "Verbinde deinen Shopify-Shop mit toern und richte die Shop Integration ein: Links, Support-E-Mail, Benachrichtigungen, Retourenportal-Link und Login."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Damit toern alle Daten zu deinen Bestellungen erhält und Informationen zu Retouren an deinen Shop zurückgibt, verbindest du zuerst deinen Shopify-Shop. Danach richtest du in der **Shop Integration** die grundlegenden Informationen für dein Retourenportal ein.
+
+## Shop verbinden
+
+Du verbindest deinen Shopify-Shop über die toern Shopify App. Die Installation dauert nur wenige Minuten. Dabei legst du auch deinen Admin-Nutzer für das toern Dashboard an und wählst deinen Tarif.
+
+<Card title="Shopify App installieren" icon="shopify" href="/shopify/app">
+  Schritt-für-Schritt-Anleitung zur Installation und zu den Berechtigungen in Shopify.
+</Card>
+
+## Shop Integration
+
+Unter **Settings → Shop Integration** siehst du alle technischen Informationen zu deinem angebundenen Shopsystem. Hier pflegst du außerdem die Links, E-Mail-Adressen und Login-Optionen für dein Retourenportal.
+
+<Frame><iframe src="https://app.guideflow.com/embed/zkj3l84cwp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+
+### Return Portal Reference URLs
+
+Diese URLs werden im Retourenportal verlinkt und führen zu den Seiten deines Shops. Für einen optimalen Ablauf solltest du sie auf jeden Fall hinterlegen.
+
+**Return Policy URL**: Verweist immer auf deine aktuellen Retourenrichtlinien.
+
+- Deine Kunden können damit im Retourenprozess direkt zu deinen Richtlinien springen.
+- Die URL wird auf der Startseite des Retourenportals direkt unter dem Login-Button angezeigt.
+- Die URL wird beim Umtausch und bei der Auswahl der Rückerstattungsoption referenziert.
+
+**Privacy Policy URL**: Verweist immer auf deine aktuelle Datenschutzerklärung. Die URL wird auf der Startseite des Retourenportals im Footer angezeigt.
+
+**Legal Notice URL**: Verweist immer auf dein aktuelles Impressum. Die URL wird auf der Startseite des Retourenportals im Footer angezeigt.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu01.png" alt="Return Portal Reference URLs" /></Frame>
+
+### Primary Support E-Mail
+
+In allen E-Mails, die toern an deine Kunden sendet, verweisen wir auf deine Support-E-Mail. Dorthin können sich deine Kunden bei Problemen oder Rückfragen wenden.
+
+Hinterlege hier die E-Mail-Adresse deines Customer Supports oder ein geteiltes Postfach. So erreichen die Anfragen deiner Kunden auf jeden Fall jemanden.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu02.png" alt="Primary Support E-Mail" /></Frame>
+
+### Receive Notifications about Event Email
+
+toern verarbeitet Retouren automatisch. Manchmal gibt es aber kritische Eingaben oder Retouren, die du prüfen solltest. Damit du davon direkt erfährst, kannst du dich per E-Mail benachrichtigen lassen. Das gibt es für zwei Fälle:
+
+1. **Urgent Customer Tickets**: toern AI erstellt ein Customer Ticket, wenn eine Kundeneingabe dringend wirkt. Zum Beispiel, wenn die Produktqualität bemängelt oder eine negative Erfahrung beschrieben wird. Das Ticket enthält eine Handlungsempfehlung. So kannst du direkt auf die Erfahrung deiner Kunden eingehen.
+2. **Klärfälle / Retouren, die einen Review benötigen**: toern löst automatisch einen Klärfall aus, wenn es im Retourenprozess Probleme gibt. Zum Beispiel, wenn kein Label erstellt werden kann, eine D-Retoure vorliegt oder die Rückerstattung nicht durchgeführt werden kann. toern fügt immer eine Beschreibung des Klärfalls hinzu, damit du das Problem selbst lösen kannst.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu03.png" alt="Einstellungen für Benachrichtigungen" /></Frame>
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu04.png" alt="E-Mail-Adressen für Benachrichtigungen" /></Frame>
+
+Du entscheidest selbst, wie viele E-Mail-Adressen du hinterlegst und welche Fälle für jede Adresse aktiv sind. Außerdem legst du die Sprache der E-Mails fest: **Deutsch** oder **Englisch**.
+
+Mehr zu Customer Tickets findest du unter [Customer Tickets](/dashboard/customer-tickets).
+
+### Return Portal Link
+
+Hier erstellst du die URL für dein Retourenportal. Pro Portal ist aktuell nur **eine URL** gleichzeitig möglich. Wenn du mehrere brauchst, kontaktiere den toern Support.
+
+Hast du bereits einen Link erstellt, kannst du ihn hier kopieren. Für eine neue URL löschst du zuerst den bestehenden Link.
+
+Gib zum Anlegen einfach den gewünschten Namen ein. Die URL hat dann folgendes Format:
+
+```text
+https://app.re-toern.de/<name>
+```
+
+- Der Name darf keine Sonderzeichen enthalten, die in URLs eine Bedeutung haben. Erlaubt ist z. B. `-`, nicht aber `?`.
+- Maximale Länge: **50 Zeichen**.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu05.png" alt="Return Portal Link erstellen" /></Frame>
+
+### Tracking Page Link
+
+Unter **Tracking Page Link** findest du die URL zur Kundenansicht für den Retourenstatus. Sie wird automatisch aus dem aktiven Retourenportal-Link erstellt:
+
+```text
+https://app.re-toern.de/<name>/tracking
+```
+
+- Der Tracking-Link ist schreibgeschützt. Du kannst ihn kopieren, aber nicht bearbeiten oder löschen.
+- Ändert sich der Retourenportal-Link, wird auch der Tracking-Link angepasst.
+- Die URL enthält keine Bestellnummer oder Postleitzahl. Nicht angemeldete Kunden geben diese Daten auf der Tracking-Seite ein.
+
+Mehr dazu unter [Retourenportal](/returns/return-portal).
+
+### Return Portal Login Preferences
+
+Hier legst du fest, mit welchen Daten sich deine Kunden im Retourenportal anmelden können. Standard ist die **Bestellnummer** und die **E-Mail-Adresse**.
+
+Bei Marktplätzen ist in der Bestellung oft nicht die E-Mail-Adresse deiner Kunden hinterlegt, sondern eine individuelle E-Mail-Adresse des Marktplatzes. Dafür gibt es den **ZIP Login**. Damit können sich deine Kunden statt mit der E-Mail-Adresse auch mit ihrer Postleitzahl anmelden. Das ist weniger individuell als die private E-Mail-Adresse, macht dich aber unabhängig von den Marktplätzen.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu06.png" alt="ZIP Login aktivieren" /></Frame>
+
+Ist der ZIP Login aktiv und finden wir keine private E-Mail-Adresse, fragen wir sie im Retourenprozess zusätzlich ab. So kann das Retourenlabel weiterhin automatisch an deine Kunden gesendet werden.
+
+#### Additional Reference Number Login
+
+Ist diese Option aktiv, können sich deine Kunden nicht nur mit Bestellnummer und E-Mail-Adresse anmelden, sondern auch mit Referenznummern aus Drittsystemen wie Xentral.
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu08.png" alt="Additional Reference Number Login aktivieren" /></Frame>
+
+### Customer Traffic Light Indicator
+
+Der **Customer Traffic Light Indicator** bewertet das Retourenverhalten deiner einzelnen Kunden. Er wird unter **Manage Returns** angezeigt und hilft dir, Kunden und Retouren besser einzuschätzen.
+
+<Frame><img src="/images/docs/Dashboardprozess/Managereturns07.png" alt="Ampel-Bewertung in Manage Returns" /></Frame>
+
+<Frame><img src="/images/docs/Settings/ShopIntegrationNeu07.png" alt="Einstellungen des Traffic Light Indicators" /></Frame>
+
+Du kannst die Ampel für drei KPIs anpassen. Sie wird berechnet, sobald ein Kunde mindestens **3 Bestellungen** bei dir getätigt hat.
+
+1. **Return Rate Threshold**: Verhältnis von Retouren zu Bestellungen. Das ist die Retourenquote auf Paketebene.
+2. **Return Metrics for Stick Items**: Verhältnis von retournierten zu behaltenen Artikeln über alle Bestellungen hinweg. Das ist die Retourenquote auf Artikelebene.
+3. **Monetary Metric**: Verhältnis von retourniertem zu behaltenem Umsatz in Euro über alle Bestellungen hinweg. So siehst du direkt, wie viel Umsatz du mit einem Kunden bereits gemacht hast.
+
+Für jede KPI gibst du einen unteren und einen oberen Schwellenwert an:
+
+- Unter dem unteren Schwellenwert: **grün**
+- Zwischen den Schwellenwerten: **gelb**
+- Über dem oberen Schwellenwert: **rot**
+
+## Weitere Integrationen
+
+toern bietet dir weitere Integrationen zu Drittsystemen. Damit sie automatisch funktionieren, füllst du die Einstellungen der jeweiligen Integration aus und aktivierst sie.
+
+<CardGroup cols={2}>
+  <Card title="Quivo" icon="truck" href="/carriers/quivo">
+    Quivo einrichten und anpassen.
+  </Card>
+  <Card title="Klaviyo" icon="envelope" href="/integrations/klaviyo">
+    Klaviyo einrichten und anpassen.
+  </Card>
+  <Card title="Xentral" icon="warehouse" href="/integrations/xentral">
+    Xentral einrichten und anpassen.
+  </Card>
+  <Card title="Zendesk" icon="headset" href="/integrations/zendesk">
+    Zendesk einrichten und anpassen.
+  </Card>
+</CardGroup>

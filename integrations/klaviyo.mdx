@@ -1,8 +1,171 @@
 ---
 title: "Klaviyo"
-description: "Verbinde Klaviyo mit toern."
+description: "Sende Events aus dem Retourenprozess an Klaviyo und steuere deine Kundenkommunikation über Klaviyo-Flows."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit der **Klaviyo-Integration** sendet toern automatisch Events an Klaviyo, sobald im Retourenprozess bestimmte Schritte stattfinden. Mit diesen Events kannst du in Klaviyo Flows auslösen, deine Kundenkommunikation personalisieren oder Segmente bilden. So informierst du deine Kunden zum Beispiel über den Status ihrer Rücksendung.
+
+## Einrichtung
+
+### API-Key in Klaviyo erstellen
+
+Du brauchst einen **privaten API-Key** mit den Rechten **Read - Accounts** und **Full Access - Events**.
+
+1. Melde dich bei Klaviyo an.
+2. Klicke unten links in der Navigation auf dein Benutzerprofil und wähle **Settings**.
+3. Navigiere zu **API keys** und erstelle einen neuen privaten API-Key.
+4. Gib dem Key den Namen „toern Integration“.
+5. Wähle in der Rechte-Tabelle **Read - Accounts** und **Full Access - Events** aus.
+6. Klicke oben rechts auf **Create**.
+7. Lass dir den neuen privaten Key anzeigen und kopiere ihn.
+
+<Frame><img src="/images/docs/Klaviyo/Klavyio01.png" alt="Menü in Klaviyo" /></Frame>
+<Frame><img src="/images/docs/Klaviyo/Klaviyo02.png" alt="API Keys in Klaviyo" /></Frame>
+<Frame><img src="/images/docs/Klaviyo/Klaviyo04.png" alt="Rechte in Klaviyo" /></Frame>
+
+<Warning>
+  Der private Key ist nur einmal sichtbar. Kopiere ihn daher sofort.
+</Warning>
+
+### Key in toern hinterlegen
+
+1. Öffne dein toern Dashboard.
+2. Navigiere zu [Settings → Third Party Services → Klaviyo](https://www.admin.re-toern.de/settings/third-party/klaviyo).
+3. Füge den privaten Key aus Klaviyo ein und speichere ihn.
+
+<Frame><img src="/images/docs/Klaviyo/KlaviyoNew01.png" alt="Klaviyo Private Key in toern" /></Frame>
+
+Mehr musst du in toern nicht einstellen, damit die Verbindung steht.
+
+- **Verify SetUp**: Prüft die Verbindung zu Klaviyo. Hat der Key das Recht **Read - Accounts**, zeigt dir die Prüfung, ob toern Anfragen an Klaviyo senden kann.
+- **Create Test Events**: Sendet Test-Events von toern an deinen Klaviyo-Account. Das hilft dir beim Aufbau deiner Flows, zum Beispiel um Test-E-Mails zu versenden. Danach sind alle Events, die toern an Klaviyo übermittelt, auch in Klaviyo sichtbar.
+
+### Klaviyo als E-Mail-Service auswählen
+
+Damit Klaviyo deine transaktionalen E-Mails übernimmt, wählst du Klaviyo als E-Mail-Service aus.
+
+1. Navigiere zu [Settings → Return](/returns/return-settings).
+2. Wähle unter **Notifications during Return Process - enable additional customer notifications** Klaviyo als E-Mail-Service aus.
+
+<Frame><img src="/images/docs/Klaviyo/Klaviyo06.png" alt="Klaviyo als E-Mail-Service auswählen" /></Frame>
+
+Ab jetzt werden E-Mail-Events direkt an Klaviyo geleitet.
+
+<Warning>
+  Sobald Klaviyo als Service ausgewählt ist, sendet toern selbst keine transaktionalen E-Mails mehr an Kunden im Retourenprozess.
+</Warning>
+
+### Interaktive Anleitungen
+
+<Tabs>
+  <Tab title="Klaviyo API-Key erstellen">
+    <Frame><iframe src="https://app.guideflow.com/embed/0p0y0vosvk" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Klaviyo Flows und Events">
+    <Frame><iframe src="https://app.guideflow.com/embed/er5d9voslk" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+## Events in Klaviyo
+
+### Übersicht aller Events
+
+| Event | Beschreibung | Wann ausgelöst |
+|---|---|---|
+| `ReturnRegisteredLabel` | Eine Retoure wurde registriert und ein Versandlabel erstellt. | Direkt nach erfolgreicher Registrierung im Retourenportal mit Label-Erstellung. |
+| `ReturnRegisteredWithoutLabel` | Eine Retoure wurde ohne Versandlabel registriert (z. B. der Kunde verschickt das Paket selbst). | Nach der Registrierung einer Retoure ohne Label-Erstellung. Nur wenn kein Label generiert werden soll und der Versand eigenständig erfolgt. |
+| `ReturnRegisteredLabelFailed` | Fehler beim Erstellen des Versandlabels. | Wenn der Label-Service nicht verfügbar ist oder das Label nicht erzeugt werden konnte. Nur wenn `ReturnRegisteredLabel` fehlschlägt. |
+| `ReturnRegistered` | Eine Retoure wurde über das Retourenportal im System erfasst. | Allgemeines Startsignal für den Retourenprozess. Der Label-Prozess ist zu diesem Zeitpunkt noch nicht abgeschlossen. |
+| `ReturnInTransit` | Die Rücksendung ist auf dem Weg zum Lager. | Sobald das Tracking zeigt, dass das Paket unterwegs ist. |
+| `ReturnReceived` | Die Retoure ist im Lager eingegangen. | Nach dem physischen Wareneingang im Lager. |
+| `ReturnInspected` | Die Ware wurde geprüft. | Nach abgeschlossener Qualitätsprüfung im Lager. |
+| `ReturnRefunded` | Der Kaufbetrag wurde erstattet. | Sobald die Rückerstattung im System erfolgt ist. |
+| `ReturnCompleted` | Der gesamte Retourenprozess ist abgeschlossen. | Nach der finalen Bestätigung, dass der Vorgang vollständig abgeschlossen ist. |
+| `ReturnCanceled` | Die Retoure wurde storniert oder abgebrochen. | Wenn der Kunde oder das System den Prozess abbricht. |
+| `ReturnForgotOrderNumber` | Der Kunde fragt nach seinen vergangenen Bestellnummern. | Wenn im Retourenportal danach gefragt wird. |
+| `WiderrufReceivedAcknowledgement` | Bestätigung des Eingangs eines Widerrufs. | Wenn ein Widerruf eingegangen ist. |
+| `WiderrufOrderCanceled` | Bestätigung, dass die Bestellung storniert wurde. | Wenn das Fulfillment noch nicht ausgeführt wurde und toern die Bestellung direkt stornieren konnte. |
+
+<Warning>
+  Wenn du die Rückerstattungs-E-Mail (`ReturnRefunded`) über Klaviyo versendest, prüfe auch deine Shopify-Benachrichtigungen. Sonst bekommen deine Kunden die E-Mail eventuell doppelt.
+</Warning>
+
+### Datenfelder der Events
+
+Alle Events enthalten strukturierte Daten, die du für E-Mail-Inhalte oder Segmente nutzen kannst.
+
+<Warning>
+  Setze immer `event.` vor das Datenfeld. Für den Markennamen verwendest du also `{{event.brandName}}` statt `{{brandName}}`.
+</Warning>
+
+**Status-Events** steht in der Tabelle für: `ReturnRegistered`, `ReturnInTransit`, `ReturnReceived`, `ReturnInspected`, `ReturnRefunded`, `ReturnCompleted`, `ReturnCanceled`.
+
+| Datenfeld | Beschreibung | Events | Beispiel |
+|---|---|---|---|
+| `brandName` | Name der Marke | Alle | MarkenName |
+| `receiverToEmail` | E-Mail-Adresse des Kunden | Alle | |
+| `customer_name` | Name des Kunden | Alle | Max Mustermann |
+| `customer_first_name` | Vorname des Kunden | Alle | Max |
+| `customer_last_name` | Nachname des Kunden | Alle | Mustermann |
+| `customer_email` | E-Mail-Adresse des Kunden | Alle | max@example.com |
+| `customer_preferred_language` | Bevorzugte Sprache des Kunden | Alle | `de` oder `en` |
+| `order_order_id` | Shopify-ID der Bestellung | Status-Events | |
+| `order_created_at` | Datum der ursprünglichen Bestellung | Status-Events | 2025-10-09T10:00:00Z |
+| `order_order_number` | Bestellnummer (nur Ziffern) | Status-Events | 100045 |
+| `order_order_number_raw` | Bestellnummer mit Präfix und Suffix | Status-Events | #t-100045 |
+| `order_order_country_code_origin` | Herkunftsland der Bestellung (Alpha-2) | Status-Events | DE |
+| `return_return_id` | Interne Retouren-ID | Status-Events | ret_456 |
+| `return_created_at` | Datum der Retoure (ISO-Datum) | Status-Events | |
+| `return_status` | Aktueller Status der Retoure | Status-Events | InTransit |
+| `return_is_manual_return` | Boolean: Retoure manuell erstellt oder durch den Kunden | Status-Events | |
+| `return_is_widerruf` | `true`, wenn es sich um einen Widerruf handelt | Status-Events | |
+| `return_items` | Array mit `variant_id`, `title`, `sku`, `barcode`, `return_reason_shopify`, `return_reason_name_de`, `return_reason_name_en`, `return_type` zu den angemeldeten Artikeln | Status-Events, `ReturnRegisteredLabel`, `ReturnRegisteredWithoutLabel` | siehe unten |
+| `return_shipping` (optional) | `null` = kein Wert | `ReturnRegisteredLabel`, `ReturnRegisteredWithoutLabel`, `ReturnRegisteredLabelFailed`, `ReturnInTransit` | |
+| `label` (optional) | `null` = kein Wert | `ReturnRegisteredWithoutLabel`, `ReturnRegisteredLabelFailed` | |
+| `return_address` (optional) | `null` = kein Wert | `ReturnRegisteredLabel`, `ReturnRegisteredLabelFailed` | |
+| `return_slip` (optional) | `null` = kein Wert | `ReturnRegisteredLabel`, `ReturnRegisteredLabelFailed` | |
+| `label_link` (optional) | Link zum Versandlabel (nur bei Label-Erstellung) | `ReturnRegisteredLabel`, `ReturnInTransit` | https://labelservice.com/xyz.pdf |
+| `label_tracking_number` (optional) | Trackingnummer | `ReturnRegisteredLabel`, `ReturnInTransit` | |
+| `label_tracking_url` (optional) | URL zum Tracking der Rücksendung | `ReturnRegisteredLabel`, `ReturnInTransit` | |
+| `return_address_name` (optional) | Rücksendeadresse: Name | `ReturnRegisteredWithoutLabel` | |
+| `return_address_name2` (optional) | Rücksendeadresse: Namenszusatz | `ReturnRegisteredWithoutLabel` | |
+| `return_address_address` (optional) | Rücksendeadresse: Straße | `ReturnRegisteredWithoutLabel` | |
+| `return_address_zipcode` (optional) | Rücksendeadresse: PLZ | `ReturnRegisteredWithoutLabel` | |
+| `return_address_city` (optional) | Rücksendeadresse: Stadt | `ReturnRegisteredWithoutLabel` | |
+| `return_address_country` (optional) | Rücksendeadresse: Land | `ReturnRegisteredWithoutLabel` | |
+| `return_slip_link` (optional) | Link zum Retourenschein (nur bei Retoure ohne Label, wenn aktiv) | `ReturnRegisteredWithoutLabel` | https://returns.com/slip/abc.pdf |
+| `order_numbers` | Liste der Bestellnummern als Strings, sortiert nach Datum. Verarbeite das Array in Klaviyo als Liste. | `ReturnForgotOrderNumber` | |
+
+Beispiel für `return_items`:
+
+```json
+[
+  {
+    "sku": "",
+    "return_reason_shopify": "SIZE_TOO_SMALL",
+    "title": "Cardigan LEO",
+    "return_type": "refund",
+    "barcode": "",
+    "return_reason_name_en": "Article too tight",
+    "variant_id": "toern_demo-58267381366865",
+    "return_reason_name_de": "Artikel zu eng"
+  },
+  {
+    "sku": "",
+    "return_reason_shopify": "NOT_AS_DESCRIBED",
+    "title": "Stirnband GLORY",
+    "return_type": "refund",
+    "barcode": "",
+    "return_reason_name_en": "Article not liked",
+    "variant_id": "toern_demo-58267379368017",
+    "return_reason_name_de": "Artikel gefällt nicht"
+  }
+]
+```
+
+## Einschränkungen
+
+- Klaviyo und der [toern E-Mail-Editor](/branding/email-templates) sind alternative Wege. Mit Klaviyo verwaltest du Inhalt und Versand in Klaviyo. Mit dem toern-Service passt du die Templates im E-Mail-Editor an.
+- Die Events sind von toern festgelegt.
+- Die mitgegebenen Datenfelder sind auf dieser Seite beschrieben.
+- Aktuell gibt es keine Vorlagen für die Flows der einzelnen Events.

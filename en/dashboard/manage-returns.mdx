@@ -1,8 +1,308 @@
 ---
 title: "Manage returns"
-description: "Process, inspect, and complete returns in the dashboard."
+description: "Find, process, classify, refund, and manually create returns in the dashboard."
 ---
 
+Under **Manage Returns** you find all your returns in one place. From here you process single returns, classify items, adjust the status, and trigger refunds. You can also create returns manually, organize them with tags, and notify your team via notes.
+
+## Returns overview
+
+All registered returns are listed chronologically. You see the most important information right in the list: when the return was registered, who the customer is, the status of the return, its type (exchange, gift card, with input), and the payment method used for the order.
+
+![Filter options of the returns overview](/images/docs/Dashboardprozess/ManageReturns01.png)
+
+By default you see the returns of the last month. You can adjust the time range. You can also search by customer and order number.
+
+### Return status
+
+You can filter returns by these statuses:
+
+- **registered**: The customer registered the return in the return portal. It is still with the customer or on its way to the fulfillment.
+- **received**: The return has arrived at the fulfillment and can be processed.
+- **on hold**: Something still needs to be done before the inspection can be completed. For example, a question to the customer, or an item still needs to be washed.
+- **inspected**: The items of the return have been classified. This often triggers an automatic refund.
+- **refunded**: The return has been refunded. It is then automatically set to **completed**.
+- **completed**: The return is completed.
+- **needs review**: The return is a clarification case and needs a manual check. This can concern an item, an input, information from the fulfiller, or a technical issue. Usually you get information about what exactly the case is about.
+
+![Returns overview](/images/docs/Dashboardprozess/Managereturns04.png)
+
+### More filters
+
+Besides the status, you can filter by:
+
+1. Payment methods you use, e.g. PayPal or Klarna
+2. Exchanges
+3. Gift cards
+4. Withdrawals
+5. Custom tags (see [Return tags](#return-tags))
+
+### Export
+
+You can export all returns in the selected time range. The export contains more information than the overview. These columns are included:
+
+```text
+order_id ; customer_id ; return_reated_at ; return_status ; item_index ; sku ; item_name ; attribute_1 ; attribute_2 ; attribute_3 ; return_reason; user_input; classification; item_id ; variant_id ; exchanged ; item_price ; country_code_origin ; reggular_refund_amount ; giftcard_refund_amount ; refund_type
+```
+
+## Create returns manually
+
+Usually customers create their returns themselves in the toern return portal. If a customer doesn't use this way or needs help from your customer service, you can create the return manually.
+
+### Find the order
+
+1. Open **Manage Returns**.
+2. Click **Create New Return**.
+3. Enter the order number or the customer's name in the search field. When you search by name, you see all orders of this customer.
+4. Click the order you're looking for.
+
+![Search for orders](/images/docs/Dashboardprozess/CreateReturn01.png)
+
+### Configure the return
+
+![Options when creating a return](/images/docs/Dashboardprozess/CreateReturn02Neu.png)
+
+1. **Select items**: Select the items via the checkbox on the right. With **Select/Deselect all Items** or the checkbox in the header row you select or deselect all items at once.
+2. **Classification** (optional): You can classify the items right away. This only makes sense if the item is already with you.
+3. **Exchange** (optional): As soon as you select an item, a drop-down opens. There you can create an exchange. This helps when a customer asks for an exchange by email. With **Show Variants for Exchange** you see all available variants of the item. toern checks them via the Shopify interface.
+4. **Return Status**: Select the current status of the return. By default, **Received** and **Inspected** are selected, because this feature is mostly used by the fulfillment.
+5. **Refund method**: Select the refund method, including a gift card. This helps, for example, if you create a return after the return window has expired and agree with the customer on a gift card.
+6. **Notification**: Decide whether the customer receives a notification.
+7. Click **Create**. The return is created and you land on the return's detail view.
+
+<Warning>
+  Is the return still at the customer's home? Then make sure to reset the status. Click **Received** and **Inspected** once. Otherwise a refund can be triggered automatically.
+</Warning>
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/zkjyg7vswk" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Return detail view
+
+Click a return in the overview to open its detail view. Here you see all information about this return and process it.
+
+### Navigation and hints in the header
+
+- Use the **breadcrumb navigation** at the top left to go back to the overview at any time.
+- Use the **arrows** at the top right to jump directly to the previous or next return. If there's no other return in one direction, the arrow is disabled.
+- The arrows respect active filters. For example, if you filter by clarification cases, you jump directly to the next clarification case.
+
+Next to the status in the header you see icons for **exchange**, **gift card returns**, and **notes**. The speech bubble icon, for example, shows that there are notes for this return. Clicking it takes you directly to the notes or timeline section.
+
+![Navigation in the return detail view](/images/docs/Dashboardprozess/ReturnDetailNavigation01.png)
+
+### Actions
+
+At the top right you see the status of the return and the actions available in this status. In the **Registered** status these are:
+
+- **Mark Received**: Sets the status from **Registered** to **Received**. Nothing else changes.
+- **Create Clarification**: Creates a clarification case from the return with its own reason. All automations for this return are stopped. You carry out the next steps manually.
+- **Cancel Return**: Deletes the return, also in Shopify.
+
+![Return details with timeline](/images/docs/Dashboardprozess/ManageReturns12.png)
+
+### Returned items and classification
+
+Under **Returned Items** you see all returned items with image, item description, classification, and return reason. An icon after the return reason shows that your customer provided additional information about the item. Click the item to see it. User inputs are shown below the return reason, as text, as a transcribed voice message, or as an image.
+
+With **Show all order items** you show all other items of the order. These are items that weren't returned or replacement items of a registered exchange.
+
+![List of returned items](/images/docs/Dashboardprozess/Managereturns06.png)
+
+Depending on the status, more actions are available. In the **received** status you can add or remove items. You need this if the package contains more or fewer items than registered.
+
+An item's detail view opens as a pop-up. There you classify the item:
+
+- **A-Return**
+- **B-Return**
+- **C-Return**
+- **D-Return**
+
+toern always offers these four classifications. How you use them is up to you and your fulfillment.
+
+For a **C** or **D return**, toern asks whether the return should be treated like a normal return. If you select **Clarification case**, the return gets the status **needs review** and is highlighted in color.
+
+### Customer information
+
+The customer information section shows the customer's contact details, address, and KPIs on their return behavior.
+
+![Customer information with KPIs](/images/docs/Dashboardprozess/Managereturns07.png)
+
+toern collects this data across returns. This gives you more context about the customer. The metrics are available on package level, on item level, and in euros. A **traffic light rating** shows you right away whether it's a "good" or "bad" customer. You can adjust the thresholds of the traffic light in the settings.
+
+### Edit customer data
+
+The customer data comes from your shop integration. If there were errors in shipping and you need to change the data for the return, use **Edit Customer**.
+
+![Edit customer information](/images/docs/Dashboardprozess/Managereturns08.png)
+
+<Warning>
+  Changed customer data is only saved in toern. It is not transferred to your shop system.
+</Warning>
+
+### Return labels
+
+Return labels are usually created right at registration, automatically via the connection to DHL or another carrier. In the detail view you can:
+
+- view and download the label with **open PDF**,
+- send the label to your customer again with **E-Mail return label**,
+- create a new label,
+- see all tracking updates with **View Timeline** once the package has been dropped off at a parcel shop.
+
+![Create new return labels](/images/docs/Dashboardprozess/Managereturns09.png)
+
+![Return label timeline](/images/docs/Dashboardprozess/Managereturns11.png)
+
+### Return timeline
+
+The **Return Timeline** shows all important activities of the return in chronological order. This includes **your team's notes** and automated steps. This way the whole flow stays traceable in one list.
+
+Typical entries are:
+
+- Creation and status changes of the return
+- Cancellations
+- **Inspections** (also via the API) and **changes to items**
+- **Refunds** (incl. gift card) and **exchanges**
+- **Return label** and **shipment tracking**
+- **Emails** to customers
+- **Clarification cases**
+- Started **processes** (e.g. return, refund)
+
+Depending on your integrations (shop, fulfillment, third-party services), more actions are logged. If an activity contains more details, you can expand it via a drop-down. There you find, for example, the classification of single items.
+
+![Return Timeline in the return detail view](/images/docs/Dashboardprozess/ReturnActivityTimeline01.png)
+
+Warnings sent to toern via the API also appear in the timeline. They are highlighted as warnings and can be expanded. This way you see right away that it's a hint that needs checking and not a normal comment.
+
+Typical examples are **multiple inspections** or **items that can't be matched**. The details show that the update came via the API and, if available, the API key used. For multiple inspections, the affected items are also shown in a table.
+
+![Warning in the Return Timeline](/images/docs/Dashboardprozess/ReturnActivityTimeline02.png)
+
+## Notes and notifications
+
+### Notes and tagging
+
+You can notify your team via a return's notes. You can format notes (bold, italic, bullet points) and add images or links.
+
+1. Write a note in the return.
+2. Type **@**. toern suggests all users you can tag.
+3. Select a user from your team or the **ToernBot**. The ToernBot notifies toern's support systems.
+
+![Tagging in notes](/images/docs/Dashboardprozess/Tagging03.png)
+
+Notes are shown chronologically in the return, with creation date and author. Only the author can edit or delete a note later.
+
+### Notifications
+
+Tagged users see their notifications in the top menu on the right at the **mailbox**. If there are new, unread notifications, the mailbox shows a green dot.
+
+![Notifications in the header](/images/docs/Dashboardprozess/Tagging01.png)
+
+Click the mailbox to open the overview of your notifications. It is split into read and unread notifications. When you click a notification, toern jumps directly to the return with the note and marks the notification as read.
+
+## Return tags
+
+With **return tags** you group returns independently of their status and tell them apart visually. Examples are **standard return**, **withdrawal**, **exchange**, or your own tags.
+
+Tags stay saved as long as they're in use. This way you can assign the same tag to several returns and filter by it in the overview.
+
+### Assign tags to a return
+
+In the **Tags** section of the return detail view you add or remove tags. Every change is logged, including the user who made it.
+
+![Search, assign, and remove tags on the return detail page](/images/docs/Dashboardprozess/ReturnDetailTags01.png)
+
+### Create a new tag
+
+If you enter a name that doesn't exist yet, the search field shows **Add [tag name]**. This creates the tag for your brand and assigns it directly to the current return.
+
+Tag names must be unique within a brand so the filter works reliably. A created tag stays available in the tag catalog.
+
+### Edit all tags
+
+Click the pencil icon in the **Tags** section to open the full tag selection:
+
+- The **search field** filters the tags. You can also create new tags here.
+- Use the **sort icon** to switch between **Most frequently used** and **Alphabetically sorted**.
+- Use the **checkboxes** to assign or remove tags.
+
+![Full tag selection with search and sorting](/images/docs/Dashboardprozess/ReturnDetailTags02.png)
+
+### Tag colors
+
+Every new tag automatically gets a random color. The colored dot appears next to the tag in the detail view and in the overview. In the full tag selection you change the color via the colored dot. Pick a color in the color picker or enter a hex value.
+
+### Filter returns by tags
+
+Use the **Tags** filter to search and select one or more tags. With several tags, you only see returns that have all selected tags.
+
+![Returns overview with open tag filter](/images/docs/Dashboardprozess/ReturnDetailTags03.png)
+
+## Manual refunds
+
+Refunds usually run automatically after the return has been classified. For a clarification case or a partial refund you can refund manually at any time. This also works if a refund has already been made.
+
+1. Click **Create New Refund** in the return.
+2. Select the items for the refund. All returned items without a registered exchange are preselected.
+3. Optionally decide whether **shipping costs** are refunded or a **return fee** is deducted.
+4. Adjust the **refund method** if needed. Besides the original payment method you can choose a **gift card** and increase it by a percentage. This keeps revenue in your shop, for example for late return registrations.
+5. Optionally deduct a **percentage** from the remaining amount, for example as an offer for a complaint.
+6. Decide whether your customer receives a **notification**. It is configured in your shop system.
+7. Click **complete** to trigger the refund.
+
+![Manual refunds](/images/docs/Dashboardprozess/Managereturns10.png)
+
+![Selecting items for the refund](/images/docs/Dashboardprozess/Refund01.png)
+
+![Refund settings](/images/docs/Dashboardprozess/Refund02.png)
+
 <Note>
-  This page is a work in progress.
+  Legally, you must refund the shipping costs if all items of an order were returned. This is the default in the settings, but you can turn it off.
 </Note>
+
+After completion you see the details and the corresponding invoice in the return under **Return Details**. For automatic refunds you can define the same settings and a maximum value in the [refund settings](/en/returns/refund).
+
+## Interactive guides
+
+<Tabs>
+  <Tab title="Dashboard Manage Returns">
+    <Frame>
+      <iframe src="https://app.guideflow.com/embed/vkm5vmot2r" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+    </Frame>
+  </Tab>
+  <Tab title="Dashboard Manual Refund">
+    <Frame>
+      <iframe src="https://app.guideflow.com/embed/gkyvmg5t4k" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+    </Frame>
+  </Tab>
+</Tabs>
+
+## Limitations
+
+### Returns overview
+
+- The dashboard is currently only available in English.
+- **Filters**
+  - You can filter by return status, payment method, exchange, and gift card. Not by return reason, input, or comment.
+  - Only clarification cases can be filtered independently of the selected time range, using **All Clarifications**.
+- **Export**
+  - The export only contains the predefined columns. You can't customize them beforehand.
+- **Create New Return**
+  - For manual returns, the return reason is always **manual return item**.
+  - Manual returns have the status **Inspected** by default. If you want something else, you need to adjust the status.
+  - With **Extend Return Window** you can only extend the return window by exactly the configured time frame.
+
+### Return detail view
+
+- Sets can currently only be returned via official bundle apps in Shopify that store the single items of a set. Which set a single item belongs to is not shown and not handled separately.
+- **Notes and comments**
+  - With **@** you can only tag other users in toern.
+  - All comments sent to toern via the API for single items are combined in one note field.
+  - Comments received via the API, such as "wrong address", are shown in toern. A clarification case can be created from them automatically (with Return Clarification Reasons). This only applies to comments, not to general return reasons. Automations based on these comments are not possible.
+  - toern adjusts items (adding, removing) only based on the first API call. All further calls lead to a clarification case. Otherwise automations after status updates could cause duplicate refunds.
+- **Return labels**
+  - Only one label link with tracking is shown at a time. If you create a new label, it replaces the previous one.
+- **Manual refunds**
+  - If automatic refunds are active and you want to adjust the refund, first create a clarification case and then make a manual refund.
+  - Manual refunds currently have no connection to Xentral. Always trigger the automatic refund here or create the documents yourself.

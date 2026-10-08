@@ -1,8 +1,66 @@
 ---
 title: "GLS"
-description: "Binde GLS als Versanddienstleister für Retouren an."
+description: "Binde GLS über eine Entwickler-App an und erstelle Retourenlabels automatisch."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit der GLS-Anbindung erstellt toern die Retourenlabels für deine Kund:innen automatisch. Dafür brauchst du einen aktiven GLS-Kundenvertrag und eine Entwickler-App bei GLS.
+
+Für klassische Rücksendungen nutzt toern die API-Schnittstelle **Shop Returns Customer API v3**.
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+## Einrichtung
+
+### Entwicklerkonto und App anlegen
+
+toern braucht eine Entwickler-App mit passendem **Key** und **Secret**. Die GLS-IT verbindet diese Zugangsdaten anschließend mit deinem Kundenkonto. Die App erstellst du auf der [GLS Dev Plattform](https://dev-portal.gls-group.net/).
+
+1. Öffne die [GLS Dev Plattform](https://dev-portal.gls-group.net/).
+2. Klicke oben rechts auf **Sign In**.
+3. Falls du noch kein Konto hast, klicke auf **Create an account**.
+
+   ![GLS Sign In](/images/docs/GLS/image.png)
+
+4. Fülle die Unternehmensinformationen aus und klicke auf **Create Account**.
+5. Klicke nach dem Login oben rechts auf dein Profil und dann auf **Apps**.
+
+   ![GLS Apps](/images/docs/GLS/image-1.png)
+
+6. Klicke auf **New App**.
+
+   ![GLS New App](/images/docs/GLS/image-2.png)
+
+7. Gib der App einen Namen, z. B. „toern Retourenportal“. Aktiviere diese APIs mit **Enable**:
+   - **Authentication API v2**
+   - **Shop Returns Customer API v3**
+   - **Shop Returns Sandbox API v3** (optional)
+
+   ![GLS App-Name](/images/docs/GLS/image-3.png)
+
+   ![GLS API-Berechtigungen](/images/docs/GLS/image-4.png)
+
+8. Klicke auf **Save**.
+
+### Zugangsdaten in toern hinterlegen
+
+Von der angelegten App brauchst du diese Informationen:
+
+- **App ID**
+- **Key** (Client ID)
+- **Secret** (Client secret)
+
+![GLS App ID](/images/docs/GLS/image-5.png)
+
+Hinterlege sie in den [GLS-Einstellungen](https://www.admin.re-toern.de/settings/return-shipping-service/gls) im toern Dashboard. Alternativ kannst du sie uns auch per E-Mail an support@re-toern.de schicken.
+
+![GLS Integration](/images/docs/GLS/GLSNew01.png)
+
+### Entwickler-App mit Kundenkonto verbinden
+
+Damit die App freigeschaltet und mit deinem Kundenkonto verbunden wird, muss eine GLS-IT-Mitarbeiterin oder ein GLS-IT-Mitarbeiter der jeweiligen Region sie im Hintergrund verbinden. Dafür wird deine GLS-Kundennummer benötigt.
+
+Den Kontakt mit GLS übernehmen wir gerne. Wir haben in den verschiedenen Regionen bereits passende Ansprechpersonen.
+
+1. Hinterlege App ID, Key und Secret in toern.
+2. Schicke deine GLS-Kundennummer an support@re-toern.de.
+3. Wir kümmern uns um den Rest.

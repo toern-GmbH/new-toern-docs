@@ -1,8 +1,93 @@
 ---
 title: "User inputs & customer ticket system"
-description: "Handle customer inputs and requests in the ticket system."
+description: "View all customer inputs and handle urgent requests in the customer ticket system."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+In the return portal, your customers can share more details besides the return reason: text, images, or voice messages. In the dashboard you see these inputs in one place. The **Customer Ticket System** also shows you the cases where you really need to act.
+
+## User Inputs
+
+Under **User Inputs** you see all returns where your customer shared more than just a return reason. This can be a text, an image, or a voice message. You can read how the process works on the customer side in the [return portal](/en/returns/return-portal).
+
+The overview helps you:
+
+- match the inputs to the returns,
+- understand your customers' current challenges,
+- see whether a return needs concrete action.
+
+All inputs in the selected time range are shown chronologically, across all products. Click the **order ID** to jump directly to the related return.
+
+![User Inputs in the dashboard](/images/docs/Dashboardprozess/UserInputsDashboard.png)
+
+Want to see the inputs for a specific item? Open the [item details](/en/dashboard/analytics#item-details). You get there via the **Top 20 returned Items** on the Overview page or by searching the item in the **Items Overview**.
+
+## Customer Ticket System
+
+The **Customer Ticket System** shows you customer feedback that needs immediate action. It's about real service problems, fulfillment errors, or special requests. For example wrongly delivered or damaged items, but also standard requests like exchanges or questions about your policies.
+
+The tickets are created by the **toern AI**. It analyzes user inputs automatically and checks whether action is needed and how urgent it is. Inputs that point to unhappy customers are classified as urgent. All others appear as normal tickets. Each ticket contains a recommended solution, matching tags, and an urgency level. This way you can prioritize quickly.
+
+### Ticket overview
+
+On the left you see the ticket list with ID, creation date, urgency, and status. Tickets are shown chronologically for the selected time range. You can filter by:
+
+- **Urgency**: How urgent the toern AI rates the request: **standard** or **urgent**.
+- **Status**: The processing state of the ticket: **open**, **in progress**, or **done**.
+- **Date**: Shows tickets from a specific time range.
+
+![List of customer tickets](/images/docs/Dashboardprozess/CustomerTickets01.png)
+
+### Ticket details
+
+Click a ticket to open its details on the right:
+
+- **Date**: Creation date of the ticket
+- **Ticket ID**: Unique ID of the ticket
+- **Associated Return**: Link to the related return
+- **Product**: The product the ticket is about
+- **AI Tags**: Tags the toern AI adds based on the content
+- **Recommended Action**: A suggestion from the toern AI on how to solve the request
+- **Input**: Your customer's actual input
+
+![Detail view of a ticket](/images/docs/Dashboardprozess/CustomerTickets02.png)
+
+<Tip>
+  Use the thumbs-up and thumbs-down buttons. This tells us whether the ticket made sense and the recommendation fits. Your feedback helps us keep improving the toern AI.
+</Tip>
+
+### Process tickets
+
+You change the status directly in the detail view under **Status Management**:
+
+1. Set the ticket to **In Progress** as soon as you start.
+2. Set it to **Done** when the problem is solved.
+
+You can undo status changes at any time. If you closed a ticket by mistake, simply reopen it. toern logs who changed the status and when.
+
+![Change the status of a ticket](/images/docs/notion/customer-tickets-status-management.png)
+
+### Email notifications
+
+So you don't miss urgent cases, toern can notify you by email. In the settings under **Customer Tickets** you define:
+
+- **Enable email notifications**: Turns notifications on or off.
+- **Notification email**: The recipient address.
+- **Email language**: The language of the emails (German or English).
+
+Save your changes with **Update**.
+
+![Email settings for customer tickets](/images/docs/notion/customer-tickets-email-settings.png)
+
+Emails are only sent if a ticket is classified as **urgent** and notifications are enabled. This way you're not flooded with emails, but you don't miss any critical cases.
+
+![Example email for an urgent ticket](/images/docs/notion/customer-tickets-urgent-email.png)
+
+### Interactive guide
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/dkd8nmqbgr" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Limitations
+
+- The toern AI only creates tickets for urgent cases on item level. Inputs are not evaluated across items or products.

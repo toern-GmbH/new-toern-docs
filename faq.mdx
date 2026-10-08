@@ -1,8 +1,837 @@
 ---
 title: "Häufige Fragen"
-description: "Antworten auf häufige Fragen zu toern."
+description: "Antworten auf häufige Fragen zu toern und Lösungen für alle Klärfälle bei Retouren, Rückerstattungen und Umtauschen."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Hier findest du Antworten auf die häufigsten Fragen rund um toern. Im zweiten Teil der Seite findest du alle Klärfälle, die bei Retouren, Rückerstattungen und Umtauschen auftreten können, und wie du sie löst.
+
+## Retouren und Umtausche anmelden
+
+<AccordionGroup>
+  <Accordion title="Die Retourenfrist ist abgelaufen. Wie kann ich trotzdem eine Retoure anmelden?">
+    Du hast zwei Möglichkeiten: Du legst eine manuelle Retoure an oder du verlängerst die Retourenfrist für die Bestellung.
+
+    **Manuelle Retoure anlegen:**
+
+    1. Gehe zu **Manage Returns**.
+    2. Klicke auf **Create New Return**.
+    3. Suche nach der Bestellnummer.
+    4. Wähle die Zeile mit der gesuchten Bestellung aus.
+    5. Wähle die Artikel aus, die retourniert werden sollen.
+    6. Wähle den aktuellen Stand der Retoure aus, z. B. **Registered**, **Received** (wenn die Ware schon beim Fulfiller ist) oder **Inspected** (wenn der Fulfiller sie schon klassifiziert hat).
+    7. Klicke auf **Create**. Die Retoure wird angelegt und du landest in der gewohnten Retourenansicht.
+
+    Unter **Refund Method** wählst du, ob die KundInnen ihr Geld über die ursprüngliche Zahlungsart zurückbekommen oder einen Gutschein für den Shop erhalten.
+
+    **Retourenfrist verlängern:**
+
+    Suche die Bestellung über **Create New Return** und öffne sie.
+
+    ![Retourenfrist anpassen](/images/docs/FAQ/AdaptReturntime.png)
+
+    Mit **Extend Return Window** verlängerst du die Retourenfrist für diese Bestellung. Die KundInnen können die Retoure dann selbst im Portal anmelden. Mit **Copy Login Link** kopierst du einen Link, den du den KundInnen schicken kannst. Damit landen sie direkt in der Artikelauswahl und müssen ihre Bestelldaten nicht mehr eingeben.
+
+    Mehr dazu findest du unter [Retouren verwalten](/dashboard/manage-returns).
+  </Accordion>
+  <Accordion title="Wie melde ich eine Retoure für KundInnen an?">
+    Du legst die Retoure manuell im Dashboard an:
+
+    1. Gehe zu **Manage Returns**.
+    2. Klicke auf **Create New Return**.
+    3. Im Suchfeld durchsuchst du alle Bestellungen. Du kannst nach Kundenname oder Bestellnummer suchen.
+    4. Wähle die passende Bestellung aus der Liste aus.
+    5. Rechts erscheinen die Details der Bestellung. Wähle die relevanten Artikel aus und klassifiziere sie bei Bedarf.
+    6. Passe unter **Return Status** die Timeline an. **Inspected** bedeutet, dass die Retoure dir bereits vorliegt und bearbeitet wurde. Klicke auf die beiden Buttons **Received** und **Inspected**, um den Status zurückzusetzen. Die Retoure hat dann den Status **Registered**, so als hätten die KundInnen sie selbst angemeldet.
+    7. Lege bei Bedarf einen Klärfall an.
+    8. Klicke auf **Create**. Die Retoure wird angelegt und durchläuft danach den normalen Retourenprozess.
+
+    <Warning>
+      Wenn die Ware noch bei den KundInnen ist, setze den Status unbedingt zurück. Sonst kann die Rückerstattung automatisch ausgelöst werden.
+    </Warning>
+
+    Mehr dazu findest du unter [Retouren verwalten](/dashboard/manage-returns).
+  </Accordion>
+  <Accordion title="Wie melde ich einen Umtausch für KundInnen an?">
+    Du hast zwei Wege:
+
+    - **Über das Retourenportal:** Öffne den Link zu deinem Portal (er ist auf deiner Shop-Website hinterlegt). Durchlaufe den Retourenprozess für die KundInnen und wähle die Artikel für den Umtausch aus.
+    - **Über das Dashboard:** Lege unter **Manage Returns → Create New Return** eine manuelle Retoure an. Sobald du einen Artikel auswählst, kannst du über das Dropdown einen Umtausch daraus machen. Mit **Show Variants for Exchange** siehst du alle verfügbaren Varianten des Artikels. toern prüft sie über die Shopify-Schnittstelle.
+
+    Mehr dazu findest du unter [Umtausch](/returns/exchange) und [Retouren verwalten](/dashboard/manage-returns).
+  </Accordion>
+  <Accordion title="Wer trägt die Versandkosten bei einem reinen Umtausch?">
+    Bei einem reinen Umtausch wird keine Retourengebühr abgezogen. Ein reiner Umtausch heißt: Neben dem getauschten Artikel werden keine weiteren Artikel retourniert. Die KundInnen bekommen in diesem Fall kein Geld zurück.
+
+    Aus Kulanz wird dann keine Gebühr abgezogen, weil die Wahrscheinlichkeit hoch ist, dass die KundInnen den neuen Artikel behalten. Wenn sie auch diesen Artikel zurückschicken möchten, müssen sie sich an deinen Kundenservice wenden. Dann kannst du manuell eine beliebige Retourengebühr erheben.
+
+    Mehr dazu findest du unter [Umtausch](/returns/exchange).
+  </Accordion>
+</AccordionGroup>
+
+## Rückerstattungen
+
+<AccordionGroup>
+  <Accordion title="Wie führe ich einen manuellen Refund durch? Wie entferne ich dabei die Retourengebühr? Wie erstatte ich die Versandkosten?">
+    Einen manuellen Refund führst du in der Regel aus, wenn es für die Retoure keine Automatisierung gibt oder sie aufgehoben wurde.
+
+    1. Öffne die Retoure, die du erstatten möchtest.
+    2. Klicke auf **Create New Refund** (jederzeit möglich) oder auf **Refund** (nur möglich, wenn das der nächste Schritt in der Timeline ist).
+    3. Wähle die Retoure aus, die erstattet werden soll, falls sie nicht schon vorausgewählt ist. Rechts siehst du alle Einstellungen für den Refund. Sie sind an die Voreinstellungen deiner Brand angepasst. Hier kannst du z. B. die Retourengebühr entfernen oder die Versandkosten erstatten.
+    4. Mit **Real Refund Amount** kannst du auch einen ganz individuellen Betrag eingeben, unabhängig von den Retourenartikeln und Voreinstellungen. Er darf den maximalen Refund-Betrag (den Bestellwert) aber nicht überschreiten.
+
+    Mehr dazu findest du unter [Rückerstattung](/returns/refund) und [Retouren verwalten](/dashboard/manage-returns).
+  </Accordion>
+  <Accordion title="Wie und wann erhalten KundInnen ihren Gutschein?">
+    Der Gutschein wird wie ein normaler Refund ausgelöst, und zwar nach dem Trigger, den du in den Refund-Einstellungen festgelegt hast. toern löst den Versand des Gutscheins mit dem berechneten Betrag aus. Die KundInnen erhalten ihn per E-Mail. Wie lange er gültig ist, richtet sich nach deinen Einstellungen.
+
+    Mehr dazu findest du unter [Gutschein-Erstattung](/returns/gift-card-refund).
+  </Accordion>
+</AccordionGroup>
+
+## Kommunikation mit KundInnen
+
+<AccordionGroup>
+  <Accordion title="Wie erstelle ich ein neues Label für KundInnen?">
+    1. Öffne die Retoure der KundInnen.
+    2. Klicke in der Box **Return Labels** auf **Generate New Label**.
+    3. Warte kurz. Unten rechts erscheint zuerst die Meldung „New label requested, please wait for the new label to be created.“ Sobald das Label ersetzt wurde, erscheint „label recreated“.
+    4. Öffne das Label mit **Open PDF**, lade es herunter und schicke es an die KundInnen.
+  </Accordion>
+  <Accordion title="Was sollte ich in die E-Mail mit einem neuen Versandlabel schreiben?">
+    Diese Vorlage deckt alle typischen Fälle ab:
+
+    > Hallo liebe/r XY,
+    >
+    > danke für deine Rückmeldung – das ist natürlich ärgerlich, so soll das nicht laufen. Auf den ersten Blick sehen das Label und der QR-Code für mich korrekt aus, aber zur Sicherheit habe ich dir ein neues Rücksendelabel erstellt und im Anhang beigefügt.
+    >
+    > Was ansonsten oft hilft:
+    >
+    > - Die Retoure in einer anderen DHL-Filiale abgeben
+    > - Label vorsichtshalber ausdrucken, damit der Barcode direkt gescannt werden kann
+    > - QR-Code und/oder Barcode funktionieren nicht? Die Filiale kann die darunter stehende Nummer manuell eingeben – bitte bestehe darauf, dass dies versucht wird
+    >
+    > Ich hoffe, so klappt es jetzt reibungslos. Falls nicht, melde dich gerne direkt wieder bei mir!
+    >
+    > Viele Grüße
+  </Accordion>
+  <Accordion title="Wann wird was per E-Mail an KundInnen kommuniziert?">
+    Während des Retourenprozesses erhalten die KundInnen mehrere personalisierte E-Mails zum Ablauf und Status ihrer Retoure:
+
+    - **Anmeldebestätigung:** Am Ende des Retourenprozesses sehen die KundInnen eine Bestätigung. Dort steht bereits, dass das Label per E-Mail kommt oder dass sie eine E-Mail mit der Versandadresse und den nächsten Schritten erhalten.
+    - **E-Mail mit Label:** Sie enthält das Label und Infos zum weiteren Ablauf:
+
+      > Packe die Artikel, die du zur Rücksendung angemeldet hast, in ihre Originalverpackung zurück und verschließe den Karton sorgfältig. Besuche eine [Versanddienstleister]-Station in deiner Nähe und zeige dort das Versandlabel vor, um dein Paket zurückzusenden. Die Erstattung des Betrags wird ausgeführt, nachdem dein Paket bei uns eingetroffen ist. Bitte beachte, dass die Rückerstattung erst nach Erhalt der Ware erfolgt.
+
+    - **E-Mail mit Versandadresse:** Sie enthält kein Label, dafür Infos zum Ablauf und ggf. einen Rücksendeschein, den die KundInnen ausdrucken und ins Paket legen:
+
+      > Bitte beachte, dass wir keine unfrankierten Rücksendungen oder Nachnahmesendungen annehmen können. Um sicherzustellen, dass deine Rücksendung bei uns ankommt, empfehlen wir, den Versand als versichertes Paket mit Sendungsverfolgung durchzuführen. Wenn im Anhang ein Rücksendeschein enthalten ist, drucke ihn bitte aus und lege ihn ins Paket. Er enthält alle nötigen Infos, damit wir deine Retoure schnell und korrekt zuordnen können. Packe die Artikel, die du zur Rücksendung angemeldet hast, in ihre Originalverpackung zurück und verschließe den Karton sorgfältig. Nutze die oben angegebene Adresse für die Rücksendung und sende den Artikel zurück an uns. Die Erstattung des Betrags wird ausgeführt, nachdem dein Paket bei uns eingetroffen ist. Bitte beachte, dass die Rückerstattung erst nach Erhalt der Ware erfolgt.
+
+    - **Benachrichtigung nach Bearbeitung:** Sobald das Fulfillment die Retoure bearbeitet und klassifiziert hat, erhalten die KundInnen eine Benachrichtigung. Sie wird von deinem Shop in Shopify erstellt und über die toern-Anbindung ausgelöst.
+    - **Gutschein:** Bei einem Refund per Gutschein wird statt der Erstattung ein Gutschein in Shopify ausgelöst. Auch dieser ist von deinem Shop vorkonfiguriert und wird von toern nur ausgelöst.
+  </Accordion>
+  <Accordion title="Kann ich die E-Mails an KundInnen individuell anpassen?">
+    Ja. Wenn du **Transactional E-Mails by toern** als Notification Service ausgewählt hast, kannst du Betreff, Cc/Bcc und Inhalt pro Event und Sprache im [E-Mail-Editor](/branding/email-templates) anpassen. Dort prüfst du die E-Mails auch mit Testdaten und verschickst Test-E-Mails.
+
+    Wenn du [Klaviyo](/integrations/klaviyo) nutzt, verwaltest du die Inhalte weiterhin direkt in Klaviyo.
+  </Accordion>
+  <Accordion title="Wie und wo hinterlege ich die Rückgaberichtlinien in meinem Shop?">
+    Jedes Shopsystem hat einen eigenen Bereich für Richtlinien. Dort können deine KundInnen sie nachlesen. Wo genau du die Einstellung findest, hängt von deinem Shopsystem ab.
+
+    Du kannst gerne die vorformulierten Textbausteine verwenden, die wir zu Beginn des Onboardings mit dir geteilt haben.
+  </Accordion>
+</AccordionGroup>
+
+## Shopify
+
+<AccordionGroup>
+  <Accordion title="Warum wird mein Retourenstatus nicht in Shopify angezeigt?">
+    Shopify zeigt einen Retourenstatus **nur** an, wenn der Artikel ausgeführt („fulfilled“) ist.
+
+    Ist der Artikel nicht ausgeführt, schlägt die Übertragung von toern fehl. Der Status kann dann nicht an Shopify übertragen und dort nicht angezeigt werden.
+
+    ![Nicht ausgeführte Bestellung in Shopify](/images/docs/notion/faq-shopify-not-fulfilled.png)
+
+    Keine Sorge: In der [Auswertung in toern](/dashboard/analytics) siehst du die Retourengründe trotzdem.
+  </Accordion>
+  <Accordion title="Wo passe ich die Shopify-Berechtigungen für meinen Shop an?">
+    Manche Funktionen brauchen spezielle Berechtigungen in Shopify, z. B. Umtausche, Gutscheine und Rückerstattungen. Bevor du diese Funktionen aktivieren kannst, musst du die Berechtigungen vergeben. Fehlen sie, erscheint eine Fehlermeldung mit den benötigten Berechtigungen.
+
+    So vergibst du die Berechtigungen in deinem Shopify-Shop:
+
+    1. Öffne **Apps and sales channels**.
+    2. Klicke oben rechts auf **Develop apps**.
+
+       ![Develop apps in Shopify](/images/docs/notion/faq-shopify-develop-apps.png)
+
+    3. Wähle die App **toern Retoureportal** aus und öffne **Configuration**.
+    4. Klicke bei **Admin API integration** auf **Edit**. Setze die Häkchen bei den benötigten Berechtigungen.
+
+    Mehr dazu findest du unter [Shopify-Integration](/getting-started/shopify-integration).
+  </Accordion>
+</AccordionGroup>
+
+## Allgemeine Fragen
+
+<AccordionGroup>
+  <Accordion title="Wie lege ich einen neuen Nutzer für meine Brand an?">
+    Neue NutzerInnen legst du selbst im **User Management** an. Klicke dort auf **Add New User** und gib den vollständigen Namen, die E-Mail-Adresse und die Rolle an. Die Zugangsdaten werden den neuen NutzerInnen per E-Mail zugeschickt.
+
+    Mehr dazu findest du unter [Nutzerverwaltung](/dashboard/user-management).
+  </Accordion>
+</AccordionGroup>
+
+## Klärfälle und wie du sie löst
+
+Wenn toern eine Retoure, eine Rückerstattung oder einen Umtausch nicht automatisch verarbeiten kann, entsteht ein **Klärfall**. Die Retoure bekommt dann den Status **Needs review** bzw. **Clarification** und du siehst die Fehlermeldung in der Retoure unter [Retouren verwalten](/dashboard/manage-returns).
+
+Unten findest du alle Klärfälle, sortiert nach Vorgang (Anlegen von Retouren, Rückerstattung, Umtausch) und System (allgemein, Shopify, Xentral). Der Titel jedes Eintrags ist die Fehlermeldung, die du in toern siehst.
+
+<Tip>
+  Viele Klärfälle löst du, indem du die Ursache behebst und den Vorgang in der Retoure erneut startest, z. B. mit **Retry failed return** unter **Actions**, **Retry failed refund** oder **Execute exchange processing**.
+</Tip>
+
+### Allgemeine Klärfälle beim Anlegen von Retouren
+
+<AccordionGroup>
+  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
+    **Ursache:** Dein Shopsystem wird von toern nicht unterstützt.
+
+    **Lösung:** Hinterlege die nötigen Daten für die Nutzung mit Shopify (siehe [Shopify-Integration](/getting-started/shopify-integration)) oder kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error during label creation. Our support team is already on it. For further questions contact support@re-toern.de.">
+    **Ursache:** Wegen eines technischen Problems konnte das Retourenlabel nicht erstellt und die Retoure nicht angelegt werden.
+
+    **Lösung:** Prüfe die Adresse der KundInnen, die Ländereinstellungen im Country-Mapping und die Carrier-Einstellungen (siehe [Retourenmethoden](/returns/return-methods)). Behebe die Fehler und führe die Retoure mit **Retry failed return** erneut aus.
+  </Accordion>
+  <Accordion title="Return status not found">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No email event created, could not send email notification">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error creating RMA PDF">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Return contains Set item requiring clarification">
+    **Ursache:** Die Retoure enthält ein Set. Sets kann toern nicht automatisiert verarbeiten.
+
+    **Lösung:** Bearbeite die Retoure manuell in toern (siehe [Sets](/returns/sets)).
+  </Accordion>
+  <Accordion title="Internal Error in Return Processing (collecting database ressources). Please contact support@re-toern.de for help">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Shopify-spezifische Klärfälle beim Anlegen von Retouren
+
+<AccordionGroup>
+  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
+    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+
+    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+  </Accordion>
+  <Accordion title="No successful fulfillments found for the order. Please check that order line items are marked as successfully fulfilled">
+    **Ursache:** Die Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+
+    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+  </Accordion>
+  <Accordion title="Some return items have no fulfillmentLineItemId. Please check the fulfillments in your shop. This might indicate that an item was not fulfilled or the fulfillment line item variant was deleted.">
+    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+
+    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+  </Accordion>
+  <Accordion title="No variant id found for exchange item. Please check the exchange variant id in your return item.">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No return id found in the response from Shopify. This might indicate that the return creation failed or the return was not created successfully">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
+    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+
+    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+  </Accordion>
+  <Accordion title="The original currency of the order could not be found. For this reason the return creation stopped to prevent wrong label & return fees from occuring">
+    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+  </Accordion>
+  <Accordion title="Missing variantId or countryCode. Could not get presentment money for product variant">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Unsupported presentment currency for return fee calculation">
+    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+  </Accordion>
+  <Accordion title="Exchange process failed in Shopify">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
+
+    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error requesting fulfillments from Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error requesting return creation in Shopify">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Shopify angelegt werden.
+
+    **Lösung:** Prüfe die Retoure in Shopify und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error processing exchange items in Shopify.">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
+
+    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Could not get price for exchange variant">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
+
+    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Xentral-spezifische Klärfälle beim Anlegen von Retouren
+
+<AccordionGroup>
+  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key).">
+    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+
+    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+  </Accordion>
+  <Accordion title="Xentral activated, but missing return reason mapping">
+    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+
+    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+  </Accordion>
+  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
+    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+
+    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+  </Accordion>
+  <Accordion title="No return items to create return in Xentral">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No return data returned from Xentral API">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing salesOrderId for Xentral return creation">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Invalid return item id for Xentral return">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Invalid return item quantity for Xentral return">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Create return in Xentral failed">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Xentral angelegt werden.
+
+    **Lösung:** Prüfe die Retoure in Xentral und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Allgemeine Klärfälle bei der Rückerstattung
+
+<AccordionGroup>
+  <Accordion title="Brand settings not found">
+    **Ursache:** Die Refund-Einstellungen deiner Brand wurden nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+
+    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an.
+  </Accordion>
+  <Accordion title="Return items not found">
+    **Ursache:** Die angemeldeten Retourenartikel wurden nicht in der Datenbank gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+
+    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch und schließe die Retoure danach in toern manuell ab.
+  </Accordion>
+  <Accordion title="Return status not found">
+    **Ursache:** Der Retourenstatus wurde im System nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Refund item not found">
+    **Ursache:** Der Artikel für die Rückerstattung wurde im System nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Refund not found">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Preferred refund method could not be found">
+    **Ursache:** Die hinterlegte Rückerstattungsmethode wurde nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+
+    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch und schließe die Retoure danach in toern manuell ab.
+  </Accordion>
+  <Accordion title="No refund settings found. Please update the settings to include refund configurations">
+    **Ursache:** Die Refund-Einstellungen wurden nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+
+    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an. Wenn das nicht hilft, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Shop system currently not supported for auto refund. Contact support for further assistance (support@re-toern.de).">
+    **Ursache:** Automatische Rückerstattungen unterstützt toern aktuell nur für Shopify.
+
+    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch.
+  </Accordion>
+  <Accordion title="Unknown refund service used for auto refund. Contact support for further assistance (support@re-toern.de)">
+    **Ursache:** Die Rückerstattungsmethode ist in toern noch nicht für die Automatisierung freigegeben. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de), damit die Methode freigegeben wird.
+  </Accordion>
+  <Accordion title="Refund failed">
+    **Ursache:** Bei der Rückerstattung ist etwas schiefgelaufen. Weitere Informationen wurden nicht an toern übermittelt.
+
+    **Lösung:** Prüfe in deinem Shopsystem, warum die Rückerstattung fehlgeschlagen ist, und führe sie manuell erneut aus.
+  </Accordion>
+  <Accordion title="Line items have changed, but this return includes exchange items. Automatic updates in Shopify are not possible. Please update the return manually in Shopify to ensure accurate tracking. The refund must also be processed manually">
+    **Ursache:** Die Artikel der Retoure wurden geändert, obwohl sie einen Umtausch enthält. Das kann zu einer falschen Rückerstattung führen.
+
+    **Lösung:** Prüfe die Artikel und was erstattet werden soll. Führe die Rückerstattung manuell in Shopify durch.
+  </Accordion>
+  <Accordion title="Line items have changed, but this return already has a return created in Xentral. Automatic updates in Xentral are not possible. Please update the return manually in Xentral and Shopify to ensure accurate tracking. The refund must also be processed manually.">
+    **Ursache:** Die Artikel der Retoure wurden geändert, obwohl bereits eine Retoure in Xentral angelegt wurde. Diese Änderung kann nicht automatisch in Xentral übernommen werden.
+
+    **Lösung:** Führe die (noch offene) Rückerstattung manuell in Shopify durch und passe die Retoure in Xentral entsprechend an.
+  </Accordion>
+  <Accordion title="The total return value exceeds the maximum refund threshold specified in the settings. The refund must be processed manually.">
+    **Ursache:** In den [Refund-Einstellungen](/returns/refund) kannst du einen Maximalbetrag für automatische Rückerstattungen festlegen. Diese Retoure überschreitet ihn, deshalb musst du sie manuell erstatten.
+
+    **Lösung:** Wenn du keine manuelle Rückerstattung möchtest, erhöhe den Maximalbetrag in den Einstellungen.
+  </Accordion>
+  <Accordion title="The total gift card value (including bonus) exceeds the gift card threshold specified in the settings. The refund must be processed manually.">
+    **Ursache:** In den [Refund-Einstellungen](/returns/refund) kannst du einen Maximalbetrag für Erstattungen per Gutschein festlegen. Diese Retoure überschreitet ihn, deshalb musst du sie manuell erstatten.
+
+    **Lösung:** Wenn du keine manuelle Rückerstattung möchtest, erhöhe den Maximalbetrag in den Einstellungen.
+  </Accordion>
+  <Accordion title="Order ID is required. Please contact support for further help (support@re-toern.de).">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="An error occurred while checking blocked discount codes. Please contact support for further help (support@re-toern.de).">
+    **Ursache:** Der verwendete Rabattcode ist in den Einstellungen blockiert. Die Rückerstattung wird nicht automatisch durchgeführt, weil sie vom Vorschlag von Shopify abweicht. Du musst sie manuell durchführen.
+
+    **Lösung:** Wenn der Rabattcode doch nicht blockiert sein soll, entferne ihn aus der Liste der blockierten Rabattcodes in den [Refund-Einstellungen](/returns/refund).
+  </Accordion>
+  <Accordion title="Internal Error in Refund Processing (collecting database resources). Please contact support@re-toern.de for help.">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Shopify-spezifische Klärfälle bei der Rückerstattung
+
+<AccordionGroup>
+  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly.">
+    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+
+    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+  </Accordion>
+  <Accordion title="The original currency of the order could not be found. For this reason the refund creation stopped to prevent wrong refund amounts from occuring.">
+    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+  </Accordion>
+  <Accordion title="Cannot find return with the given external return ID in Shopify">
+    **Ursache:** Die Retoure für die Rückerstattung wurde nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No returnable fulfillments found for the order. Please check the order and fulfillments in your shop">
+    **Ursache:** Die Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+
+    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+  </Accordion>
+  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
+    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+
+    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+  </Accordion>
+  <Accordion title="Customer ID not found for gift card issuance">
+    **Ursache:** Die Kunden-ID wurde nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+
+    **Lösung:** Prüfe in Shopify, ob die Kundin oder der Kunde noch existiert, und kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Shopify order was already cancelled">
+    **Ursache:** Die Bestellung wurde in Shopify bereits storniert. Deshalb kann toern keine Retoure erstellen.
+
+    **Lösung:** Storniere die Retoure auch in toern, indem du auf **Cancel** klickst.
+  </Accordion>
+  <Accordion title="Order is not refundable. Please make sure that the order is fully paid before issuing a refund">
+    **Ursache:** Die Bestellung ist in Shopify als nicht erstattungsfähig markiert. Deshalb kann toern keine Rückerstattung durchführen.
+
+    **Lösung:** Prüfe den Status der Bestellung in Shopify. Stelle sicher, dass die Bestellung vollständig bezahlt ist, und führe die Retoure dann erneut mit **Retry failed return** aus.
+  </Accordion>
+  <Accordion title="This order cannot be refunded because its payment status is not eligible for refunds">
+    **Ursache:** Die Bestellung ist in Shopify als nicht erstattungsfähig markiert. Deshalb kann toern keine Rückerstattung durchführen.
+
+    **Lösung:** Prüfe den Status der Bestellung in Shopify. Stelle sicher, dass die Bestellung vollständig bezahlt ist, und führe die Retoure dann erneut mit **Retry failed return** aus.
+  </Accordion>
+  <Accordion title="Shopify order had more than 50 items. Shopify limits refunds to 50 items per request">
+    **Ursache:** Die Bestellung enthält in Shopify mehr als 50 Artikel. Über das Retourenportal kann toern maximal 50 Artikel abdecken.
+
+    **Lösung:** Kläre direkt mit den KundInnen, wie viele Artikel erstattet werden sollen, und führe die Rückerstattung manuell in Shopify durch.
+  </Accordion>
+  <Accordion title="Return status is either canceled or declined, can't proceed with the refund">
+    **Ursache:** Die Retoure ist in Shopify entweder storniert („canceled“) oder abgelehnt („declined“). Deshalb kann toern den Retourenprozess nicht fortsetzen.
+
+    **Lösung:** Prüfe die Retoure in Shopify und schließe sie danach in toern ab.
+  </Accordion>
+  <Accordion title="Insufficient transaction amounts to fulfill the refund">
+    **Ursache:** Das Guthaben, z. B. bei PayPal, reicht für die Rückerstattung nicht aus.
+
+    **Lösung:** Lade das Guthaben auf und versuche die Rückerstattung erneut mit **Retry failed refund**.
+  </Accordion>
+  <Accordion title="Error during requesting Shopify for refund">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error requesting order info from Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error requesting returnProcess from Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error creating gift card in Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Return update failed. Updated shop return not connected. Please check the return and return items in your shop">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Return cannot be canceled. Return status is not cancelable. Therefore return can not by synced with adjusted return items">
+    **Ursache:** Die Retoure kann nicht storniert werden. **Cancel** kann deshalb nicht im verbundenen Shopsystem ausgeführt werden.
+
+    **Lösung:** Prüfe den Zustand der Retoure im Shopsystem und schließe sie dort ab.
+  </Accordion>
+  <Accordion title="Error during canceling return in Shopify. Return was not canceled & synced successfully">
+    **Ursache:** Die Retoure kann nicht storniert werden. **Cancel** kann deshalb nicht im verbundenen Shopsystem ausgeführt werden.
+
+    **Lösung:** Prüfe den Zustand der Retoure im Shopsystem und schließe sie dort ab.
+  </Accordion>
+  <Accordion title="Error during recreating return in Shopify. Return was not created successfully">
+    **Ursache:** Aus technischen Gründen konnte die Retoure nicht in Shopify angelegt werden.
+
+    **Lösung:** Prüfe die Retoure in Shopify und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error during recreating return in Shopify. Original currency of the order was not found">
+    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+  </Accordion>
+  <Accordion title="Error during requesting Shopify. Return was not requested, canceled or created successfully">
+    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing returnProcess in response">
+    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="GraphQL Error occurred">
+    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Unexpected error during refund">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Shopify erstattet werden.
+
+    **Lösung:** Prüfe die Rückerstattung in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Xentral-spezifische Klärfälle bei der Rückerstattung
+
+<AccordionGroup>
+  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key)">
+    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+
+    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+  </Accordion>
+  <Accordion title="Xentral activated, but missing return reason mapping">
+    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+
+    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+  </Accordion>
+  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
+    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+
+    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+  </Accordion>
+  <Accordion title="No return items to create return in Xentral">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing return ID in return data">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing invoice ID in order data">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing salesOrderId">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Invalid item id">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Invalid item quantity">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No return data returned from Xentral API">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing credit note ID in response">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing success confirmation in response">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Create return in Xentral failed">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Xentral angelegt werden.
+
+    **Lösung:** Prüfe die Retoure in Xentral und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Close return in Xentral failed">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure in Xentral nicht geschlossen werden.
+
+    **Lösung:** Prüfe die Retoure in Xentral und versuche danach in toern erneut, sie mit **Retry failed refund** zu schließen. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="View return in Xentral failed">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Create credit note in Xentral failed">
+    **Ursache:** Aus unbekannten technischen Gründen konnte die Gutschrift (Credit Note) nicht in Xentral angelegt werden.
+
+    **Lösung:** Prüfe die Retoure in Xentral und versuche danach in toern erneut, die Credit Note mit **Retry failed refund** anzulegen. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Allgemeine Klärfälle bei Umtauschen
+
+<AccordionGroup>
+  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
+    **Ursache:** Dein Shopsystem wird von toern nicht unterstützt.
+
+    **Lösung:** Hinterlege die nötigen Daten für die Nutzung mit Shopify (siehe [Shopify-Integration](/getting-started/shopify-integration)) oder kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Brand settings not found for the provided brand ID">
+    **Ursache:** Die Einstellungen deiner Brand für den Umtausch wurden nicht gefunden. Deshalb kann kein Umtausch durchgeführt werden.
+
+    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an.
+  </Accordion>
+  <Accordion title="ReturnStatus data not found for the provided order ID">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Order not found for the provided order ID">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Return items not found for the provided order ID">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Customer not found for the provided customer ID">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Customer ID not found in return status">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Fulfillment order not found in Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Unexpected fulfillment order status">
+    **Ursache:** Der Fulfillment-Auftrag des Umtauschartikels sollte auf **Hold** stehen. Das ist nicht der Fall. Wahrscheinlich wurde er manuell in Shopify geändert.
+
+    **Lösung:** Prüfe den Fulfillment-Auftrag des Umtauschartikels in Shopify. Wenn er nicht deinen Erwartungen entspricht, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Failed to release fulfillment hold">
+    **Ursache:** Bei Umtauschen innerhalb einer Bestellung wird der neue Fulfillment-Auftrag für den Ersatz zunächst auf **On hold** gesetzt und nach der Klassifizierung freigegeben („released“). Diese Freigabe ist aus technischen Gründen fehlgeschlagen.
+
+    **Lösung:** Prüfe den Umtausch in Shopify und gib den Fulfillment-Auftrag manuell frei. Schließe den Umtausch danach in toern ab.
+  </Accordion>
+  <Accordion title="Failed to fetch fulfillment orders from Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error releasing fulfillment hold">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Internal Error in Exchange Processing (collecting database resources). Please contact support@re-toern.de for help">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht durchgeführt werden.
+
+    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Shopify-spezifische Klärfälle bei Umtauschen
+
+<AccordionGroup>
+  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
+    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+
+    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+  </Accordion>
+  <Accordion title="Invalid exchange items: missing exchange_variant_id_extern">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="GraphQL Error occurred while creating exchange order.">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error creating exchange order">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht angelegt werden.
+
+    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No order ID returned from Shopify">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="HTTP error while creating exchange order">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Shopify tag addition failed">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Failed to create return note after Shopify tag failure">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No external order ID found. Skipping Shopify tag creation">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Error during requesting Shopify for exchange">
+    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht angelegt werden.
+
+    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+
+### Xentral-spezifische Klärfälle bei Umtauschen
+
+<AccordionGroup>
+  <Accordion title="Xentral activated but access data (xentral_id or api_key) is missing">
+    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+
+    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+  </Accordion>
+  <Accordion title="Xentral meta settings not found for brand.">
+    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+
+    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+  </Accordion>
+  <Accordion title="Missing exchange order ID in Xentral response">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="No shipping method mapping found for country code in Xentral meta settings">
+    **Ursache:** Um einen Ersatzauftrag in Xentral anzulegen, braucht toern eine Versandart (Shipping Method). Diese hinterlegst du in den Xentral-Einstellungen in toern.
+
+    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+  </Accordion>
+  <Accordion title="Invalid number of exchange items (min 1, max 50)">
+    **Ursache:** Die Anzahl der Umtauschartikel ist ungültig. Erlaubt sind mindestens 1 und höchstens 50 Artikel.
+
+    **Lösung:** Führe den Umtausch manuell in Xentral durch und schließe ihn danach in toern ab. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Product not found in Xentral for external reference number">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Import sales order in Xentral failed">
+    **Ursache:** Ein externer Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Klicke auf **Execute exchange processing**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing required fields for Xentral order">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+  <Accordion title="Missing required fields: xentral_product_id or product_quantity">
+    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+
+    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+  </Accordion>
+</AccordionGroup>
+

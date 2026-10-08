@@ -1,8 +1,122 @@
 ---
 title: "General branding"
-description: "Colors, logo, fonts, and images for all portals."
+description: "Adapt logo, background image, colors, fonts, and login texts to your corporate design."
 ---
 
+In the **Branding** section, you adapt the return portal to your corporate design. This makes the return process feel like part of your shop for your customers. Among other things, you can upload a logo and a background image and customize colors and fonts.
+
+## Logo
+
+Your logo lets customers recognize your brand in the return process right away. Simply upload a **.png** file.
+
+Keep in mind:
+
+- The logo should be at least **500 x 500 pixels**.
+- Avoid whitespace around the logo where possible (see the hints in the settings).
+- A logo that is wider than it is tall looks best in the portal. This optimizes the display on mobile and desktop.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew01.png" alt="Upload of the brand logo" />
+</Frame>
+
+## Background Image
+
+In addition to the logo, you can upload a background image. It's shown when customers register their return. This lets you personalize the portal further with your brand's own images.
+
+- Recommended resolution: **1920 x 1080** (Full HD) or **3840 x 2160** (4K).
+- Recommended format: **.jpg/JPEG**.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew02.png" alt="Upload of the background image" />
+</Frame>
+
+## Highlight and Action Colors
+
+In the rest of the return process, you adapt the portal to your brand mainly through colors and fonts.
+
+You can set two colors:
+
+- **Highlight Color**: Emphasizes small accents and important process steps, for example the loading animation.
+- **Action Color**: Indicates interactions through a color change. We recommend a dark color. One example is the **Next** button, which switches to the darker toern green when clicked.
+
+Enter the colors as a **hex code**. The color is shown directly in the preview.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew03.png" alt="Color customization" />
+</Frame>
+
+## Font Configuration
+
+You can also customize the fonts in the return portal. There is a **Primary**, **Secondary**, and **Tertiary Font**. Fonts are set via **Google Fonts**. You can also find instructions via the info button in the settings.
+
+### Add a font
+
+1. Open [fonts.google.com](https://fonts.google.com).
+2. Select the font family and the styles or weights you want (e.g. 400, 600).
+3. In the right panel, click **Get embed code**.
+4. Switch to the **@import** tab. You'll see something like this:
+
+   ```css
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+   ```
+
+5. Copy only the URL inside `url('...')`, starting with `https://fonts.googleapis.com/css2`. Example:
+
+   ```text
+   https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap
+   ```
+
+6. Paste the URL into the field for the Primary, Secondary, or Tertiary Font (Google CSS URL).
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew04.png" alt="Font customization" />
+</Frame>
+
+<Tip>
+  You can include several font families by adding more `&family=...` parts. Google provides these in the embed code. Keep `display=swap` in the URL for better rendering.
+</Tip>
+
+<Warning>
+  - Don't paste the whole `@import ...;` line, only the HTTPS URL.
+  - Don't paste a `<link>` tag. Use the **@import** tab and copy the URL.
+  - Don't use `fonts.gstatic.com` links or direct `.ttf` or `.otf` file links.
+</Warning>
+
 <Note>
-  This page is a work in progress.
+  The Google Fonts URLs are only used for preview and testing. In production, fonts are served GDPR-compliantly via our CDN for security reasons.
 </Note>
+
+## Order Number Placeholder
+
+You can customize the placeholder in the order number field on the login page (default: "e.g. from the order confirmation"). You set the text in German and in English for international returns.
+
+This is especially helpful if customers can log in with different numbers and you want to show them where to find these numbers.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew05.png" alt="Customizing the Order Number Placeholder" />
+</Frame>
+
+## Login Information Text
+
+On the login page, you can add an extra info text about logging in or about the return. This also helps if customers can log in with different numbers.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew06.png" alt="Customizing the Login Information Text" />
+</Frame>
+
+## More settings
+
+<CardGroup cols={2}>
+  <Card title="Languages" icon="language" href="/en/branding/languages">
+    Define which languages your return portal is available in.
+  </Card>
+  <Card title="Email templates" icon="envelope" href="/en/branding/email-templates">
+    Customize the emails your customers receive.
+  </Card>
+</CardGroup>
+
+## Limitations
+
+- Logos should be rectangular and wider than tall, as shown in the settings. The height in the portal is limited.
+- You can only set fonts via Google Fonts. They are, however, hosted GDPR-compliantly on our servers.
+- So far, you can only customize the order number placeholder and an extra info text on the login page. All other info boxes and texts are set by toern.

@@ -1,8 +1,294 @@
 ---
 title: "Return portal"
-description: "How the return portal and the return process work for your customers."
+description: "How the return portal and the return process work for your customers – from login to status tracking."
 ---
 
+In the return portal, your customers register their returns digitally. They select the items, choose a reason, and then receive all information and the label by email. The whole process runs without manual work on your side.
+
+Customers don't need to install an app. The portal is a web application and works on any device and in any browser.
+
+## Login and item selection
+
+Your customers log in to the portal with their **order number** and **email address**.
+
+In the settings, you can also allow customers to log in with their order number and **zip code**. This is especially helpful if you process marketplace orders through toern. These orders often have no private email address stored in Shopify.
+
+<Tip>
+  If customers forgot their order number, they can request it with their email address. They then receive their previous order numbers from the shop in chronological order.
+</Tip>
+
+You can adapt the login to your brand: cover image, logo, and colors are integrated.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/itemselection03.png" alt="Login in the toern return portal" width="400" /></Frame>
+
+After logging in, customers see all items of their order with image, item name, size, and price. They can select as many items as they like.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/itemselection2.png" alt="Item selection in the return process" width="300" /></Frame>
+
+For each selected item, customers then go through the next steps:
+
+1. Choose a return reason
+2. Optionally add more information (text, voice message, or images)
+3. Optionally choose an exchange item, if you have activated [exchanges](/en/returns/exchange)
+
+After that, they return to the item selection. There they can select another item or continue to the next step.
+
+## Return reasons
+
+In the first sub-step, your customers choose one of the predefined return reasons. They must choose exactly one reason to continue.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/Returnreasons.png" alt="Return reason selection in the return process" width="300" /></Frame>
+
+You define the reasons in the dashboard in so-called **collections**. Learn how this works under [Return reasons](/en/returns/return-reasons).
+
+The reason is saved and used for analytics, both per item and across products. You can find it in the dashboard in the individual return and in the analytics under the return details.
+
+## User inputs
+
+After choosing a reason, your customers can add more information about the return. By default, a free text field is shown. With the **microphone icon** they can record a voice message, with the **image icon** they can upload images. Images are especially helpful if an item is defective.
+
+This input is optional and can be skipped.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/FlexShare03.png" alt="Free text input in the return process" width="250" /></Frame>
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/FlexShare02.png" alt="Voice message in the return process" width="250" /></Frame>
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/FlexShare01.png" alt="Image upload in the return process" width="250" /></Frame>
+
+The inputs are saved and used for analytics, per item and across products. You can find them in the dashboard in the individual return and in the analytics under the return details. Under **User Inputs**, all user inputs are also listed chronologically.
+
+For critical inputs, for example "A thread is pulled", toern automatically creates a **customer ticket** and sends an email to your customer support. This way you never miss important information. Learn more under [Customer tickets](/en/dashboard/customer-tickets).
+
+After the input, customers continue with choosing an exchange. If you haven't activated exchanges, they go straight back to the item selection.
+
+## Return confirmation
+
+The last step in the portal is the return confirmation. Here your customers see a summary of all selected items, whether an exchange was registered, and which refund method they chose. The return must be confirmed once more.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/approval01.png" alt="Final confirmation of the return" width="350" /></Frame>
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/approval02.png" alt="Completion screen in the return process" width="280" /></Frame>
+
+Afterwards, your customers learn what happens next:
+
+- They receive the label and next steps by email.
+- The refund is usually only issued after the items have arrived.
+- Exchange items are also only shipped after the items have arrived.
+
+If customers log in again later with order number and email, they see this screen again. There they can request the email with the label once more.
+
+As soon as the return is confirmed, it appears as **Registered** under **Manage Returns** in the dashboard. Learn more under [Manage returns](/en/dashboard/manage-returns).
+
+## Return status tracking
+
+On the tracking page, your customers can see the current status of their return at any time. All updates are shown clearly in a timeline.
+
+### Access to the tracking page
+
+Your customers can open the tracking page in two ways:
+
+1. **Via the status page in the portal**: After registering the return, logged-in customers click **Track return**.
+2. **Via the tracking link**: Customers enter their **order number** and **zip code** and land on the same screen.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/ReturnStatusTracking04.png" alt="Track return in the return portal" width="250" /></Frame>
+
+### Tracking link in the dashboard
+
+If customers can't log in to the portal, you can send them the tracking link directly. You can find it under **Settings → Shop Integration → Tracking Page Link**. Copy the link and share it with your customers.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/ReturnStatusTracking05.png" alt="Tracking link in the dashboard" /></Frame>
+
+### Return timeline
+
+The timeline shows the progress of the return. Completed steps are highlighted in green. The remaining steps stay visible, so customers can follow the whole process.
+
+Depending on the process, these steps can be shown:
+
+1. **Return registered**
+2. **Return in transit**
+3. **Clarification required** (if additional information or a review is needed)
+4. **Return received**
+5. **Return inspected**
+6. **Refund**
+7. **Completed**
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/ReturnStatusTracking02.png" alt="Return timeline with the statuses return registered, return in transit, and clarification required" width="250" /></Frame>
+
+### Shipping status
+
+If live shipping information is available, the step **Return in transit** is shown. Via **Show status**, customers see more details:
+
+- current shipping status
+- carrier
+- tracking number
+- individual shipping events
+
+If the carrier provides a tracking link, the tracking number can be opened directly.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/ReturnStatusTracking03.png" alt="Expanded shipping status with tracking number and shipping events" width="250" /></Frame>
+
+### Clarification required
+
+If a return needs additional information or a review, the timeline shows the status **Clarification required**. As soon as the clarification is resolved, the notice disappears again.
+
+### Return not found
+
+If no matching return is found, an error message appears above the form. The order number and zip code stay filled in. Your customers can then:
+
+- correct their input
+- start the search again
+- use **Forgot order number?** to look up their order number
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/ReturnStatusTracking01.png" alt="Tracking form with an error message for a return that wasn't found" width="250" /></Frame>
+
+## Link the return portal in your shop
+
+To help your customers find the portal, add the link to your shop, for example in the footer, on your shipping and returns page, or in your FAQ.
+
 <Note>
-  This page is a work in progress.
+  Usually, toern sets up the right link for you and shares it as soon as it's ready to use.
 </Note>
+
+Each brand has its own return portal:
+
+```text
+https://app.re-toern.de/<brandname>
+```
+
+Replace `<brandname>` with your brand's unique name, for example `https://app.re-toern.de/toern`.
+
+<Frame><img src="/images/docs/notion/return-portal-link.png" alt="Example: link to the return portal in a shop's FAQ" width="350" /></Frame>
+
+## Dynamic linking
+
+You can also send your customers directly into the portal with their order number and email address pre-filled. They are then logged in automatically.
+
+Add these parameters to your brand URL:
+
+| Parameter | Required | Description |
+|---|---|---|
+| `orderNumber` | Yes | The customer's order number (raw Shopify order number) |
+| `email` | Yes | The customer's email address |
+
+Example:
+
+```text
+https://app.re-toern.de/myshop?orderNumber=123456&email=test@example.com
+```
+
+How the link behaves:
+
+- If both parameters are present, the login form is **pre-filled and submitted automatically**.
+- If one or both parameters are missing, customers see the normal login form.
+
+If your system already knows the order number and email, you can embed the link in, for example:
+
+- **Order confirmation emails**
+- **Return buttons in the customer account**
+- **Support messages**
+
+Example button in HTML:
+
+```html
+<a href="https://app.re-toern.de/myshop?orderNumber=123456&email=test@example.com">
+  Start Return
+</a>
+```
+
+<Warning>
+  Authentication is always verified in the toern backend. The parameters only **initiate** the login, they don't bypass it. Never include sensitive data like passwords or tokens in the URL.
+</Warning>
+
+## Integration building blocks
+
+Here you'll find sample texts for your shop. Use them as they are or adapt them. Replace the *italic* placeholders in capital letters with your own details.
+
+### Texts for the "Return your order" page
+
+#### Returns from Germany
+
+> *BUTTON-REGISTER-RETURN*
+>
+> You can return unworn items within *PERIOD* days *free of charge*.
+>
+> After registering, you'll receive a return label that you can use to send your parcel via *CARRIER-NAME*.
+>
+> The refund is issued as quickly as possible after the items have been received and inspected. The refund is processed via the payment method you used.
+>
+> **What do I do with an item that was damaged during shipping?**
+>
+> If an item we delivered is damaged, faulty, or not right in any way, you can file a complaint and of course return it to us free of charge with the return slip. Within the return period, you can do this via the return registration. After the period has expired, please contact our customer support to resolve the case.
+
+#### Returns from the EU and other countries
+
+> You can return unworn items within *PERIOD* days. Return shipping costs for orders from abroad must be paid by the customer.
+>
+> Please use the following address for your return:
+>
+> *ADDRESS*
+>
+> Please note that we can't accept unstamped or cash-on-delivery returns. To make sure your return reaches us, we recommend sending it as an insured parcel with tracking.
+>
+> The refund is issued as quickly as possible after the items have been received and inspected. The refund is processed via the payment method you used.
+>
+> **What do I do with an item that was damaged during shipping?**
+>
+> If an item is damaged, faulty, or not right in any way, you can also file a complaint and return it to us free of charge with the return slip. Please contact our customer support to resolve the case.
+
+#### Further notes
+
+> We're happy to help with a direct exchange of a returned item and detailed information on the complaint process. If you have questions, you can contact our customer support at any time, either by email or via our contact form.
+
+### Block for the privacy policy
+
+Use this section to extend your shop's privacy policy. It transparently informs your customers about data processing in the digital return process.
+
+> To offer our digital return process, we work with the service provider toern GmbH, Am Sandtorkai 32, 20457 Hamburg (hereinafter "toern"). As part of this process, personal data is processed, including your name, your address, your email address, and your order data. This data is stored for the duration of your order and the return period. In the event of a return, toern uses this data to create a return label and send confirmation emails. This serves the performance of the contract and ensures efficient communication. For certain returns that are sent directly to the next customer, the address of the private individuals involved may be visible on the return label. The processing of this data is based on the performance of the contract, since creating and providing return labels is part of our contractual services (Art. 6 (1) sentence 1 lit. b GDPR).
+>
+> Your data is securely protected in accordance with the requirements of the General Data Protection Regulation (GDPR). After the return period has expired, your personal data will be deleted, unless there is a statutory retention obligation or another lawful reason for storing it further.
+
+### FAQ building blocks
+
+<AccordionGroup>
+  <Accordion title="How can I return my order from Germany?">
+    *BUTTON-REGISTER-RETURN*
+
+    You can return unworn items within *PERIOD* days *free of charge*.
+  </Accordion>
+  <Accordion title="How can I return my order from the EU and other countries?">
+    You can return unworn items within *PERIOD* days. Return shipping costs for orders from abroad must be paid by the customer.
+
+    Please use the following address for your return:
+
+    *ADDRESS*
+
+    Please note that we can't accept unstamped or cash-on-delivery returns. To make sure your return reaches us, we recommend sending it as an insured parcel with tracking.
+  </Accordion>
+  <Accordion title="When will I receive my refund?">
+    Your refund is issued as quickly as possible after the returned items have been received and inspected. The refund is processed via the payment method you used.
+  </Accordion>
+  <Accordion title="Where can I drop off my return parcel?">
+    After registering your return from Germany, you'll receive a return label that you can use to send your parcel via *CARRIER-NAME*.
+  </Accordion>
+  <Accordion title="Do I have to pay for return shipping?">
+    Return shipping for items from Germany is *free of charge*.
+  </Accordion>
+  <Accordion title="What do I do with an item that was damaged during shipping?">
+    If an item we delivered is damaged, faulty, or not right in any way, you can file a complaint and of course return it to us *free of charge* with the return slip.
+
+    Within the return period, you can do this via the return registration. After the period has expired, please contact our customer support to resolve the case.
+  </Accordion>
+  <Accordion title="How can I file a complaint about an item?">
+    *YOUR PROCESS* (optional)
+  </Accordion>
+  <Accordion title="Can I directly exchange a returned item?">
+    *YOUR PROCESS* (optional)
+  </Accordion>
+  <Accordion title="How do I handle orders that were not placed directly in the online shop?">
+    *YOUR PROCESS* (optional)
+  </Accordion>
+</AccordionGroup>
+
+## Limitations
+
+<Warning>
+  - Info boxes and texts in the portal can't be customized.
+  - Customers can't choose the carrier. The label is created automatically.
+</Warning>

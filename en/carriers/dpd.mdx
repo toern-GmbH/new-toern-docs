@@ -1,8 +1,53 @@
 ---
 title: "DPD"
-description: "Connect DPD as a carrier for returns."
+description: "Connect DPD via DPD Web Connect and create return labels automatically."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With **DPD Web Connect**, toern creates your DPD return labels automatically. It's the easiest way to connect DPD. All you need is your Delis ID and your DPD password.
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Setup
+
+### Request access to DPD Web Connect
+
+You get your credentials from your DPD depot. Before you receive a Delis ID, your depot must activate your access to the DPD Web Service.
+
+1. Fill in the [DPD Web Services registration form](/images/docs/DPD/RegistrationFormWebServicesDPD.pdf).
+2. Send the form to your DPD depot.
+3. The depot requests access to DPD Web Connect. Activation usually happens the day after the request.
+
+### Add the access credentials in toern
+
+Enter the following in the [DPD settings](https://www.admin.re-toern.de/settings/return-shipping-service/dpd-webconnect) in toern:
+
+- **Delis ID** (= your DPD username)
+- **your DPD password**
+
+Once the data is entered and verified, the connection to DPD is active.
+
+![DPD Web Connect Access Credentials](/images/docs/DPD/DPDNew01.png)
+
+### Country Address Mapping
+
+For toern to create return labels via DPD, you store the return addresses per country in the **DPD Country Address Mapping**.
+
+- Every country that accepts returns needs an entry in the DPD Country Address Mapping.
+- Every entry needs the correct address.
+- The address can differ per country, but doesn't have to.
+
+![DPD Country Address Mapping](/images/docs/DPD/DPDNew03.png)
+
+![DPD Country Map](/images/docs/DPD/DPD01.png)
+
+## Shipment tracking
+
+For toern to track your DPD returns, it needs the **DPD Push URL** (Tracking Push Service). You request it from your DPD contact. This requires special permissions that DPD has to approve.
+
+1. In the DPD settings in toern, click **Generate DPD URL and Download Form**. You get the required form.
+2. Send the form to your DPD contact.
+3. As soon as DPD confirms that the push URL is active, toern can track your returns.
+
+![DPD Shipment Tracking](/images/docs/DPD/DPDNew02.png)
+
+Alternatively, download the [Tracking Push Service registration form](/images/docs/DPD/Anmeldeformular_Tracking-Push-Service.pdf), sign in to [DPD Webservices](https://esolutions.dpd.com/entwickler.aspx) and send the completed form to support@re-toern.de. We fill in the technical part and send it back to you. Then you send it to your DPD contact.

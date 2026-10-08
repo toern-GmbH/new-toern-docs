@@ -1,8 +1,152 @@
 ---
 title: "Return methods"
-description: "Configure how customers can send their return back."
+description: "Define how customers send their return back: shipping providers, return countries, label settings and return slip."
 ---
 
+To let your customers send their returns back easily, toern ideally creates shipping labels automatically. To do this, you connect your dashboard directly to your shipping provider. Alternatively, you can work without an integrated shipping service. In that case, your customers send the return themselves to an address you define.
+
+## Supported shipping providers
+
+toern offers native integrations for the most common carriers. Choose the provider you have an active contract with:
+
+1. **DHL**
+2. **DPD Web Connect**
+3. **GLS Shop Returns**
+4. **PostNord Return Drop Off**
+5. **Quivo Logistics**: If Quivo is your fulfiller, toern uses the Quivo Shipping API directly. This speeds up the setup considerably.
+
+Under **Settings → Return Shipping Service**, you choose between the available shipping providers and can switch between them at any time.
+
+![Selecting the shipping provider](/images/docs/DHL/ShippingNew01.png)
+
+<Warning>
+  Before toern can generate the first label, an active integration is required. Without your credentials (e.g. the EKP number for DHL or API credentials), toern can't transmit shipping data to the provider.
+</Warning>
+
+### Set up a shipping provider
+
+There is a step-by-step guide for each provider that shows you how to add your credentials:
+
+<CardGroup cols={2}>
+  <Card title="DHL" icon="truck" href="/en/carriers/dhl">
+    User roles and API access
+  </Card>
+  <Card title="DPD" icon="truck" href="/en/carriers/dpd">
+    Web Connect integration
+  </Card>
+  <Card title="GLS" icon="truck" href="/en/carriers/gls">
+    Credentials and permissions
+  </Card>
+  <Card title="PostNord" icon="truck" href="/en/carriers/postnord">
+    Credentials, addresses and QR code
+  </Card>
+  <Card title="Quivo" icon="truck" href="/en/carriers/quivo">
+    Credentials and setup
+  </Card>
+</CardGroup>
+
 <Note>
-  This page is a work in progress.
+  toern can only create return labels automatically in the return process if a shipping provider is active.
+</Note>
+
+## Return countries
+
+With the country mapping, you define from which countries returns are allowed at all. For each country, you also decide whether a label is created and which fees apply.
+
+The table contains the following columns:
+
+1. **Country**: The country from which customers can return via toern.
+2. **Type**: The type of return registration. Either toern creates a label automatically, or your customers ship the return to a specific address themselves.
+3. **Description**: Either the address the return is sent to, or the carrier.
+4. **Label Fee**: The label fee, if you charge one.
+5. **Return Fee**: The general return fee, if you charge one.
+6. **Actions**: Edit or delete a mapping here.
+
+**Label Fee**: A fee you deduct from your customers for automatically creating the label. This lets you pass on your label costs.
+
+**Return Fee**: A fee you deduct from your customers for the return itself, because it causes costs for you. It's independent of the label and label costs.
+
+Depending on whether your customer used a label or not, either only the return fee or both fees are deducted from the refund amount.
+
+![Country mapping](/images/docs/Settings/ReturnNew02.png)
+
+### Add a country
+
+1. Click **Add New Country Mapping**.
+2. Search for the country in the dropdown and select it.
+3. Choose the return type:
+   - **Digital Label**: Select the carrier. It should be activated under **Return Shipping Service**.
+   - **No Label**: Enter the address your customers send the return to themselves.
+4. Optionally enter the label fee or the general return fee. Always enter the fee in euros, no matter which country.
+5. Click **Add Mapping**. The country is now available for return registration.
+
+![Add mapping](/images/docs/Settings/ReturnSettings04.png)
+
+<Warning>
+  After adding a country, always check under **Return Shipping Service** that a matching address exists for the carrier. If the country is missing at the carrier, no label can be created.
+</Warning>
+
+### Limitations
+
+- You need to add every country for return registration individually in the country mapping.
+- For DHL and DPD, you also need to select or create the matching locations for each country in the settings.
+- For Quivo, the corresponding countries must be configured in the Quivo settings.
+
+## Fallback label sender address
+
+The **Fallback Label Sender Address** is used when the shipping provider rejects your customer's address during label creation. toern then automatically retries the label creation with the fallback address you've set.
+
+You can find the setting under **Settings → Return → Fallback Label Sender Address**.
+
+![Fallback Label Sender Address settings](/images/docs/Settings/FallbackSenderAddress01.png)
+
+The fallback address needs the following details:
+
+1. **Company Name**: Company or fulfillment name
+2. **Street**: Street
+3. **House No.**: House number
+4. **Zipcode**: Postal code
+5. **City**: City
+6. **Country**: Country, selected from the country dropdown
+
+Changes are saved automatically. Fill in the address completely so toern can use it for the second label attempt.
+
+Your customer's name stays on the return label. The company name you entered appears below it as a `c/o` line:
+
+```text
+Max Mustermann
+c/o Muster Fulfillment GmbH
+Musterstraße 10
+12345 Musterstadt
+Deutschland
+```
+
+If no complete fallback address is set or the second attempt fails too, no label can be created. In that case:
+
+- Your customer receives an email about the failed label creation.
+- If your brand has a primary support email, you receive this email in BCC at the same time.
+- toern creates a clarification case for the return in **Manage Returns**.
+
+## Label order identifier
+
+toern can add a number to the return label that identifies the order. Which number works best depends on your fulfillment process. You can choose between:
+
+- **Shopify Order ID** (default)
+- **UUID** that toern assigns to every order
+- **Shopify Order Number**: the order number you can customize, e.g. with letters
+
+![Label order identifier](/images/docs/Settings/ReturnNew06.png)
+
+## Return slip attachment
+
+Some fulfillers need a return slip in the package for certain returns. This mainly applies to returns without an automatic label, where your customers only receive the destination address and ship the parcel themselves.
+
+If the return slip is active, toern automatically attaches a PDF to the email your customers receive after registration with the information on the next steps. The PDF contains a QR code with the relevant information for your fulfiller. This way, the fulfiller's processes can be followed.
+
+![Return slip](/images/docs/Settings/ReturnNew05.png)
+
+For the QR code, you can use the **UUID** that toern generates for every order instead of the order number. You can also set the order number to be used if no UUID exists.
+
+<Note>
+  You can only enable return slips for returns where no label is created.
 </Note>

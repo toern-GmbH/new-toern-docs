@@ -1,8 +1,67 @@
 ---
 title: "Return reasons"
-description: "Define the return reasons customers can choose from in the portal."
+description: "Use collections to define which return reasons your customers can choose from in the portal."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+Return reasons tell you why your customers send items back. The reasons are used in your analytics, both per item and across products. This helps you spot issues with fit, quality, or product descriptions faster.
+
+## How return reasons work in the portal
+
+When your customers select an item for a return, they must choose exactly one of the predefined reasons in the first sub-step. Only then can they continue.
+
+<Frame><img src="/images/docs/Retourenportal---Standardprozess/Returnreasons.png" alt="Return reason selection in the return process" width="300" /></Frame>
+
+You can find the chosen reason in the dashboard in the individual return and in the analytics under the return details. To see the whole flow from your customers' perspective, check out [Return portal](/en/returns/return-portal).
+
+## Collections
+
+You manage return reasons in so-called **collections**. A collection contains any number of reasons in a fixed order. You can assign collections to specific products. In the portal, your customers then see the reasons of the matching collection.
+
+### Default collection
+
+The **default collection** is shown for all products that have no other collection assigned. toern provides a default collection for **Fashion**. It stays selected until you create and select your own collection.
+
+<Frame><img src="/images/docs/Settings/ReturnReasonsNew01.png" alt="Default collection in the return reasons settings" /></Frame>
+
+You can't edit or delete toern's default collections. You can only view them.
+
+## Setup
+
+### Create a collection
+
+1. Click **Create Collection**. A new page for your collection opens.
+2. Enter a name for the collection.
+3. Click **Update** to save.
+
+<Frame><img src="/images/docs/Settings/ReturnReasonsNew03.png" alt="Set a name for a new collection" /></Frame>
+
+### Add reasons
+
+1. Click **Add reason**. A new tile with text fields for a German and an English description appears.
+2. Fill in both descriptions.
+3. Optional: Under **Shopify reason**, choose a Shopify reason. Your return reason is mapped to this reason in Shopify.
+4. Change the order with the **arrow buttons** on the tiles.
+5. Remove a reason with the **trash icon**.
+
+### Release the collection
+
+Click **Release Collection** to enable the collection for the return process. This locks the mapping and all other assignments.
+
+<Warning>
+  After the release, you can no longer change the order or add new reasons. If you want to use a modified collection, you need to create a new one.
+</Warning>
+
+### Assign a collection to product types or tags
+
+You can assign a collection to product types or tags from Shopify. This way you show different reasons for different products. Beanies, for example, need different reasons than bikinis.
+
+Enter the **exact** product type or tag from Shopify.
+
+<Frame><img src="/images/docs/Settings/ReturnReasonsNew02.png" alt="Assign collections to tags and product types" /></Frame>
+
+## Limitations
+
+<Warning>
+  - There is exactly one default collection. If you want to show different reasons for other items, create more collections and assign them via product types or tags.
+  - Once a collection has been released via **Release**, you can't add new reasons anymore.
+</Warning>

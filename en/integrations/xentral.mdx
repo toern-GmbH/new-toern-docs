@@ -1,8 +1,245 @@
 ---
 title: "Xentral"
-description: "Connect Xentral to toern."
+description: "Connect your Xentral ERP to toern and create returns, credit notes and exchange orders in Xentral automatically."
 ---
 
+With the **Xentral integration**, you connect your Xentral ERP to toern. This saves you manual work in your ERP and keeps both systems in sync.
+
+## What does the integration do?
+
+- **Sync orders**: toern fetches order data from Xentral.
+- **Create returns**: toern creates returns in Xentral directly during the return process.
+- **Create credit notes**: For refunds, toern creates credit notes in Xentral.
+- **Create exchange orders**: For exchanges, toern automatically creates replacement orders in Xentral.
+- **Transparency**: All Xentral references and documents are visible in your toern dashboard. The usual logs are also created for activities in Xentral.
+
+## Setup
+
+### Create a personal access token in Xentral
+
+To connect, you need a **Personal Access Token (PAT)** and your **Xentral ID**. The interactive guide shows you how to create the token directly in your Xentral account and where to find the URL with your Xentral ID.
+
+<Frame><iframe src="https://app.guideflow.com/embed/dr9m765fnp" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+
+### Add your credentials in toern
+
+1. Open your toern dashboard.
+2. Go to Settings → Third Party Services → Xentral.
+3. Under **Access Credentials**, enter your **Personal Access Token (PAT)** and your **Xentral ID**.
+4. Click **Update Access**.
+
+toern and Xentral are now connected.
+
+<Frame><img src="/images/docs/Settings/XentralNew01.png" alt="Xentral access credentials in toern" /></Frame>
+
+### Configure the features
+
+Once your credentials are saved, you decide how toern communicates with Xentral. You can turn each feature on or off to match your internal workflow. The settings below are grouped by topic.
+
+## Basic settings
+
+### Xentral Synchronization
+
+When this feature is active, toern regularly fetches new orders from Xentral and syncs them with the returns in Shopify. This way, every item can be tracked throughout the entire return cycle and referenced correctly when returns or exchange orders are created.
+
+<Warning>
+  This feature is the basis for all other Xentral features. Without it, no order information is synced with Xentral. Always keep it turned on.
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew02.png" alt="Xentral Synchronization" /></Frame>
+
+### Use Beta Endpoints
+
+toern is connected to Xentral via API. Some features rely on newer Xentral endpoints, including the partly released v3 API. If you enable this option, you can use all settings marked **Beta**.
+
+## Returns
+
+### Create Returns
+
+When this setting is active, toern automatically creates returns in Xentral as soon as a return is submitted through the toern customer portal or processed manually in the dashboard.
+
+If **Return Creation Draft** is not active, toern only creates the return in Xentral at the time of the refund.
+
+<Warning>
+  If active, you need to configure the [Return Reason Mapping](#return-reason-mapping).
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew03.png" alt="Create Returns" /></Frame>
+
+### Return Creation Draft
+
+With this feature, toern creates the return in Xentral as a **draft** as soon as it's registered.
+
+With beta endpoints active, toern overwrites the draft with the final return information after a successful refund. If the items changed during the return process, toern adjusts them and turns the draft into the final return. Without beta endpoints, there's currently a limitation in the Xentral API: you then need to adjust changes manually in the draft.
+
+<Warning>
+  If active, you need to configure the [Return Reason Mapping](#return-reason-mapping).
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew04.png" alt="Return Creation Draft" /></Frame>
+
+### Return Reason Mapping
+
+If you create returns in Xentral from toern, you need to map the return reasons between Shopify and Xentral. Shopify and Xentral use different reference IDs to categorize returns.
+
+How it works:
+
+1. Click **Load Return Reasons from Xentral**. You'll see all Xentral return reasons with their IDs.
+2. Add a mapping and select the Shopify return reason and the Xentral ID. Shopify reasons are shown on the left, Xentral IDs on the right.
+3. Map every Shopify reason to a valid Xentral ID.
+4. Set a **default reason**. It's used when there's no direct mapping.
+
+You can edit or delete mappings at any time. Once saved, toern applies them automatically when creating returns in Xentral. This way, every return in Xentral has a valid return reason for logistics, quality control and accounting.
+
+<Frame><img src="/images/docs/Settings/XentralNew06.png" alt="Xentral return reason mapping" /></Frame>
+
+### Return Closure
+
+When this feature is active, toern automatically closes the return in Xentral as soon as the refund has been completed. This reduces the workload for customer service and accounting.
+
+<Warning>
+  This requires **Create Returns** to be active. You also need to configure the [Return Reason Mapping](#return-reason-mapping).
+</Warning>
+
+<Frame><img src="/images/docs/Settings/XentralNew05.png" alt="Return Closure" /></Frame>
+
+### Beta features for returns
+
 <Note>
-  This page is a work in progress.
+  These settings only work if **Use Beta Endpoints** is active.
 </Note>
+
+| Setting | What it does | Requirement |
+|---|---|---|
+| **Return Auto Send after Refund (Beta)** | Automatically sends the return documents with the final return information to the customer after a successful refund. | – |
+| **Add Tags to Return Order (Beta)** | Adds extra tags to returns in Xentral. This helps you spot exchange or gift card returns faster. | – |
+| **Auto Restock Return Order Items (Beta)** | Books the items of a return back into stock in Xentral once the return is completed. | Configure **Restock Warehouse and Storage Location Map (Beta)** |
+| **Restock Warehouse and Storage Location Map (Beta)** | Defines which warehouse returned items are booked into (see below). | – |
+
+**Restock Warehouse and Storage Location Map (Beta)**: You set three warehouses. Which one is used depends on the item's classification.
+
+- **Default warehouse**: Used when none of the other rules apply.
+- **Sellable warehouse**: For items classified as A, B or C.
+- **Defective warehouse**: For items classified as D.
+
+## Credit notes
+
+### Credit Notes Creation
+
+When this option is active, toern creates a credit note in Xentral for a refund. It's based on the final refund data.
+
+<Frame><img src="/images/docs/Settings/XentralNew07.png" alt="Credit Notes Creation" /></Frame>
+
+### Beta features for credit notes
+
+<Note>
+  These settings only work if **Use Beta Endpoints** is active.
+</Note>
+
+| Setting | What it does | Requirement |
+|---|---|---|
+| **Credit Notes auto release after refund (Beta)** | Automatically releases credit notes once they've been created. | – |
+| **Credit Notes auto send after refund (Beta)** | Automatically sends the credit note documents with the final information to the customer after a successful refund. | – |
+| **Add Service Fees to Credit Note (Beta)** | Applies the configured service fee rules to credit notes. | Configure **Service Fees Credit Note (Beta)** |
+| **Service Fees Credit Note (Beta)** | This is where you set up service fees for credit notes (see below). | **Add Service Fees to Credit Note (Beta)** active |
+
+**Service Fees Credit Note (Beta)**: For each service fee, you set:
+
+- a **Xentral product ID**,
+- a **descriptive reason** that appears in the credit note's line item in Xentral,
+- the **amount** of the service fee,
+- a **classification** that defines when the service fee is added.
+
+You can edit or remove each service fee. This lets you cover scenarios where additional services, such as ironing, are charged as a service fee.
+
+## Return fees and shipping costs
+
+<Note>
+  These settings only work if **Use Beta Endpoints** is active.
+</Note>
+
+These settings let you represent return fees and refunded shipping costs in Xentral returns and credit notes. The items are only added if a fee was actually charged for the return or shipping costs are refunded.
+
+### Return fee
+
+| Setting | What it does | Requirement |
+|---|---|---|
+| **Return Fee Default Item (Beta)** | Set a default item from Xentral that is used to represent return fees in returns or credit notes. | – |
+| **Add Return Fee to Credit Note (Beta)** | Shows the return fee in the Xentral credit note using the default item. | Configure **Return Fee Default Item (Beta)** and **Return Fee VAT Correction in Credit Note (Beta)** |
+| **Return Fee VAT Correction in Credit Note (Beta)** | Adjusts the return fee amount in the credit note by a fixed VAT rate, for example 19% as `0.19`. | – |
+| **Add Return Fee to Return Order (Beta)** | Shows the return fee in the Xentral return using the default item. | Configure **Return Fee Default Item (Beta)** |
+
+### Shipping costs
+
+| Setting | What it does | Requirement |
+|---|---|---|
+| **Return Shipping Default Item (Beta)** | Set a default item from Xentral that is used to represent refunded shipping costs in returns or credit notes. | – |
+| **Add Shipping Fee to Credit Note (Beta)** | Shows the refunded shipping costs in the Xentral credit note using the default item. | Configure **Return Shipping Default Item (Beta)** |
+| **Add Return Shipping Fee to Return Order (Beta)** | Shows the refunded shipping costs in the Xentral return using the default item. | Configure **Return Shipping Default Item (Beta)** |
+
+<Note>
+  Line items in Xentral returns don't contain prices.
+</Note>
+
+## Exchanges
+
+### Exchange Orders
+
+With this option, toern automatically creates replacement orders in Xentral for exchanges. The replacement order takes over item, price and customer data from the original order and is visible directly in Xentral. Replacement orders are created with a value of 0 euros.
+
+For this to work, fill in the **exchange country mapping** (Xentral Exchange Process Settings):
+
+1. Click **Load Shipping Methods from Xentral**. You'll see all Xentral shipping methods with their IDs.
+2. Assign a valid Xentral shipping method ID to every destination country where exchanges should be possible.
+
+This defines which shipping rule Xentral applies when it creates a replacement order. From then on, all exchange orders from toern are created, linked and shown directly in Xentral. This saves manual ERP work and keeps the process consistent for your fulfillment team.
+
+<Frame><img src="/images/docs/Settings/XentralNew08.png" alt="Exchange Orders" /></Frame>
+
+### Exchange Orders - Auto Shipping
+
+When this feature is active, toern automatically selects a shipping method for replacement orders in Xentral and triggers shipping right when the replacement order is created.
+
+<Frame><img src="/images/docs/Settings/XentralNew09.png" alt="Exchange Orders - Auto Shipping" /></Frame>
+
+### Exchange Orders - Fast Lane
+
+When this feature is active, all replacement orders in Xentral are automatically prioritized and processed in the **Fast Lane**.
+
+<Frame><img src="/images/docs/Settings/XentralNew010.png" alt="Exchange Orders - Fast Lane" /></Frame>
+
+### Exchange Orders - Document Type
+
+Choose which documents Xentral creates automatically for replacement orders:
+
+- no documents
+- invoice
+- delivery note
+- invoice and delivery note
+
+<Frame><img src="/images/docs/Settings/XentralNew011.png" alt="Exchange Orders - Document Type" /></Frame>
+
+## Display in the dashboard
+
+### Display Xentral Return Info
+
+toern shows the relevant Xentral links and document numbers in the return detail view. You'll find them in a dropdown in the order information. With this setting, the dropdown is expanded by default, so you see all numbers and links right away.
+
+<Frame><img src="/images/docs/Settings/XentralNew012.png" alt="Display Xentral Return Info" /></Frame>
+
+## Limitations
+
+toern only supports the following functions for Xentral:
+
+- Loading existing orders, once a day
+- Creating returns, either as a draft or in final form at the time of the refund
+- Closing returns after the refund
+- Creating credit notes
+- Creating new orders for exchanges
+- Showing links to resources in Xentral
+
+You also need to set a default return reason. To do this, load the return reasons from Xentral and select an ID.
+
+<Tip>
+  If an issue comes up when a return is created in Xentral, you'll find causes and solutions in the [FAQ](/en/faq).
+</Tip>

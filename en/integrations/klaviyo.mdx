@@ -1,8 +1,171 @@
 ---
 title: "Klaviyo"
-description: "Connect Klaviyo to toern."
+description: "Send events from the return process to Klaviyo and run your customer communication through Klaviyo flows."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With the **Klaviyo integration**, toern automatically sends events to Klaviyo as soon as certain steps happen in the return process. You can use these events in Klaviyo to trigger flows, personalize your customer communication or build segments. For example, you can keep your customers updated on the status of their return.
+
+## Setup
+
+### Create an API key in Klaviyo
+
+You need a **private API key** with the scopes **Read - Accounts** and **Full Access - Events**.
+
+1. Log in to Klaviyo.
+2. Click your user profile at the bottom left of the navigation and select **Settings**.
+3. Go to **API keys** and create a new private API key.
+4. Name the key "toern Integration".
+5. In the scopes table, select **Read - Accounts** and **Full Access - Events**.
+6. Click **Create** in the top right corner.
+7. Reveal the new private key and copy it.
+
+<Frame><img src="/images/docs/Klaviyo/Klavyio01.png" alt="Menu in Klaviyo" /></Frame>
+<Frame><img src="/images/docs/Klaviyo/Klaviyo02.png" alt="API keys in Klaviyo" /></Frame>
+<Frame><img src="/images/docs/Klaviyo/Klaviyo04.png" alt="Scopes in Klaviyo" /></Frame>
+
+<Warning>
+  The private key is only shown once. Copy it right away.
+</Warning>
+
+### Add the key in toern
+
+1. Open your toern dashboard.
+2. Go to [Settings → Third Party Services → Klaviyo](https://www.admin.re-toern.de/settings/third-party/klaviyo).
+3. Paste the private key from Klaviyo and save it.
+
+<Frame><img src="/images/docs/Klaviyo/KlaviyoNew01.png" alt="Klaviyo private key in toern" /></Frame>
+
+That's all you need to set up in toern for the connection to work.
+
+- **Verify SetUp**: Checks the connection to Klaviyo. If the key has the **Read - Accounts** scope, the check tells you whether toern can send requests to Klaviyo.
+- **Create Test Events**: Sends test events from toern to your Klaviyo account. This helps you while building your flows, for example to send test emails. Afterwards, all events toern sends to Klaviyo are visible in Klaviyo.
+
+### Select Klaviyo as email service
+
+To have Klaviyo handle your transactional emails, select Klaviyo as your email service.
+
+1. Go to [Settings → Return](/en/returns/return-settings).
+2. Under **Notifications during Return Process - enable additional customer notifications**, select Klaviyo as the email service.
+
+<Frame><img src="/images/docs/Klaviyo/Klaviyo06.png" alt="Select Klaviyo as email service" /></Frame>
+
+From now on, email events are sent directly to Klaviyo.
+
+<Warning>
+  Once Klaviyo is selected as the service, toern no longer sends transactional emails to customers during the return process.
+</Warning>
+
+### Interactive guides
+
+<Tabs>
+  <Tab title="Create a Klaviyo API key">
+    <Frame><iframe src="https://app.guideflow.com/embed/0p0y0vosvk" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Klaviyo flows and events">
+    <Frame><iframe src="https://app.guideflow.com/embed/er5d9voslk" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+## Events in Klaviyo
+
+### Overview of all events
+
+| Event | Description | When it's triggered |
+|---|---|---|
+| `ReturnRegisteredLabel` | A return was registered and a shipping label was created. | Right after a successful registration in the return portal with label creation. |
+| `ReturnRegisteredWithoutLabel` | A return was registered without a shipping label (e.g. the customer ships the parcel themselves). | After a return is registered without label creation. Only if no label should be generated and the customer ships on their own. |
+| `ReturnRegisteredLabelFailed` | The shipping label could not be created. | If the label service is unavailable or the label could not be generated. Only if `ReturnRegisteredLabel` fails. |
+| `ReturnRegistered` | A return was recorded in the system through the return portal. | General start signal for the return process. The label process is not finished at this point. |
+| `ReturnInTransit` | The return is on its way to the warehouse. | As soon as tracking shows that the parcel is on its way. |
+| `ReturnReceived` | The return has arrived at the warehouse. | After the physical goods receipt in the warehouse. |
+| `ReturnInspected` | The goods have been inspected. | After the quality check in the warehouse is done. |
+| `ReturnRefunded` | The purchase amount was refunded. | As soon as the refund has been made in the system. |
+| `ReturnCompleted` | The entire return process is complete. | After final confirmation that the process is fully complete. |
+| `ReturnCanceled` | The return was canceled or aborted. | When the customer or the system cancels the process. |
+| `ReturnForgotOrderNumber` | The customer asks for their past order numbers. | When requested in the return portal. |
+| `WiderrufReceivedAcknowledgement` | Confirmation that a withdrawal was received. | When a withdrawal has been received. |
+| `WiderrufOrderCanceled` | Confirmation that the order was canceled. | When fulfillment hasn't happened yet and toern was able to cancel the order directly. |
+
+<Warning>
+  If you send the refund email (`ReturnRefunded`) through Klaviyo, also check your Shopify notifications. Otherwise your customers may receive the email twice.
+</Warning>
+
+### Event data fields
+
+All events contain structured data you can use for email content or segments.
+
+<Warning>
+  Always put `event.` in front of the data field. For the brand name, use `{{event.brandName}}` instead of `{{brandName}}`.
+</Warning>
+
+In the table, **status events** means: `ReturnRegistered`, `ReturnInTransit`, `ReturnReceived`, `ReturnInspected`, `ReturnRefunded`, `ReturnCompleted`, `ReturnCanceled`.
+
+| Data field | Description | Events | Example |
+|---|---|---|---|
+| `brandName` | Brand name | All | BrandName |
+| `receiverToEmail` | Customer's email address | All | |
+| `customer_name` | Customer's name | All | Max Mustermann |
+| `customer_first_name` | Customer's first name | All | Max |
+| `customer_last_name` | Customer's last name | All | Mustermann |
+| `customer_email` | Customer's email address | All | max@example.com |
+| `customer_preferred_language` | Customer's preferred language | All | `de` or `en` |
+| `order_order_id` | Shopify ID of the order | Status events | |
+| `order_created_at` | Date of the original order | Status events | 2025-10-09T10:00:00Z |
+| `order_order_number` | Order number (digits only) | Status events | 100045 |
+| `order_order_number_raw` | Order number with prefix and suffix | Status events | #t-100045 |
+| `order_order_country_code_origin` | Country of origin of the order (alpha-2) | Status events | DE |
+| `return_return_id` | Internal return ID | Status events | ret_456 |
+| `return_created_at` | Date of the return (ISO date) | Status events | |
+| `return_status` | Current status of the return | Status events | InTransit |
+| `return_is_manual_return` | Boolean: return created manually or by the customer | Status events | |
+| `return_is_widerruf` | `true` if this is a withdrawal | Status events | |
+| `return_items` | Array with `variant_id`, `title`, `sku`, `barcode`, `return_reason_shopify`, `return_reason_name_de`, `return_reason_name_en`, `return_type` for the registered items | Status events, `ReturnRegisteredLabel`, `ReturnRegisteredWithoutLabel` | see below |
+| `return_shipping` (optional) | `null` = no value | `ReturnRegisteredLabel`, `ReturnRegisteredWithoutLabel`, `ReturnRegisteredLabelFailed`, `ReturnInTransit` | |
+| `label` (optional) | `null` = no value | `ReturnRegisteredWithoutLabel`, `ReturnRegisteredLabelFailed` | |
+| `return_address` (optional) | `null` = no value | `ReturnRegisteredLabel`, `ReturnRegisteredLabelFailed` | |
+| `return_slip` (optional) | `null` = no value | `ReturnRegisteredLabel`, `ReturnRegisteredLabelFailed` | |
+| `label_link` (optional) | Link to the shipping label (only with label creation) | `ReturnRegisteredLabel`, `ReturnInTransit` | https://labelservice.com/xyz.pdf |
+| `label_tracking_number` (optional) | Tracking number | `ReturnRegisteredLabel`, `ReturnInTransit` | |
+| `label_tracking_url` (optional) | URL to track the return shipment | `ReturnRegisteredLabel`, `ReturnInTransit` | |
+| `return_address_name` (optional) | Return address: name | `ReturnRegisteredWithoutLabel` | |
+| `return_address_name2` (optional) | Return address: name addition | `ReturnRegisteredWithoutLabel` | |
+| `return_address_address` (optional) | Return address: street | `ReturnRegisteredWithoutLabel` | |
+| `return_address_zipcode` (optional) | Return address: ZIP code | `ReturnRegisteredWithoutLabel` | |
+| `return_address_city` (optional) | Return address: city | `ReturnRegisteredWithoutLabel` | |
+| `return_address_country` (optional) | Return address: country | `ReturnRegisteredWithoutLabel` | |
+| `return_slip_link` (optional) | Link to the return slip (only for returns without label, if active) | `ReturnRegisteredWithoutLabel` | https://returns.com/slip/abc.pdf |
+| `order_numbers` | List of order numbers as strings, sorted by date. Process the array as a list in Klaviyo. | `ReturnForgotOrderNumber` | |
+
+Example for `return_items`:
+
+```json
+[
+  {
+    "sku": "",
+    "return_reason_shopify": "SIZE_TOO_SMALL",
+    "title": "Cardigan LEO",
+    "return_type": "refund",
+    "barcode": "",
+    "return_reason_name_en": "Article too tight",
+    "variant_id": "toern_demo-58267381366865",
+    "return_reason_name_de": "Artikel zu eng"
+  },
+  {
+    "sku": "",
+    "return_reason_shopify": "NOT_AS_DESCRIBED",
+    "title": "Stirnband GLORY",
+    "return_type": "refund",
+    "barcode": "",
+    "return_reason_name_en": "Article not liked",
+    "variant_id": "toern_demo-58267379368017",
+    "return_reason_name_de": "Artikel gefällt nicht"
+  }
+]
+```
+
+## Limitations
+
+- Klaviyo and the [toern email editor](/en/branding/email-templates) are alternatives. With Klaviyo, you manage content and sending in Klaviyo. With the toern service, you customize the templates in the email editor.
+- The events are defined by toern.
+- The included data fields are described on this page.
+- There are currently no templates for the flows of the individual events.

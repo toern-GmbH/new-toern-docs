@@ -1,16 +1,208 @@
 ---
 title: "Einführung"
-description: "Willkommen in der toern Dokumentation"
+description: "Willkommen bei toern: Überblick über Retourenportal, Dashboard und Integrationen sowie dein Weg durch das Onboarding bis zum Go-Live."
 ---
+
+Schön, dass du an Bord bist. toern automatisiert deinen Retourenprozess: Deine Kunden melden Retouren im **Retourenportal** an, und du verwaltest sie im **toern Dashboard**. Über **Integrationen** verbindest du toern mit deinem Shop, deinem Fulfillment, deinen Versanddienstleistern und weiteren Tools.
 
 Hier findest du alles, was du für die Einrichtung und Nutzung von toern brauchst.
 
-<Card title="Shopify-Shop verbinden" icon="rocket" href="/getting-started/shopify-integration">
-  Starte mit toern, indem du deinen Shopify-Shop verbindest.
-</Card>
-<Card title="FFN Connect (JTL Partner)" icon="plug" href="/fulfillment/ffn-connect-jtl-partner">
-  Verbinde dein Fulfillment über FFN Connect mit toern.
-</Card>
-<Card title="API Reference" icon="code" href="/api-reference/introduction">
-  Greife über die REST API auf deine Retouren zu.
-</Card>
+## Was bietet toern?
+
+### Retourenportal
+
+Im Retourenportal melden deine Kunden ihre Retouren selbst an.
+
+<CardGroup cols={2}>
+  <Card title="Retourenportal" icon="box-open" href="/returns/return-portal">
+    Anmeldung, Artikelauswahl, Nutzereingaben, Retourenbestätigung, Dynamic Linking und Retourentracking.
+  </Card>
+  <Card title="Retourengründe" icon="list-check" href="/returns/return-reasons">
+    Welche Retourengründe deine Kunden auswählen können.
+  </Card>
+  <Card title="Umtausch" icon="arrows-rotate" href="/returns/exchange">
+    Artikel direkt im Retourenprozess umtauschen.
+  </Card>
+  <Card title="Gutschein" icon="gift" href="/returns/gift-card-refund">
+    Ein Shop-Gutschein statt einer normalen Rückerstattung.
+  </Card>
+  <Card title="Widerruf-Portal" icon="file-signature" href="/withdrawal/withdrawal-portal">
+    Separater Prozess für Widerruf, direkte Stornierung und Widerruf-Retouren.
+  </Card>
+</CardGroup>
+
+### toern Dashboard
+
+Im Dashboard behältst du alle Retouren im Blick und bearbeitest sie.
+
+<CardGroup cols={2}>
+  <Card title="Analytics" icon="chart-line" href="/dashboard/analytics">
+    Alle relevanten Retourendaten auf einen Blick.
+  </Card>
+  <Card title="Manage Returns" icon="list" href="/dashboard/manage-returns">
+    Alle Retouren verwalten, manuelle Retouren anlegen, Tagging und Benachrichtigungen.
+  </Card>
+  <Card title="Customer Tickets" icon="ticket" href="/dashboard/customer-tickets">
+    Nutzereingaben und AI-Tickets verwalten.
+  </Card>
+  <Card title="Nutzermanagement" icon="users" href="/dashboard/user-management">
+    Weitere Nutzer für deine Brand anlegen.
+  </Card>
+</CardGroup>
+
+### Integrationen
+
+<CardGroup cols={2}>
+  <Card title="REST API & Webhooks" icon="code" href="/api-reference/introduction">
+    Greife über die REST API auf deine Retouren zu.
+  </Card>
+  <Card title="Klaviyo" icon="envelope" href="/integrations/klaviyo">
+    Anbindung und E-Mail-Flows mit Klaviyo.
+  </Card>
+  <Card title="Zendesk" icon="headset" href="/integrations/zendesk">
+    Anbindung und Ticketmanagement mit Zendesk.
+  </Card>
+  <Card title="Xentral" icon="warehouse" href="/integrations/xentral">
+    Anbindung an Xentral.
+  </Card>
+  <Card title="Sendcloud" icon="truck" href="/integrations/sendcloud">
+    Anbindung an Sendcloud.
+  </Card>
+  <Card title="FFN Connect (JTL Partner)" icon="plug" href="/fulfillment/ffn-connect-jtl-partner">
+    Verbinde dein Fulfillment über FFN Connect mit toern.
+  </Card>
+</CardGroup>
+
+## Dein Onboarding
+
+Folge diesen Schritten, damit dein Start so reibungslos wie möglich gelingt.
+
+<Steps>
+  <Step title="Shopify-Shop verbinden">
+    Installiere die [toern Shopify App](/shopify/app) und richte die [Shop Integration](/getting-started/shopify-integration) ein.
+  </Step>
+  <Step title="Fulfillment einrichten">
+    Verbinde dein Fulfillment mit toern. Mehr unter [Fulfillment-Integration](/fulfillment/fulfillment-integration).
+  </Step>
+  <Step title="Versand einrichten">
+    Richte deinen Versanddienstleister ein, z. B. [DHL](/carriers/dhl), [DPD](/carriers/dpd), [GLS](/carriers/gls) oder [PostNord](/carriers/postnord). Mehr unter [Rücksendemethoden](/returns/return-methods).
+  </Step>
+  <Step title="Retourenlogik einrichten">
+    Lege die wichtigsten Einstellungen fest. Mehr unter [Retourenlogik einrichten](/getting-started/return-portal-logic) und [Portal gestalten](/getting-started/brand-your-portal).
+  </Step>
+  <Step title="Nutzer anlegen">
+    Lege weitere Nutzer für deine Brand an. Mehr unter [Nutzermanagement](/dashboard/user-management).
+  </Step>
+  <Step title="Integrationen einrichten">
+    Richte weitere Integrationen ein, z. B. Klaviyo oder Zendesk.
+  </Step>
+  <Step title="Retourenprozess testen">
+    Teste den gesamten Retourenprozess, bevor du live gehst.
+  </Step>
+  <Step title="Live gehen">
+    Hinterlege den Link zum Retourenportal in deinem Shop.
+  </Step>
+</Steps>
+
+## Retourenprozess testen
+
+Teste den Retourenprozess ganzheitlich, bevor du den Link in deinem Shop hinterlegst und deine Kunden ihn nutzen können. Hier beschreiben wir einen grundlegenden Test. Am besten testest du mehrere Bestellungen und alle bekannten Sonderfälle.
+
+### 1. Testbestellung anlegen
+
+Lege zuerst eine Testbestellung in Shopify an. Wähle am besten 2–3 Artikel aus. So hast du bei der Retoure eine Auswahl und kannst pro Artikel unterschiedliche Dinge testen, z. B. Gutschein oder Umtausch.
+
+<Info>
+  Die Bestellung muss **fulfilled** sein, damit eine Retoure angemeldet werden kann. Außerdem müssen Kundendaten hinterlegt sein. Um die Rückerstattung zu testen, nutze eine echte Zahlungsmethode oder die Testmethode **Bogus**.
+</Info>
+
+### 2. Retoure anmelden
+
+Melde jetzt eine Retoure an. Das geht auf zwei Wegen:
+
+- Über dein Retourenportal mit Bestellnummer und E-Mail-Adresse. Mehr unter [Retourenportal](/returns/return-portal).
+- Manuell über **Create new Return** auf der Seite **Manage Returns**. Mehr unter [Manage Returns](/dashboard/manage-returns).
+
+### 3. Retoure im Dashboard durchlaufen
+
+Angemeldete Retouren erscheinen unter **Manage Returns** mit dem Status **registered**. Wähle die Retoure aus und durchlaufe die gesamte Retouren-Timeline. Den Status **Received** musst du dabei simulieren, da ja nichts verschickt wird.
+
+Probiere alle Funktionen aus, z. B. Artikel klassifizieren, ein neues Label erstellen, manuelle Rückerstattungen durchführen oder einen Gutschein auslösen.
+
+### Retourenrichtlinien prüfen
+
+Bevor du den Link im Shop hinterlegst, prüfe deine Retourenrichtlinien. Sie sollten alle Informationen zu Rückgabefristen und Rücksendegebühren für die jeweiligen Länder enthalten. Wenn du noch keine Richtlinien hast, nutze unsere Integrationsbausteine als Vorlage. Du findest sie unter [Retourenportal](/returns/return-portal).
+
+### Guideflows zu den Funktionen
+
+Keine Lust, alle Beschreibungen zu lesen? Diese Guideflows zeigen dir kurz, was du auf den jeweiligen Seiten in toern machen kannst. Wir empfehlen, sie in dieser Reihenfolge anzusehen:
+
+<Tabs>
+  <Tab title="Overview">
+    <Frame><iframe src="https://app.guideflow.com/embed/dr9l8n5snr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Manage Returns">
+    <Frame><iframe src="https://app.guideflow.com/embed/vkm5vmot2r" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Manual Refunds">
+    <Frame><iframe src="https://app.guideflow.com/embed/gkyvmg5t4k" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Create Returns">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkjyg7vswk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Items Overview">
+    <Frame><iframe src="https://app.guideflow.com/embed/8koo8ogfwk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Ticket System">
+    <Frame><iframe src="https://app.guideflow.com/embed/dkd8nmqbgr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Customer KPIs">
+    <Frame><iframe src="https://app.guideflow.com/embed/yr4yo0qa4r" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Retourenprozess testen">
+    <Frame><iframe src="https://app.guideflow.com/embed/0p0dylquvk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+### Guideflows zu den Einstellungen
+
+Du möchtest direkt alle weiteren Einstellungen vornehmen? Diese Guideflows decken alle Settings ab:
+
+<Tabs>
+  <Tab title="Shop Integration">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkj3l84cwp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Branding">
+    <Frame><iframe src="https://app.guideflow.com/embed/lpxg48eh1k" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Return">
+    <Frame><iframe src="https://app.guideflow.com/embed/er576g5clk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Refund">
+    <Frame><iframe src="https://app.guideflow.com/embed/9r28mo8uzr" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Exchange">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkl3mqwajk" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+  <Tab title="Return Collections">
+    <Frame><iframe src="https://app.guideflow.com/embed/zkj3z9lswp" width="100%" height="600" style={{ border: 0 }} allowFullScreen /></Frame>
+  </Tab>
+</Tabs>
+
+## Live gehen
+
+Alles getestet? Dann hinterlegst du jetzt den Link zu deinem Retourenportal in deinem Shop. Ab diesem Moment bist du **live** und deine Kunden können Retouren über toern anmelden.
+
+```text
+https://app.re-toern.de/<name>
+```
+
+Den Link erstellst und kopierst du unter **Settings → Shop Integration → Return Portal Link**. Mehr dazu unter [Shopify-Shop verbinden](/getting-started/shopify-integration#return-portal-link).
+
+<Warning>
+  Sobald der Link in deinem Shop hinterlegt ist, informiere bitte [support@re-toern.de](mailto:support@re-toern.de).
+</Warning>
+
+<Tip>
+  Du hast noch Fragen? Melde dich jederzeit bei unserem Customer Support unter [support@re-toern.de](mailto:support@re-toern.de). Antworten auf häufige Fragen findest du außerdem in den [FAQ](/faq) und im [Glossar](/glossary).
+</Tip>

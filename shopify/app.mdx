@@ -1,8 +1,133 @@
 ---
 title: "Shopify App"
-description: "Installiere die toern App über den Shopify App Store."
+description: "Installiere die toern App über den Shopify App Store und verbinde deinen Shop mit toern."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit der **toern Shopify App** verbindest du deinen Shopify-Shop in wenigen Minuten mit toern. Nach der Installation kannst du dich direkt im toern Dashboard anmelden und mit dem Onboarding starten.
+
+## App installieren
+
+### 1. App öffnen
+
+Öffne die toern App im Shopify App Store: [toern Shopify App](https://apps.shopify.com/toern-returns-integration).
+
+<Frame><img src="/images/docs/Onboarding/ShopifyInstall01.png" alt="toern Shopify App im App Store" /></Frame>
+
+Die Seite ist öffentlich. Über **Open** öffnest du die App für deinen eigenen Shopify-Shop. Installiere dort die App **toern-returns-integration** und folge den Anweisungen in Shopify.
+
+<Frame><img src="/images/docs/Onboarding/ShopifyInstall03.png" alt="Installation der toern App in Shopify" /></Frame>
+
+### 2. Admin-Nutzer anlegen
+
+Lege die Zugangsdaten für den Admin-Nutzer des toern Dashboards an. Du brauchst dafür einen **Namen** und eine **E-Mail-Adresse**. Weitere Nutzer kannst du später selbst hinzufügen.
+
+<Frame><img src="/images/docs/Onboarding/ShopifyInstall02.png" alt="Zugangsdaten für toern anlegen" /></Frame>
+
+### 3. Tarif auswählen und bestätigen
+
+1. Klicke auf **Register**, um den Nutzer anzulegen.
+2. Wähle in Shopify den gewünschten Tarif aus.
+3. Schließe den Vorgang mit **Approve** ab.
+
+<Frame><img src="/images/docs/Onboarding/ShopifyInstall04.png" alt="Tarif in Shopify auswählen" /></Frame>
+
+<Frame><img src="/images/docs/Onboarding/ShopifyInstall05.png" alt="Installation bestätigen" /></Frame>
+
+Die App wird jetzt installiert. Sobald die Installation abgeschlossen ist, kannst du dich im toern Dashboard anmelden. Das Passwort für den Admin-Nutzer findest du in der E-Mail, die toern dir sendet.
+
+## Nach der Installation
+
+Du kannst dich jetzt im toern Dashboard anmelden und mit dem Onboarding beginnen. Richte zuerst die benötigten Integrationen ein, z. B. deinen Versanddienstleister oder Klaviyo. Danach passt du die Einstellungen nach deinem Bedarf an. Eine Übersicht findest du in der [Einführung](/).
+
+<Warning>
+  Kontaktiere nach der erfolgreichen Installation [support@re-toern.de](mailto:support@re-toern.de). Wir besprechen mit dir die nächsten Schritte im Onboarding und prüfen deine Einstellungen vor dem Go-Live.
+</Warning>
+
+## Berechtigungen in Shopify
+
+Mit der Installation erhält toern die folgenden Berechtigungen in Shopify. Sie müssen für einen funktionierenden Retourenprozess bestehen bleiben.
+
+| Kategorie | Berechtigung |
+| --- | --- |
+| Bestellungen | `write_orders` |
+| | `read_orders` |
+| Fulfillmentdienste | `write_fulfillments` |
+| | `read_fulfillments` |
+| Inventar | `write_inventory` |
+| | `read_inventory` |
+| Kunden | `write_customers` |
+| | `read_customers` |
+| Produkte | `write_products` |
+| | `read_products` |
+| Rückgaben | `write_returns` |
+| | `read_returns` |
+| Standorte | `write_locations` |
+| | `read_locations` |
+| Versand | `write_shipping` |
+| | `read_shipping` |
+| Zugewiesene Fulfillment-Bestellungen | `write_assigned_fulfillment_orders` |
+| | `read_assigned_fulfillment_orders` |
+| Umtausch | `write_merchant_managed_fulfillment_orders` |
+| | `read_merchant_managed_fulfillment_orders` |
+| | `write_third_party_fulfillment_orders` |
+| | `read_third_party_fulfillment_orders` |
+| Geschenkkarte | `write_gift_cards` |
+| | `read_gift_cards` |
+| | `write_gift_card_transactions` |
+| | `read_gift_card_transactions` |
+| Discounts | `read_discounts` |
+
+Insgesamt sind das **27 Berechtigungen**.
+
+<Tip>
+  Fragen zu Shopify-Berechtigungen und zum Retourenstatus in Shopify beantworten wir in den [FAQ](/faq).
+</Tip>
+
+## Rückerstattungen in Shopify
+
+toern protokolliert Rückerstattungen und Statusänderungen direkt in deiner Shopify-Bestellung. So kannst du jederzeit nachvollziehen, was passiert ist.
+
+### Rückerstattungs-Log
+
+In Shopify siehst du das vollständige Log einer Rückerstattung:
+
+<Frame><img src="/images/docs/notion/shopify-refund-log.png" alt="Vollständiges Log einer Rückerstattung in Shopify" /></Frame>
+
+Auf der Shopify-Seite der Bestellung findest du außerdem die Preisaufstellung der Rückerstattung:
+
+<Frame><img src="/images/docs/notion/shopify-refund-price-list.png" alt="Preisaufstellung der Rückerstattung in Shopify" /></Frame>
+
+So sieht das Log einer manuellen Rückerstattung aus:
+
+<Frame><img src="/images/docs/notion/shopify-manual-refund-log.png" alt="Log einer manuellen Rückerstattung" /></Frame>
+
+Die letzte Aktivität wird über den Retourenstatus protokolliert:
+
+<Frame><img src="/images/docs/notion/shopify-return-status-log.png" alt="Retourenstatus im Shopify-Log" /></Frame>
+
+### Automatische Rückerstattung
+
+So sieht das Log einer automatischen Rückerstattung ohne Rücksendegebühr aus:
+
+<Frame><img src="/images/docs/notion/shopify-autorefund-log-1.png" alt="Log einer automatischen Rückerstattung" /></Frame>
+
+<Frame><img src="/images/docs/notion/shopify-autorefund-log-2.png" alt="Details einer automatischen Rückerstattung" /></Frame>
+
+Wird eine Rücksendegebühr abgezogen, erscheint sie in Shopify als **Rücksendungsversand**.
+
+Alle Informationen findest du auch in der Timeline der Bestellung in Shopify:
+
+<Frame><img src="/images/docs/notion/shopify-timeline-log.png" alt="Timeline der Bestellung in Shopify" /></Frame>
+
+### Kundenbenachrichtigungen
+
+Ist in Shopify **Notify Customer** aktiviert, erhalten deine Kunden eine E-Mail zur Rückerstattung:
+
+<Frame><img src="/images/docs/notion/shopify-notify-customer.png" alt="Rückerstattungs-E-Mail von Shopify" /></Frame>
+
+Die Vorlage dieser E-Mail passt du in Shopify an:
+
+1. Öffne in Shopify **Einstellungen**.
+2. Navigiere zu **Benachrichtigungen → Kundenbenachrichtigungen → Rückerstattung**.
+
+<Frame><img src="/images/docs/notion/shopify-refund-notification-template.png" alt="Vorlage der Rückerstattungs-Benachrichtigung in Shopify" /></Frame>

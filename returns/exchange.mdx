@@ -1,8 +1,247 @@
 ---
 title: "Umtausch"
-description: "Ermögliche Kunden, Artikel umzutauschen statt sie zurückzugeben."
+description: "Lass deine Kunden Artikel direkt im Retourenportal gegen eine andere Variante umtauschen, statt sie nur zurückzugeben."
 ---
 
+Mit der Umtauschfunktion (Exchange) können deine Kunden einen nicht passenden Artikel direkt bei der Retourenanmeldung gegen eine andere Variante desselben Produkts tauschen, z. B. eine andere Größe oder Farbe. Die neue Variante wird ihnen als Ersatz zugeschickt. So behältst du den Umsatz, statt ihn zu erstatten.
+
+Auf dieser Seite erfährst du, wie der Umtausch im Retourenportal aussieht, wie er in Shopify verarbeitet wird und wie du ihn einrichtest.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Der Umtausch ist nur für Shopify-Shops verfügbar. Wenn du ein anderes Shopsystem nutzt, wird in den Einstellungen ein Hinweis angezeigt, dass Exchanges nur für Shopify-Shops unterstützt werden.
 </Note>
+
+## Umtausch im Retourenportal
+
+Ist der Umtausch aktiviert, können deine Kunden im Retourenprozess verfügbare Varianten des Artikels auswählen oder diesen Schritt überspringen. Entscheiden sie sich für einen Umtausch, wählen sie aus den verfügbaren Optionen wie Farbe und Größe den Ersatzartikel aus.
+
+Für die angezeigten Optionen gelten folgende Regeln:
+
+- Der Bestand wird in Echtzeit geprüft. Deine Kunden sehen nur Varianten, die tatsächlich verfügbar sind. Ausverkaufte Artikel werden gar nicht angezeigt.
+- Es werden nur Varianten mit demselben Preis wie der ursprüngliche Artikel angezeigt. So entsteht kein Preisunterschied zwischen umgetauschtem Artikel und Ersatzartikel.
+
+![Auswahl der Varianten](/images/docs/Exchange/variant_options_selection.png)
+
+Sind alle Optionen ausgewählt, wird die gewählte Variante mit Bild angezeigt und dein Kunde kann fortfahren.
+
+![Abgeschlossene Variantenauswahl](/images/docs/Exchange/variant_options_selection_completed.png)
+
+Zusätzlich informiert toern deine Kunden über den weiteren Ablauf und verweist auf deine Rückgaberichtlinien.
+
+![Hinweis zu den Rückgaberichtlinien](/images/docs/Exchange/return_policy_disclaimer_en.png)
+
+### Warn-Pop-up bei gleichem Artikel
+
+Optional kannst du ein Pop-up einblenden, das deine Kunden warnt, wenn sie denselben Artikel in derselben Variante als Ersatz auswählen. Es erscheint direkt nach der Auswahl und nur, wenn der Ersatzartikel mit dem ursprünglichen Artikel übereinstimmt. So vermeidest du versehentliche Umtausche, wenn sich Kunden zu schnell durchklicken.
+
+Das Pop-up ist standardmäßig deaktiviert. Du aktivierst es in den Einstellungen unter [Exchange Warning](#exchange-warning).
+
+![Exchange-Bestätigungs-Pop-up](/images/docs/Exchange/exchange_popup_de.png)
+
+### Erstattungsbetrag
+
+Auf der Seite zur Auswahl der Erstattungsmethode werden umgetauschte Artikel vom geschätzten Erstattungsbetrag abgezogen, da sie durch die neue Variante ersetzt werden.
+
+<Note>
+  Tauschen deine Kunden alle Artikel einer Bestellung um, wird keine Retourengebühr erhoben. Der Erstattungsbetrag liegt dann bei 0 EUR, und eine Gebühr würde zu einem offenen Zahlbetrag führen. In diesem Fall sehen deine Kunden einen Hinweis, dass sie keine Erstattung erhalten, weil alle Artikel umgetauscht werden.
+</Note>
+
+![Alle Artikel umgetauscht, keine Erstattung](/images/docs/Exchange/refund_dislacimer_all_exchanged_en.png)
+
+Am Ende des Retourenprozesses erhalten deine Kunden eine Bestätigung, dass der Ersatzartikel versendet wird, sobald deine Retourenvoraussetzungen erfüllt sind.
+
+![Bestätigung des Umtauschs nach Abschluss des Retourenprozesses](/images/docs/Exchange/exchange_process_completion_en.png)
+
+<Warning>
+  Umgetauschte Artikel können nicht erneut über das Retourenportal zurückgegeben werden. Möchten deine Kunden den Ersatzartikel doch retournieren, müssen sie sich an deinen Kundensupport wenden.
+</Warning>
+
+## Umtausch in Shopify verarbeiten
+
+Es gibt zwei Möglichkeiten, Umtausche zu verarbeiten. Welche genutzt wird, legst du in den [Einstellungen](#einrichtung) fest.
+
+Unabhängig von der Methode siehst du die umgetauschten Artikel und die jeweiligen Ersatzartikel immer auf der Retourendetailseite.
+
+![Umtauschartikel in den Retourendetails](/images/docs/Exchange/return_item_details.png)
+
+### Option 1: Shopify-Standardprozess (Standard)
+
+Diese Option nutzt den nativen Exchange-Prozess von Shopify und ist standardmäßig aktiv. Die Ersatzartikel werden als Umtauschartikel innerhalb der Retoure angelegt:
+
+1. Direkt nach der Registrierung der Retoure wird für die Ersatzartikel eine neue Fulfillment Order in der ursprünglichen Bestellung erstellt. Sie hat zunächst den Status **ON_HOLD**.
+2. Sobald der Umtausch ausgelöst wird, wird der Hold entfernt. Die Fulfillment Order ist dann unerfüllt und versandbereit.
+
+Shopify reduziert den Erstattungsbetrag dabei automatisch anhand von Menge und Preis der Ersatzartikel.
+
+![Fulfillment Order auf Hold](/images/docs/Exchange/exchange_on_hold.png)
+
+![Fulfillment Order unerfüllt und versandbereit](/images/docs/Exchange/fulfillment_unfulfilled.png)
+
+Bei dieser Option wird der Bestand der Ersatzartikel sofort nach der Registrierung der Retoure reserviert:
+
+| Artikeltyp | Nach Bestellung | Nach Retourenprozess | Nach Umtauschprozess | Nach Erstattungsprozess |
+| --- | --- | --- | --- | --- |
+| Umgetauschter Artikel | 97 | 97 (keine Änderung) | 97 (keine Änderung) | 98 (+1 bei aktivem Restock) |
+| Ersatzartikel | 65 | 64 (-1) | 64 (keine Änderung) | Kann nicht erstattet werden |
+
+### Option 2: Neue Bestellung erstellen
+
+Bei dieser Option wird für die Ersatzartikel eine neue, unerfüllte Bestellung über 0,00 EUR im Status **PAID** erstellt. Die neue Bestellung wird per Tag als Umtausch gekennzeichnet. In den zusätzlichen Details in Shopify findest du einen Link zur ursprünglichen Bestellung.
+
+![Übersicht der neuen Umtauschbestellung](/images/docs/Exchange/new_exchange_order_overview.png)
+
+Werden nicht alle Artikel umgetauscht, reduziert sich der Erstattungsbetrag um die umgetauschten Artikel. Den angepassten Betrag siehst du auf der Bestellseite in Shopify.
+
+![Angepasster Erstattungsbetrag](/images/docs/Exchange/refund_amount_adjusted.png)
+
+Den Status der Umtauschbestellung siehst du auf der Retourendetailseite.
+
+![Umtauschbestellung ausstehend](/images/docs/Exchange/exchange_order_awaiting.png)
+
+![Umtauschbestellung erstellt](/images/docs/Exchange/exchange_order_created.png)
+
+Die neue Bestellung wird erst erstellt, wenn der Umtausch entsprechend deinem eingestellten Trigger ausgelöst wird. Der Bestand wird also erst reserviert, wenn der Umtauschprozess erfolgreich abgeschlossen ist:
+
+| Artikeltyp | Nach Bestellung | Nach Retourenprozess | Nach Umtauschprozess | Nach Erstattungsprozess |
+| --- | --- | --- | --- | --- |
+| Umgetauschter Artikel | 97 | 97 (keine Änderung) | 97 (keine Änderung) | 98 (+1 bei aktivem Restock) |
+| Ersatzartikel | 65 | 65 (keine Änderung) | 64 (-1) | Kann nicht erstattet werden |
+
+Ist der Ersatzartikel zwischen Registrierung der Retoure und Start des Umtauschprozesses ausverkauft, schlägt die Erstellung der Umtauschbestellung fehl. toern erstellt dann einen Klärfall und zeigt eine Meldung an, die die Situation erklärt. Du musst dich in diesem Fall mit deinem Kunden in Verbindung setzen.
+
+![Fehlermeldung: Bestand nicht verfügbar](/images/docs/Exchange/inventory_claim_unavailable.png)
+
+### Umtausch bei rabattierten Artikeln
+
+Wurde auf den umgetauschten Artikel ein Rabatt angewendet, wird der Preis des Ersatzartikels automatisch um denselben Betrag reduziert. Hat der umgetauschte Artikel z. B. 5,21 EUR Rabatt, wird auch der ursprüngliche Preis des Ersatzartikels von 22 EUR um 5,21 EUR reduziert. So zahlen deine Kunden für den Ersatz nicht mehr, und es entstehen keine offenen Zahlbeträge.
+
+![Rabattierter umgetauschter Artikel](/images/docs/Exchange/item_discounted.png)
+
+![Rabatt auf den Ersatzartikel angewendet](/images/docs/Exchange/exchange_replacement_discounted.png)
+
+<Warning>
+  Bei ungleich verteilten Rabatten in einer Bestellung (z. B. „Buy X get Y“ oder „3. Artikel erhält 5 EUR Rabatt“) werden Umtausche für diese Bestellung blockiert. So werden keine falschen Erstattungsbeträge ausgezahlt.
+</Warning>
+
+## Einrichtung
+
+Du findest die Einstellungen unter **Settings → Exchange**. Die Seite ist in drei Bereiche gegliedert, die du über die Links oben erreichst:
+
+- **Exchange Settings**
+- **Blacklist Articles**
+- **Blacklist Countries**
+
+### Shopify-Berechtigungen
+
+Der Umtausch benötigt bestimmte Shopify-API-Berechtigungen. Fehlen deiner Shopify-Integration Berechtigungen, siehst du oben im Bereich **Exchange Settings** eine orangefarbene Warnbox.
+
+![Warnung bei fehlenden Shopify-Berechtigungen](/images/docs/Exchange/settings_shopify_permission_alert.png)
+
+Die Warnung zeigt dir:
+
+- welche Berechtigungen fehlen
+- einen Link zur Einrichtungsanleitung, mit der du den richtigen API-Key erstellst
+
+Aktualisiere in diesem Fall deinen Shopify-API-Key mit den benötigten Berechtigungen. Klicke dafür auf **Setup Guide / Einrichtungsanleitung**.
+
+<Note>
+  Bei einem vorübergehenden Verbindungsproblem zu Shopify kann eine andere Fehlermeldung erscheinen, die dich bittet, es in ein paar Minuten erneut zu versuchen. Das ist ein Verbindungsproblem, kein Berechtigungsproblem.
+</Note>
+
+### Enable Exchange
+
+Mit diesem Toggle aktivierst oder deaktivierst du den Umtausch für dein Retourenportal. Standardmäßig ist er deaktiviert. Ist er aktiv, sehen deine Kunden im Retourenprozess die Option, Artikel gegen andere Varianten zu tauschen.
+
+Umtausche werden standardmäßig als Umtauschartikel innerhalb der Retoure angelegt, da das der Standardprozess von Shopify ist. Sollen Umtausche als neue Bestellung angelegt werden, aktiviere **Exchanges as New Order**.
+
+![Enable Exchange](/images/docs/Settings/ExchangesNew02.png)
+
+### Exchanges as New Order
+
+Ist dieser Toggle aktiv, werden Umtausche als separate 0,00-EUR-Bestellung in Shopify angelegt. Die neuen Bestellungen werden per Tag als Umtausch gekennzeichnet und mit der ursprünglichen Bestellung verlinkt.
+
+![Exchanges as New Order](/images/docs/Settings/ExchangesNew01.png)
+
+Ist **Exchanges as New Order** nicht aktiv, wird der Umtausch immer automatisch nach einer Erstattung ausgelöst. Das gilt sowohl, wenn du eine Retoure als erstattet markierst, als auch bei manuellen Erstattungen.
+
+Ist **Exchanges as New Order** aktiv, legst du zusätzlich im Dropdown fest, wann die neue Bestellung in Shopify angelegt wird:
+
+| Trigger | Beschreibung |
+| --- | --- |
+| **After registration** | Der Umtausch wird direkt nach Abschluss der Retourenregistrierung verarbeitet. |
+| **After it is received** | Der Umtausch wird verarbeitet, nachdem das Retourenpaket im Lager eingegangen ist. |
+| **After inspection** | Der Umtausch wird nach Prüfung und Freigabe der retournierten Ware verarbeitet. |
+
+![Auswahl des Exchange-Triggers](/images/docs/Exchange/settings_operations_trigger.png)
+
+### Restrict Exchange Stock to Original Warehouse
+
+Mit diesem Toggle beschränkst du die Bestandsprüfung auf das Lager, das den ursprünglichen Artikel ausgeliefert hat. Ist er aktiv, wird eine Ersatzvariante nur angeboten, wenn sie in genau diesem Lager verfügbar ist. So vermeidest du Umtausche, die vom ursprünglichen Lager aus nicht erfüllt werden könnten. Ist er deaktiviert, wird der Bestand über alle deine Lager hinweg geprüft.
+
+![Restrict Exchange Stock to Original Warehouse](/images/docs/Exchange/settings_original_warehouse_stock.png)
+
+### Shipping Label for Exchange Items
+
+Mit diesem Toggle aktivierst du die automatische Erstellung eines Versandlabels für Ersatzartikel. Labels werden ausschließlich über Sendcloud erstellt. Stelle daher sicher, dass du [Sendcloud](/integrations/sendcloud) korrekt eingerichtet hast, bevor du die Funktion aktivierst.
+
+Beim Aktivieren richtet toern im Hintergrund automatisch ein Feld in Shopify ein, das das Versandlabel als PDF an der Bestellung speichert. Schlägt diese Einrichtung fehl, z. B. wegen fehlender Shopify-Berechtigungen, werden die Einstellungen nicht gespeichert. Prüfe dann deine Shopify-Berechtigungen und versuche es erneut. Besteht das Problem weiter, kontaktiere den Support.
+
+![Shipping Label for Exchange Items](/images/docs/Exchange/settings_crate_shipping_label.png)
+
+### Exchange Warning
+
+Ist diese Einstellung aktiv, sehen deine Kunden ein Warn-Pop-up, wenn sie denselben Artikel in derselben Variante als Ersatz auswählen. Es erscheint direkt nach der Auswahl und nur, wenn der Ersatzartikel mit dem ursprünglichen Artikel übereinstimmt. Das Pop-up ist standardmäßig deaktiviert.
+
+![Exchange Warning](/images/docs/Settings/ExchangesNew04.png)
+
+## Artikel vom Umtausch ausschließen (Blacklist Articles)
+
+In diesem Bereich schließt du bestimmte Produktvarianten vom Umtausch aus. Das ist z. B. sinnvoll für:
+
+- personalisierte oder individualisierte Produkte
+- stark reduzierte oder Sale-Artikel
+- Limited-Edition-Produkte
+- Artikel mit besonderen Handling-Anforderungen
+
+![Blacklist Articles](/images/docs/Settings/ExchangesNew05.png)
+
+### Varianten auf die Blacklist setzen
+
+1. Suche die Produktvariante über SKU oder Produktnamen.
+2. Wähle die Variante aus.
+3. Klicke auf **Add to Blacklist**.
+4. Um alle Varianten eines Artikels auf einmal hinzuzufügen, nutze den Bulk-Add-Modus mit **Add All Variants**.
+5. Um eine Variante wieder zu entfernen, klicke in der Tabelle neben der Variante auf **Remove**.
+
+![Blacklist Articles](/images/docs/Exchange/settings_blacklist_item.png)
+
+![Blacklist Articles im Bulk-Add-Modus](/images/docs/Exchange/settings_bulk_add_variant.png)
+
+Varianten auf der Blacklist werden deinen Kunden nicht als Umtauschoption angezeigt. Stehen alle Varianten eines Produkts auf der Blacklist, wird der Umtauschschritt für dieses Produkt komplett übersprungen.
+
+## Länder vom Umtausch ausschließen (Blacklist Countries)
+
+In diesem Bereich schließt du bestimmte Länder vom Umtausch aus. Das ist z. B. sinnvoll, wenn:
+
+- die Versandkosten für Umtausche in bestimmte Länder zu hoch sind
+- du Umtausche auf nationale Bestellungen beschränken möchtest
+- Zoll- oder Importbestimmungen Umtausche in bestimmten Regionen unpraktisch machen
+
+![Blacklist Countries](/images/docs/Settings/ExchangesNew06.png)
+
+<Note>
+  Hier erscheinen nur Länder, die du in den [Retourenländern](/returns/return-methods) konfiguriert hast. Ein Land, das nicht für Retouren aktiviert ist, kannst du nicht für Umtausche ausschließen. Hast du noch keine Retourenländer konfiguriert, siehst du den Hinweis **No countries in return settings yet**.
+
+  Steht ein Ländercode auf deiner Blacklist, ist aber nicht mehr in den Retourenländern enthalten, wird er weiterhin am Ende der Tabelle angezeigt. So kannst du ihn bei Bedarf entfernen.
+</Note>
+
+## Einschränkungen
+
+- Erhaltene Ersatzartikel aus einem Umtausch können nicht über das Retourenportal als Retoure angemeldet werden. Deine Kunden müssen sich dafür an deinen Kundensupport wenden.
+- Werden bei einer Retoure alle Artikel umgetauscht und gibt es daher keine Erstattungssumme, wird keine Retourengebühr berechnet.
+- Bei ungleich verteilten Rabatten in einer Bestellung sind Umtausche blockiert.
+- Einschränkungen bei Umtausch als neue Bestellung:
+  - Ersatzbestellungen mit einem Warenwert von 0,00 EUR verfälschen die Statistiken in Shopify.
+  - Liegt zwischen Anlegen der Retoure und Erstellung der Bestellung Zeit, kann der Artikel inzwischen ausverkauft sein. Dann wird ein Klärfall erstellt, und du musst dich mit deinem Kunden in Verbindung setzen. Beim Shopify-Standardprozess innerhalb der Bestellung tritt dieses Problem nicht auf.
+
+Bei Fragen zu den Umtausch-Einstellungen oder zur Fehlerbehebung erreichst du den Support unter [support@re-toern.de](mailto:support@re-toern.de).

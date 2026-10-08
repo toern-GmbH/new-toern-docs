@@ -1,8 +1,47 @@
 ---
 title: "Quivo"
-description: "Connect Quivo as a carrier for returns."
+description: "Create return labels via the QUIVO Logistics interface."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+Quivo is a fulfillment provider that toern partners with. Many Quivo customers handle shipping and returns through Quivo's own carrier contracts. That's why toern uses the Quivo interface directly to create your return labels.
+
+<Info>
+  If your fulfillment runs through Quivo, shipping and label creation usually run through Quivo too. In that case you don't need a DHL integration.
+</Info>
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Setup
+
+### Request credentials
+
+To create labels, toern needs this data from **Quivo Web Connect**:
+
+- **Username**
+- **Password**
+- **API Key**
+- **Hash**
+
+You get it from your Quivo contact.
+
+### Add the access credentials in toern
+
+1. In the toern dashboard, open the [Quivo shipping settings](https://www.admin.re-toern.de/settings/third-party/quivo).
+2. Paste the data into the matching fields.
+3. Click **Update Quivo**.
+
+![Quivo Access Credentials](/images/docs/Quivo/QuivoNew01.png)
+
+## Return Label Price Optimization
+
+Quivo can use a different carrier per country via the Quivo API, so the cheapest label is always used. You can use this service through toern as well. When the feature is active, toern checks for every return whether the cheapest carrier is used.
+
+You activate the feature in the Quivo settings with the toggle.
+
+![Quivo Label Price Optimization](/images/docs/Quivo/QuivoNew02.png)
+
+![Quivo Label Price Optimization toggle](/images/docs/Quivo/QuivoNew03.png)
+
+<Warning>
+  The feature needs a special setup: special return links per group ID have to be created in Quivo Web Connect. toern can do this via the Quivo API. Before you activate the feature, contact support@re-toern.de so all group IDs are set correctly and the matching links are activated. Otherwise the feature won't work properly.
+</Warning>

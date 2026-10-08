@@ -1,8 +1,62 @@
 ---
 title: "Gift card refund"
-description: "Offer refunds as a gift card."
+description: "Offer your customers a gift card instead of a refund and keep the revenue in your shop."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With gift cards, you offer your customers an alternative to a regular refund. This keeps the revenue in your shop instead of paying it back directly. Incentives like a higher gift card value or waiving the return fee make the gift card more attractive.
+
+## How it works
+
+Your customers select the gift card in the second step of the return process. By default, the **original refund** is selected. So your customers have to actively choose the gift card.
+
+This is what the selection looks like in the return portal:
+
+![Selecting the gift card in the return portal](/images/docs/Retourenportal---Standardprozess/Gutscheine01.png)
+
+![Gift card selected](/images/docs/Retourenportal---Standardprozess/Gutschein02.png)
+
+Your customers then confirm the return in a final step. Until then, they can still go back to the [item selection](/en/returns/return-portal) and change the return.
+
+Just like a regular refund, the gift card is usually created automatically as soon as the return's classification is complete:
+
+1. toern creates the gift card in Shopify.
+2. Shopify sends an email notification to your customer. You configure its layout in Shopify.
+3. The gift card is stored in Shopify. toern links it in the return in Shopify so you can view it if needed.
+
+You can also create a gift card manually during a manual refund. The gift card always applies as the refund method for the entire return, not per item.
+
+<Warning>
+  If toern handles refunds, your fulfiller should disable refunds. Otherwise, gift cards can't be issued. Learn more under [Refund](/en/returns/refund#shopify-restock).
+</Warning>
+
+## Setup
+
+You activate and configure gift cards under **Settings → Refund**.
+
+### Activate gift cards (Gift Card Refunds)
+
+Use the toggle under **Gift Card Refunds** to activate gift cards in general.
+
+![Gift card settings](/images/docs/Settings/RefundNew07.png)
+
+### Configure gift cards (Gift Card Configuration)
+
+Under **Gift Card Configuration**, you define how attractive your gift cards are and how long they're valid:
+
+- **Bonus percentage**: This percentage is added to the refund amount. It makes the gift card more interesting for your customers compared to cash back.
+- **Maximum amount**: If this amount is exceeded, the gift card can't be selected.
+- **Expiration**: If the gift card isn't redeemed within this time, it becomes invalid.
+
+![Gift card configuration](/images/docs/Settings/RefundNew08.png)
+
+![Gift card expiration](/images/docs/Settings/RefundSettings03.png)
+
+### Waive the return fee for gift cards (Remove Returnfee for Giftcards)
+
+As an extra incentive, you can waive the return fee when your customers choose a gift card. The gift card amount is then calculated without deducting the return fee.
+
+![Remove return fee for gift cards](/images/docs/Settings/RefundNew09.png)
+
+## Limitations
+
+- Your customers can choose between the original refund and a gift card. Store credit that can be paid out again as a balance isn't possible.

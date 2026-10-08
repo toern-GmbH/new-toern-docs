@@ -1,8 +1,308 @@
 ---
 title: "Retouren verwalten"
-description: "Retouren im Dashboard bearbeiten, prüfen und abschließen."
+description: "Retouren im Dashboard finden, bearbeiten, klassifizieren, erstatten und manuell anlegen."
 ---
 
+Unter **Manage Returns** findest du alle deine Retouren an einem Ort. Von hier aus bearbeitest du einzelne Retouren, klassifizierst Artikel, passt den Status an und löst Rückerstattungen aus. Du kannst Retouren auch manuell anlegen, mit Tags organisieren und dein Team über Notizen benachrichtigen.
+
+## Retourenübersicht
+
+Alle angemeldeten Retouren werden chronologisch aufgelistet. Die wichtigsten Informationen siehst du direkt in der Liste: wann die Retoure registriert wurde, wer der Kunde ist, welchen Status die Retoure hat, welcher Typ sie ist (Umtausch, Gutschein, mit Input) und welche Bezahlmethode bei der Bestellung genutzt wurde.
+
+![Filteroptionen der Retourenübersicht](/images/docs/Dashboardprozess/ManageReturns01.png)
+
+Standardmäßig siehst du die Retouren des letzten Monats. Den Zeitraum kannst du anpassen. Du kannst außerdem nach Kunde und Bestellnummer suchen.
+
+### Retourenstatus
+
+Du kannst die Retouren nach diesen Status filtern:
+
+- **registered**: Der Kunde hat die Retoure im Retourenportal registriert. Sie ist noch beim Kunden oder auf dem Weg zum Fulfillment.
+- **received**: Die Retoure ist im Fulfillment angekommen und kann bearbeitet werden.
+- **on hold**: Vor dem Abschluss der Inspektion muss noch etwas erledigt werden. Zum Beispiel eine Rückfrage beim Kunden oder ein Artikel muss noch gewaschen werden.
+- **inspected**: Die Artikel der Retoure wurden klassifiziert. Oft löst das automatisch eine Rückerstattung aus.
+- **refunded**: Die Retoure wurde erstattet. Danach wird sie automatisch auf **completed** gesetzt.
+- **completed**: Die Retoure ist abgeschlossen.
+- **needs review**: Die Retoure ist ein Klärfall und muss manuell geprüft werden. Das kann einen Artikel, einen Input, Informationen vom Fulfiller oder ein technisches Problem betreffen. Meistens bekommst du Informationen dazu, worum es genau geht.
+
+![Übersicht der Retouren](/images/docs/Dashboardprozess/Managereturns04.png)
+
+### Weitere Filter
+
+Neben dem Status kannst du filtern nach:
+
+1. Bezahlmethoden, die du nutzt, z. B. PayPal oder Klarna
+2. Umtausch
+3. Gutscheinen
+4. Widerrufen
+5. Individuellen Tags (siehe [Retouren-Tags](#retouren-tags))
+
+### Export
+
+Du kannst alle Retouren im gewählten Zeitraum exportieren. Der Export enthält mehr Informationen als die Übersicht. Folgende Spalten sind enthalten:
+
+```text
+order_id ; customer_id ; return_reated_at ; return_status ; item_index ; sku ; item_name ; attribute_1 ; attribute_2 ; attribute_3 ; return_reason; user_input; classification; item_id ; variant_id ; exchanged ; item_price ; country_code_origin ; reggular_refund_amount ; giftcard_refund_amount ; refund_type
+```
+
+## Retouren manuell anlegen
+
+Normalerweise legen Kunden ihre Retouren selbst im toern Retourenportal an. Wenn ein Kunde diesen Weg nicht geht oder Hilfe von deinem Kundenservice braucht, kannst du die Retoure manuell anlegen.
+
+### Bestellung suchen
+
+1. Öffne **Manage Returns**.
+2. Klicke auf **Create New Return**.
+3. Gib im Suchfeld die Bestellnummer oder den Namen des Kunden ein. Bei der Suche nach dem Namen siehst du alle Bestellungen dieses Kunden.
+4. Klicke auf die gesuchte Bestellung.
+
+![Suche nach Bestellungen](/images/docs/Dashboardprozess/CreateReturn01.png)
+
+### Retoure konfigurieren
+
+![Auswahlmöglichkeiten beim Anlegen einer Retoure](/images/docs/Dashboardprozess/CreateReturn02Neu.png)
+
+1. **Artikel auswählen**: Wähle die Artikel über die Checkbox am rechten Rand aus. Mit **Select/Deselect all Items** oder der Checkbox in der Titelspalte wählst du alle Artikel auf einmal aus oder hebst die Auswahl auf.
+2. **Klassifizierung** (optional): Du kannst die Artikel direkt klassifizieren. Das ist nur sinnvoll, wenn der Artikel schon bei dir ist.
+3. **Umtausch** (optional): Sobald du einen Artikel auswählst, öffnet sich ein Drop-down. Dort kannst du einen Umtausch anlegen. Das ist hilfreich, wenn ein Kunde per E-Mail um einen Umtausch bittet. Mit **Show Variants for Exchange** siehst du alle verfügbaren Varianten des Artikels. toern prüft sie über die Shopify-Schnittstelle.
+4. **Return Status**: Wähle den aktuellen Status der Retoure. Standardmäßig sind **Received** und **Inspected** ausgewählt, weil die Funktion meist vom Fulfillment genutzt wird.
+5. **Rückerstattungsmethode**: Wähle die Rückerstattungsmethode, auch einen Gutschein. Das hilft zum Beispiel, wenn du eine Retoure nach Ablauf der Retourenfrist anlegst und dich mit dem Kunden auf einen Gutschein einigst.
+6. **Benachrichtigung**: Lege fest, ob der Kunde eine Benachrichtigung erhält.
+7. Klicke auf **Create**. Die Retoure wird angelegt und du landest in der Detailansicht der Retoure.
+
+<Warning>
+  Ist die Retoure noch beim Kunden zu Hause? Dann setze den Status unbedingt zurück. Klicke dazu einmal auf **Received** und **Inspected**. Sonst kann automatisch eine Rückerstattung ausgelöst werden.
+</Warning>
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/zkjyg7vswk" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Retoure-Detailansicht
+
+Klicke in der Übersicht auf eine Retoure, um ihre Detailansicht zu öffnen. Hier siehst du alle Informationen zu dieser Retoure und bearbeitest sie.
+
+### Navigation und Hinweise im Header
+
+- Über die **Breadcrumb-Navigation** oben links kommst du jederzeit zurück zur Übersicht.
+- Mit den **Pfeilen** oben rechts springst du direkt zur vorherigen oder nächsten Retoure. Gibt es in eine Richtung keine weitere Retoure, ist der Pfeil deaktiviert.
+- Die Pfeile berücksichtigen aktive Filter. Filterst du zum Beispiel nach Klärfällen, springst du direkt zum nächsten Klärfall.
+
+Neben dem Status im Header siehst du Symbole für **Umtausch**, **Gutschein-Retouren** und **Notizen**. Das Sprechblasen-Symbol zeigt zum Beispiel an, dass es Notizen zu dieser Retoure gibt. Ein Klick darauf bringt dich direkt zum Notes- bzw. Timeline-Bereich.
+
+![Navigation in der Retoure-Detailansicht](/images/docs/Dashboardprozess/ReturnDetailNavigation01.png)
+
+### Aktionen
+
+Oben rechts siehst du den Status der Retoure und die Aktionen, die in diesem Status möglich sind. Im Status **Registered** sind das:
+
+- **Mark Received**: Setzt den Status von **Registered** auf **Received**. Sonst ändert sich nichts.
+- **Create Clarification**: Erstellt aus der Retoure einen Klärfall mit eigener Begründung. Alle Automatisierungen für diese Retoure werden gestoppt. Die weiteren Schritte führst du manuell durch.
+- **Cancel Return**: Löscht die Retoure, auch in Shopify.
+
+![Retourendetails mit Timeline](/images/docs/Dashboardprozess/ManageReturns12.png)
+
+### Retournierte Artikel und Klassifizierung
+
+Unter **Returned Items** siehst du alle retournierten Artikel mit Bild, Artikelbeschreibung, Klassifizierung und Retourengrund. Ein Symbol hinter dem Retourengrund zeigt an, dass dein Kunde zusätzliche Informationen zum Artikel gegeben hat. Klicke auf den Artikel, um sie zu sehen. Die Nutzereingaben werden unter dem Retourengrund angezeigt, als Text, als transkribierte Sprachnachricht oder als Bild.
+
+Mit **Show all order items** blendest du alle weiteren Artikel der Bestellung ein. Das sind nicht retournierte Artikel oder Austauschartikel eines angemeldeten Umtauschs.
+
+![Liste der retournierten Artikel](/images/docs/Dashboardprozess/Managereturns06.png)
+
+Je nach Status kommen weitere Aktionen dazu. Im Status **received** kannst du Artikel hinzufügen oder entfernen. Das brauchst du, wenn im Paket mehr oder weniger Artikel liegen als angemeldet.
+
+Die Detailansicht eines Artikels öffnet sich als Pop-up. Dort klassifizierst du den Artikel:
+
+- **A-Return**
+- **B-Return**
+- **C-Return**
+- **D-Return**
+
+toern bietet immer diese vier Klassifizierungen an. Wie du sie nutzt, stimmst du mit deinem Fulfillment ab.
+
+Bei einer **C-** oder **D-Retoure** fragt toern nach, ob die Retoure wie eine normale Retoure behandelt werden soll. Wählst du **Clarification case**, bekommt die Retoure den Status **needs review** und wird farblich hervorgehoben.
+
+### Kundeninformationen
+
+Im Bereich Kundeninformationen findest du die Kontaktdaten, die Adresse und KPIs zum Retourenverhalten des Kunden.
+
+![Kundeninformationen mit KPIs](/images/docs/Dashboardprozess/Managereturns07.png)
+
+toern sammelt diese Daten retourenübergreifend. So bekommst du mehr Kontext zum Kunden. Die Metriken gibt es auf Paketebene, auf Artikelebene und in Euro. Eine **Ampelbewertung** zeigt dir sofort, ob es sich um einen "guten" oder "schlechten" Kunden handelt. Die Schwellenwerte der Ampel kannst du in den Settings anpassen.
+
+### Kundendaten anpassen
+
+Die Kundendaten stammen aus deiner Shop-Integration. Gab es Fehler beim Versand und du musst die Daten für die Retoure ändern, nutze **Edit Customer**.
+
+![Kundeninformationen ändern](/images/docs/Dashboardprozess/Managereturns08.png)
+
+<Warning>
+  Geänderte Kundendaten werden nur in toern gespeichert. Sie werden nicht in dein Shopsystem übertragen.
+</Warning>
+
+### Retourenlabels
+
+Retourenlabels werden normalerweise direkt bei der Anmeldung erstellt, automatisch über die Anbindung an DHL oder einen anderen Versanddienstleister. In der Detailansicht kannst du:
+
+- das Label mit **open PDF** ansehen und herunterladen,
+- das Label mit **E-Mail return label** erneut an deinen Kunden senden,
+- ein neues Label erstellen,
+- mit **View Timeline** alle Status-Updates der Sendung sehen, sobald das Paket im Paketshop abgegeben wurde.
+
+![Neue Retourenlabels erstellen](/images/docs/Dashboardprozess/Managereturns09.png)
+
+![Timeline des Retourenlabels](/images/docs/Dashboardprozess/Managereturns11.png)
+
+### Return Timeline
+
+Die **Return Timeline** zeigt dir alle wichtigen Aktivitäten der Retoure in zeitlicher Reihenfolge. Dazu gehören die **Notizen deines Teams** und automatisierte Schritte. So bleibt der Ablauf in einer Liste nachvollziehbar.
+
+Typische Einträge sind:
+
+- Anlage und Statuswechsel der Retoure
+- Stornos
+- **Inspektionen** (auch über die API) und **Änderungen an Artikeln**
+- **Rückerstattungen** (inkl. Gutschein) und **Umtausch**
+- **Retourenlabel** und **Sendungs-Tracking**
+- **E-Mails** an Kunden
+- **Klärfälle**
+- gestartete **Prozesse** (z. B. Rückgabe, Erstattung)
+
+Je nach deinen Integrationen (Shop, Fulfillment, Third Party Services) werden weitere Aktionen protokolliert. Enthält eine Aktivität mehr Details, kannst du sie per Drop-down aufklappen. Dort findest du zum Beispiel die Klassifizierung einzelner Artikel.
+
+![Return Timeline in der Retoure-Detailansicht](/images/docs/Dashboardprozess/ReturnActivityTimeline01.png)
+
+Warnhinweise, die über die API an toern übermittelt werden, erscheinen ebenfalls in der Timeline. Sie sind als Warnung hervorgehoben und lassen sich aufklappen. So erkennst du sofort, dass es sich um einen prüfungsrelevanten Hinweis handelt und nicht um einen normalen Kommentar.
+
+Typische Beispiele sind **mehrfache Inspektionen** oder **nicht zuordenbare Artikel**. In den Details siehst du, dass das Update über die API kam, und, falls verfügbar, den verwendeten API-Key. Bei mehrfachen Inspektionen werden die betroffenen Artikel zusätzlich als Tabelle angezeigt.
+
+![Warnhinweis in der Return Timeline](/images/docs/Dashboardprozess/ReturnActivityTimeline02.png)
+
+## Notizen und Benachrichtigungen
+
+### Notizen und Tagging
+
+Über die Notizen einer Retoure kannst du dein Team benachrichtigen. Notizen kannst du formatieren (fett, kursiv, Aufzählungen) und Bilder oder Links einfügen.
+
+1. Schreibe eine Notiz in der Retoure.
+2. Tippe **@**. toern schlägt dir alle Nutzer vor, die du taggen kannst.
+3. Wähle einen Nutzer aus deinem Team oder den **ToernBot**. Der ToernBot benachrichtigt die Support-Systeme von toern.
+
+![Tagging in den Notizen](/images/docs/Dashboardprozess/Tagging03.png)
+
+Notizen werden chronologisch in der Retoure angezeigt, mit Erstelldatum und Autor. Nur der Autor kann eine Notiz später bearbeiten oder löschen.
+
+### Benachrichtigungen
+
+Getaggte Nutzer sehen ihre Benachrichtigungen im oberen Menü rechts beim **Briefkasten**. Gibt es neue, ungelesene Benachrichtigungen, hat der Briefkasten einen grünen Punkt.
+
+![Benachrichtigungen im Header](/images/docs/Dashboardprozess/Tagging01.png)
+
+Klicke auf den Briefkasten, um die Übersicht deiner Benachrichtigungen zu öffnen. Sie ist in gelesene und ungelesene Benachrichtigungen unterteilt. Klickst du auf eine Benachrichtigung, springt toern direkt zur Retoure mit der Notiz und markiert die Benachrichtigung als gelesen.
+
+## Retouren-Tags
+
+Mit **Retouren-Tags** gruppierst du Retouren unabhängig vom Status und unterscheidest sie visuell. Beispiele sind **Standard-Retoure**, **Widerruf**, **Umtausch** oder eigene Tags.
+
+Tags bleiben gespeichert, solange sie genutzt werden. So kannst du dasselbe Tag mehreren Retouren zuweisen und in der Übersicht danach filtern.
+
+### Tags einer Retoure zuweisen
+
+Im Bereich **Tags** der Retoure-Detailansicht fügst du Tags hinzu oder entfernst sie. Jede Änderung wird in den Logs protokolliert, inklusive des Nutzers, der sie vorgenommen hat.
+
+![Tags auf der Retoure-Detailseite suchen, zuweisen und entfernen](/images/docs/Dashboardprozess/ReturnDetailTags01.png)
+
+### Neues Tag erstellen
+
+Gibst du einen Namen ein, den es noch nicht gibt, erscheint im Suchfeld **Add [Tag-Name]**. Damit erstellst du das Tag für deine Brand und weist es direkt der aktuellen Retoure zu.
+
+Tag-Namen müssen innerhalb einer Brand eindeutig sein, damit der Filter zuverlässig funktioniert. Ein erstelltes Tag bleibt im Tag-Katalog verfügbar.
+
+### Alle Tags bearbeiten
+
+Über das Stift-Symbol im Bereich **Tags** öffnest du die vollständige Tag-Auswahl:
+
+- Das **Suchfeld** filtert die Tags. Hier kannst du auch neue Tags erstellen.
+- Über das **Sortier-Symbol** wechselst du zwischen **Most frequently used** und **Alphabetically sorted**.
+- Mit den **Checkboxen** weist du Tags zu oder entfernst sie.
+
+![Vollständige Tag-Auswahl mit Suche und Sortierung](/images/docs/Dashboardprozess/ReturnDetailTags02.png)
+
+### Tag-Farben
+
+Jedes neue Tag bekommt automatisch eine zufällige Farbe. Der farbige Punkt erscheint beim Tag in der Detailansicht und in der Übersicht. In der vollständigen Tag-Auswahl änderst du die Farbe über den farbigen Punkt. Wähle eine Farbe im Farbwähler oder gib einen Hex-Wert ein.
+
+### Retouren nach Tags filtern
+
+Über den Filter **Tags** suchst du ein oder mehrere Tags und wählst sie aus. Bei mehreren Tags siehst du nur Retouren, die alle ausgewählten Tags haben.
+
+![Retourenübersicht mit geöffnetem Tag-Filter](/images/docs/Dashboardprozess/ReturnDetailTags03.png)
+
+## Manuelle Rückerstattungen
+
+Rückerstattungen laufen in der Regel automatisch, nachdem die Retoure klassifiziert wurde. Bei einem Klärfall oder für eine Teilerstattung kannst du jederzeit manuell erstatten. Das geht auch, wenn bereits eine Rückerstattung durchgeführt wurde.
+
+1. Klicke in der Retoure auf **Create New Refund**.
+2. Wähle die Artikel für die Rückerstattung. Vorausgewählt sind alle retournierten Artikel ohne angemeldeten Umtausch.
+3. Lege optional fest, ob die **Versandkosten** erstattet oder eine **Retourengebühr** abgezogen wird.
+4. Passe bei Bedarf die **Rückerstattungsmethode** an. Neben der ursprünglichen Bezahlmethode kannst du einen **Gutschein** wählen und ihn um einen Prozentsatz erhöhen. So bleibt der Umsatz zum Beispiel bei verspäteten Retourenanmeldungen im Shop.
+5. Ziehe optional einen **prozentualen Betrag** vom Restbetrag ab, zum Beispiel für ein Angebot bei einer Reklamation.
+6. Lege fest, ob dein Kunde eine **Benachrichtigung** erhält. Sie wird im Shopsystem konfiguriert.
+7. Klicke auf **complete**, um die Rückerstattung auszulösen.
+
+![Manuelle Rückerstattungen](/images/docs/Dashboardprozess/Managereturns10.png)
+
+![Auswahl der Artikel für die Rückerstattung](/images/docs/Dashboardprozess/Refund01.png)
+
+![Einstellungen für die Rückerstattung](/images/docs/Dashboardprozess/Refund02.png)
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Rechtlich musst du die Versandkosten erstatten, wenn alle Artikel einer Bestellung retourniert wurden. Das ist in den Einstellungen der Standard, du kannst es aber deaktivieren.
 </Note>
+
+Nach Abschluss siehst du die Details und die zugehörige Rechnung in der Retoure unter **Return Details**. Für automatische Rückerstattungen kannst du dieselben Einstellungen und einen Maximalwert in den [Rückerstattungs-Einstellungen](/returns/refund) festlegen.
+
+## Interaktive Anleitungen
+
+<Tabs>
+  <Tab title="Dashboard Manage Returns">
+    <Frame>
+      <iframe src="https://app.guideflow.com/embed/vkm5vmot2r" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+    </Frame>
+  </Tab>
+  <Tab title="Dashboard Manual Refund">
+    <Frame>
+      <iframe src="https://app.guideflow.com/embed/gkyvmg5t4k" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+    </Frame>
+  </Tab>
+</Tabs>
+
+## Einschränkungen
+
+### Retourenübersicht
+
+- Das Dashboard ist aktuell nur auf Englisch verfügbar.
+- **Filter**
+  - Du kannst nach Retourenstatus, Bezahlmethode, Umtausch und Gutschein filtern. Nicht nach Retourengrund, Input oder Kommentar.
+  - Nur Klärfälle lassen sich mit **All Clarifications** unabhängig vom gewählten Zeitraum filtern.
+- **Export**
+  - Der Export enthält nur die vordefinierten Spalten. Du kannst sie vorab nicht anpassen.
+- **Create New Return**
+  - Bei manuellen Retouren ist der Retourengrund immer **manual return item**.
+  - Manuelle Retouren haben standardmäßig den Status **Inspected**. Willst du etwas anderes, musst du den Status anpassen.
+  - Mit **Extend Return Window** kannst du die Retourenfrist nur um genau das hinterlegte Zeitfenster verlängern.
+
+### Retoure-Detailansicht
+
+- Sets können aktuell nur über offizielle Bundle-Apps in Shopify retourniert werden, in denen die Einzelartikel eines Sets hinterlegt sind. Die Zugehörigkeit der Einzelartikel zu einem Set wird nicht angezeigt und nicht gesondert behandelt.
+- **Notizen und Kommentare**
+  - Mit **@** kannst du nur andere Nutzer in toern taggen.
+  - Alle Kommentare, die über die API zu einzelnen Artikeln an toern übermittelt werden, werden in einem Notizfeld zusammengefasst.
+  - Kommentare über die API, wie "Adresse falsch", werden in toern angezeigt. Daraus kann automatisch ein Klärfall erstellt werden (mit Return Clarification Reasons). Das gilt nur für Kommentare, nicht für die allgemeinen Retourengründe. Automatisierungen auf Basis dieser Kommentare sind nicht möglich.
+  - toern passt Artikel (hinzufügen, entfernen) nur auf Basis des ersten API-Calls an. Alle weiteren führen zu einem Klärfall. Sonst könnte es durch Automatisierungen nach Status-Updates zu doppelten Rückerstattungen kommen.
+- **Retourenlabels**
+  - Es wird immer nur ein Label-Link mit Tracking angezeigt. Erstellst du ein neues Label, ersetzt es das vorherige.
+- **Manuelle Rückerstattungen**
+  - Sind automatische Rückerstattungen aktiv und willst du die Erstattung anpassen, erstelle zuerst einen Klärfall und führe dann eine manuelle Rückerstattung durch.
+  - Manuelle Rückerstattungen haben aktuell keine Verbindung zu Xentral. Löse hier immer die automatische Rückerstattung aus oder lege die Dokumente selbst an.

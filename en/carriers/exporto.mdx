@@ -1,8 +1,50 @@
 ---
 title: "Exporto"
-description: "Connect Exporto as a carrier for returns."
+description: "Use Exporto shipping labels for cross-border returns, e.g. from Switzerland and the UK."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+Exporto is one of our partners for cross-border shipping in Europe, especially for Switzerland and the UK. With the direct integration, you use Exporto shipping labels right in the toern return process.
+
+This lets you route returns straight to the right warehouse and handle cross-border returns reliably. Transparency and tracking stay in toern as usual.
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+## Setup
+
+### Add the access credentials
+
+For the setup you need these credentials from Exporto:
+
+- **Client ID**
+- **Client Credentials**
+
+Enter them in the [Exporto settings](https://www.admin.re-toern.de/settings/shipping-services?group=Exporto) in toern.
+
+### Map shipping methods per country
+
+For every country where you want to use Exporto as carrier and label provider, set up a mapping.
+
+1. After entering the credentials, click **Reload methods** on the same page.
+2. Click **Add mapping**.
+3. Select the country and the matching Exporto shipping method. You can choose from the shipping methods configured in your Exporto account.
+4. Repeat this for every country you want.
+
+<Warning>
+  Currently, you can only add one Exporto shipping method per country.
+</Warning>
+
+### Select Exporto as carrier
+
+Once the shipping methods are mapped, select Exporto as carrier under [Settings → Return → Return Methods](https://www.admin.re-toern.de/settings/return#return-methods). Then configure the shipping methods for your countries as usual. Learn more under [Return methods](/en/returns/return-methods).
+
+<Tip>
+  Name the shipping method after the carrier Exporto actually uses. This way your customers see right away who ships their return, and there's no confusion.
+</Tip>
+
+## Interactive guide
+
+This interactive guide walks you step by step through setting up the Exporto integration.
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/yr4v5qyulr" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>

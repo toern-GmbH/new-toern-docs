@@ -1,8 +1,102 @@
 ---
 title: "Overviews & analytics"
-description: "Keep track of returns and key metrics."
+description: "Keep track of your return rate, return shipment status, retained revenue, and most returned items."
 ---
 
+The **Overview** page shows you the key metrics of your returns at a glance. You see right away how your return rate, returns, and orders develop. The item details help you find out which products and variants come back most often and why.
+
+You can access the dashboard at [admin.re-toern.de](https://www.admin.re-toern.de/). Log in with your credentials (user and password). The Overview page is the first page you see after logging in.
+
+## Overview
+
+At the top of the page you see the current **return rate**, the **number of returns**, and the **number of orders**. By default, the time range is set to one month. You can adjust it as you like. All data is shown on **package level** and on **item level**.
+
 <Note>
-  This page is a work in progress.
+  For a monthly evaluation (e.g. from the 1st to the 31st of a month), toern always counts from 00:00 to 23:59:59. This can differ from Shopify. That's why the numbers don't always match 100%.
 </Note>
+
+![Key metrics on the Overview page](/images/docs/Dashboardprozess/Overview01.png)
+
+Below, a graph shows the number of orders and returns over time. Here, too, you can switch between **package level** and **item level** at any time.
+
+![Orders and returns over time](/images/docs/Dashboardprozess/Overview02.png)
+
+### Return shipment status
+
+The **Return Shipment Status** shows you how many returns are currently in which step:
+
+- **Registered**: The return was registered in the toern return portal and is listed under **Manage Returns**. The package is still with your customer.
+- **Pre-Transit**: The return was dropped off at a parcel shop and is waiting to be shipped.
+- **In-Transit**: The carrier is bringing the return to your fulfillment.
+- **Received**: The return has arrived at your fulfillment and can be processed.
+- **Processed**: The return is fully completed.
+
+You can see the intermediate processing steps in detail in each return.
+
+![Return Shipment Status](/images/docs/Dashboardprozess/Overview03.png)
+
+### Retention rate
+
+The **Retention Overview** shows you how much revenue you retained through **exchanges** and **gift cards**. You see the volume in euros and the total count for each. This volume is set against the volume of refunds. This way you can see how much revenue you retained relative to your refunds.
+
+Exchanged items that are later returned via customer service are not taken into account.
+
+![Retention Rate](/images/docs/Dashboardprozess/Overview04.png)
+
+### Return details
+
+At the bottom you find statistics on item level and on return reasons:
+
+- **Top 20 returned Items**: The items returned most often in the selected time range. Both by number of returns and by return rate.
+- **Return reasons**: The second tab shows the return reasons evaluated across all products.
+
+![Return Details with the most returned items](/images/docs/Dashboardprozess/Overview05.png)
+
+Click an item in the list to open its item details.
+
+## Item details
+
+The **item details** show you all relevant data for an item. The time range is set to one month by default and can be adjusted. At the top you find a summary with the most important information about the product.
+
+![Item summary](/images/docs/Dashboardprozess/ItemDetails01.png)
+
+The colors of the variants show you the return rate per variant. An example: size S has 25 orders and 17 returns in the selected time range. At 68%, it is in the dark red range.
+
+Below you find:
+
+- **User inputs**: All inputs from your customers for this item in one list. Plus the ratio of feedback inputs to all returns of the item. This helps you judge how many customers wanted to share additional information and how urgent the topic is.
+- **Return reasons** on item level.
+- **Variants** with additional information.
+
+![User inputs on item level](/images/docs/Dashboardprozess/ItemDetails02.png)
+
+![Return reasons on item level](/images/docs/Dashboardprozess/ItemDetails03.png)
+
+![Additional information on variant level](/images/docs/Dashboardprozess/ItemDetails04.png)
+
+You can open each variant. There you see detailed statistics and return reasons on variant level. This is especially helpful when single variants have a noticeably high return rate.
+
+![Detailed statistics of a variant](/images/docs/Dashboardprozess/ItemDetails06.png)
+
+## Interactive guide
+
+<Frame>
+  <iframe src="https://app.guideflow.com/embed/dr9l8n5snr" width="100%" height="600" style={{ border: 0 }} allowFullScreen />
+</Frame>
+
+## Limitations
+
+- **Return Statistics**
+  - Return data is based only on data collected in toern. Other sources are not included in the calculation.
+  - The calculation can differ from Shopify.
+- **Return Shipment Status**
+  - Detailed updates (Pre-Transit and In-Transit) are only received for DHL tracking.
+  - For DHL, DPD, and GLS there is an update at the **Received** status.
+- **Retention Overview**
+  - Only completed returns are taken into account.
+  - Exchanged items that are returned again afterwards are not subtracted.
+- **Return Details**
+  - Only the top 20 returned items are shown here. You find all others under **Items Overview**.
+  - You set the time range at the top of the page.
+- **Return reasons (across products)**
+  - In the cross-product analysis, return reasons are evaluated by variant, not by item. All registered return reasons are broken down to single variants.

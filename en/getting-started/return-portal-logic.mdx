@@ -1,8 +1,102 @@
 ---
 title: "Set up return portal logic"
-description: "Define what customers can return and which options they get."
+description: "The most important settings to get your return process working: portal link, return period, countries, support email, and more."
 ---
 
-<Note>
-  This page is a work in progress.
-</Note>
+With just a few settings, your return process is ready to go. Here you'll find the most important ones. These aren't all the options, but everything you need to start with toern. Go through the steps one by one and adjust them to your needs.
+
+## The most important settings
+
+### 1. Create the return portal link
+
+Your customers need the link to your return portal to register returns. You create it under **Settings → Shop Integration → Return Portal Link**. The link is ready to use right away and includes your branding settings.
+
+Learn more in [Connect your Shopify shop](/en/getting-started/shopify-integration#return-portal-link).
+
+### 2. Set the return period
+
+Under **General return period**, define how many days your customers have after receiving their order to register a return. After that, no more returns can be created.
+
+The period starts with the last fulfillment event (e.g. delivery) and also includes a small buffer.
+
+### 3. Add countries for returns
+
+Select the countries from which your customers can register returns. To do this, fill in the **Return country mapping** in the return settings. You add each country individually.
+
+1. Open **Settings → Return**.
+2. Click **Add New Country Mapping**.
+3. Search for the country.
+4. Choose whether a digital label should be created.
+5. Optionally set a **Label Fee** and/or a **Return Fee**.
+6. Click **Add Mapping**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings04.png" alt="Adding a new country mapping" /></Frame>
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings05.png" alt="Filling in the country mapping" /></Frame>
+
+- **Label Fee**: Only deducted from the refund if a label was created.
+- **Return Fee**: Deducted from every return, regardless of the label.
+
+<Warning>
+  If you use DHL or DPD, also add the countries from the mapping in your carrier's settings.
+</Warning>
+
+<CardGroup cols={2}>
+  <Card title="Return settings" icon="gear" href="/en/returns/return-settings">
+    More about the country mapping and fees.
+  </Card>
+  <Card title="Return methods" icon="truck" href="/en/returns/return-methods">
+    More about the shipping settings.
+  </Card>
+</CardGroup>
+
+### 4. Add your support email
+
+toern sends your customers emails about the status of their return. These emails refer to your support so your customers have a contact for questions. Add this email address before you start under **Settings → Shop Integration**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings02.png" alt="Adding the support email" /></Frame>
+
+You can adjust how many emails toern sends in the settings. You customize the templates in the [email editor](/en/branding/email-templates). Alternatively, you can send emails via [Klaviyo](/en/integrations/klaviyo).
+
+### 5. Link your return policy
+
+toern links your return policy in the return portal so your customers can read it at any time. Add the URL under **Settings → Shop Integration**.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings01.png" alt="Adding the return policy link" /></Frame>
+
+### 6. Upload logo and background image
+
+Match your return portal to your corporate design from the start. Learn how in [Brand your portal](/en/getting-started/brand-your-portal).
+
+### 7. Optional: Enable automatic refunds
+
+If you like, you can enable automatic refunds right away. Go to **Settings → Refund**. Use the toggle to activate the feature and set triggers.
+
+<Card title="Refunds" icon="money-bill" href="/en/returns/refund">
+  Everything about the refund settings.
+</Card>
+
+### 8. Optional: Enable exchanges
+
+You can also enable exchanges right away. Your customers then see alternative variants of a product (e.g. other sizes and colors) and can choose from them. Go to **Settings → Exchange**. Use the toggle to activate the feature and set triggers.
+
+<Card title="Exchange" icon="arrows-rotate" href="/en/returns/exchange">
+  Everything about exchange settings and processes.
+</Card>
+
+### 9. Define the classification for clarification cases
+
+You can create clarification cases manually in toern at any time. In a clarification case, all automations are switched off and you complete the return manually.
+
+Clarification cases can also be created automatically based on the classification of returned items. Agree with your fulfillment partner on what the classifications **A–D** mean. Under **Settings → Return** you then select for which classifications a clarification case is created.
+
+<Frame><img src="/images/docs/Onboarding/BasicSettings06.png" alt="Selecting clarification cases per classification" /></Frame>
+
+That's it. You've completed the most important settings for a working return process.
+
+## Limitations
+
+To make sure automation works, keep the following in mind:
+
+- **Product bundles**: We can currently only automate bundles if you use a corresponding Shopify app.
+- **Marketplaces**: If returns from marketplaces should also run through toern, the orders must exist in Shopify. Then customers from marketplaces can also register a return via your return portal link. If these customers don't have an email address on file, enable the [ZIP Login](/en/getting-started/shopify-integration#return-portal-login-preferences).

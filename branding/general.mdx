@@ -1,8 +1,122 @@
 ---
 title: "Allgemeines Branding"
-description: "Farben, Logo, Schriften und Bilder für alle Portale."
+description: "Passe Logo, Hintergrundbild, Farben, Schriften und Login-Texte an dein Corporate Design an."
 ---
 
+Im Bereich **Branding** passt du das Retourenportal an dein Corporate Design an. So wirkt der Retourenprozess für deine Kunden wie ein Teil deines Shops. Du kannst unter anderem ein Logo und ein Hintergrundbild hochladen sowie Farben und Schriften anpassen.
+
+## Logo
+
+Mit deinem Logo erkennen Kunden deine Brand im Retourenprozess sofort wieder. Lade dazu einfach eine **.png**-Datei hoch.
+
+Beachte dabei:
+
+- Das Logo sollte mindestens **500 x 500 Pixel** groß sein.
+- Vermeide möglichst Weißraum um das Logo (siehe Hinweise in den Einstellungen).
+- Ein Logo, das breiter als hoch ist, sieht im Portal am besten aus. So ist die Darstellung auf Mobile und Desktop optimiert.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew01.png" alt="Upload des Brand-Logos" />
+</Frame>
+
+## Background Image
+
+Zusätzlich zum Logo kannst du ein Hintergrundbild hochladen. Es wird bei der Anmeldung der Retoure angezeigt. So kannst du das Portal mit eigenen Bildern deiner Brand weiter individualisieren.
+
+- Empfohlene Auflösung: **1920 x 1080** (Full HD) oder **3840 x 2160** (4K).
+- Empfohlenes Format: **.jpg/JPEG**.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew02.png" alt="Upload des Hintergrundbilds" />
+</Frame>
+
+## Highlight and Action Colors
+
+Im restlichen Retourenprozess passt du das Portal vor allem über Farben und Schriften an deine Brand an.
+
+Du kannst zwei Farben festlegen:
+
+- **Highlight Color**: Betont kleine Akzente und wichtige Prozessschritte, zum Beispiel die Lade-Animation.
+- **Action Color**: Zeigt Interaktionen durch einen Farbwechsel an. Wir empfehlen eine dunkle Farbe. Ein Beispiel ist der **Weiter**-Button, der beim Klick auf das dunklere toern-Grün wechselt.
+
+Gib die Farben als **Hex-Code** ein. Die Farbe wird direkt in der Vorschau angezeigt.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew03.png" alt="Anpassung der Farben" />
+</Frame>
+
+## Font Configuration
+
+Du kannst auch die Schriften im Retourenportal anpassen. Dafür gibt es eine **Primary**, **Secondary** und **Tertiary Font**. Hinterlegt werden die Schriften über **Google Fonts**. Eine Anleitung findest du auch über den Info-Button in den Einstellungen.
+
+### Schrift einbinden
+
+1. Öffne [fonts.google.com](https://fonts.google.com).
+2. Wähle die Schriftfamilie und die gewünschten Stile bzw. Schriftstärken aus (z. B. 400, 600).
+3. Klicke im rechten Bereich auf **Get embed code** bzw. **Einbettungscode abrufen**.
+4. Wechsle zum Tab **@import**. Du siehst dann etwa Folgendes:
+
+   ```css
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+   ```
+
+5. Kopiere nur die URL innerhalb von `url('...')`, beginnend mit `https://fonts.googleapis.com/css2`. Beispiel:
+
+   ```text
+   https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap
+   ```
+
+6. Füge die URL in das Feld für die Primary, Secondary oder Tertiary Font (Google CSS URL) ein.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew04.png" alt="Anpassung der Schriften" />
+</Frame>
+
+<Tip>
+  Du kannst mehrere Schriftfamilien einbinden, indem du weitere `&family=...`-Teile ergänzt. Google stellt diese im Einbettungscode bereit. Behalte `display=swap` in der URL bei, damit die Schrift besser gerendert wird.
+</Tip>
+
+<Warning>
+  - Füge nicht die ganze Zeile `@import ...;` ein, sondern nur die HTTPS-URL.
+  - Füge keinen `<link>`-Tag ein. Nutze den Tab **@import** und kopiere die URL.
+  - Verwende keine Links zu `fonts.gstatic.com` und keine direkten `.ttf`- oder `.otf`-Dateien.
+</Warning>
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Die Google-Fonts-URLs dienen nur der Vorschau und zum Testen. Im Live-Betrieb werden die Schriften aus Sicherheitsgründen DSGVO-konform über unser CDN bereitgestellt.
 </Note>
+
+## Order Number Placeholder
+
+Du kannst den Platzhalter im Bestellnummer-Feld auf der Login-Seite anpassen (Standard: „z. B. aus der Bestellbestätigung“). Den Text legst du jeweils auf Deutsch und auf Englisch für internationale Retouren fest.
+
+Das ist besonders hilfreich, wenn sich Kunden mit verschiedenen Nummern anmelden können und du zeigen möchtest, wo sie diese finden.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew05.png" alt="Anpassung des Order Number Placeholder" />
+</Frame>
+
+## Login Information Text
+
+Auf der Login-Seite kannst du einen zusätzlichen Hinweistext zur Anmeldung oder zur Retoure ergänzen. Auch das hilft, wenn sich Kunden mit verschiedenen Nummern anmelden können.
+
+<Frame>
+  <img src="/images/docs/Settings/BrandingNew06.png" alt="Anpassung des Login Information Text" />
+</Frame>
+
+## Weitere Einstellungen
+
+<CardGroup cols={2}>
+  <Card title="Sprachen" icon="language" href="/branding/languages">
+    Lege fest, in welchen Sprachen dein Retourenportal verfügbar ist.
+  </Card>
+  <Card title="E-Mail-Vorlagen" icon="envelope" href="/branding/email-templates">
+    Passe die E-Mails an, die deine Kunden erhalten.
+  </Card>
+</CardGroup>
+
+## Einschränkungen
+
+- Logos sollten rechteckig und breiter als hoch sein, wie in den Einstellungen dargestellt. Die Höhe im Portal ist begrenzt.
+- Schriften kannst du nur über Google Fonts festlegen. Sie werden aber DSGVO-konform auf unseren Servern gehostet.
+- Individualisieren kannst du bisher nur den Platzhalter für die Bestellnummer und einen zusätzlichen Hinweistext auf der Login-Seite. Alle weiteren Infoboxen und Texte legt toern fest.

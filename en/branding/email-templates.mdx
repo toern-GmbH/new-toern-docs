@@ -1,8 +1,323 @@
 ---
 title: "Email templates"
-description: "Customize the emails your customers receive."
+description: "Use the email editor to customize the subject, content, Cc, and Bcc of the emails your customers receive."
 ---
 
+With the **email editor**, you customize toern's transactional emails for your brand. You always edit a combination of **email event** and **language**. You can change Cc and Bcc recipients, the subject, and the content, insert variables, check a preview, and send a test email.
+
 <Note>
-  This page is a work in progress.
+  The editor is available for emails sent via **Transactional E-Mails by toern**. If Klaviyo is selected under **Notification Service**, you keep managing content and sending in Klaviyo. Learn more under [Klaviyo](/en/integrations/klaviyo).
 </Note>
+
+## Prerequisites
+
+Before you start, check the following:
+
+- Your user account has access to the return settings and the email editor.
+- Under **Settings → Returns → Customer Notifications**, **Transactional E-Mails by toern** is selected as the **Notification Service**.
+- You know which event and which language you want to edit. Each language is saved separately.
+
+## Open the editor
+
+1. In the toern dashboard, open **Settings**.
+2. Select **Returns** and scroll to **Customer Notifications**.
+3. Check that **Transactional E-Mails by toern** is selected as the notification service.
+4. Click **Open email editor** to see all templates. Alternatively, use the pencil icon in an event row to open the matching template directly.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-entry.png" alt="Customer Notifications with notification service, send toggles, pencil icons, and the link to the email editor" />
+</Frame>
+
+<Note>
+  The **Send** toggles and the email content are separate. An edited template is not activated automatically. After saving, check that the event is switched on in **Customer Notifications**.
+</Note>
+
+## Features at a glance
+
+The editor consists of a toolbar, a sidebar, the address and subject fields, and the split area for editor and preview.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-overview.png" alt="Overview of the email editor with templates, languages, subject, HTML source, and live preview" />
+</Frame>
+
+The most important controls:
+
+1. **All templates**: Opens or closes the sidebar.
+2. **Full screen**: Expands the editor to the whole browser window. Use the same icon or the Escape key to exit full screen.
+3. **Template name**: Shows the currently selected email event.
+4. **Standard, Custom, or Empty**: Shows where the current content comes from.
+5. **Language flags**: Switch between your brand's languages.
+6. **Show simplified text / Show HTML source**: Switches between the simplified text view and the HTML source.
+7. **Test parameters** with the `{}` icon: Opens the sample data for variables.
+8. **Send test** with the paper plane: Opens the dialog for a test email.
+9. **Save as custom / Save changes** with the save icon: Saves the change for the current event and language.
+10. **Editor and Preview**: You edit the content on the left and see the live preview on the right. You can drag the divider between them.
+
+The toolbar mainly uses icons. Hover over an icon to see a tooltip with its function.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-fullscreen.png" alt="Email editor in full screen mode with template list, HTML editor, and preview" />
+</Frame>
+
+## Customize an email
+
+### 1. Select a template
+
+In the sidebar, open the **Templates** tab and select the event you want to edit. Templates are grouped by area, for example Return Portal or Withdrawal.
+
+Some settings cover several email variants. The **Return is registered with instructions** event, for example, has separate templates for:
+
+- Registration with label
+- Registration without label
+- Failed label creation
+- Pending brand upload
+- In-store return
+
+Always select the specific variant you want to change.
+
+The badge next to the name shows the current state:
+
+- **Standard**: toern's standard template is used.
+- **Custom**: A custom version is already saved for your brand, this event, and this language.
+- **Empty**: There's no content yet for this combination. You can create a new version.
+
+### 2. Select a language
+
+Select the language flag in the top right. A change only applies to the selected language. The German and English templates are independent of each other. To learn which languages are available, see [Languages](/en/branding/languages).
+
+If a language has the status **Empty**, you can create the content from scratch. Check the subject, variables, and test email especially carefully.
+
+<Warning>
+  Save before switching language or template. Unsaved changes are discarded when you switch.
+</Warning>
+
+### 3. Set Cc and Bcc
+
+The **Cc** and **Bcc** fields are optional.
+
+- **Cc** recipients are visible to the other recipients of the email.
+- **Bcc** recipients get a copy but stay invisible to others.
+- Separate multiple addresses with a comma or semicolon.
+- The addresses are saved with the template and used for real emails of this event.
+
+<Warning>
+  Cc and Bcc addresses are also used for test emails. Before sending a test, make sure no unintended recipients get a copy.
+</Warning>
+
+An address you've additionally set up under **Return Notification BCC** stays in place regardless. Recipients from both settings can therefore add up.
+
+### 4. Edit the subject
+
+The **Subject** field is the email's subject line. It can't be empty when you save. You can combine text and supported variables, for example:
+
+```text
+{{ data.brandName }}: We have received your return
+```
+
+In the preview, variables are replaced with test values. Where possible, only use variables offered for the event in the **Variables** tab.
+
+### 5. Edit the content
+
+There are two views for the content.
+
+**Show simplified text** is suited for pure text changes. HTML tags and many layout details are hidden, while variables stay visible.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-simplified.png" alt="Simplified text view with variables and live preview" />
+</Frame>
+
+Use this view when you want to change wording without touching the layout. Keep in mind:
+
+- Leave variables complete within their double curly braces.
+- Don't move or delete variables whose meaning you don't know.
+- Make bigger structural or layout changes in the HTML source.
+- Before saving, switch to **Show HTML source** once and check the preview there.
+
+**Show HTML source** shows the full HTML content. Here you can edit headings, paragraphs, links, emphasis, and inline styles, among other things.
+
+Typical HTML building blocks:
+
+```html
+<h1>Heading</h1>
+<p>A paragraph with <strong>highlighted text</strong>.</p>
+<a href="https://example.com">Open link</a>
+<br />
+```
+
+The editor is not a drag-and-drop or rich-text builder. For layout, colors, or more complex structures, you need basic knowledge of HTML and email-compatible CSS.
+
+The plain-text alternative that email clients without HTML can show is generated automatically from the HTML when you save or send a test. You don't edit it in a separate field.
+
+### 6. Use variables
+
+Variables insert real data such as brand name, customer name, order number, or return address into the message. Which variables are available depends on the event.
+
+1. In the sidebar, open **Variables**.
+2. Place the cursor in the subject or content where you want the variable.
+3. Click a variable or drag and drop it into the editor.
+4. Alternatively, type `{{` and select a variable from the autocomplete.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-variables.png" alt="Variables tab with the variables available for the event" />
+</Frame>
+
+A regular variable looks like this:
+
+```text
+{{ data.customer.name }}
+```
+
+Hover over an inserted variable to see its current test value. Clicking the variable opens **Test value**. There you can enter a different made-up value for preview and test sending.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-variable-test-value.png" alt="Editing a variable's test value directly in the editor" />
+</Frame>
+
+<Note>
+  Test values don't change any real customer data and aren't saved with the template. They're only used for the preview and test sending.
+</Note>
+
+#### Advanced variable blocks
+
+In the HTML source, you can also use sections that are only rendered when data exists:
+
+```text
+{{#data.return_method.instructions}}
+  <p>{{ data.return_method.instructions }}</p>
+{{/data.return_method.instructions}}
+```
+
+Supported are regular variables, sections, inverted sections, and lists. Constructs such as `#if`, `#unless`, or `else` are not supported. For new logic, use existing blocks from the standard template as a starting point.
+
+### 7. Adjust test parameters
+
+Click the `{}` icon **Test parameters** to open all sample data for the event. The values are in a JSON structure, usually under `data`.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-test-parameters.png" alt="Test parameters panel with made-up JSON sample data" />
+</Frame>
+
+A simplified example:
+
+```json
+{
+  "data": {
+    "brandName": "Example Shop",
+    "customer": {
+      "name": "Max Mustermann"
+    }
+  }
+}
+```
+
+Changes appear immediately in the preview and are also used for test emails. They aren't saved and are regenerated when you switch to another template or language.
+
+<Warning>
+  Only use made-up test values, never real customer data. Make sure the JSON stays valid: quotes, commas, and brackets must be correct.
+</Warning>
+
+### 8. Check the preview
+
+On the right, you see a live preview of the content. Drag the divider between **Editor** and **Preview** to give one area more space.
+
+In the preview, check in particular:
+
+- Are all texts complete?
+- Are variables replaced in the right place?
+- Are headings, paragraphs, and links structured sensibly?
+- Do optional sections only appear when test data exists?
+- Is the content complete in every active language?
+
+The preview mainly shows the content. The full layout and the display in different email clients may differ. A real test email is therefore the final check.
+
+### 9. Fix warnings and errors
+
+The editor checks the content automatically when you save and when you send a test. There's no separate validate button.
+
+- **Yellow marking**: A variable is unknown or not officially supported for this event. You can save and test, but the value may be empty or wrong in real emails. Replace the variable with an offered one where possible.
+- **Red marking**: The content contains a blocking syntax or rendering error. Saving is stopped. For an error in the content, the editor switches to the HTML source and marks the affected line.
+
+If a check fails, hover over the marking, read the hint, fix the spot, and try saving or sending the test again.
+
+### 10. Send a test email
+
+Click the paper plane icon **Send test**.
+
+1. Enter a valid recipient address. The logged-in user's address may be pre-filled.
+2. Check Cc and Bcc once more.
+3. Click **Send test** in the dialog.
+
+<Frame>
+  <img src="/images/docs/EmailEditor/email-editor-send-test.png" alt="Dialog for sending a test email to a sample address" />
+</Frame>
+
+The test email uses the current content in the editor, even if it isn't saved yet. It also uses the current test parameters as well as Cc and Bcc. Sending a test doesn't save the template.
+
+Check in the real inbox:
+
+- Sender and subject
+- All inserted variables
+- Links and calls to action
+- Display on desktop and smartphone
+- Spacing, colors, and formatting
+- The automatically generated plain-text alternative, if your email client shows it
+
+### 11. Save
+
+After a change, the save icon becomes active.
+
+- For **Standard** or **Empty**, the action is called **Save as custom**. This creates a custom version for your brand. toern's standard template stays unchanged.
+- For **Custom**, the action is called **Save changes**. This updates your existing version.
+
+Before saving, it's best to proceed like this:
+
+1. Switch to **HTML source**.
+2. Check the preview.
+3. Send a test email.
+4. Fix all red errors and, where possible, yellow warnings.
+5. Click **Save as custom** or **Save changes**.
+6. Wait for the confirmation and check that the badge now shows **Custom**.
+
+The saved custom version is used for all future emails of the event in the selected language.
+
+### 12. Revert to the standard template
+
+If a template has the status **Custom**, **Revert to standard** is available.
+
+1. Select the right event.
+2. Select the right language.
+3. Click **Revert to standard**.
+4. Confirm reverting to the standard template.
+
+This only removes the custom version of this event-language combination. Other languages and templates stay unchanged.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Open email editor isn't shown">
+    Check the notification service. With Klaviyo, you edit templates in Klaviyo. If the link is also missing with the toern service, your user account may lack the required permission.
+  </Accordion>
+  <Accordion title="Save is disabled">
+    The button only becomes active once savable content has changed. Also, the subject and content can't be empty.
+  </Accordion>
+  <Accordion title="A variable is marked yellow">
+    The variable probably doesn't belong to the selected event. Use a variable from the **Variables** tab, even if the editor lets you save with the warning.
+  </Accordion>
+  <Accordion title="Saving or sending a test is stopped with a red error">
+    Open the HTML source, hover over the marked spot, and fix the syntax. Also check that all variable blocks are opened and closed correctly.
+  </Accordion>
+  <Accordion title="The test email looks different from the preview">
+    The preview is a quick content check. You only see the full layout and the rules of each email client when actually sending. Go by the test email.
+  </Accordion>
+</AccordionGroup>
+
+## Checklist before going live
+
+- Right event and right variant selected
+- Every required language checked and saved
+- Subject complete and clear
+- Only supported variables used
+- Cc and Bcc checked
+- Preview checked with realistic, made-up test values
+- Custom version saved successfully
+- Event switched on under **Customer Notifications**

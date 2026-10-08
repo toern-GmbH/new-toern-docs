@@ -1,8 +1,146 @@
 ---
 title: "Retoureneinstellungen"
-description: "Allgemeine Einstellungen für Retouren und zurückkommende Pakete."
+description: "Lege Retourenfrist, Kundenbenachrichtigungen, Klärfälle und ausgeschlossene Artikel für deinen Retourenprozess fest."
 ---
 
+Unter **Settings → Return** passt du alle allgemeinen Einstellungen für deinen Retourenprozess an. So bestimmst du, wie lange Kunden retournieren können, welche E-Mails sie bekommen und wann eine Retoure manuell geprüft werden soll.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Die versandbezogenen Einstellungen auf dieser Seite (Return Countries, Fallback Label Sender Address, Label Order Identifier und Return Slip Attachment) findest du unter [Rücksendemethoden](/returns/return-methods).
 </Note>
+
+## Return Period
+
+Die Retourenfrist ist der Zeitraum, in dem deine Kunden eine Retoure anmelden können. Du kannst eine beliebige Anzahl an Tagen festlegen.
+
+toern rechnet automatisch **4 Tage Puffer** auf die Frist auf. Erfahrungsgemäß kommen die Versandinformationen oft verspätet, und eine Bestellung braucht im Schnitt 4 Tage bis zum Kunden. So wird die Frist möglichst erst ab Eingang beim Kunden gezählt und nicht ab Versand aus dem Lager.
+
+<Frame><img src="/images/docs/Settings/ReturnNew01.png" alt="Einstellung der Retourenfrist" /></Frame>
+
+Zusätzlich prüft toern per API, ob es einen neuen Fulfillment-Status zur Bestellung gibt, und passt die Frist entsprechend an. Da diese Status nicht immer 100 % aktuell sind, bleibt der Puffer von 4 Tagen bestehen.
+
+<Warning>
+  Nach deutschem Recht gelten mindestens 14 Tage für den Widerruf eines Kaufvertrags.
+</Warning>
+
+## Customer Notifications
+
+Im Retourenprozess gibt es viele Schritte, von der Labelerstellung bis zur Rückerstattung. Damit deine Kunden immer informiert sind, kannst du bei diesen Schritten E-Mails auslösen:
+
+1. Kunde hat die Bestellnummer vergessen
+2. Retoure wurde registriert (es steht noch nicht fest, wie es weitergeht, also mit oder ohne Label)
+3. Retoure wurde registriert und die Infos für die nächsten Schritte stehen bereit
+4. Retoure ist auf dem Weg zum Fulfillment Center
+5. Retoure ist im Fulfillment Center angekommen
+6. Retoure wurde klassifiziert bzw. inspiziert
+7. Retoure wurde erstattet
+8. Retoure wurde abgeschlossen
+9. Retoure wurde storniert
+
+<Frame><img src="/images/docs/Settings/ReturnNew03.png" alt="Einstellungen für E-Mail-Benachrichtigungen" /></Frame>
+
+Mit den Toggles legst du fest, ob eine E-Mail ausgelöst wird. Standardmäßig versendet toern die E-Mails mit seinen Standardvorlagen.
+
+Die Schritte 1 und 3 kannst du nicht ausschalten. Sie sind für die Anmeldung einer Retoure grundlegend.
+
+<Warning>
+  Bei einer Rückerstattung verschickt Shopify in der Regel ohnehin eine E-Mail. Stelle sicher, dass sich die E-Mails nicht ungewollt doppeln.
+</Warning>
+
+### E-Mail-Vorlagen anpassen
+
+Ist **Transactional E-Mails by toern** als Notification Service ausgewählt, kannst du die Vorlagen über **Open email editor** oder das Stift-Symbol neben einem Event anpassen. Event, Sprache, Betreff, Cc/Bcc und Inhalt werden dabei separat gespeichert. Der Editor ändert nicht den Send-Toggle des Events.
+
+<CardGroup cols={2}>
+  <Card title="E-Mail-Vorlagen" icon="envelope" href="/branding/email-templates">
+    Schritt-für-Schritt-Anleitung für Templates, Variablen, Vorschau und Testversand
+  </Card>
+  <Card title="Klaviyo" icon="plug" href="/integrations/klaviyo">
+    Alternative Zustellung und eigene Flows in Klaviyo
+  </Card>
+</CardGroup>
+
+<Warning>
+  Sobald du den Notification Service auf Klaviyo umstellst, versendet toern keine E-Mails mehr. Stelle vor dem Speichern sicher, dass die Klaviyo-Anbindung funktioniert und alle Flows eingerichtet sind.
+</Warning>
+
+## Return Notification BCC
+
+Für Schritt 3 („Retoure wurde registriert und die Infos für die nächsten Schritte stehen bereit“) kannst du zusätzlich beliebige E-Mail-Adressen ins BCC setzen. Diese Adressen bekommen dann bei jeder registrierten Retoure eine E-Mail.
+
+1. Klicke auf **Add E-mail**.
+2. Gib die gewünschte E-Mail-Adresse ein.
+3. Wiederhole das bei Bedarf für weitere Adressen.
+
+<Frame><img src="/images/docs/Settings/ReturnNew04.png" alt="Einstellungen für Return Notification BCC" /></Frame>
+
+<Note>
+  Bei einem hohen Retourenvolumen kann das zu sehr vielen E-Mails führen.
+</Note>
+
+## Inspection based Clarifications
+
+Hier legst du fest, bei welcher Klassifizierung deines Fulfillers ein Klärfall erstellt wird. Ein Klärfall stoppt die Automatisierung, sodass du die Retoure manuell prüfen kannst.
+
+Fulfiller können für jeden retournierten Artikel eine Klassifizierung von **A bis D** an toern übergeben. In der Regel gilt:
+
+- **A**: wiederverkäuflicher Artikel
+- **B** und **C**: Abstufungen dazwischen
+- **D**: defekter, nicht wiederverkäuflicher Artikel
+
+Welche Klassifizierungen einen Klärfall auslösen, hängt von deinen Absprachen mit dem Fulfillment-Dienstleister ab. Du kannst die Einstellung jederzeit anpassen.
+
+Im Dropdown **Default Classification** kannst du ausschließlich Klassifizierung A auswählen. Ist A nicht aktiviert, bleibt die Auswahl auf **None** und das Dropdown ist deaktiviert. Bereits vorhandene Klassifizierungen werden nicht überschrieben. Eine automatische Klassifizierung wird in der Aktivitäts-Timeline dokumentiert.
+
+<Frame><img src="/images/docs/Settings/ReturnNew10.png" alt="Klärfälle basierend auf der Klassifizierung" /></Frame>
+
+## Warn About Unclassified Items
+
+Mit dieser Einstellung erscheint eine Warnung, wenn du eine Retoure mit **Mark inspected** als inspiziert markierst, obwohl noch nicht alle Artikel klassifiziert sind. Vor dem Fortfahren musst du einen Bestätigungsdialog bestätigen.
+
+So stellst du sicher, dass jeder Artikel einer Retoure korrekt bewertet wurde (z. B. A–D) und der Prozess nicht zu früh abgeschlossen wird.
+
+<Frame><img src="/images/docs/Settings/ManageReturnsInspectionWarning.png" alt="Warnung bei nicht klassifizierten Artikeln" width="600" /></Frame>
+
+## Fulfillment based Clarifications
+
+Besteht eine API-Verbindung zu deinem Fulfillment-Dienstleister, kann dieser zu jedem retournierten Artikel zusätzliche Hinweise übermitteln. Sie beziehen sich auf den Artikel oder die ganze Retoure. Beispiele sind:
+
+- Die Annahme wurde durch den Kunden verweigert.
+- Die Bestellung konnte nicht zugestellt werden.
+- Die Verpackung ist beschädigt.
+
+Damit solche Retouren nicht automatisch durchlaufen, kannst du bei bestimmten Hinweisen automatisch einen Klärfall erstellen lassen.
+
+1. Klicke auf **Add Reason**.
+2. Gib den Text des Hinweises ein, den dein Fulfiller an toern überträgt.
+3. Optional: Lege eine Anpassung der Rückerstattung fest.
+
+<Warning>
+  Der Text muss **exakt** gleich geschrieben sein wie der Hinweis deines Fulfillers. Sonst kann toern das Matching nicht durchführen.
+</Warning>
+
+Über die Anpassung kannst du den Erstattungsbetrag je nach Hinweis reduzieren oder erhöhen. Du kannst zum Beispiel die Retourengebühr erhöhen, wenn der Kunde die Annahme verweigert hat und dir dadurch Mehraufwand entsteht. Kommuniziere solche Kosten transparent in deinem Shop.
+
+<Frame><img src="/images/docs/Settings/ReturnNew08.png" alt="Klärfälle basierend auf Hinweisen des Fulfillers" /></Frame>
+
+Alle Gründe kannst du nachträglich bearbeiten oder entfernen.
+
+## Blacklist Articles
+
+Hier schließt du einzelne Artikel von der Retourenanmeldung und dem gesamten Retourenprozess aus. Deine Kunden sehen dann im Portal den Hinweis, dass **keine Retoure möglich** ist.
+
+Suche die Artikel über ihre **SKU** und füge sie hinzu.
+
+<Frame><img src="/images/docs/Settings/ReturnNew09.png" alt="Artikel vom Retourenprozess ausschließen" /></Frame>
+
+## Einschränkungen
+
+<Warning>
+  **E-Mail-Benachrichtigungen**
+  - Die verfügbaren E-Mail-Events sind durch toern vorgegeben. Du kannst sie je nach Event aktivieren oder deaktivieren.
+  - Der E-Mail-Editor ist ein HTML- und Variablen-Editor, kein visueller Drag-and-drop-Builder.
+
+  **Klärfälle**
+  - Automatische Klärfälle auf Basis der Inspektion werden nur über die Klassifizierung (A–D) definiert. Du entscheidest selbst, bei welcher Klassifizierung ein Klärfall erstellt wird, und sprichst das mit deinem Fulfillment ab. Auf Basis von Retourengründen und Notizen werden keine Klärfälle automatisch erstellt.
+</Warning>

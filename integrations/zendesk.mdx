@@ -1,8 +1,93 @@
 ---
 title: "Zendesk"
-description: "Verbinde Zendesk mit toern."
+description: "Zeige Retoureninformationen direkt in Zendesk-Tickets an und leite Customer Tickets aus toern automatisch an Zendesk weiter."
 ---
 
-<Note>
-  Diese Seite ist in Arbeit.
-</Note>
+Mit der **Zendesk-Integration** hat dein Support-Team alle Retoureninformationen direkt in Zendesk. Du musst nicht zwischen den Tools wechseln.
+
+## Was ermöglicht die Integration?
+
+toern bietet für Zendesk eine doppelte Integration an:
+
+1. **toern-App in Zendesk**: Du installierst toern als Zendesk-App. Gibt es zu einem Ticket eine Retoure, siehst du die Retoureninformationen direkt im Ticket.
+2. **Customer Tickets in Zendesk**: Alle [Customer Tickets](/dashboard/customer-tickets), die toern automatisch erstellt, werden an Zendesk weitergegeben und dort als Ticket angelegt. So kannst du direkt in Zendesk darauf reagieren.
+
+## Einrichtung
+
+### Zugangsdaten in toern hinterlegen
+
+1. Öffne dein toern Dashboard.
+2. Navigiere zu [Settings → Third Party Services → Zendesk](https://www.admin.re-toern.de/settings/third-party/zendesk).
+3. Trage deine **Zendesk Subdomain** ein. Das ist der Anfang deiner Zendesk-URL. Bei `https://toerngmbh.zendesk.com/agent/home/tickets` ist die Subdomain zum Beispiel `toerngmbh`.
+4. Trage die **Zendesk User Email** deines Admin-Users ein.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew01.png" alt="Zendesk Access Credentials in toern" /></Frame>
+
+### Zendesk Access Token erstellen
+
+Der **Zendesk Access Token** stellt die Verbindung zu Zendesk her. Du erstellst ihn im Admin Center von Zendesk.
+
+1. Öffne in Zendesk das **Admin Center**.
+2. Navigiere zu **API → API tokens**.
+3. Erstelle einen neuen Token und kopiere ihn.
+4. Hinterlege den Token in den Zendesk-Einstellungen in toern.
+
+<Warning>
+  Der Token ist nur einmal sichtbar. Kopiere ihn daher sofort.
+</Warning>
+
+<Warning>
+  Damit das Management der Customer Tickets funktioniert, muss im Admin Center unter **API → API configurations** das Kästchen **Allow API token access** aktiviert sein.
+</Warning>
+
+### Zendesk aktivieren
+
+Sobald deine Zugangsdaten hinterlegt sind, schaltest du die Integration ein.
+
+- **Active**: Aktiviert die Integration mit Zendesk.
+- **Create Tickets from Portal**: Leitet die Customer Tickets aus toern automatisch an Zendesk weiter, damit du sie dort bearbeiten kannst.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew02.png" alt="Zendesk aktivieren" /></Frame>
+
+### API Portal Token generieren
+
+Für die Installation der toern-App in Zendesk brauchst du einen **toern API Portal Token**. Über diesen Token erkennt Zendesk deine Brand.
+
+1. Generiere den Token in den Zendesk-Einstellungen in toern.
+2. Kopiere ihn, sobald Zendesk während der App-Installation danach fragt.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew03.png" alt="toern API Portal Token" /></Frame>
+
+### toern-App in Zendesk installieren
+
+1. Öffne in Zendesk das **Admin Center**.
+2. Navigiere zu **Apps → Zendesk Support-Apps**.
+3. Klicke auf **Private App hochladen** und lade die `.zip`-Datei der toern-App hoch.
+4. Gib als Namen „toern Returns Integration“ ein und klicke auf **Hochladen**.
+5. Füge den **toern API Portal Token** ein.
+6. Füge die **allowed Domain** ein (siehe unten).
+7. Installiere die App. Weitere Einstellungen sind nicht nötig.
+
+<Info>
+  Die `.zip`-Datei heißt zum Beispiel `toernReturnsIntegration-V28.zip` und wird exklusiv von toern bereitgestellt. Falls du sie noch brauchst, melde dich bei [support@re-toern.de](mailto:support@re-toern.de).
+</Info>
+
+### Domain whitelisten
+
+Während der Installation fragt Zendesk nach einer Domain zum Whitelisten. Die passende toern-Domain findest du am Ende der Zendesk-Einstellungen in toern. Kopiere sie und füge sie in Zendesk ein. Nur so läuft die App fehlerfrei.
+
+<Frame><img src="/images/docs/Settings/ZendeskNew04.png" alt="Domain für die Whitelist" /></Frame>
+
+### Interaktive Anleitung
+
+<Frame><iframe src="https://app.guideflow.com/embed/gky24j0u4r" width="100%" height="600" style={{ border: 0 }} allow="clipboard-read; clipboard-write; fullscreen" allowFullScreen /></Frame>
+
+## Nutzung in Zendesk
+
+Sobald die toern-App installiert ist, findest du sie in deinen Zendesk-Tickets unter **Apps**. Dort siehst du alle relevanten Informationen zu den Retouren, die zum Ticket gehören.
+
+Wenn **Create Tickets from Portal** aktiv ist, erscheinen außerdem alle Customer Tickets aus toern als neue Tickets in Zendesk.
+
+## Einschränkungen
+
+- toern bietet aktuell nur eine private App für die Zendesk-Integration an. Dafür brauchst du in Zendesk mindestens den **Growth**-Plan.
