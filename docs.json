@@ -1,13 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "toern Retourenmanagement",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#092523",
+    "light": "#1FC16B",
+    "dark": "#092523"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/images/toern-logomark.svg",
+    "dark": "/images/toern-logomark.svg"
+  },
   "navigation": {
     "pages": [
       {
@@ -34,8 +37,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/Logotype(1).svg",
+    "dark": "/images/Logotype.svg"
   },
   "navbar": {
     "links": [
@@ -68,5 +71,8 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "fonts": {
+    "family": "Geist"
   }
 }
