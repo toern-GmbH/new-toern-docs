@@ -22,15 +22,118 @@
             "groups": [
               {
                 "group": "Erste Schritte",
+                "icon": "rocket",
                 "pages": [
                   "index",
-                  "quickstart"
+                  "getting-started/shopify-integration",
+                  "getting-started/brand-your-portal",
+                  "getting-started/return-portal-logic"
+                ]
+              },
+              {
+                "group": "Retoureneinstellungen",
+                "icon": "box",
+                "pages": [
+                  "returns/return-reasons",
+                  "returns/return-methods",
+                  "returns/refund",
+                  "returns/gift-card-refund",
+                  "returns/exchange",
+                  "returns/return-portal",
+                  "returns/return-settings",
+                  "returns/sets"
+                ]
+              },
+              {
+                "group": "Widerruf",
+                "icon": "file-signature",
+                "pages": [
+                  "withdrawal/withdrawal-portal",
+                  "withdrawal/withdrawal-settings"
+                ]
+              },
+              {
+                "group": "Reklamationen",
+                "icon": "triangle-exclamation",
+                "pages": [
+                  "claims/claim-portal",
+                  "claims/claim-settings"
+                ]
+              },
+              {
+                "group": "Branding",
+                "icon": "palette",
+                "pages": [
+                  "branding/general",
+                  "branding/languages",
+                  "branding/email-templates",
+                  "branding/portal-templates"
+                ]
+              },
+              {
+                "group": "Fulfillment",
+                "icon": "warehouse",
+                "pages": [
+                  "fulfillment/fulfillment-integration",
+                  "fulfillment/ffn-connect-jtl-partner"
+                ]
+              },
+              {
+                "group": "Shopify",
+                "icon": "shopify",
+                "pages": [
+                  "shopify/app",
+                  "shopify/plan"
+                ]
+              },
+              {
+                "group": "toern Dashboard",
+                "icon": "gauge",
+                "pages": [
+                  "dashboard/analytics",
+                  "dashboard/manage-returns",
+                  "dashboard/process-flows",
+                  "dashboard/customer-tickets",
+                  "dashboard/user-management",
+                  "dashboard/import-orders",
+                  "dashboard/user-settings"
+                ]
+              },
+              {
+                "group": "Versanddienstleister",
+                "icon": "truck",
+                "pages": [
+                  "carriers/dhl",
+                  "carriers/dpd",
+                  "carriers/gls",
+                  "carriers/postnord",
+                  "carriers/post-at",
+                  "carriers/quivo",
+                  "carriers/exporto"
                 ]
               },
               {
                 "group": "Integrationen",
+                "icon": "plug",
                 "pages": [
-                  "integrations/ffn-connect-jtl-partner"
+                  "integrations/klaviyo",
+                  "integrations/xentral",
+                  "integrations/zendesk",
+                  "integrations/sendcloud"
+                ]
+              },
+              {
+                "group": "FAQ",
+                "icon": "circle-question",
+                "pages": [
+                  "faq"
+                ]
+              },
+              {
+                "group": "Sonstiges",
+                "icon": "ellipsis",
+                "pages": [
+                  "glossary"
                 ]
               }
             ]
@@ -63,15 +166,118 @@
             "groups": [
               {
                 "group": "Getting Started",
+                "icon": "rocket",
                 "pages": [
                   "en/index",
-                  "en/quickstart"
+                  "en/getting-started/shopify-integration",
+                  "en/getting-started/brand-your-portal",
+                  "en/getting-started/return-portal-logic"
+                ]
+              },
+              {
+                "group": "Return Settings",
+                "icon": "box",
+                "pages": [
+                  "en/returns/return-reasons",
+                  "en/returns/return-methods",
+                  "en/returns/refund",
+                  "en/returns/gift-card-refund",
+                  "en/returns/exchange",
+                  "en/returns/return-portal",
+                  "en/returns/return-settings",
+                  "en/returns/sets"
+                ]
+              },
+              {
+                "group": "Withdrawal",
+                "icon": "file-signature",
+                "pages": [
+                  "en/withdrawal/withdrawal-portal",
+                  "en/withdrawal/withdrawal-settings"
+                ]
+              },
+              {
+                "group": "Claims",
+                "icon": "triangle-exclamation",
+                "pages": [
+                  "en/claims/claim-portal",
+                  "en/claims/claim-settings"
+                ]
+              },
+              {
+                "group": "Branding",
+                "icon": "palette",
+                "pages": [
+                  "en/branding/general",
+                  "en/branding/languages",
+                  "en/branding/email-templates",
+                  "en/branding/portal-templates"
+                ]
+              },
+              {
+                "group": "Fulfillment",
+                "icon": "warehouse",
+                "pages": [
+                  "en/fulfillment/fulfillment-integration",
+                  "en/fulfillment/ffn-connect-jtl-partner"
+                ]
+              },
+              {
+                "group": "Shopify",
+                "icon": "shopify",
+                "pages": [
+                  "en/shopify/app",
+                  "en/shopify/plan"
+                ]
+              },
+              {
+                "group": "toern Dashboard",
+                "icon": "gauge",
+                "pages": [
+                  "en/dashboard/analytics",
+                  "en/dashboard/manage-returns",
+                  "en/dashboard/process-flows",
+                  "en/dashboard/customer-tickets",
+                  "en/dashboard/user-management",
+                  "en/dashboard/import-orders",
+                  "en/dashboard/user-settings"
+                ]
+              },
+              {
+                "group": "Carriers",
+                "icon": "truck",
+                "pages": [
+                  "en/carriers/dhl",
+                  "en/carriers/dpd",
+                  "en/carriers/gls",
+                  "en/carriers/postnord",
+                  "en/carriers/post-at",
+                  "en/carriers/quivo",
+                  "en/carriers/exporto"
                 ]
               },
               {
                 "group": "Integrations",
+                "icon": "plug",
                 "pages": [
-                  "en/integrations/ffn-connect-jtl-partner"
+                  "en/integrations/klaviyo",
+                  "en/integrations/xentral",
+                  "en/integrations/zendesk",
+                  "en/integrations/sendcloud"
+                ]
+              },
+              {
+                "group": "FAQ",
+                "icon": "circle-question",
+                "pages": [
+                  "en/faq"
+                ]
+              },
+              {
+                "group": "Other",
+                "icon": "ellipsis",
+                "pages": [
+                  "en/glossary"
                 ]
               }
             ]
@@ -147,11 +353,27 @@
   "redirects": [
     {
       "source": "/quickstart-2",
-      "destination": "/quickstart"
+      "destination": "/getting-started/shopify-integration"
+    },
+    {
+      "source": "/quickstart",
+      "destination": "/getting-started/shopify-integration"
+    },
+    {
+      "source": "/en/quickstart",
+      "destination": "/en/getting-started/shopify-integration"
     },
     {
       "source": "/ffn-connect-jtl-partner",
-      "destination": "/integrations/ffn-connect-jtl-partner"
+      "destination": "/fulfillment/ffn-connect-jtl-partner"
+    },
+    {
+      "source": "/integrations/ffn-connect-jtl-partner",
+      "destination": "/fulfillment/ffn-connect-jtl-partner"
+    },
+    {
+      "source": "/en/integrations/ffn-connect-jtl-partner",
+      "destination": "/en/fulfillment/ffn-connect-jtl-partner"
     }
   ]
 }
