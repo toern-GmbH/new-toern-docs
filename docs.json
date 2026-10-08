@@ -14,34 +14,87 @@
   "navigation": {
     "languages": [
       {
-        "language": "en",
-        "pages": [
+        "language": "de",
+        "default": true,
+        "tabs": [
           {
-            "group": "Getting Started",
-            "pages": [
-              "index",
-              "quickstart"
+            "tab": "Dokumentation",
+            "groups": [
+              {
+                "group": "Erste Schritte",
+                "pages": [
+                  "index",
+                  "quickstart"
+                ]
+              },
+              {
+                "group": "Integrationen",
+                "pages": [
+                  "integrations/ffn-connect-jtl-partner"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "API Reference",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Endpoints",
+                "openapi": {
+                  "source": "toern-api-v1.json",
+                  "directory": "api-reference"
+                }
+              }
             ]
           }
         ]
       },
       {
-        "language": "de",
-        "groups": [
+        "language": "en",
+        "tabs": [
           {
-            "group": "Getting Started",
-            "pages": [
-              "quickstart-2"
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "en/index",
+                  "en/quickstart"
+                ]
+              },
+              {
+                "group": "Integrations",
+                "pages": [
+                  "en/integrations/ffn-connect-jtl-partner"
+                ]
+              }
             ]
           },
           {
-            "group": "Integrations",
-            "pages": [
-              "ffn-connect-jtl-partner"
+            "tab": "API Reference",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "en/api-reference/introduction"
+                ]
+              },
+              {
+                "group": "Endpoints",
+                "openapi": {
+                  "source": "toern-api-v1.json",
+                  "directory": "en/api-reference"
+                }
+              }
             ]
           }
-        ],
-        "default": true
+        ]
       }
     ]
   },
@@ -81,7 +134,6 @@
     }
   },
   "api": {
-    "openapi": "toern-api-v1.json",
     "params": {
       "expanded": "all"
     },
@@ -91,5 +143,15 @@
     "examples": {
       "defaults": "all"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/quickstart-2",
+      "destination": "/quickstart"
+    },
+    {
+      "source": "/ffn-connect-jtl-partner",
+      "destination": "/integrations/ffn-connect-jtl-partner"
+    }
+  ]
 }

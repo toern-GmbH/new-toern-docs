@@ -1,0 +1,26 @@
+---
+title: "Introduction"
+description: "Access your returns programmatically with the toern External API v1."
+---
+
+The toern External API returns JSON for every request. The base URL is `https://api.retoern.com`.
+
+## Authentication
+
+Authenticate with a bearer token:
+
+```bash
+Authorization: Bearer toern_<kid>.<secret>
+```
+
+Create API keys in your toern dashboard under **Settings → REST API Keys**. Each key is scoped to one brand and only sees that brand's data.
+
+<Warning>
+  The API key is only shown once, right after it is created. Copy it immediately and store it securely.
+</Warning>
+
+## Conventions
+
+- Every timestamp is ISO 8601 UTC.
+- Every URL in a response (label PDFs, feedback images, questionnaire images) is presigned and expires. Download the files rather than storing the URLs.
+- The returns resource answers per **order**, not per return. If a customer ships an order back in several packages, the returns are collapsed into one entry. See the `Return` schema for how fields are merged, and read the `pageSize` notes before you implement pagination.

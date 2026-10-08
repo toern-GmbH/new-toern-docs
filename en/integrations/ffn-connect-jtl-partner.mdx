@@ -1,0 +1,78 @@
+---
+title: "FFN Connect (JTL Partner)"
+---
+
+With the **FFN Connect integration** you can connect your fulfillment directly to toern. You automatically receive information about which items were returned and what condition they are in.
+
+If your fulfillment works with JTL-Wawi, FFN Connect provides a simple connection to toern.
+
+<Warning>
+  For the integration, either you or your fulfillment provider needs a paid membership with [FFN Connect](https://ffn-connect.de/).
+</Warning>
+
+## What does the integration do?
+
+The integration provides two core functions:
+
+1. **Pre-announce returns**: As soon as customers register a return in toern, the information is automatically sent to FFN Connect and is visible in JTL. Your fulfillment can prepare for incoming returns early.
+2. **Process returns automatically**: As soon as your fulfillment processes and completes a return in JTL, the information, including item condition, is automatically sent to toern. This lets automations such as refunds or replacement orders trigger directly.
+
+## Setup
+
+### Create an API key in toern
+
+First, you need an API key to connect FFN Connect to toern.
+
+1. Open your toern dashboard.
+2. Navigate to Settings → REST API Keys.
+3. Create a new API key.
+4. Copy the generated API key.
+
+<Warning>
+  The API key is only shown once, right after it is created. Copy it immediately and store it securely.
+</Warning>
+
+### Activate the integration in FFN Connect
+
+1. Log in to FFN Connect.
+2. Navigate to Settings → Return portal.
+3. Add toern as your returns management system.
+4. Enter the API key you created earlier.
+
+### Configure the integration
+
+In the **Settings** you define how returns are processed between toern, FFN Connect, and JTL.
+
+![Image](/images/image-1.png "Image")
+
+#### Shopify shop and warehouse
+
+- Shopify shop: Select the connected Shopify shop whose orders should be synchronized automatically.
+- Default warehouse: Define the warehouse returns are assigned to by default.
+- Return reasons: Map the Shopify return reasons to the corresponding internal JTL return reasons. This mapping is optional. Without a mapping, "No reason" is used automatically.
+
+![Image](/images/image-2.png "Image")
+
+#### Classification rules
+
+Classification rules define how your fulfillment's condition assessment is sent to toern.
+
+To do this, map the notes from JTL to the corresponding item classifications (A/B/C/D) in toern.
+
+For example, toern can distinguish between flawless and damaged items and run or pause the matching automations depending on the condition.
+
+![Image](/images/image-3.png "Image")
+
+#### Return retrieval
+
+Define whether registered returns should be retrieved from toern automatically and sent to FFN Connect.
+
+![Image](/images/image-4.png "Image")
+
+#### Manage returns in FFN Connect
+
+Under the Returns menu item in FFN Connect you find both pre-announced returns and returns already completed in JTL.
+
+This gives you an overview of incoming returns and their processing status at all times.
+
+![Image](/images/image-5.png "Image")
