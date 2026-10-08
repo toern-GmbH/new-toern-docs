@@ -12,15 +12,6 @@
     "dark": "/images/toern-logomark.svg"
   },
   "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
     "global": {
       "anchors": [
         {
@@ -34,7 +25,38 @@
           "icon": "newspaper"
         }
       ]
-    }
+    },
+    "languages": [
+      {
+        "language": "en",
+        "pages": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "index",
+              "quickstart"
+            ]
+          }
+        ]
+      },
+      {
+        "language": "de",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": [
+              "quickstart-2"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "ffn-connect-jtl-partner"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/images/Logotype.svg",

@@ -1,0 +1,78 @@
+---
+title: "FFN Connect (JTL Partner)"
+---
+
+Mit der **FFN Connect Integration** kannst du dein Fulfillment direkt mit toern verbinden. So erhältst du automatisch Informationen darüber, welche Artikel retourniert wurden und in welchem Zustand sie sich befinden.
+
+Wenn dein Fulfillment mit JTL-Wawi arbeitet, ermöglicht FFN Connect eine einfache Anbindung an toern.
+
+<Warning>
+  Für die Integration benötigst entweder du oder dein Fulfillment-Dienstleister eine kostenpflichtige Mitgliedschaft bei [FFN Connect](https://ffn-connect.de/).
+</Warning>
+
+## Was ermöglicht die Integration?
+
+Die Integration bietet zwei zentrale Funktionen:
+
+1. **Retouren vorankündigen**: Sobald Kunden eine Retoure in toern anmelden, werden die Informationen automatisch an FFN Connect übertragen und sind in JTL einsehbar. So kann sich dein Fulfillment frühzeitig auf eingehende Retouren vorbereiten.
+2. **Retouren automatisch verarbeiten**: Sobald dein Fulfillment eine Retoure in JTL bearbeitet und abschließt, werden die Informationen inklusive Artikelzustand automatisch an toern übermittelt. Dadurch können Automatisierungen wie Rückerstattungen oder Ersatzbestellungen direkt ausgelöst werden.
+
+## Einrichtung
+
+### API-Key in toern erstellen
+
+Zunächst benötigst du einen API-Key, um FFN Connect mit toern zu verbinden.
+
+1. Öffne dein toern Dashboard.
+2. Navigiere zu Settings → REST API Keys.
+3. Erstelle einen neuen API-Key.
+4. Kopiere den generierten API-Key.
+
+<Warning>
+  Der API-Key wird nur einmalig direkt nach der Erstellung angezeigt. Kopiere ihn daher sofort und bewahre ihn sicher auf.
+</Warning>
+
+### Integration in FFN Connect aktivieren
+
+1. Melde dich bei FFN Connect an.
+2. Navigiere zu Einstellungen → Retourenportal.
+3. Füge toern als Retourenmanagement-System hinzu.
+4. Trage deinen zuvor erstellten API-Key ein.
+
+### Integration konfigurieren
+
+In den **Einstellungen** kannst du festlegen, wie Retouren zwischen toern, FFN Connect und JTL verarbeitet werden.
+
+![Image](/images/image-1.png "Image")
+
+#### Shopify-Shop und Lager
+
+- Shopify-Shop: Wähle den verbundenen Shopify-Shop aus, dessen Bestellungen automatisch synchronisiert werden sollen.
+- Standardlager: Lege das Lager fest, dem die Retouren standardmäßig zugeordnet werden.
+- Retourengründe: Ordne den Retourengründen aus Shopify die entsprechenden internen JTL-Retourengründe zu. Diese Zuordnung ist optional. Ohne Zuordnung wird automatisch „Kein Grund“ verwendet.
+
+![Image](/images/image-2.png "Image")
+
+#### Klassifizierungsregeln
+
+Über Klassifizierungsregeln kannst du festlegen, wie die Zustandsbewertung deines Fulfillments an toern übertragen wird.
+
+Dazu ordnest du den Notizen aus JTL die entsprechenden Artikelklassifizierungen (A/B/C/D) in toern zu.
+
+So kann toern beispielsweise zwischen einwandfreien und beschädigten Artikeln unterscheiden und abhängig vom Zustand die passenden Automatisierungen ausführen oder unterbrechen.
+
+![Image](/images/image-3.png "Image")
+
+#### Retourenabruf
+
+Lege fest, ob angemeldete Retouren automatisch aus toern abgerufen und an FFN Connect übertragen werden sollen.
+
+![Image](/images/image-4.png "Image")
+
+#### Retouren in FFN Connect verwalten
+
+Unter dem Menüpunkt Retouren in FFN Connect findest du sowohl vorangekündigte als auch bereits in JTL abgeschlossene Retouren.
+
+Damit hast du jederzeit einen Überblick über eingehende Retouren und deren Bearbeitungsstatus.
+
+![Image](/images/image-5.png "Image")
