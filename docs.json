@@ -12,20 +12,6 @@
     "dark": "/images/toern-logomark.svg"
   },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    },
     "languages": [
       {
         "language": "en",
@@ -54,7 +40,8 @@
               "ffn-connect-jtl-partner"
             ]
           }
-        ]
+        ],
+        "default": true
       }
     ]
   },
@@ -94,6 +81,15 @@
     }
   },
   "api": {
-    "openapi": "toern-api-v1.json"
+    "openapi": "toern-api-v1.json",
+    "params": {
+      "expanded": "all"
+    },
+    "playground": {
+      "display": "none"
+    },
+    "examples": {
+      "defaults": "all"
+    }
   }
 }
