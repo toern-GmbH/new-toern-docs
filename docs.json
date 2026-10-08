@@ -92,5 +92,8 @@
       "linkedin": "https://www.linkedin.com/company/toern",
       "website": "https://re-toern.de/"
     }
+  },
+  "api": {
+    "openapi": "toern-api-v1.json"
   }
 }

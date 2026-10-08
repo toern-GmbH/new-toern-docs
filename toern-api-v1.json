@@ -1,0 +1,1111 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "toern External API v1",
+    "version": "1.0.0",
+    "description": "External API for returns. All responses are JSON. Authenticate with `Authorization: Bearer toern_<kid>.<secret>`; a key is scoped to one brand and only ever sees that brand's data. Every timestamp is ISO 8601 UTC. Every URL in a response (label PDFs, feedback images, questionnaire images) is presigned and expires — download rather than store them. The returns resource answers per ORDER, not per return: a customer shipping an order back in several packages produces several returns, and they are collapsed into one entry — see the `Return` schema for how the fields are merged, and read the `pageSize` notes before you write pagination."
+  },
+  "servers": [
+    {
+      "url": "https://api.retoern.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Returns"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Send `Authorization: Bearer <api_key>`. Keys have the form `toern_<kid>.<secret>` and are created in the admin dashboard under Settings → API keys; the secret is shown once, at creation. A key is scoped to one brand, and every endpoint only ever sees that brand's returns."
+      }
+    },
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Human-readable cause. On a 500 this is always the literal \"Internal Server Error\" — the detail is only logged on our side, never returned."
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "Machine-readable code, present on some 400s only. Branch on the status code, not on this."
+          }
+        },
+        "description": "Error response"
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "full_name": { "type": "string" },
+          "email": { "type": "string" },
+          "country": { "type": "string" },
+          "zip": { "type": "string" }
+        },
+        "required": ["full_name", "email", "country", "zip"]
+      },
+      "Feedback": {
+        "type": "object",
+        "description": "Free-text, voice and image feedback the customer left. On an order with several returns the texts of every return are joined with \" | \" and the image lists concatenated.",
+        "properties": {
+          "text": { "type": "string" },
+          "text_audio": {
+            "type": "string",
+            "description": "Transcript of the customer's voice feedback."
+          },
+          "images": {
+            "type": "array",
+            "description": "Presigned URLs, valid for a limited time — download rather than store them.",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["text", "text_audio", "images"]
+      },
+      "ReturnReasonShopify": {
+        "type": "string",
+        "description": "The Shopify return reason the brand mapped this return reason to. Empty when the reason has no mapping, and always empty on a set parent row.",
+        "enum": [
+          "",
+          "SIZE_TOO_LARGE",
+          "SIZE_TOO_SMALL",
+          "STYLE",
+          "COLOR",
+          "NOT_AS_DESCRIBED",
+          "WRONG_ITEM",
+          "DEFECTIVE",
+          "UNWANTED",
+          "UNKNOWN",
+          "OTHER"
+        ]
+      },
+      "ReturnItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Variant id of the return item."
+          },
+          "title": { "type": "string" },
+          "quantity": { "type": "integer", "default": 1 },
+          "sku": { "type": "string" },
+          "barcode": { "type": "string" },
+          "amount": {
+            "type": "string",
+            "description": "Price of a single unit as string, e.g. \"105.00\". Each item entry represents one physical unit, so this is the line item total divided by the ordered quantity."
+          },
+          "currency": { "type": "string" },
+          "return_reason": {
+            "type": "string",
+            "description": "The German reason text — same value as `return_reason_de`, kept for compatibility. `\"Unknown\"` when the reason could not be resolved."
+          },
+          "return_reason_de": { "type": "string" },
+          "return_reason_en": { "type": "string" },
+          "return_reason_shopify": {
+            "$ref": "#/components/schemas/ReturnReasonShopify"
+          },
+          "classification": {
+            "type": "string",
+            "description": "Condition grade assigned at inspection. Empty until the item has been inspected."
+          },
+          "added_manually": { "type": "boolean" },
+          "removed_manually": {
+            "type": "boolean",
+            "description": "The item was declared but did not come back, or was removed at inspection. Removed items stay in `items` but are not counted in `quantity`."
+          },
+          "exchanged": { "type": "boolean" },
+          "return_uuid": {
+            "type": "string",
+            "description": "Which return of the order this unit belongs to. Matches one of the entry's `uuids` — the only way to attribute an item on an order returned in several packages."
+          },
+          "feedback": {
+            "$ref": "#/components/schemas/Feedback",
+            "description": "The feedback the customer left for this specific item. The entry-level `feedback` holds everything they left for the whole return."
+          },
+          "is_set_item": {
+            "type": "boolean",
+            "description": "This row is a set PARENT: grouping metadata, not a physical unit, so it is excluded from `quantity`. Its parts are the rows carrying `set_parent_id` equal to this row's `id`. Its `return_reason` says whether the set came back complete (\"Gemischter Grund\") or in part (\"Teilweise Retoure\"), and its `return_reason_shopify` is always empty."
+          },
+          "is_part_of_set": {
+            "type": "boolean",
+            "description": "This row is a sub-article of a set: a real physical unit, counted in `quantity`."
+          },
+          "set_parent_id": {
+            "type": "string",
+            "description": "Sub-articles only: the `id` of the set parent row this unit belongs to."
+          },
+          "set_parent_sku": {
+            "type": "string",
+            "description": "Sub-articles only: the SKU of the set parent."
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "quantity",
+          "sku",
+          "barcode",
+          "amount",
+          "currency",
+          "return_reason",
+          "return_reason_de",
+          "return_reason_en",
+          "return_reason_shopify",
+          "classification",
+          "added_manually",
+          "removed_manually",
+          "exchanged",
+          "return_uuid",
+          "feedback"
+        ]
+      },
+      "Shipment": {
+        "type": "object",
+        "nullable": true,
+        "description": "The return label of one return. Null when no label was created — a return method the customer arranges themselves, or a label that failed.",
+        "properties": {
+          "tracking_number": { "type": "string" },
+          "provider": { "type": "string" },
+          "tracking_url": {
+            "type": "string"
+          },
+          "label_url": {
+            "type": "string",
+            "description": "Presigned URL of the label PDF, valid for a limited time — download rather than store it."
+          }
+        },
+        "required": ["tracking_number", "provider", "tracking_url", "label_url"]
+      },
+      "Return": {
+        "type": "object",
+        "description": "One order's returns, collapsed into a single entry. A customer can ship an order back in several packages, and each package is its own return; this resource always answers per order, combining those returns together. `uuids`, `all_shipments` and each item's `return_uuid` are what let you take the entry apart again. The merge rules that matter: a process-state flag is true if ANY return reached it and its timestamp is the LATEST one; `created_at` is the earliest and `updated_at` the latest; `fetched_via_api` is true only if ALL of them are; `items` are concatenated oldest return first. A declined claim is not part of the entry at all: a claim whose approval was refused is left out, so it contributes no `items`, no `uuid`, no shipment, no return type and no approval status. Its units are released the moment it is refused and can come back on a new return of any type, so the claim reserves nothing and is reported nowhere: its own uuid answers `404`, and so does an order that has nothing else on it.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The shop's order id, without the brand prefix. NOT a per-return identifier and not unique per return — it is the same value as `order_id`, and two returns on one order share it. Use `uuid` to identify a return."
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The most recent return of the order. Use it on the `/v1/returns/uuid/{uuid}` routes to address that single return."
+          },
+          "uuids": {
+            "type": "array",
+            "description": "Every return of the order, oldest first — so an order returned in three packages lists three uuids. Each item's `return_uuid` points at one of these.",
+            "items": { "type": "string" }
+          },
+          "order_id": { "type": "string" },
+          "order_number": { "type": "string" },
+          "order_date": { "type": "string", "format": "date-time" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "updated_at": { "type": "string", "format": "date-time" },
+          "customer": { "$ref": "#/components/schemas/Customer" },
+          "has_feedback": { "type": "boolean" },
+          "feedback": { "$ref": "#/components/schemas/Feedback" },
+          "registered": { "type": "boolean" },
+          "registered_at": {
+            "type": "string",
+            "nullable": true,
+            "description": "ISO date-time or null."
+          },
+          "received": { "type": "boolean" },
+          "received_at": { "type": "string", "nullable": true },
+          "inspected": { "type": "boolean" },
+          "inspected_at": { "type": "string", "nullable": true },
+          "refunded": { "type": "boolean" },
+          "refunded_at": { "type": "string", "nullable": true },
+          "completed": { "type": "boolean" },
+          "completed_at": { "type": "string", "nullable": true },
+          "canceled": { "type": "boolean" },
+          "canceled_at": { "type": "string", "nullable": true },
+          "clarification": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "True while the return has an OPEN clarification, null when it never had one. Note the inversion: this is not a \"reached that state\" flag like the others."
+          },
+          "clarification_at": { "type": "string", "nullable": true },
+          "on_hold": { "type": "boolean" },
+          "on_hold_at": { "type": "string", "nullable": true },
+          "requires_approval": {
+            "type": "boolean",
+            "default": false,
+            "description": "True when a return of this order is behind the claim approval gate. Only claims are ever gated, and only when the brand has claim approval switched on. A declined claim is not reported by a GET, so on a read this is only ever true for a claim still awaiting a decision or already approved."
+          },
+          "approval_status": {
+            "type": "string",
+            "enum": ["not_required", "pending", "approved", "rejected"],
+            "default": "not_required",
+            "description": "Where the approval gate stands. `pending` means a decision is still outstanding — until it is approved no return label is created, no shop return is synced and nothing is refunded. Resolve it with `claim_decision` on the PUT endpoints. An order whose returns disagree reports the most blocking status: pending, then rejected, then approved — and `approval_decided_at` and `approval_reason` then describe that same return, so the three always agree. A GET never answers `rejected`: a declined claim is left out of the entry, so the status is reported only by the PUT that made the decision."
+          },
+          "approval_decided_at": {
+            "type": "string",
+            "nullable": true,
+            "description": "When the decision behind `approval_status` was made. Null while it is `pending`, and always null when no approval is required."
+          },
+          "approval_reason": {
+            "type": "string",
+            "description": "The decline reason shown to the customer. Empty unless `approval_status` is `rejected`, which only the PUT that declined the claim reports — a GET leaves declined claims out. An earlier decline that a newer claim has superseded is not reported here either: the fields describe the return that answers for the current status."
+          },
+          "manual_created": { "type": "boolean", "default": false },
+          "fetched_via_api": { "type": "boolean", "default": false },
+          "is_widerruf": {
+            "type": "boolean",
+            "default": false,
+            "description": "True when a return of this order was submitted through the withdrawal (Widerruf) portal. On a single-return order this is `return_type == \"withdrawal\"`; on an order mixing types it is true if ANY return is a withdrawal, so it can be true while `return_type` reads `\"mixed\"`. Predates `return_type` and is kept for compatibility."
+          },
+          "return_type": {
+            "type": "string",
+            "enum": ["regular", "withdrawal", "claim", "mixed"],
+            "default": "regular",
+            "description": "What kind of return this is. `withdrawal` is the statutory right of withdrawal (Widerruf); `claim` is a warranty complaint about a defective item (Reklamation). An order whose returns are not all of the same type reports `mixed` here — see `return_types` for the actual set."
+          },
+          "return_types": {
+            "type": "array",
+            "description": "Every return type present on this order, so an entry that reports `return_type: \"mixed\"` still says exactly what it is made of. A single-return order carries the one type. A declined claim is not counted, so an order whose claim was refused alongside a regular return reports `[\"regular\"]` rather than `\"mixed\"`.",
+            "items": {
+              "type": "string",
+              "enum": ["regular", "withdrawal", "claim"]
+            }
+          },
+          "tags": {
+            "type": "array",
+            "readOnly": true,
+            "description": "Return tag names assigned in the admin dashboard. Tags cannot be created or assigned through the external API.",
+            "items": { "type": "string" }
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Physical units returned across the whole order: `items` excluding set parents and manually removed rows."
+          },
+          "items": {
+            "type": "array",
+            "description": "Every unit of the order's returns, oldest return first, each row one physical unit. A declined claim contributes nothing: a GET leaves the claim out entirely, and the PUT that declined it reports it with no units. The units themselves are released, so they can be returned again on a new return.",
+            "items": { "$ref": "#/components/schemas/ReturnItem" }
+          },
+          "shipment": {
+            "$ref": "#/components/schemas/Shipment",
+            "description": "The label of the most recent return. See `all_shipments` for the rest."
+          },
+          "all_shipments": {
+            "type": "array",
+            "description": "Every return label of the order, oldest first. An order returned in several packages has one entry per package that got a label.",
+            "items": { "$ref": "#/components/schemas/Shipment" }
+          }
+        },
+        "required": [
+          "id",
+          "uuid",
+          "uuids",
+          "order_id",
+          "order_number",
+          "order_date",
+          "created_at",
+          "updated_at",
+          "customer",
+          "has_feedback",
+          "feedback",
+          "registered",
+          "registered_at",
+          "received",
+          "received_at",
+          "inspected",
+          "inspected_at",
+          "refunded",
+          "refunded_at",
+          "completed",
+          "completed_at",
+          "canceled",
+          "canceled_at",
+          "clarification",
+          "clarification_at",
+          "on_hold",
+          "on_hold_at",
+          "requires_approval",
+          "approval_status",
+          "approval_decided_at",
+          "approval_reason",
+          "manual_created",
+          "fetched_via_api",
+          "is_widerruf",
+          "return_type",
+          "return_types",
+          "tags",
+          "quantity",
+          "items",
+          "shipment",
+          "all_shipments"
+        ]
+      },
+      "PaginatedReturnsResponse": {
+        "type": "object",
+        "properties": {
+          "returns": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Return" }
+          },
+          "lastEvaluatedKey": {
+            "type": "string",
+            "nullable": true,
+            "description": "Opaque cursor. Pass it back as `startToken` to read the next page. Null — and ONLY null — means there are no more pages; an empty `returns` array does not, see `pageSize`."
+          }
+        },
+        "required": ["returns", "lastEvaluatedKey"]
+      },
+      "SingleReturnResponse": {
+        "type": "object",
+        "properties": {
+          "return": { "$ref": "#/components/schemas/Return" },
+          "disclaimer": {
+            "type": "string",
+            "description": "Optional informational message. Present when, for example, a concurrent update is being processed and the return will be finalized shortly."
+          }
+        },
+        "required": ["return"]
+      },
+      "UpdateReturnRequest": {
+        "type": "object",
+        "description": "At least one of these fields must be provided. Return tags are response-only and cannot be set through this endpoint.",
+        "properties": {
+          "fetched_via_api": { "type": "boolean" },
+          "received": { "type": "boolean" },
+          "inspected": { "type": "boolean" },
+          "claim_decision": {
+            "type": "string",
+            "enum": ["approve", "reject"],
+            "description": "Resolves the approval gate on a claim that is awaiting a decision. Applies to every return in scope that requires approval — on the `uuid` route that is the single named return. Approving is what releases the deferred workflow: until then no return label is created, no shop return is synced and nothing is refunded. Declining leaves the return where it is in the progression; it does not cancel it. It does remove it from every read: this response still reports the claim it has just declined, but no later GET does, and an order with nothing else on it answers `404` from then on. Answers `400` when no return in scope requires approval, or when the decision has already been made."
+          },
+          "claim_decision_reason": {
+            "type": "string",
+            "description": "Required, and non-empty, when `claim_decision` is `reject`. Shown to the customer in the claim-declined notification."
+          }
+        }
+      },
+      "ManualInspectionResponse": {
+        "description": "Normally the order's combined return entry. An inspection that toern has nothing to do — every reported unit being a SKU configured as ignorable — is acknowledged with a message instead and no return is touched, so check which of the two you got before reading `return`.",
+        "oneOf": [
+          { "$ref": "#/components/schemas/SingleReturnResponse" },
+          {
+            "type": "object",
+            "properties": {
+              "message": { "type": "string" }
+            },
+            "required": ["message"]
+          }
+        ]
+      },
+      "InspectedItem": {
+        "type": "object",
+        "description": "Either `id`, `sku`, or `lineItemId` must be provided (not null).",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "description": "Variant id from shop system."
+          },
+          "sku": { "type": "string", "nullable": true },
+          "lineItemId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Shopify line item id (numeric part only). Extract from the full GID, e.g. use `\"17674494509337\"` from `\"gid://shopify/LineItem/17674494509337\"`."
+          },
+          "classification": {
+            "type": "string",
+            "enum": ["", "A", "B", "C", "D"]
+          },
+          "missing": {
+            "type": "boolean",
+            "description": "`true`: this unit was expected (already declared on a return) but did not physically come back — it is soft-removed and its slot opens up again for a later package to legitimately fill. `false` (the ordinary case): the unit did arrive and goes through normal matching, which un-removes a matching soft-removed row instead of adding a duplicate for the same slot."
+          },
+          "comment": {
+            "type": "string",
+            "description": "Free-text note on this specific unit. Checked case-insensitively against the brand's configured clarification/fee trigger phrases and recorded as an inspection-note activity — see `ManualInspectionRequest.comment` for the same mechanism at the request level."
+          }
+        },
+        "required": ["classification", "missing"]
+      },
+      "ManualInspectionRequest": {
+        "type": "object",
+        "description": "Submit manual inspection data. Return tags are response-only and cannot be set through this endpoint.",
+        "properties": {
+          "fetched_via_api": {
+            "type": "boolean",
+            "description": "Marks only the single return this call treats as the anchor (the oldest not-yet-inspected return in scope, or the return this call creates) — not every return this call touches, and not necessarily every return of the order. The order-level `fetched_via_api` on a GET only reads `true` once every one of its returns carries it."
+          },
+          "clarification": {
+            "type": "boolean",
+            "description": "Explicitly raise a clarification case on the anchor return for manual review, on top of (not instead of) any clarification this inspection raises on its own — a not-matched item, a settled-return mismatch, a modified exchange item, or a repeat inspection. Required on every request; send `false` when there is nothing extra to flag."
+          },
+          "clarification_reason": {
+            "type": "string",
+            "description": "Shown on the case created when `clarification` is `true`. Defaults to \"Submitted via api (manual inspection)\" when omitted; ignored when `clarification` is `false`."
+          },
+          "comment": {
+            "type": "string",
+            "description": "Return-level note for this inspection. Recorded as an inspection-note activity on the anchor return, and — like each item's own `comment` — checked against the brand's configured clarification/fee trigger phrases (case-insensitive exact match), which can raise a clarification or apply a special return fee."
+          },
+          "return_type": {
+            "type": "string",
+            "enum": ["regular", "withdrawal", "claim"],
+            "default": "regular",
+            "description": "The type a return created by this inspection is registered as. Only applies when the inspection has to create one — that is, when the order has no open return left for the inspected units to land on. When the units go to an existing return there is nothing to type and this is ignored. A created `claim` enters the approval gate when the brand requires claim approval, so it answers with `approval_status: \"pending\"` and will not refund until it is approved — resolve it with `claim_decision` on the PUT endpoints. A claim that was already declined does not block this: its units are released, so re-inspecting them forms a new claim rather than landing on the refused one."
+          },
+          "inspected_items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/InspectedItem" }
+          }
+        },
+        "required": ["clarification", "inspected_items"]
+      },
+      "QuestionnaireAnswer": {
+        "type": "object",
+        "description": "One answered question, together with the wording the customer actually saw. The snapshots are stored with the answer, so a question the brand has since edited or deleted still renders correctly.",
+        "properties": {
+          "question_id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "description": "Question type, e.g. `FREE_TEXT`, `DROPDOWN`, `CHECKBOXES`, `IMAGE_UPLOAD`."
+          },
+          "label_snapshot": {
+            "type": "object",
+            "description": "The question label as it was shown, keyed by language code.",
+            "additionalProperties": { "type": "string" }
+          },
+          "option_snapshot": {
+            "type": "array",
+            "description": "Present on choice questions: every option that was offered, with its label per language code.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "label": {
+                  "type": "object",
+                  "additionalProperties": { "type": "string" }
+                }
+              }
+            }
+          },
+          "value": {
+            "description": "A single value, or a list for multi-value questions. On an `IMAGE_UPLOAD` question this is the list of stored file names — use `image_urls` to fetch them.",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional free text the customer added alongside an image upload."
+          },
+          "image_urls": {
+            "type": "array",
+            "description": "Present on `IMAGE_UPLOAD` answers only: a presigned URL per uploaded image, plus its compressed variant.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_name": { "type": "string" },
+                "url": { "type": "string" },
+                "url_compressed": { "type": "string" }
+              }
+            }
+          }
+        },
+        "required": ["question_id", "type", "label_snapshot", "value"]
+      },
+      "QuestionnaireResponse": {
+        "type": "object",
+        "description": "The answers to one custom page. An item-scoped page is answered once per returned item and carries `index` / `variant_id` identifying which.",
+        "properties": {
+          "block_id": { "type": "string" },
+          "page_name": { "type": "string" },
+          "page_title_snapshot": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "flow_id": {
+            "type": "string",
+            "description": "The flow the page belongs to, e.g. `claim`."
+          },
+          "flow_version": { "type": "integer", "nullable": true },
+          "index": {
+            "type": "string",
+            "description": "Item-scoped pages only: the returned item's slot."
+          },
+          "variant_id": {
+            "type": "string",
+            "description": "Item-scoped pages only: the returned item's variant."
+          },
+          "submitted_at": { "type": "string", "format": "date-time" },
+          "answers": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/QuestionnaireAnswer" }
+          }
+        },
+        "required": ["block_id", "flow_id", "submitted_at", "answers"]
+      },
+      "Questionnaire": {
+        "type": "object",
+        "description": "Every custom page answered on one return.",
+        "properties": {
+          "return_id": { "type": "string" },
+          "uuid": {
+            "type": "string",
+            "description": "The return these answers belong to. Matches `uuid` on the return and `return_uuid` on its items."
+          },
+          "order_id": { "type": "string" },
+          "return_type": {
+            "type": "string",
+            "enum": ["regular", "withdrawal", "claim"]
+          },
+          "responses": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/QuestionnaireResponse" }
+          }
+        },
+        "required": [
+          "return_id",
+          "uuid",
+          "order_id",
+          "return_type",
+          "responses"
+        ]
+      },
+      "QuestionnaireListResponse": {
+        "type": "object",
+        "properties": {
+          "questionnaires": {
+            "type": "array",
+            "description": "One entry per return that has answers, oldest return first. A return that was never asked anything has no entry, so an order with no custom pages answers with an empty list.",
+            "items": { "$ref": "#/components/schemas/Questionnaire" }
+          }
+        },
+        "required": ["questionnaires"]
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "The API key is missing or invalid, or the resource belongs to another brand",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ErrorResponse" }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "OrderIdPath": {
+        "name": "order_id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "The order id from your shop system, without any brand prefix — the same value the `order_id` field of a return carries. Addresses every return of that order."
+      },
+      "UuidPath": {
+        "name": "uuid",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "A return's `uuid`. A uuid names ONE package: writes stay scoped to that single return, while the GET still answers with the whole order's combined entry. The uuid of a declined claim answers `404` on a GET, indistinguishable from a uuid that never existed — a refused claim is not reported in any form, and it reserves nothing, so there is nothing for the uuid to name."
+      },
+      "DeliveryNumberPath": {
+        "name": "delivery_number",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "The Xentral delivery number of the order. Resolved to the order, then addressed like `order_id`."
+      },
+      "DirectionQuery": {
+        "name": "direction",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["asc", "desc"],
+          "default": "desc"
+        }
+      },
+      "FetchedViaApiQuery": {
+        "name": "fetched_via_api",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "description": "Filter the results if they are flagged fetched via api. - Each return has an attribute fetched_via_api, that can manually set to true if it should be marked as fetched via api. "
+      },
+      "ReturnTypesQuery": {
+        "name": "returnTypes",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "claim,withdrawal"
+        },
+        "description": "Comma-separated list of return types to limit the results to: `regular`, `withdrawal`, `claim`. Absent means every type. An order that holds returns of more than one type answers to any of them, and its entry still carries all of its returns. Declined claims are not reported, so they are not matched either: an order whose only claim was refused never answers to `claim`, and an order whose refused claim sits beside a regular return answers to `regular` only. An unrecognised value answers `400`."
+      },
+      "PageSizeQuery": {
+        "name": "pageSize",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "maximum": 50,
+          "minimum": 1
+        },
+        "description": "How many RETURNS a page reads, not how many entries it answers with. An order returned in several packages collapses into one entry, and the `fetched_via_api` / `returnTypes` filters are applied after that collapse — so a page can and regularly does yield fewer entries than `pageSize`, sometimes zero. Never treat a short or empty `returns` array as the end of the list: keep paging while `lastEvaluatedKey` is non-null."
+      },
+      "StartDateQuery": {
+        "name": "startDate",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "ISO date (YYYY-MM-DD).",
+          "example": "2025-01-31"
+        }
+      },
+      "EndDateQuery": {
+        "name": "endDate",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "description": "ISO date (YYYY-MM-DD).",
+          "example": "2025-01-31"
+        }
+      },
+      "StartTokenQuery": {
+        "name": "startToken",
+        "in": "query",
+        "required": false,
+        "schema": { "type": "string" },
+        "description": "Pagination token: pass `lastEvaluatedKey` from previous response."
+      }
+    }
+  },
+  "paths": {
+    "/v1/returns": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "List returns",
+        "description": "Results sorted by created_at ISO date.",
+        "parameters": [
+          { "$ref": "#/components/parameters/DirectionQuery" },
+          { "$ref": "#/components/parameters/FetchedViaApiQuery" },
+          { "$ref": "#/components/parameters/ReturnTypesQuery" },
+          { "$ref": "#/components/parameters/PageSizeQuery" },
+          { "$ref": "#/components/parameters/StartDateQuery" },
+          { "$ref": "#/components/parameters/EndDateQuery" },
+          { "$ref": "#/components/parameters/StartTokenQuery" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedReturnsResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/{order_id}": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get return by order_id",
+        "parameters": [{ "$ref": "#/components/parameters/OrderIdPath" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      },
+      "put": {
+        "tags": ["Returns"],
+        "summary": "Update return flags by order_id",
+        "description": "At least one of `fetched_via_api`, `received`, `inspected`, `claim_decision` must be provided. `fetched_via_api` is set on every return in scope. `received: true` marks the oldest still-open return in scope (not yet refunded, completed, or canceled) that isn't already received, setting `received_at`; `inspected: true` does the same for the oldest not-yet-inspected one. If no such return exists the request still succeeds with nothing changed. Neither can be set back to `false` — this endpoint cannot un-receive or un-inspect a return. `claim_decision` resolves the approval gate on every gated claim in scope; `claim_decision_reason` is required when declining. All three routes (`order_id`, `uuid`, Xentral `delivery_number`) work the same way — `uuid` just scopes to that one return instead of every return of the order.",
+        "parameters": [{ "$ref": "#/components/parameters/OrderIdPath" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateReturnRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/{order_id}/manual-inspection": {
+      "post": {
+        "tags": ["Returns"],
+        "summary": "Submit manual inspection by order_id",
+        "description": "Report exactly what physically came back in this package. This is not an administrative edit — it represents a real, physical package, and the report drives real, sometimes irreversible decisions in toern: items can be added, confirmed, or removed (pruned) if they were expected but not reported, and anything unexpected can form a new return or get flagged for manual review. Always report what actually arrived, not what you expect toern already knows. All three manual-inspection endpoints — by `order_id`, `uuid`, or Xentral `delivery_number` — work exactly the same way.",
+        "parameters": [{ "$ref": "#/components/parameters/OrderIdPath" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualInspectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualInspectionResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/{order_id}/questionnaire": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get questionnaire answers by order_id",
+        "description": "The answers a customer gave on the brand's own flow pages. Claims are the main use — a warranty complaint is where a brand asks its own questions — but a brand can put custom pages on any flow, so the answers are reported whatever the type and each entry names its own `return_type`. Answers are stored per return, so an order returned in several packages answers with one entry per return, oldest first.",
+        "parameters": [{ "$ref": "#/components/parameters/OrderIdPath" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionnaireListResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/uuid/{uuid}": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get return by uuid",
+        "parameters": [{ "$ref": "#/components/parameters/UuidPath" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      },
+      "put": {
+        "tags": ["Returns"],
+        "summary": "Update return flags by uuid",
+        "description": "At least one of `fetched_via_api`, `received`, `inspected`, `claim_decision` must be provided. The `uuid` scopes every flag to that single return only — sibling returns on the same order are left untouched. `received: true` sets `received_at` unless the return is already received or is refunded/completed/canceled; `inspected: true` does the same for `inspected_at`. Neither can be set back to `false` — this endpoint cannot un-receive or un-inspect a return. `claim_decision` resolves the approval gate on this return if it requires approval; `claim_decision_reason` is required when declining. All three update-flags routes (`order_id`, `uuid`, Xentral `delivery_number`) work the same way — `uuid` just narrows the scope to one return.",
+        "parameters": [{ "$ref": "#/components/parameters/UuidPath" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateReturnRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/uuid/{uuid}/manual-inspection": {
+      "post": {
+        "tags": ["Returns"],
+        "summary": "Submit manual inspection by uuid",
+        "description": "Report exactly what physically came back in this package. This is not an administrative edit — it represents a real, physical package, and the report drives real, sometimes irreversible decisions in toern: items can be added, confirmed, or removed (pruned) if they were expected but not reported, and anything unexpected can form a new return or get flagged for manual review. Always report what actually arrived, not what you expect toern already knows. All three manual-inspection endpoints — by `order_id`, `uuid`, or Xentral `delivery_number` — work exactly the same way.",
+        "parameters": [{ "$ref": "#/components/parameters/UuidPath" }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualInspectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualInspectionResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/uuid/{uuid}/questionnaire": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get questionnaire answers by uuid",
+        "description": "The answers a customer gave on the brand's own flow pages. Claims are the main use — a warranty complaint is where a brand asks its own questions — but a brand can put custom pages on any flow, so the answers are reported whatever the type and each entry names its own `return_type`. The uuid resolves the order and the answers of every return of that order are reported, the same way the return lookups answer with the whole order's combined entry however it was addressed. Pick the one you asked for by its `uuid` if you only want that package.",
+        "parameters": [{ "$ref": "#/components/parameters/UuidPath" }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionnaireListResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/xentral/{delivery_number}": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get return by Xentral delivery_number",
+        "parameters": [
+          { "$ref": "#/components/parameters/DeliveryNumberPath" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      },
+      "put": {
+        "tags": ["Returns"],
+        "summary": "Update return flags by Xentral delivery_number",
+        "description": "At least one of `fetched_via_api`, `received`, `inspected`, `claim_decision` must be provided. `fetched_via_api` is set on every return in scope. `received: true` marks the oldest still-open return in scope (not yet refunded, completed, or canceled) that isn't already received, setting `received_at`; `inspected: true` does the same for the oldest not-yet-inspected one. If no such return exists the request still succeeds with nothing changed. Neither can be set back to `false` — this endpoint cannot un-receive or un-inspect a return. `claim_decision` resolves the approval gate on every gated claim in scope; `claim_decision_reason` is required when declining. All three routes (`order_id`, `uuid`, Xentral `delivery_number`) work the same way — `uuid` just scopes to that one return instead of every return of the order.",
+        "parameters": [
+          { "$ref": "#/components/parameters/DeliveryNumberPath" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateReturnRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleReturnResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/xentral/{delivery_number}/questionnaire": {
+      "get": {
+        "tags": ["Returns"],
+        "summary": "Get questionnaire answers by Xentral delivery_number",
+        "description": "The answers a customer gave on the brand's own flow pages. Claims are the main use — a warranty complaint is where a brand asks its own questions — but a brand can put custom pages on any flow, so the answers are reported whatever the type and each entry names its own `return_type`. Answers are stored per return, so an order returned in several packages answers with one entry per return, oldest first.",
+        "parameters": [
+          { "$ref": "#/components/parameters/DeliveryNumberPath" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionnaireListResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    },
+    "/v1/returns/xentral/{delivery_number}/manual-inspection": {
+      "post": {
+        "tags": ["Returns"],
+        "summary": "Submit manual inspection by Xentral delivery_number",
+        "description": "Report exactly what physically came back in this package. This is not an administrative edit — it represents a real, physical package, and the report drives real, sometimes irreversible decisions in toern: items can be added, confirmed, or removed (pruned) if they were expected but not reported, and anything unexpected can form a new return or get flagged for manual review. Always report what actually arrived, not what you expect toern already knows. All three manual-inspection endpoints — by `order_id`, `uuid`, or Xentral `delivery_number` — work exactly the same way.",
+        "parameters": [
+          { "$ref": "#/components/parameters/DeliveryNumberPath" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualInspectionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualInspectionResponse"
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "500": { "$ref": "#/components/responses/ServerError" }
+        }
+      }
+    }
+  }
+}
