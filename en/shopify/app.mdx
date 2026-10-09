@@ -11,17 +11,32 @@ With the **toern Shopify app**, you connect your Shopify shop to toern in just a
 
 Open the toern app in the Shopify App Store: [toern Shopify app](https://apps.shopify.com/toern-returns-integration).
 
-<Frame><img src="/images/docs/Onboarding/ShopifyInstall01.png" alt="toern Shopify app in the App Store" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/Onboarding/ShopifyInstall01.png"
+    alt="toern Shopify app in the App Store"
+  />
+</Frame>
 
 The page is public. Click **Open** to open the app for your own Shopify shop. Install the app **toern-returns-integration** there and follow the instructions in Shopify.
 
-<Frame><img src="/images/docs/Onboarding/ShopifyInstall03.png" alt="Installing the toern app in Shopify" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/Onboarding/ShopifyInstall03.png"
+    alt="Installing the toern app in Shopify"
+  />
+</Frame>
 
 ### 2. Create the admin user
 
 Create the login credentials for the admin user of the toern dashboard. You need a **name** and an **email address**. You can add more users yourself later.
 
-<Frame><img src="/images/docs/Onboarding/ShopifyInstall02.png" alt="Creating toern credentials" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/Onboarding/ShopifyInstall02.png"
+    alt="Creating toern credentials"
+  />
+</Frame>
 
 ### 3. Select and approve your plan
 
@@ -29,9 +44,19 @@ Create the login credentials for the admin user of the toern dashboard. You need
 2. Select your plan in Shopify.
 3. Finish with **Approve**.
 
-<Frame><img src="/images/docs/Onboarding/ShopifyInstall04.png" alt="Selecting a plan in Shopify" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/Onboarding/ShopifyInstall04.png"
+    alt="Selecting a plan in Shopify"
+  />
+</Frame>
 
-<Frame><img src="/images/docs/Onboarding/ShopifyInstall05.png" alt="Approving the installation" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/Onboarding/ShopifyInstall05.png"
+    alt="Approving the installation"
+  />
+</Frame>
 
 The app is now being installed. As soon as the installation is complete, you can log in to the toern dashboard. You'll find the password for the admin user in the email toern sends you.
 
@@ -40,94 +65,71 @@ The app is now being installed. As soon as the installation is complete, you can
 You can now log in to the toern dashboard and start your onboarding. First set up the integrations you need, e.g. your shipping carrier or Klaviyo. Then adjust the settings to your needs. You'll find an overview in the [Introduction](/en).
 
 <Warning>
-  After the successful installation, contact [support@re-toern.de](mailto:support@re-toern.de). We'll go through the next onboarding steps with you and review your settings before go-live.
+  After the successful installation, contact
+  [support@re-toern.de](mailto:support@re-toern.de). We'll go through the next
+  onboarding steps with you and review your settings before go-live.
 </Warning>
 
 ## Permissions in Shopify
 
 With the installation, toern receives the following permissions in Shopify. They must stay in place for the return process to work.
 
-| Category | Permission |
-| --- | --- |
-| Orders | `write_orders` |
-| | `read_orders` |
-| Fulfillment services | `write_fulfillments` |
-| | `read_fulfillments` |
-| Inventory | `write_inventory` |
-| | `read_inventory` |
-| Customers | `write_customers` |
-| | `read_customers` |
-| Products | `write_products` |
-| | `read_products` |
-| Returns | `write_returns` |
-| | `read_returns` |
-| Locations | `write_locations` |
-| | `read_locations` |
-| Shipping | `write_shipping` |
-| | `read_shipping` |
-| Assigned fulfillment orders | `write_assigned_fulfillment_orders` |
-| | `read_assigned_fulfillment_orders` |
-| Exchange | `write_merchant_managed_fulfillment_orders` |
-| | `read_merchant_managed_fulfillment_orders` |
-| | `write_third_party_fulfillment_orders` |
-| | `read_third_party_fulfillment_orders` |
-| Gift card | `write_gift_cards` |
-| | `read_gift_cards` |
-| | `write_gift_card_transactions` |
-| | `read_gift_card_transactions` |
-| Discounts | `read_discounts` |
+| Category                    | Permission                                  |
+| --------------------------- | ------------------------------------------- |
+| Orders                      | `write_orders`                              |
+|                             | `read_orders`                               |
+| Fulfillment services        | `write_fulfillments`                        |
+|                             | `read_fulfillments`                         |
+| Inventory                   | `write_inventory`                           |
+|                             | `read_inventory`                            |
+| Customers                   | `write_customers`                           |
+|                             | `read_customers`                            |
+| Products                    | `write_products`                            |
+|                             | `read_products`                             |
+| Returns                     | `write_returns`                             |
+|                             | `read_returns`                              |
+| Locations                   | `write_locations`                           |
+|                             | `read_locations`                            |
+| Shipping                    | `write_shipping`                            |
+|                             | `read_shipping`                             |
+| Assigned fulfillment orders | `write_assigned_fulfillment_orders`         |
+|                             | `read_assigned_fulfillment_orders`          |
+| Exchange                    | `write_merchant_managed_fulfillment_orders` |
+|                             | `read_merchant_managed_fulfillment_orders`  |
+|                             | `write_third_party_fulfillment_orders`      |
+|                             | `read_third_party_fulfillment_orders`       |
+| Gift card                   | `write_gift_cards`                          |
+|                             | `read_gift_cards`                           |
+|                             | `write_gift_card_transactions`              |
+|                             | `read_gift_card_transactions`               |
+| Discounts                   | `read_discounts`                            |
 
 That's **27 permissions** in total.
 
 <Tip>
-  Questions about Shopify permissions and the return status in Shopify are answered in the [FAQ](/en/faq).
+  Questions about Shopify permissions and the return status in Shopify are
+  answered in the [FAQ](/en/faq).
 </Tip>
-
-## Refunds in Shopify
-
-toern logs refunds and status changes directly in your Shopify order. This way you can always see what happened.
-
-### Refund log
-
-In Shopify you see the full log of a refund:
-
-<Frame><img src="/images/docs/notion/shopify-refund-log.png" alt="Full refund log in Shopify" /></Frame>
-
-On the Shopify page of the order you'll also find the price breakdown of the refund:
-
-<Frame><img src="/images/docs/notion/shopify-refund-price-list.png" alt="Refund price breakdown in Shopify" /></Frame>
-
-This is what the log of a manual refund looks like:
-
-<Frame><img src="/images/docs/notion/shopify-manual-refund-log.png" alt="Log of a manual refund" /></Frame>
-
-The latest activity is logged via the return status:
-
-<Frame><img src="/images/docs/notion/shopify-return-status-log.png" alt="Return status in the Shopify log" /></Frame>
-
-### Automatic refund
-
-This is what the log of an automatic refund without a return fee looks like:
-
-<Frame><img src="/images/docs/notion/shopify-autorefund-log-1.png" alt="Log of an automatic refund" /></Frame>
-
-<Frame><img src="/images/docs/notion/shopify-autorefund-log-2.png" alt="Details of an automatic refund" /></Frame>
-
-If a return fee is deducted, it shows up in Shopify as **Rücksendungsversand** (return shipping).
-
-All information also appears in the order timeline in Shopify:
-
-<Frame><img src="/images/docs/notion/shopify-timeline-log.png" alt="Order timeline in Shopify" /></Frame>
 
 ### Customer notifications
 
 If **Notify Customer** is enabled in Shopify, your customers receive a refund email:
 
-<Frame><img src="/images/docs/notion/shopify-notify-customer.png" alt="Refund email sent by Shopify" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-notify-customer.png"
+    alt="Refund email sent by Shopify"
+  />
+</Frame>
 
 You can edit the template of this email in Shopify:
 
 1. Open **Settings** in Shopify.
 2. Go to **Notifications → Customer notifications → Refund**.
 
-<Frame><img src="/images/docs/notion/shopify-refund-notification-template.png" alt="Refund notification template in Shopify" /></Frame>
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-refund-notification-template.png"
+    alt="Refund notification template in Shopify"
+  />
+</Frame>

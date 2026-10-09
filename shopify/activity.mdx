@@ -1,0 +1,216 @@
+---
+title: "Aktivitäten in Shopify"
+description: "Erfahre, wie toern Retouren, Rückerstattungen und Umtäusche in Shopify dokumentiert und welche Informationen du direkt in deinen Bestellungen findest."
+---
+
+toern dokumentiert alle relevanten Aktivitäten rund um **Retouren, Rückerstattungen und Umtäusche** direkt in deinen Shopify-Bestellungen. So kannst du jederzeit nachvollziehen, welche Aktionen durchgeführt wurden und wie sich diese auf eine Bestellung auswirken.
+
+Dabei orientiert sich toern möglichst an den nativen Shopify-Prozessen. In bestimmten Fällen bieten wir alternative Abläufe an, beispielsweise die Erstellung einer neuen Ersatzbestellung bei einem Umtausch. So stellen wir sicher, dass sich die Prozesse auch mit deinem Fulfillment-System abbilden lassen.
+
+Eine vollständige Übersicht aller Retouren und ihrer Details findest du jederzeit in deinem **toern Dashboard**.
+
+## Aktivitäten im Shopify-Protokoll
+
+Alle Aktionen, die toern in Shopify ausführt, werden im Aktivitätenprotokoll der jeweiligen Bestellung dokumentiert.
+
+Dazu gehören beispielsweise:
+
+- Rückerstattungen und deren Beträge
+- Änderungen am Retourenstatus
+- Erstellung und Verarbeitung von Umtäuschen
+- Weitere bestellungsbezogene Aktionen
+
+Du findest das Protokoll direkt auf der Bestelldetailseite in deinem Shopify-Admin.
+
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-refund-log.png"
+    alt="Aktivitätenprotokoll einer Rückerstattung in einer Shopify-Bestellung"
+  />
+</Frame>
+
+## Retouren in Shopify
+
+Sobald eine Retoure über toern angemeldet wird, werden die betroffenen Artikel in Shopify als separate Retoure innerhalb der ursprünglichen Bestellung aufgeführt.
+
+Dadurch bleiben die ursprünglich bestellten Artikel und die retournierten Positionen klar voneinander unterscheidbar.
+
+In den Retourendetails findest du unter anderem:
+
+- **Retournierte Artikel:** Welche Produkte zurückgesendet werden
+- **Retourengründe:** Warum die jeweiligen Artikel retourniert werden
+- **Rücksendegebühren:** Welche Gebühren gegebenenfalls anfallen
+- **Sendungsverfolgung:** Trackinginformationen zum Rücksendelabel, sofern vorhanden
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReturnInShopifyTrackingAndFee.jpg"
+    alt="Retourendetails in Shopify mit Rücksendegebühr und Trackinginformationen"
+  />
+</Frame>
+
+Weitere Informationen zum Retourenverlauf, zum Bearbeitungsstatus und zu den einzelnen Artikeln findest du im toern Dashboard.
+
+## Rückerstattungen in Shopify
+
+Unabhängig davon, ob eine Rückerstattung **automatisch oder manuell über toern** ausgelöst wird, wird sie in der ursprünglichen Shopify-Bestellung dokumentiert.
+
+So kannst du direkt in Shopify nachvollziehen, welche Beträge an deine Kundinnen und Kunden zurückerstattet wurden.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReturnInShopify.jpg"
+    alt="Darstellung einer Retoure und Rückerstattung in Shopify"
+  />
+</Frame>
+
+### Rückerstattungsbeträge einsehen
+
+Die genaue Aufschlüsselung der Zahlungen und Rückerstattungen findest du im Zahlungsbereich der ursprünglichen Shopify-Bestellung.
+
+Hier erkennst du:
+
+- Den ursprünglich gezahlten Betrag
+- Bereits durchgeführte Rückerstattungen
+- Den tatsächlich zurückerstatteten Betrag
+
+Eventuell einbehaltene Gebühren werden bei der Berechnung der Rückerstattung berücksichtigt.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/PaymentTablePartialRefund.jpg"
+    alt="Zahlungsübersicht einer Shopify-Bestellung mit teilweiser Rückerstattung"
+  />
+</Frame>
+
+### Rückerstattungen im Aktivitätenprotokoll
+
+Zusätzlich werden die von toern ausgeführten Rückerstattungen im Aktivitätenprotokoll der Bestellung festgehalten.
+
+Damit kannst du nachvollziehen, wann eine Rückerstattung durchgeführt wurde.
+
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-refund-log.png"
+    alt="Aktivitätenprotokoll einer Rückerstattung in Shopify"
+  />
+</Frame>
+
+## Umtäusche in Shopify
+
+Auch Umtäusche werden von toern in Shopify dokumentiert.
+
+Je nach Konfiguration und Kompatibilität deines Fulfillment-Systems stehen dir **zwei unterschiedliche Verfahren** zur Verfügung:
+
+1. **Nativer Shopify-Umtausch:** Der Umtausch wird direkt innerhalb der ursprünglichen Bestellung abgewickelt.
+2. **Neue 0-Euro-Ersatzbestellung:** Für den Umtausch wird eine separate Shopify-Bestellung erstellt.
+
+Beide Verfahren ermöglichen die Abwicklung von Umtäuschen über toern. Sie unterscheiden sich jedoch darin, wie die Ersatzartikel in Shopify angelegt und an dein Fulfillment übergeben werden.
+
+### Option 1: Nativer Shopify-Umtausch
+
+Beim nativen Shopify-Umtausch werden die Ersatzartikel direkt mit der ursprünglichen Bestellung und der zugehörigen Retoure verknüpft.
+
+Es wird **keine neue Shopify-Bestellung** erstellt. Stattdessen werden die Ersatzartikel innerhalb der bestehenden Bestellung ergänzt und ein neuer Fulfillment-Auftrag angelegt.
+
+Dieser kann anschließend von deinem Fulfillment-System verarbeitet werden.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReplacementOrder.jpg"
+    alt="Nativer Shopify-Umtausch mit Ersatzartikeln innerhalb der ursprünglichen Bestellung"
+  />
+</Frame>
+
+**Vorteile dieses Verfahrens:**
+
+- Ursprüngliche Bestellung, Retoure und Umtausch bleiben miteinander verknüpft.
+- Die Ersatzartikel sind direkt in der ursprünglichen Bestellung sichtbar.
+- Es entsteht keine zusätzliche Shopify-Bestellung.
+- Die Artikelpreise werden von toern entsprechend dem Umtauschprozess angepasst.
+
+<Note>
+  **Kompatibilität mit deinem Fulfillment prüfen**
+
+Nicht jedes Fulfillment-System unterstützt zusätzliche Fulfillment-Aufträge innerhalb bereits bestehender Bestellungen.
+
+Einige Systeme verarbeiten ausschließlich neu eingehende Bestellungen. In diesem Fall können die Ersatzartikel möglicherweise nicht automatisch an dein Lager übertragen werden.
+
+Kläre daher vor der Aktivierung mit deinem Fulfillment-Anbieter, ob zusätzliche Fulfillment-Aufträge unterstützt werden.
+
+</Note>
+
+### Option 2: Neue 0-Euro-Ersatzbestellung
+
+Falls dein Fulfillment-System den nativen Shopify-Umtausch nicht unterstützt, kann toern stattdessen eine **neue Ersatzbestellung mit einem Bestellwert von 0 Euro** erstellen.
+
+Die Ersatzartikel werden dabei als eigenständige Bestellung in Shopify angelegt und mit einem Artikelpreis von jeweils 0 Euro ausgewiesen.
+
+Dadurch können Fulfillment-Systeme, die ausschließlich neue Bestellungen verarbeiten, die Ersatzartikel wie eine reguläre Bestellung übernehmen.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/0EuroReplacementOrder.jpg"
+    alt="Separate Shopify-Ersatzbestellung mit einem Bestellwert von 0 Euro"
+  />
+</Frame>
+
+#### Verknüpfung mit der ursprünglichen Bestellung
+
+Shopify bietet bei diesem Verfahren keine native Verknüpfung zwischen der ursprünglichen Retoure und der neu erstellten Ersatzbestellung.
+
+Damit du trotzdem beide Bestellungen eindeutig zuordnen kannst, hinterlegt toern entsprechende Referenzen:
+
+- In der **ursprünglichen Bestellung** findest du einen Link zur neuen Ersatzbestellung.
+- In der **Ersatzbestellung** findest du einen Link zur ursprünglichen Bestellung.
+
+So kannst du jederzeit zwischen den beiden Bestellungen wechseln.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/Return0EuroReplacementInfo.jpg"
+    alt="Gegenseitige Referenz zwischen ursprünglicher Bestellung und Ersatzbestellung in Shopify"
+  />
+</Frame>
+
+<Warning>
+  **Abweichende Anzeige offener Beträge in Shopify**
+
+Bei Umtäuschen über separate 0-Euro-Ersatzbestellungen kann Shopify in der ursprünglichen Bestellung einen vermeintlich noch zu erstattenden Betrag anzeigen.
+
+Diese Anzeige bedeutet nicht automatisch, dass tatsächlich noch eine Rückerstattung aussteht.
+
+Maßgeblich sind die bereits durchgeführten Rückerstattungen im Zahlungsbereich der ursprünglichen Bestellung. Dort kannst du nachvollziehen, welche Beträge tatsächlich erstattet wurden.
+
+</Warning>
+
+### Umtauschbestellungen über den Exchange-Tag erkennen
+
+Damit du Bestellungen mit Umtäuschen schnell identifizieren kannst, versieht toern die ursprünglichen Shopify-Bestellungen mit dem Tag `Exchange`.
+
+Der Tag wird gesetzt, sobald eine Retoure einen Umtausch enthält.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ExchangeTag.jpg"
+    alt="Exchange-Tag an einer Shopify-Bestellung mit Umtausch"
+  />
+</Frame>
+
+Über diesen Tag kannst du entsprechende Bestellungen in Shopify leichter finden und filtern.
+
+## Welches Umtauschverfahren sollte ich verwenden?
+
+Die Wahl hängt vor allem davon ab, wie dein Fulfillment-System Bestellungen und Fulfillment-Aufträge verarbeitet.
+
+|                         | Nativer Shopify-Umtausch                     | 0-Euro-Ersatzbestellung                   |
+| ----------------------- | -------------------------------------------- | ----------------------------------------- |
+| Neue Shopify-Bestellung | Nein                                         | Ja                                        |
+| Ersatzartikel           | In der ursprünglichen Bestellung             | In einer separaten Bestellung             |
+| Verknüpfung             | Nativ über Shopify                           | Über gegenseitige Referenzen              |
+| Fulfillment             | Zusätzlicher Fulfillment-Auftrag             | Neue Bestellung                           |
+| Voraussetzung           | Fulfillment unterstützt zusätzliche Aufträge | Fulfillment verarbeitet neue Bestellungen |
+
+**Unsere Empfehlung:** Verwende den nativen Shopify-Umtausch, sofern dein Fulfillment-System diesen unterstützt. Andernfalls ist die 0-Euro-Ersatzbestellung eine Alternative.
+
+Unabhängig vom gewählten Verfahren findest du die vollständigen Informationen zum Umtausch und zur zugehörigen Retoure in deinem toern Dashboard.

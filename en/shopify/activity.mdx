@@ -1,0 +1,216 @@
+---
+title: "Activities in Shopify"
+description: "Learn how toern documents returns, refunds, and exchanges in Shopify and where to find the relevant information in your orders."
+---
+
+toern documents all relevant activities related to **returns, refunds, and exchanges** directly in your Shopify orders. This allows you to track which actions have been performed and how they affect an order.
+
+Wherever possible, toern follows Shopify's native processes. In certain cases, we offer alternative workflows, such as creating a separate replacement order for an exchange. This ensures that exchanges can also be processed with fulfillment systems that do not support Shopify's native exchange workflow.
+
+You can always find a complete overview of your returns and their details in your **toern Dashboard**.
+
+## Activities in the Shopify timeline
+
+All actions performed by toern in Shopify are documented in the activity timeline of the respective order.
+
+These include, for example:
+
+- Refunds and their amounts
+- Changes to return statuses
+- Creation and processing of exchanges
+- Other order-related actions
+
+You can find the activity timeline directly on the order details page in your Shopify admin.
+
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-refund-log.png"
+    alt="Activity timeline showing a refund processed in a Shopify order"
+  />
+</Frame>
+
+## Returns in Shopify
+
+When a return is registered through toern, the affected items are displayed as a separate return within the original Shopify order.
+
+This keeps the original order items and the returned items clearly distinguishable.
+
+The return details include:
+
+- **Returned items:** Which products are being returned
+- **Return reasons:** Why the individual items are being returned
+- **Return shipping fees:** Any applicable return shipping charges
+- **Tracking information:** Tracking details for the return shipping label, if available
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReturnInShopifyTrackingAndFee.jpg"
+    alt="Return details in Shopify showing return shipping fees and tracking information"
+  />
+</Frame>
+
+Additional information about the return history, processing status, and individual items is available in your toern Dashboard.
+
+## Refunds in Shopify
+
+Whether a refund is triggered **automatically or manually through toern**, it is documented in the original Shopify order.
+
+This allows you to see directly in Shopify which amounts have been refunded to your customers.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReturnInShopify.jpg"
+    alt="Return and refund displayed in a Shopify order"
+  />
+</Frame>
+
+### Viewing refund amounts
+
+You can find a detailed breakdown of payments and refunds in the payment section of the original Shopify order.
+
+This section shows:
+
+- The original amount paid
+- Refunds that have already been processed
+- The amount actually refunded
+
+Any retained fees are taken into account when calculating the refund amount.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/PaymentTablePartialRefund.jpg"
+    alt="Shopify payment summary showing a partial refund"
+  />
+</Frame>
+
+### Refunds in the activity timeline
+
+All refunds processed by toern are also recorded in the order's activity timeline.
+
+This allows you to track when a refund was processed.
+
+<Frame>
+  <img
+    src="/images/docs/notion/shopify-refund-log.png"
+    alt="Shopify activity timeline showing a processed refund"
+  />
+</Frame>
+
+## Exchanges in Shopify
+
+Exchanges processed through toern are also documented in Shopify.
+
+Depending on your configuration and the compatibility of your fulfillment system, **two different exchange workflows** are available:
+
+1. **Native Shopify exchange:** The exchange is processed directly within the original order.
+2. **New zero-value replacement order:** A separate Shopify order is created for the replacement items.
+
+Both workflows allow you to process exchanges through toern. The main difference is how replacement items are created in Shopify and transferred to your fulfillment system.
+
+### Option 1: Native Shopify exchange
+
+With Shopify's native exchange workflow, replacement items are linked directly to the original order and its associated return.
+
+**No new Shopify order is created.** Instead, the replacement items are added to the existing order, and a new fulfillment order is created.
+
+This fulfillment order can then be processed by your fulfillment system.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ReplacementOrder.jpg"
+    alt="Native Shopify exchange showing replacement items within the original order"
+  />
+</Frame>
+
+**Benefits of this workflow:**
+
+- The original order, return, and exchange remain connected.
+- Replacement items are visible directly within the original order.
+- No additional Shopify order is created.
+- Item prices are adjusted by toern according to the exchange process.
+
+<Note>
+  **Check compatibility with your fulfillment system**
+
+Not every fulfillment system supports additional fulfillment orders within existing Shopify orders.
+
+Some systems only process newly created orders. In these cases, replacement items may not be automatically transferred to your warehouse.
+
+Before enabling this workflow, confirm with your fulfillment provider that additional fulfillment orders are supported.
+
+</Note>
+
+### Option 2: New zero-value replacement order
+
+If your fulfillment system does not support Shopify's native exchange workflow, toern can create a **new replacement order with a total value of zero** instead.
+
+The replacement items are created in a separate Shopify order, with each item priced at zero.
+
+This allows fulfillment systems that only process new orders to handle replacement items like regular orders.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/0EuroReplacementOrder.jpg"
+    alt="Separate Shopify replacement order with a total value of zero"
+  />
+</Frame>
+
+#### Linking the replacement order to the original order
+
+Shopify does not provide a native connection between the original return and a separately created replacement order in this workflow.
+
+To ensure that both orders can still be clearly identified, toern adds references to each order:
+
+- The **original order** contains a link to the new replacement order.
+- The **replacement order** contains a link back to the original order.
+
+This allows you to navigate between both orders at any time.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/Return0EuroReplacementInfo.jpg"
+    alt="Cross-references between the original Shopify order and the replacement order"
+  />
+</Frame>
+
+<Warning>
+  **Potentially misleading outstanding refund amounts in Shopify**
+
+When exchanges are processed through separate zero-value replacement orders, Shopify may display an apparent outstanding refund amount in the original order.
+
+This does not necessarily mean that an additional refund is actually owed to the customer.
+
+The refunds already processed in the payment section of the original order are the relevant reference. You can use this section to verify which amounts have actually been refunded.
+
+</Warning>
+
+### Identifying exchange orders with the Exchange tag
+
+To help you quickly identify orders involving exchanges, toern automatically adds the `Exchange` tag to the original Shopify orders.
+
+The tag is applied whenever a return includes an exchange.
+
+<Frame>
+  <img
+    src="/images/docs/Shopify/ExchangeTag.jpg"
+    alt="Exchange tag applied to a Shopify order containing an exchange"
+  />
+</Frame>
+
+You can use this tag to find and filter exchange-related orders in Shopify.
+
+## Which exchange workflow should I use?
+
+The right workflow primarily depends on how your fulfillment system processes Shopify orders and fulfillment orders.
+
+|                   | Native Shopify exchange                            | Zero-value replacement order     |
+| ----------------- | -------------------------------------------------- | -------------------------------- |
+| New Shopify order | No                                                 | Yes                              |
+| Replacement items | Within the original order                          | In a separate order              |
+| Order connection  | Native Shopify connection                          | Cross-references between orders  |
+| Fulfillment       | Additional fulfillment order                       | New order                        |
+| Requirement       | Fulfillment supports additional fulfillment orders | Fulfillment processes new orders |
+
+**Our recommendation:** Use Shopify's native exchange workflow whenever your fulfillment system supports it. Otherwise, the zero-value replacement order is an alternative.
+
+Regardless of the selected workflow, you can find complete information about the exchange and its associated return in your toern Dashboard.

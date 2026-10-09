@@ -55,10 +55,7 @@
               {
                 "group": "Reklamationen",
                 "icon": "triangle-exclamation",
-                "pages": [
-                  "claims/claim-portal",
-                  "claims/claim-settings"
-                ]
+                "pages": ["claims/claim-portal", "claims/claim-settings"]
               },
               {
                 "group": "Branding",
@@ -73,18 +70,12 @@
               {
                 "group": "Fulfillment",
                 "icon": "warehouse",
-                "pages": [
-                  "fulfillment/fulfillment-integration",
-                  "fulfillment/ffn-connect-jtl-partner"
-                ]
+                "pages": ["fulfillment/fulfillment-integration"]
               },
               {
                 "group": "Shopify",
                 "icon": "shopify",
-                "pages": [
-                  "shopify/app",
-                  "shopify/plan"
-                ]
+                "pages": ["shopify/app", "shopify/plan", "shopify/activity"]
               },
               {
                 "group": "toern Dashboard",
@@ -119,22 +110,19 @@
                   "integrations/klaviyo",
                   "integrations/xentral",
                   "integrations/zendesk",
-                  "integrations/sendcloud"
+                  "integrations/sendcloud",
+                  "integrations/ffn-connect-jtl-partner"
                 ]
               },
               {
                 "group": "FAQ",
                 "icon": "circle-question",
-                "pages": [
-                  "faq"
-                ]
+                "pages": ["faq"]
               },
               {
                 "group": "Sonstiges",
                 "icon": "ellipsis",
-                "pages": [
-                  "glossary"
-                ]
+                "pages": ["glossary"]
               }
             ]
           },
@@ -143,9 +131,7 @@
             "groups": [
               {
                 "group": "Overview",
-                "pages": [
-                  "api-reference/introduction"
-                ]
+                "pages": ["api-reference/introduction"]
               },
               {
                 "group": "Endpoints",
@@ -199,10 +185,7 @@
               {
                 "group": "Claims",
                 "icon": "triangle-exclamation",
-                "pages": [
-                  "en/claims/claim-portal",
-                  "en/claims/claim-settings"
-                ]
+                "pages": ["en/claims/claim-portal", "en/claims/claim-settings"]
               },
               {
                 "group": "Branding",
@@ -217,17 +200,15 @@
               {
                 "group": "Fulfillment",
                 "icon": "warehouse",
-                "pages": [
-                  "en/fulfillment/fulfillment-integration",
-                  "en/fulfillment/ffn-connect-jtl-partner"
-                ]
+                "pages": ["en/fulfillment/fulfillment-integration"]
               },
               {
                 "group": "Shopify",
                 "icon": "shopify",
                 "pages": [
                   "en/shopify/app",
-                  "en/shopify/plan"
+                  "en/shopify/plan",
+                  "en/shopify/activity"
                 ]
               },
               {
@@ -263,22 +244,19 @@
                   "en/integrations/klaviyo",
                   "en/integrations/xentral",
                   "en/integrations/zendesk",
-                  "en/integrations/sendcloud"
+                  "en/integrations/sendcloud",
+                  "en/integrations/ffn-connect-jtl-partner"
                 ]
               },
               {
                 "group": "FAQ",
                 "icon": "circle-question",
-                "pages": [
-                  "en/faq"
-                ]
+                "pages": ["en/faq"]
               },
               {
                 "group": "Other",
                 "icon": "ellipsis",
-                "pages": [
-                  "en/glossary"
-                ]
+                "pages": ["en/glossary"]
               }
             ]
           },
@@ -287,9 +265,7 @@
             "groups": [
               {
                 "group": "Overview",
-                "pages": [
-                  "en/api-reference/introduction"
-                ]
+                "pages": ["en/api-reference/introduction"]
               },
               {
                 "group": "Endpoints",
