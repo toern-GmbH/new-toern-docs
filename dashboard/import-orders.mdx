@@ -3,6 +3,62 @@ title: "Bestellungen importieren"
 description: "Importiere Bestellungen in toern."
 ---
 
+Sobald dein Shopify-Shop mit toern verbunden ist, überträgt Shopify jede neue Bestellung automatisch an toern. Bestellungen, die du **vor** der Verbindung erhalten hast, kennt toern dagegen noch nicht. Deine Kunden können diese Bestellungen deshalb noch nicht im Retourenportal retournieren.
+
+Mit **Import orders** holst du diese Bestellungen für einen bestimmten Zeitraum nachträglich aus Shopify in toern. Typischerweise machst du das einmal vor dem Go-live, damit auch Kunden mit älteren Bestellungen direkt eine Retoure anmelden können.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Der Import funktioniert nur, wenn dein Shopify-Shop bereits verbunden ist. Wie das geht, erfährst du unter [Shopify-Shop verbinden](/getting-started/shopify-integration).
 </Note>
+
+## Wer kann Bestellungen importieren?
+
+Nur **Brand Admins** können Bestellungen importieren. Mehr zu den Rollen findest du unter [Rollen](/dashboard/user-management#rollen).
+
+## Bestellungen importieren
+
+Du erreichst den Import direkt über [diesen Link](https://www.admin.re-toern.de/import-orders).
+
+1. Wähle unter **Start Date** das Datum der ältesten Bestellung, die du importieren möchtest.
+2. Wähle unter **End Date** das Datum der neuesten Bestellung, die du importieren möchtest. Ein Datum in der Zukunft kannst du nicht auswählen.
+3. Klicke auf **Import Orders**.
+
+Mit **Last 30 Days** füllst du beide Felder automatisch mit den letzten 30 Tagen bis heute aus.
+
+toern importiert alle Bestellungen, die in Shopify im gewählten Zeitraum angelegt wurden. Start- und Enddatum sind dabei eingeschlossen.
+
+<Tip>
+  Wähle den Zeitraum so, dass er mindestens deine Retourenfrist abdeckt. Bei einer Retourenfrist von 30 Tagen reicht also **Last 30 Days**. Planst du zusätzlich Kulanz ein, wähle einen entsprechend längeren Zeitraum.
+</Tip>
+
+## Während des Imports
+
+Der Import läuft im Hintergrund. Je nach Anzahl der Bestellungen kann er einige Minuten dauern. Du kannst in der Zwischenzeit normal im Dashboard weiterarbeiten.
+
+Solange der Import läuft, zeigt toern oben im Dashboard den Hinweis **Order Import in Progress** an.
+
+Pro Brand kann immer nur ein Import gleichzeitig laufen. Startest du einen weiteren Import, bevor der erste abgeschlossen ist, wird er nicht ausgeführt. Warte deshalb, bis der laufende Import fertig ist und du die Benachrichtigung erhalten hast.
+
+## Ergebnis des Imports
+
+Sobald der Import abgeschlossen ist, erhältst du eine Benachrichtigung im Dashboard. Sie enthält:
+
+- den importierten **Zeitraum**
+- die Anzahl der **erfolgreich** importierten Bestellungen
+- die Anzahl der **fehlgeschlagenen** Bestellungen
+- die **Gesamtzahl** der verarbeiteten Bestellungen
+
+Wo du deine Benachrichtigungen findest, erfährst du unter [Benachrichtigungen](/dashboard/manage-returns#benachrichtigungen).
+
+Sind einzelne Bestellungen fehlgeschlagen, kannst du den Import für denselben Zeitraum erneut starten.
+
+## Fehlermeldungen
+
+| Meldung                                    | Bedeutung                                                         |
+| ------------------------------------------ | ----------------------------------------------------------------- |
+| **Please select both start and end dates** | Du hast kein Start- oder Enddatum ausgewählt.                     |
+| **Start date cannot be after end date**    | Das Startdatum liegt nach dem Enddatum. Tausche die beiden Daten. |
+
+Erhältst du nach einigen Minuten keine Benachrichtigung über den abgeschlossenen Import, prüfe, ob dein Shopify-Shop verbunden ist und ob du als Brand Admin angemeldet bist.
+
+Hast du Fragen zum Import oder fehlen Bestellungen in toern? Schreib uns an [support@re-toern.de](mailto:support@re-toern.de).

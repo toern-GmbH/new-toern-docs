@@ -3,6 +3,62 @@ title: "Import orders"
 description: "Import orders into toern."
 ---
 
+Once your Shopify shop is connected to toern, Shopify automatically sends every new order to toern. Orders you received **before** connecting, however, are not yet known to toern. Your customers therefore can't return these orders in the return portal yet.
+
+With **Import orders** you pull these orders from Shopify into toern for a specific period. Typically you do this once before going live, so customers with older orders can register a return right away.
+
 <Note>
-  This page is a work in progress.
+  The import only works if your Shopify shop is already connected. Learn how under [Connect your Shopify shop](/en/getting-started/shopify-integration).
 </Note>
+
+## Who can import orders?
+
+Only **Brand Admins** can import orders. Learn more about the roles under [Roles](/en/dashboard/user-management#roles).
+
+## Import orders
+
+Open the import directly via [this link](https://www.admin.re-toern.de/import-orders).
+
+1. Under **Start Date**, select the date of the oldest order you want to import.
+2. Under **End Date**, select the date of the newest order you want to import. You can't select a date in the future.
+3. Click **Import Orders**.
+
+**Last 30 Days** automatically fills both fields with the last 30 days up to today.
+
+toern imports all orders created in Shopify within the selected period. Start and end date are included.
+
+<Tip>
+  Choose a period that covers at least your return window. With a 30-day return window, **Last 30 Days** is enough. If you also allow returns as a goodwill gesture, choose a longer period accordingly.
+</Tip>
+
+## During the import
+
+The import runs in the background. Depending on the number of orders, it can take a few minutes. You can keep working in the dashboard as usual in the meantime.
+
+While the import is running, toern shows the notice **Order Import in Progress** at the top of the dashboard.
+
+Only one import can run per brand at a time. If you start another import before the first one has finished, it won't be executed. So wait until the running import is finished and you've received the notification.
+
+## Import result
+
+As soon as the import is finished, you get a notification in the dashboard. It contains:
+
+- the imported **period**
+- the number of **successfully** imported orders
+- the number of **failed** orders
+- the **total** number of processed orders
+
+Learn where to find your notifications under [Notifications](/en/dashboard/manage-returns#notifications).
+
+If individual orders failed, you can start the import again for the same period.
+
+## Error messages
+
+| Message                                    | Meaning                                                      |
+| ------------------------------------------ | ------------------------------------------------------------ |
+| **Please select both start and end dates** | You haven't selected a start or end date.                    |
+| **Start date cannot be after end date**    | The start date is after the end date. Swap the two dates.    |
+
+If you don't receive a notification about the finished import after a few minutes, check whether your Shopify shop is connected and whether you're logged in as a Brand Admin.
+
+Do you have questions about the import, or are orders missing in toern? Write to us at [support@re-toern.de](mailto:support@re-toern.de).
