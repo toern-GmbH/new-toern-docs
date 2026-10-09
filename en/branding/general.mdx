@@ -16,7 +16,10 @@ Keep in mind:
 - A logo that is wider than it is tall looks best in the portal. This optimizes the display on mobile and desktop.
 
 <Frame>
-  <img src="/images/docs/Settings/BrandingNew01.png" alt="Upload of the brand logo" />
+  <img
+    src="/images/docs/Settings/BrandingNew01.png"
+    alt="Upload of the brand logo"
+  />
 </Frame>
 
 ## Background Image
@@ -27,7 +30,10 @@ In addition to the logo, you can upload a background image. It's shown when cust
 - Recommended format: **.jpg/JPEG**.
 
 <Frame>
-  <img src="/images/docs/Settings/BrandingNew02.png" alt="Upload of the background image" />
+  <img
+    src="/images/docs/Settings/BrandingNew02.png"
+    alt="Upload of the background image"
+  />
 </Frame>
 
 ## Highlight and Action Colors
@@ -42,7 +48,10 @@ You can set two colors:
 Enter the colors as a **hex code**. The color is shown directly in the preview.
 
 <Frame>
-  <img src="/images/docs/Settings/BrandingNew03.png" alt="Color customization" />
+  <img
+    src="/images/docs/Settings/BrandingNew03.png"
+    alt="Color customization"
+  />
 </Frame>
 
 ## Font Configuration
@@ -57,7 +66,7 @@ You can also customize the fonts in the return portal. There is a **Primary**, *
 4. Switch to the **@import** tab. You'll see something like this:
 
    ```css
-   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
    ```
 
 5. Copy only the URL inside `url('...')`, starting with `https://fonts.googleapis.com/css2`. Example:
@@ -73,7 +82,9 @@ You can also customize the fonts in the return portal. There is a **Primary**, *
 </Frame>
 
 <Tip>
-  You can include several font families by adding more `&family=...` parts. Google provides these in the embed code. Keep `display=swap` in the URL for better rendering.
+  You can include several font families by adding more `&family=...` parts.
+  Google provides these in the embed code. Keep `display=swap` in the URL for
+  better rendering.
 </Tip>
 
 <Warning>
@@ -83,26 +94,9 @@ You can also customize the fonts in the return portal. There is a **Primary**, *
 </Warning>
 
 <Note>
-  The Google Fonts URLs are only used for preview and testing. In production, fonts are served GDPR-compliantly via our CDN for security reasons.
+  The Google Fonts URLs are only used for preview and testing. In production,
+  fonts are served GDPR-compliantly via our CDN for security reasons.
 </Note>
-
-## Order Number Placeholder
-
-You can customize the placeholder in the order number field on the login page (default: "e.g. from the order confirmation"). You set the text in German and in English for international returns.
-
-This is especially helpful if customers can log in with different numbers and you want to show them where to find these numbers.
-
-<Frame>
-  <img src="/images/docs/Settings/BrandingNew05.png" alt="Customizing the Order Number Placeholder" />
-</Frame>
-
-## Login Information Text
-
-On the login page, you can add an extra info text about logging in or about the return. This also helps if customers can log in with different numbers.
-
-<Frame>
-  <img src="/images/docs/Settings/BrandingNew06.png" alt="Customizing the Login Information Text" />
-</Frame>
 
 ## More settings
 
@@ -110,7 +104,11 @@ On the login page, you can add an extra info text about logging in or about the 
   <Card title="Languages" icon="language" href="/en/branding/languages">
     Define which languages your return portal is available in.
   </Card>
-  <Card title="Email templates" icon="envelope" href="/en/branding/email-templates">
+  <Card
+    title="Email templates"
+    icon="envelope"
+    href="/en/branding/email-templates"
+  >
     Customize the emails your customers receive.
   </Card>
 </CardGroup>
