@@ -338,18 +338,6 @@
     {
       "source": "/en/quickstart",
       "destination": "/en/getting-started/shopify-integration"
-    },
-    {
-      "source": "/ffn-connect-jtl-partner",
-      "destination": "/fulfillment/ffn-connect-jtl-partner"
-    },
-    {
-      "source": "/integrations/ffn-connect-jtl-partner",
-      "destination": "/fulfillment/ffn-connect-jtl-partner"
-    },
-    {
-      "source": "/en/integrations/ffn-connect-jtl-partner",
-      "destination": "/en/fulfillment/ffn-connect-jtl-partner"
     }
   ]
 }
