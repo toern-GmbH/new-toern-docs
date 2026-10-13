@@ -1,8 +1,113 @@
 ---
 title: "Post AT"
-description: "Binde Post AT als Versanddienstleister für Retouren an."
+description: "Binde die Österreichische Post an und erstelle Retourenlabels für Rücksendungen nach Österreich automatisch."
 ---
 
+Mit der Post-AT-Anbindung nutzt toern deinen bestehenden Vertrag mit der Österreichischen Post und erstellt die Retourenlabels für deine Kund:innen automatisch. Damit wickelst du Rücksendungen nach Österreich ganz einfach ab:
+
+- **National:** Rücksendungen innerhalb Österreichs (AT → AT)
+- **International:** Rücksendungen aus anderen EU-Ländern nach Österreich (EU → AT)
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+<Warning>
+  Welche Funktionen per API zur Verfügung stehen, hängt von deinem Vertrag mit der Post AT ab. Für internationale Retourenprodukte brauchst du zum Beispiel einen entsprechenden Vertrag.
+</Warning>
+
+## Voraussetzungen
+
+- Ein aktiver Geschäftskundenvertrag mit der Post AT.
+- Ein Zugang zum Post AT PLC-Portal.
+- Die API-Zugänge für dein Konto sind von der Post AT freigeschaltet.
+
+## Einrichtung
+
+### API-Zugang bei der Post AT anfragen
+
+Kontaktiere deine Ansprechperson bei der Post AT und bitte darum, die API-Zugänge für dein Konto freizuschalten.
+
+Möchtest du auch das Tracking deiner Retouren nutzen, läuft das über einen SFTP-Server der Post AT. Dafür koordinieren wir gerne einen gemeinsamen Termin mit dir und der Post AT. So stellen wir sicher, dass dein Setup funktioniert.
+
 <Note>
-  Diese Seite ist in Arbeit.
+  Die Einrichtung des Trackings ist aktuell noch mit manuellem Aufwand und einer Abstimmung mit der Post AT verbunden. Schreib uns dafür an support@re-toern.de.
 </Note>
+
+### API-Zugangsdaten im Post AT Portal finden
+
+Sobald dein Konto für die API freigeschaltet ist, findest du die Zugangsdaten im Post AT Portal.
+
+1. Melde dich in deinem Post AT Konto an.
+
+   ![Post AT Portal](/images/docs/PostAt/PostAtPortal.jpg)
+
+2. Öffne **Gerätekonfiguration**. Im Abschnitt **Organisation** klickst du auf **API**.
+
+   ![Post AT Gerätekonfiguration](/images/docs/PostAt/PostAtPortalGerätekonfiguration.jpg)
+
+3. Notiere dir diese drei Werte:
+   - **ClientID** (Mandanten-ID)
+   - **OrgUnitID**
+   - **OrgUnitGUID**
+
+   ![Post AT API-Zugangsdaten](/images/docs/PostAt/PostAtPortalApi.jpg)
+
+### Zugangsdaten in toern hinterlegen
+
+1. Öffne im toern Dashboard die [Post-AT-Einstellungen](https://www.admin.re-toern.de/settings/shipping-services#postat-access-credentials) (Settings → Returns Shipping Services → Post AT).
+
+   ![Post AT Einstellungen](/images/docs/PostAt/SettingsPostAt.jpg)
+
+2. Wähle unter **Access Credentials** die passende Umgebung aus: **Live system** für den echten Betrieb oder **Test system** für Tests. Das Testsystem hat eigene API-Daten.
+3. Trage **ClientID**, **OrgUnitID** und **OrgUnitGUID** aus dem Post AT Portal ein und speichere.
+
+![Post AT Access Credentials](/images/docs/PostAt/SettingsPostAtCredentials.jpg)
+
+## Einstellungen in toern
+
+### Country Address Mapping
+
+Für jedes Land, aus dem Retouren möglich sein sollen, legst du fest, welches Post-Produkt verwendet wird und an welche Adresse die Retouren gehen. Ausschlaggebend ist dabei das Land deiner Kund:innen.
+
+1. Scrolle in den Post-AT-Einstellungen zum Bereich **Country Address Mapping**.
+
+   ![Post AT Country Address Mapping](/images/docs/PostAt/SettingsPostAtCountryMappings.jpg)
+
+2. Klicke auf **Add Country**.
+3. Wähle unter **Customer Country** das Land aus, z. B. Österreich für nationale Retouren.
+4. Prüfe das **Post Product**. toern wählt es automatisch vor:
+   - **Retourpaket (28)** für Retouren innerhalb Österreichs (AT → AT)
+   - **Retourpaket International (63)** für Retouren aus anderen Ländern
+
+   In Absprache mit deiner Ansprechperson bei der Post AT kannst du auch ein anderes verfügbares Produkt auswählen.
+5. Hinterlege die Rücksendeadresse. An diese Fulfillment- oder Annahmeadresse werden die Retouren aus dem Land geschickt.
+6. Klicke auf **Add Country**.
+
+![Post AT Land hinzufügen](/images/docs/PostAt/SettingsPostAtAddCountry.jpg)
+
+Bereits angelegte Länder kannst du jederzeit bearbeiten oder löschen. Länder ohne eigenen Eintrag nutzen den Eintrag **Default (all countries)**, sofern du ihn hinterlegt hast.
+
+<Info>
+  Entweder das Land deiner Kund:innen oder das Land der Rücksendeadresse muss Österreich sein.
+</Info>
+
+<Warning>
+  Das Country Address Mapping aktiviert die Rücksendemethode nicht automatisch. Lege Post AT zusätzlich wie gewohnt unter **Returns → Return Methods** als [Rücksendemethode](/returns/return-methods) für das jeweilige Land an. Dort hinterlegst du auch optionale Gebühren für die Labels.
+</Warning>
+
+### Tracking Access
+
+Die Post AT stellt die Trackingdaten als Dateien auf einem SFTP-Server bereit. Die Zugangsdaten dafür erhältst du von der Post AT, wenn der Tracking-Export eingerichtet wird.
+
+Im Bereich **Tracking Access** in den Post-AT-Einstellungen hinterlegst du:
+
+- **Kunden-Kennung** (5-stellig)
+- **SFTP Server**
+- **Port**
+- **Username**
+- **Password**
+
+![Post AT Tracking Access](/images/docs/PostAt/SettingsPostAtSFTP.jpg)
+
+<Warning>
+  Koordiniere vor der Einrichtung einen Termin mit toern und deiner Ansprechperson bei der Post AT. So stellen wir gemeinsam sicher, dass das Setup funktioniert.
+</Warning>

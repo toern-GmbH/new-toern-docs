@@ -1,8 +1,113 @@
 ---
 title: "Post AT"
-description: "Connect Post AT as a carrier for returns."
+description: "Connect Austrian Post and create return labels for returns to Austria automatically."
 ---
 
+With the Post AT connection, toern uses your existing contract with Austrian Post and creates return labels for your customers automatically. This makes returns to Austria easy:
+
+- **National:** returns within Austria (AT → AT)
+- **International:** returns from other EU countries to Austria (EU → AT)
+
+You can find general information about return methods and return countries under [Return methods](/en/returns/return-methods).
+
+<Warning>
+  Which features are available via the API depends on your contract with Post AT. For international return products, for example, you need a matching contract.
+</Warning>
+
+## Requirements
+
+- An active business customer contract with Post AT.
+- Access to the Post AT PLC portal.
+- Post AT has enabled API access for your account.
+
+## Setup
+
+### Request API access from Post AT
+
+Contact your Post AT representative and ask them to enable API access for your account.
+
+If you also want to track your returns, this works through an SFTP server provided by Post AT. We're happy to coordinate a joint appointment with you and Post AT to make sure your setup works.
+
 <Note>
-  This page is a work in progress.
+  Setting up tracking currently still involves manual effort and coordination with Post AT. Contact us at support@re-toern.de.
 </Note>
+
+### Find the API credentials in the Post AT portal
+
+Once your account is enabled for the API, you can find the credentials in the Post AT portal.
+
+1. Log in to your Post AT account.
+
+   ![Post AT portal](/images/docs/PostAt/PostAtPortal.jpg)
+
+2. Open **Gerätekonfiguration** (device configuration). In the **Organisation** section, click **API**.
+
+   ![Post AT device configuration](/images/docs/PostAt/PostAtPortalGerätekonfiguration.jpg)
+
+3. Note down these three values:
+   - **ClientID** (Mandanten-ID)
+   - **OrgUnitID**
+   - **OrgUnitGUID**
+
+   ![Post AT API credentials](/images/docs/PostAt/PostAtPortalApi.jpg)
+
+### Add the credentials in toern
+
+1. Open the [Post AT settings](https://www.admin.re-toern.de/settings/shipping-services#postat-access-credentials) in the toern dashboard (Settings → Returns Shipping Services → Post AT).
+
+   ![Post AT settings](/images/docs/PostAt/SettingsPostAt.jpg)
+
+2. Under **Access Credentials**, select the environment: **Live system** for live operation or **Test system** for testing. The test system has its own API data.
+3. Enter the **ClientID**, **OrgUnitID** and **OrgUnitGUID** from the Post AT portal and save.
+
+![Post AT Access Credentials](/images/docs/PostAt/SettingsPostAtCredentials.jpg)
+
+## Settings in toern
+
+### Country Address Mapping
+
+For every country you want to accept returns from, you define which Post product is used and which address the returns are sent to. What counts is your customer's country.
+
+1. In the Post AT settings, scroll to the **Country Address Mapping** section.
+
+   ![Post AT Country Address Mapping](/images/docs/PostAt/SettingsPostAtCountryMappings.jpg)
+
+2. Click **Add Country**.
+3. Under **Customer Country**, select the country, e.g. Austria for national returns.
+4. Check the **Post Product**. toern preselects it automatically:
+   - **Retourpaket (28)** for returns within Austria (AT → AT)
+   - **Retourpaket International (63)** for returns from other countries
+
+   In agreement with your Post AT representative, you can also select another available product.
+5. Enter the return address. Returns from this country are sent to this fulfillment or receiving address.
+6. Click **Add Country**.
+
+![Post AT add country](/images/docs/PostAt/SettingsPostAtAddCountry.jpg)
+
+You can edit or delete existing countries at any time. Countries without their own entry use the **Default (all countries)** entry, if you have set one.
+
+<Info>
+  Either your customer's country or the return address country must be Austria.
+</Info>
+
+<Warning>
+  The Country Address Mapping doesn't activate the return method automatically. Also add Post AT as a [return method](/en/returns/return-methods) for the country under **Returns → Return Methods** as usual. That's also where you set optional label fees.
+</Warning>
+
+### Tracking Access
+
+Post AT provides tracking data as files on an SFTP server. You receive the access data from Post AT when the tracking export is set up.
+
+In the **Tracking Access** section of the Post AT settings, enter:
+
+- **Kunden-Kennung** (5-digit customer ident)
+- **SFTP Server**
+- **Port**
+- **Username**
+- **Password**
+
+![Post AT Tracking Access](/images/docs/PostAt/SettingsPostAtSFTP.jpg)
+
+<Warning>
+  Before setting this up, coordinate an appointment with toern and your Post AT representative. Together we make sure the setup works.
+</Warning>
