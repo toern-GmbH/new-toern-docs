@@ -113,11 +113,11 @@ The **Customer Traffic Light Indicator** rates the return behavior of each of yo
 
 <Frame><img src="/images/docs/Settings/ShopIntegrationNeu07.png" alt="Traffic Light Indicator settings" /></Frame>
 
-You can adjust the traffic light for three KPIs. It's calculated as soon as a customer has placed at least **3 orders** with you.
+You can adjust the traffic light for three KPIs. It's calculated as soon as a customer has at least **3 orders** or at least **10 ordered items** with you. Until then the traffic light shows **Not rated**.
 
 1. **Return Rate Threshold**: Ratio of returns to orders. This is the return rate on package level.
-2. **Return Metrics for Stick Items**: Ratio of returned to kept items across all orders. This is the return rate on item level.
-3. **Monetary Metric**: Ratio of returned to kept revenue in euros across all orders. This shows you directly how much revenue you've already made with a customer.
+2. **Return Metrics for Stock Items**: Ratio of returned to ordered items across all orders. This is the return rate on item level. An exchanged item doesn't count as returned. If the customer also sends back the replacement, the replacement counts as returned.
+3. **Monetary Metric**: Ratio of the amount refunded to the amount paid in euros across all orders. The amount paid is the full order total incl. shipping, taxes and duties. The amount refunded is the refund actually paid out. This shows you directly how much revenue you actually keep with a customer.
 
 For each KPI you set a lower and an upper threshold:
 
