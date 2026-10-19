@@ -109,6 +109,7 @@
                 "pages": [
                   "integrations/klaviyo",
                   "integrations/xentral",
+                  "integrations/pickware",
                   "integrations/zendesk",
                   "integrations/sendcloud",
                   "integrations/ffn-connect-jtl-partner"
@@ -243,6 +244,7 @@
                 "pages": [
                   "en/integrations/klaviyo",
                   "en/integrations/xentral",
+                  "en/integrations/pickware",
                   "en/integrations/zendesk",
                   "en/integrations/sendcloud",
                   "en/integrations/ffn-connect-jtl-partner"

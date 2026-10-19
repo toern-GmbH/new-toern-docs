@@ -1,0 +1,184 @@
+---
+title: "Pickware"
+description: "Connect Pickware ERP to toern and take over your warehouse's return inspection in toern automatically."
+---
+
+With the **Pickware integration**, you connect your Pickware ERP to toern. As soon as your warehouse completes a return in Pickware, Pickware sends the result to toern. toern classifies the items and then starts your usual automations, such as the refund.
+
+<Note>
+  The Pickware integration has to be enabled for your account. Contact
+  [support@re-toern.de](mailto:support@re-toern.de) to enable it.
+</Note>
+
+## What does the integration do?
+
+- **Inspect returns automatically**: Once your warehouse has completed a return, toern takes over the classification of the items. You don't need to enter anything manually in the dashboard.
+- **Detect missing items**: Items that Pickware reports as not in the package are not refunded in toern and can't be returned again.
+- **Take over unregistered returns**: If a package arrives that your customer never registered a return for, toern creates the return automatically.
+- **Correct stock levels**: Pickware restocks returned items itself. toern therefore doesn't restock anything in Shopify on top.
+
+## Setup
+
+### Create an API token in Pickware
+
+To connect, you need a **GraphQL API token** from Pickware ERP.
+
+1. Open Pickware ERP.
+2. Go to Settings → GraphQL API tokens.
+3. Create a new token with these three permissions (scopes):
+   - `webhook_subscriptions:write`
+   - `return_orders:read`
+   - `orders:read`
+4. Copy the **access key** and the **secret access key**.
+5. Open the token's detail page and copy the **API domain** from the **Endpoint** field. You only need the domain without the path, for example `https://your-shop.pickware.shop`.
+
+<Warning>
+  If one of the three permissions is missing, toern can't fetch the returns from
+  Pickware.
+</Warning>
+
+{/* Screenshot: Pickware ERP, creating a new GraphQL API token with the three scopes selected */}
+
+<Frame caption="Create a GraphQL API token in Pickware ERP">
+  <img
+    src="/images/docs/Pickware/api-token.png"
+    alt="Pickware ERP while creating a GraphQL API token with the permissions webhook_subscriptions:write, return_orders:read and orders:read"
+  />
+</Frame>
+
+{/* Screenshot: Pickware ERP, the token's detail page with the Endpoint field highlighted */}
+
+<Frame caption="You find the API domain in the Endpoint field">
+  <img
+    src="/images/docs/Pickware/api-endpoint.png"
+    alt="Detail page of a GraphQL API token in Pickware ERP with the Endpoint field"
+  />
+</Frame>
+
+### Add your credentials in toern
+
+1. Open your toern dashboard.
+2. Go to Settings → Integrations → Pickware → **Access Credentials**.
+3. Enter the **API domain**, **Access key** and **Secret access key**. The fields save automatically.
+
+As soon as all three fields are saved, toern connects to Pickware automatically. From then on, Pickware informs toern about every completed return.
+
+{/* Screenshot: toern dashboard, Settings → Integrations → Pickware → Access Credentials, filled in */}
+
+<Frame caption="Enter your Pickware credentials in toern">
+  <img
+    src="/images/docs/Pickware/access-credentials.png"
+    alt="Settings page in toern with the fields API domain, Access key and Secret access key"
+  />
+</Frame>
+
+### Check the connection
+
+Under Settings → Integrations → Pickware → **Webhooks**, you can see whether toern receives the updates from Pickware. The **Return completed** event should show the status **Active**.
+
+| Status                                     | What it means                                                     | What you can do                            |
+| ------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------ |
+| **Active**                                 | toern receives the updates from Pickware.                         | Nothing, everything is running.            |
+| **Awaiting consent**                       | Pickware is confirming the connection.                            | Click **Refresh status** after a moment.   |
+| **Consent failed**                         | The connection couldn't be confirmed.                             | Click **Sync webhook**.                    |
+| **Disabled by Pickware**                   | Pickware disabled the connection after several failed deliveries. | Click **Sync webhook** to reactivate it.   |
+| **Deleted in Pickware** or **Not created** | The connection is missing in Pickware.                            | Click **Sync webhook** to create it again. |
+
+If **Sync webhook** doesn't help, contact [support@re-toern.de](mailto:support@re-toern.de).
+
+{/* Screenshot: toern dashboard, Settings → Integrations → Pickware → Webhooks, Return completed event with status Active */}
+
+<Frame caption="The status of the connection to Pickware">
+  <img
+    src="/images/docs/Pickware/webhooks.png"
+    alt="Settings page in toern with the Return completed event in status Active and the Sync webhook button"
+  />
+</Frame>
+
+## How returns are processed
+
+### When does Pickware send a return?
+
+Pickware only sends a return once your warehouse **completes** it in Pickware. As long as a return is only partially received, nothing happens in toern yet. Your warehouse can still record more items until it completes the return.
+
+### Classification
+
+toern takes over the condition of every received item from Pickware:
+
+| In Pickware | Classification in toern |
+| ----------- | ----------------------- |
+| Restocked   | **A**                   |
+| Disposed    | **D**                   |
+
+The return then has the status **inspected**, and your automations run as usual, for example the automatic refund.
+
+<Warning>
+  Every received item has to be either restocked or disposed in Pickware. If an
+  item is missing this information, toern doesn't take over the return yet and
+  keeps trying again for up to 72 hours.
+</Warning>
+
+### Missing items
+
+If your warehouse reports items as missing, toern removes them from the return for good:
+
+- They are **not refunded**.
+- You **can't add them back** in the dashboard.
+- Your customer **can't return them again**.
+
+Every missing item is noted in the return's activity log. If a [set](/en/returns/sets) is missing, this applies to the whole set.
+
+### None of the items arrived
+
+If your warehouse completes a return without any item having arrived, the return becomes a **clarification case**. Nothing is refunded automatically. Usually this just means that your customer changed their mind and never sent the package.
+
+<Warning>
+  If your customer wants to send the items back later after all, they can't log
+  in to the return portal again. With Pickware, only one return per order is
+  possible (see [Limitations](#limitations)). In this case, contact
+  [support@re-toern.de](mailto:support@re-toern.de).
+</Warning>
+
+### Returns Pickware creates itself
+
+Sometimes a package arrives that your customer never registered a return for. If your warehouse assigns it to the right order in Pickware, toern creates the return automatically once it is completed:
+
+- It is a **manual return** with the status **inspected** and the classifications from Pickware.
+- toern takes the **return fee** from Shopify, as Pickware created it there.
+- The refund goes to the **original payment method**.
+- The return has **no shipping label**.
+
+After that, your automations run like for any other return. If toern can't match an item to an open position of the order, for example because it is already part of another return, the return becomes a clarification case.
+
+{/* Screenshot: toern dashboard, detail view of a return processed by Pickware: items with classification A/D, one missing item and the Pickware entries in the activity log */}
+
+<Frame caption="A return processed by Pickware in the dashboard">
+  <img
+    src="/images/docs/Pickware/return-detail.png"
+    alt="Detail view of a return in toern with classified items, one missing item and entries from Pickware in the activity log"
+  />
+</Frame>
+
+### Clarification cases
+
+In these cases, toern creates a clarification case instead of continuing automatically:
+
+- **No item arrived.** See [above](#none-of-the-items-arrived).
+- **An item doesn't match the order.** toern can't match it to an open position of the order.
+- **Pickware completes a return again.** toern doesn't take over the second completion. Check the return in Pickware together with your warehouse.
+- **The return was already classified.** If the return was already classified in toern, toern doesn't take over the result from Pickware. Check the return with your warehouse here as well.
+
+You can find out how to solve clarification cases in the [FAQ](/en/faq).
+
+## Limitations
+
+Pickware processes the return in Shopify itself. After that, toern can no longer change it in Shopify. That's why these limitations currently apply to returns with Pickware:
+
+- **One return per order**: If an order already has a return, your customer can't log in to the return portal again. This also applies to [claims](/en/claims/claim-portal) and to returns you create manually in the dashboard. The **Restrict Multiple Returns Per Order** setting is therefore not shown.
+- **No adding or removing items**: You can't add or remove items in the return's detail view.
+- **Return fee can't be changed**: You can't change the return fee, neither in the detail view nor in a manual refund.
+- **Manual refunds only for items on the return**: You can't refund items through the return that aren't part of it.
+- **No restocking by toern**: Pickware restocks the items itself. The **Shopify Restock** setting is therefore not shown, and you can't restock items in manual refunds.
+- **Completed returns only**: toern only takes over a return once it is completed in Pickware.
+
+<Note>These limitations may change in the future.</Note>

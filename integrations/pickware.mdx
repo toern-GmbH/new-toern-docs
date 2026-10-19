@@ -1,0 +1,184 @@
+---
+title: "Pickware"
+description: "Verbinde Pickware ERP mit toern und übernimm die Retourenprüfung deines Lagers automatisch in toern."
+---
+
+Mit der **Pickware-Integration** verbindest du dein Pickware ERP mit toern. Sobald dein Lager eine Retoure in Pickware abschließt, überträgt Pickware das Ergebnis an toern. toern klassifiziert die Artikel und startet danach die gewohnten Automatisierungen, zum Beispiel die Rückerstattung.
+
+<Note>
+  Die Pickware-Integration muss für deinen Account freigeschaltet sein. Wende
+  dich dafür an [support@re-toern.de](mailto:support@re-toern.de).
+</Note>
+
+## Was ermöglicht die Integration?
+
+- **Retouren automatisch prüfen**: Hat dein Lager eine Retoure abgeschlossen, übernimmt toern die Klassifizierung der Artikel. Du musst nichts manuell im Dashboard eintragen.
+- **Fehlende Artikel erkennen**: Artikel, die laut Pickware nicht im Paket waren, werden in toern weder erstattet noch können sie erneut retourniert werden.
+- **Retouren ohne Anmeldung übernehmen**: Kommt ein Paket an, für das dein Kunde keine Retoure angemeldet hat, legt toern die Retoure automatisch an.
+- **Korrekter Lagerbestand**: Pickware bucht retournierte Artikel selbst wieder ein. toern bucht deshalb in Shopify nichts zusätzlich ein.
+
+## Einrichtung
+
+### API-Token in Pickware erstellen
+
+Für die Verbindung brauchst du einen **GraphQL-API-Token** aus Pickware ERP.
+
+1. Öffne Pickware ERP.
+2. Navigiere zu Einstellungen → GraphQL-API-Tokens.
+3. Erstelle einen neuen Token mit diesen drei Berechtigungen (Scopes):
+   - `webhook_subscriptions:write`
+   - `return_orders:read`
+   - `orders:read`
+4. Kopiere den **Access Key** und den **Secret Access Key**.
+5. Öffne die Detailseite des Tokens und kopiere die **API-Domain** aus dem Feld **Endpoint**. Du brauchst nur die Domain ohne Pfad, zum Beispiel `https://dein-shop.pickware.shop`.
+
+<Warning>
+  Fehlt eine der drei Berechtigungen, kann toern die Retouren nicht von Pickware
+  abrufen.
+</Warning>
+
+{/* Screenshot: Pickware ERP, neuen GraphQL-API-Token anlegen, mit den drei ausgewählten Scopes */}
+
+<Frame caption="Einen GraphQL-API-Token in Pickware ERP erstellen">
+  <img
+    src="/images/docs/Pickware/api-token.png"
+    alt="Pickware ERP beim Anlegen eines GraphQL-API-Tokens mit den Berechtigungen webhook_subscriptions:write, return_orders:read und orders:read"
+  />
+</Frame>
+
+{/* Screenshot: Pickware ERP, Detailseite des Tokens, Feld Endpoint hervorgehoben */}
+
+<Frame caption="Die API-Domain findest du im Feld Endpoint">
+  <img
+    src="/images/docs/Pickware/api-endpoint.png"
+    alt="Detailseite eines GraphQL-API-Tokens in Pickware ERP mit dem Feld Endpoint"
+  />
+</Frame>
+
+### Zugangsdaten in toern hinterlegen
+
+1. Öffne dein toern Dashboard.
+2. Navigiere zu Settings → Integrations → Pickware → **Access Credentials**.
+3. Trage **API domain**, **Access key** und **Secret access key** ein. Die Felder werden automatisch gespeichert.
+
+Sobald alle drei Felder gespeichert sind, verbindet sich toern automatisch mit Pickware. Ab dann informiert Pickware toern über jede abgeschlossene Retoure.
+
+{/* Screenshot: toern Dashboard, Settings → Integrations → Pickware → Access Credentials, ausgefüllt */}
+
+<Frame caption="Pickware-Zugangsdaten in toern eintragen">
+  <img
+    src="/images/docs/Pickware/access-credentials.png"
+    alt="Einstellungsseite in toern mit den Feldern API domain, Access key und Secret access key"
+  />
+</Frame>
+
+### Verbindung prüfen
+
+Unter Settings → Integrations → Pickware → **Webhooks** siehst du, ob toern die Updates von Pickware empfängt. Beim Event **Return completed** sollte der Status **Active** stehen.
+
+| Status                                       | Was er bedeutet                                                                      | Was du tun kannst                                         |
+| -------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| **Active**                                   | toern empfängt die Updates von Pickware.                                             | Nichts, alles läuft.                                      |
+| **Awaiting consent**                         | Pickware bestätigt gerade die Verbindung.                                            | Klicke nach einem Moment auf **Refresh status**.          |
+| **Consent failed**                           | Die Verbindung konnte nicht bestätigt werden.                                        | Klicke auf **Sync webhook**.                              |
+| **Disabled by Pickware**                     | Pickware hat die Verbindung nach mehreren fehlgeschlagenen Zustellungen deaktiviert. | Klicke auf **Sync webhook**, um sie wieder zu aktivieren. |
+| **Deleted in Pickware** oder **Not created** | Die Verbindung fehlt in Pickware.                                                    | Klicke auf **Sync webhook**, um sie neu anzulegen.        |
+
+Hilft **Sync webhook** nicht weiter, wende dich an [support@re-toern.de](mailto:support@re-toern.de).
+
+{/* Screenshot: toern Dashboard, Settings → Integrations → Pickware → Webhooks, Event Return completed mit Status Active */}
+
+<Frame caption="Der Status der Verbindung zu Pickware">
+  <img
+    src="/images/docs/Pickware/webhooks.png"
+    alt="Einstellungsseite in toern mit dem Event Return completed im Status Active und dem Button Sync webhook"
+  />
+</Frame>
+
+## So werden Retouren verarbeitet
+
+### Wann überträgt Pickware eine Retoure?
+
+Pickware überträgt eine Retoure erst, wenn dein Lager sie in Pickware **abschließt**. Solange eine Retoure nur teilweise empfangen ist, passiert in toern noch nichts. Dein Lager kann bis zum Abschluss weitere Artikel erfassen.
+
+### Klassifizierung
+
+toern übernimmt den Zustand jedes empfangenen Artikels aus Pickware:
+
+| In Pickware | Klassifizierung in toern |
+| ----------- | ------------------------ |
+| Eingelagert | **A**                    |
+| Entsorgt    | **D**                    |
+
+Danach hat die Retoure den Status **inspected**, und deine Automatisierungen laufen wie gewohnt, zum Beispiel die automatische Rückerstattung.
+
+<Warning>
+  Jeder empfangene Artikel muss in Pickware entweder eingelagert oder entsorgt
+  sein. Fehlt diese Angabe bei einem Artikel, übernimmt toern die Retoure noch
+  nicht und versucht es bis zu 72 Stunden lang erneut.
+</Warning>
+
+### Fehlende Artikel
+
+Meldet dein Lager Artikel als fehlend, entfernt toern sie endgültig aus der Retoure:
+
+- Sie werden **nicht erstattet**.
+- Du kannst sie im Dashboard **nicht wieder hinzufügen**.
+- Dein Kunde kann sie **nicht erneut retournieren**.
+
+Jeder fehlende Artikel wird im Aktivitätsprotokoll der Retoure vermerkt. Fehlt ein [Set](/returns/sets), gilt das für das ganze Set.
+
+### Keiner der Artikel ist angekommen
+
+Schließt dein Lager eine Retoure ab, ohne dass ein Artikel angekommen ist, wird die Retoure zum **Klärfall**. Es wird nichts automatisch erstattet. Meistens heißt das einfach, dass dein Kunde es sich anders überlegt und das Paket nie verschickt hat.
+
+<Warning>
+  Möchte dein Kunde die Artikel später doch zurückschicken, kann er sich nicht
+  erneut im Retourenportal anmelden. Mit Pickware ist pro Bestellung nur eine
+  Retoure möglich (siehe [Einschränkungen](#einschränkungen)). Wende dich in
+  diesem Fall an [support@re-toern.de](mailto:support@re-toern.de).
+</Warning>
+
+### Retouren, die Pickware selbst anlegt
+
+Manchmal kommt ein Paket an, für das dein Kunde keine Retoure angemeldet hat. Ordnet dein Lager es in Pickware der richtigen Bestellung zu, legt toern beim Abschluss automatisch eine Retoure an:
+
+- Sie ist eine **manuelle Retoure** mit dem Status **inspected** und den Klassifizierungen aus Pickware.
+- Die **Retourengebühr** übernimmt toern aus Shopify, so wie Pickware sie dort angelegt hat.
+- Erstattet wird auf die **ursprüngliche Zahlungsmethode**.
+- Die Retoure hat **kein Versandlabel**.
+
+Danach laufen deine Automatisierungen wie bei jeder anderen Retoure. Kann toern einen Artikel keiner offenen Position der Bestellung zuordnen, zum Beispiel weil er schon in einer anderen Retoure ist, wird die Retoure zum Klärfall.
+
+{/* Screenshot: toern Dashboard, Detailansicht einer von Pickware verarbeiteten Retoure: Artikel mit Klassifizierung A/D, ein fehlender Artikel und die Pickware-Einträge im Aktivitätsprotokoll */}
+
+<Frame caption="Eine von Pickware verarbeitete Retoure im Dashboard">
+  <img
+    src="/images/docs/Pickware/return-detail.png"
+    alt="Detailansicht einer Retoure in toern mit klassifizierten Artikeln, einem fehlenden Artikel und Einträgen von Pickware im Aktivitätsprotokoll"
+  />
+</Frame>
+
+### Klärfälle
+
+In diesen Fällen erstellt toern einen Klärfall, statt automatisch weiterzumachen:
+
+- **Kein Artikel ist angekommen.** Siehe [oben](#keiner-der-artikel-ist-angekommen).
+- **Ein Artikel passt nicht zur Bestellung.** toern kann ihn keiner offenen Position der Bestellung zuordnen.
+- **Pickware schließt eine Retoure erneut ab.** toern übernimmt den zweiten Abschluss nicht. Prüfe die Retoure gemeinsam mit deinem Lager in Pickware.
+- **Die Retoure war schon klassifiziert.** Wurde die Retoure bereits in toern klassifiziert, übernimmt toern das Ergebnis aus Pickware nicht. Prüfe auch hier die Retoure mit deinem Lager.
+
+Wie du Klärfälle löst, erfährst du in den [FAQ](/faq).
+
+## Einschränkungen
+
+Pickware verarbeitet die Retoure in Shopify selbst. Danach kann toern sie in Shopify nicht mehr ändern. Deshalb gelten für Retouren mit Pickware aktuell diese Einschränkungen:
+
+- **Eine Retoure pro Bestellung**: Gibt es für eine Bestellung schon eine Retoure, kann dein Kunde sich nicht erneut im Retourenportal anmelden. Das gilt auch für [Reklamationen](/claims/claim-portal) und für manuell angelegte Retouren im Dashboard. Die Einstellung **Restrict Multiple Returns Per Order** wird deshalb nicht angezeigt.
+- **Keine Artikel hinzufügen oder entfernen**: In der Detailansicht der Retoure kannst du keine Artikel hinzufügen oder entfernen.
+- **Retourengebühr nicht änderbar**: Du kannst die Retourengebühr weder in der Detailansicht noch bei einer manuellen Rückerstattung anpassen.
+- **Manuelle Rückerstattung nur für Artikel der Retoure**: Artikel, die nicht Teil der Retoure sind, kannst du nicht über die Retoure erstatten.
+- **Kein Einbuchen durch toern**: Pickware bucht die Artikel selbst ein. Die Einstellung **Shopify Restock** wird deshalb nicht angezeigt, und bei manuellen Rückerstattungen kannst du Artikel nicht einbuchen.
+- **Nur abgeschlossene Retouren**: toern übernimmt eine Retoure erst, wenn sie in Pickware abgeschlossen ist.
+
+<Note>Diese Einschränkungen können sich in Zukunft ändern.</Note>
