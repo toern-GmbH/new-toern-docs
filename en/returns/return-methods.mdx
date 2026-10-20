@@ -1,6 +1,6 @@
 ---
 title: "Return methods"
-description: "Define how customers send their return back: shipping providers, return countries, label settings and return slip."
+description: "Define how customers send their return back: shipping providers, return methods per country and flow, label settings and return slip."
 ---
 
 To let your customers send their returns back easily, toern ideally creates shipping labels automatically. To do this, you connect your dashboard directly to your shipping provider. Alternatively, you can work without an integrated shipping service. In that case, your customers send the return themselves to an address you define.
@@ -14,6 +14,8 @@ toern offers native integrations for the most common carriers. Choose the provid
 3. **GLS Shop Returns**
 4. **PostNord Return Drop Off**
 5. **Quivo Logistics**: If Quivo is your fulfiller, toern uses the Quivo Shipping API directly. This speeds up the setup considerably.
+6. **Exporto**: For cross-border returns, e.g. from Switzerland and the UK.
+7. **Post AT**: Austrian Post, for returns to Austria.
 
 Under **Settings → Return Shipping Service**, you choose between the available shipping providers and can switch between them at any time.
 
@@ -43,52 +45,100 @@ There is a step-by-step guide for each provider that shows you how to add your c
   <Card title="Quivo" icon="truck" href="/en/carriers/quivo">
     Credentials and setup
   </Card>
+  <Card title="Exporto" icon="truck" href="/en/carriers/exporto">
+    Cross-border returns
+  </Card>
+  <Card title="Post AT" icon="truck" href="/en/carriers/post-at">
+    Returns to Austria
+  </Card>
 </CardGroup>
 
 <Note>
   toern can only create return labels automatically in the return process if a shipping provider is active.
 </Note>
 
-## Return countries
+## Return methods
 
-With the country mapping, you define from which countries returns are allowed at all. For each country, you also decide whether a label is created and which fees apply.
+Return methods define how your customers send their items back. You create them per country under **Settings → Return → Return Methods**. A country can have several methods, even several of the same carrier. Your customers then choose one of them in the portal.
 
-The table contains the following columns:
+Each method has one of the following types:
 
-1. **Country**: The country from which customers can return via toern.
-2. **Type**: The type of return registration. Either toern creates a label automatically, or your customers ship the return to a specific address themselves.
-3. **Description**: Either the address the return is sent to, or the carrier.
-4. **Label Fee**: The label fee, if you charge one.
-5. **Return Fee**: The general return fee, if you charge one.
-6. **Actions**: Edit or delete a mapping here.
+1. **Carrier**: toern creates the label automatically through one of your integrated shipping providers.
+2. **Self ship**: Your customers ship the return themselves to an address you define.
+3. **In store**: Your customers bring the items to one of your stores. No shipping is needed.
+4. **Brand Upload**: You upload a label for each return yourself on the return detail page. toern then emails it to your customer.
 
-**Label Fee**: A fee you deduct from your customers for automatically creating the label. This lets you pass on your label costs.
+### Fees
 
-**Return Fee**: A fee you deduct from your customers for the return itself, because it causes costs for you. It's independent of the label and label costs.
+Every method has two fees:
 
-Depending on whether your customer used a label or not, either only the return fee or both fees are deducted from the refund amount.
+**Label fee**: A fee you deduct from your customers for the label. This lets you pass on your label costs.
 
-![Country mapping](/images/docs/Settings/ReturnNew02.png)
+**Return fee**: A fee you deduct from your customers for the return itself, because it causes costs for you. It's independent of the label.
 
-### Add a country
+Both fees together are the total return fee of the method. That total is deducted from the refund amount. Always enter fees in euros, no matter which country. Enter `0` to offer the method for free.
 
-1. Click **Add New Country Mapping**.
-2. Search for the country in the dropdown and select it.
-3. Choose the return type:
-   - **Digital Label**: Select the carrier. It should be activated under **Return Shipping Service**.
-   - **No Label**: Enter the address your customers send the return to themselves.
-4. Optionally enter the label fee or the general return fee. Always enter the fee in euros, no matter which country.
-5. Click **Add Mapping**. The country is now available for return registration.
+### Flows
 
-![Add mapping](/images/docs/Settings/ReturnSettings04.png)
+toern has three flows: regular **Returns**, **Claims** and **Withdrawals**. Under **Available in**, you choose in which of these flows a method is offered. By default, a new method is available in all three.
+
+Turn a flow off if you want to handle it differently. For example, your DHL method for Germany could be offered only for returns, with a label fee. A second DHL method for Germany, offered only for claims, could then have no fees at all. Customers only ever see the methods of the flow they're in.
+
+A method always needs at least one flow. To stop offering a method entirely, deactivate it with **Active** instead.
+
+![Add return method](/images/docs/Settings/ReturnSettings04.png)
+
+### Add a return method
+
+1. Click **Add Return Method**.
+2. Select the country and the type.
+3. Under **Available in**, keep all flows or turn off the ones the method shouldn't be offered in.
+4. Fill in the details for the type. For **Carrier**, select the shipping service. For **Self ship** and **In store**, enter an address, instructions, or both.
+5. Enter a name and an optional description for each portal language.
+6. Enter the label fee and the return fee.
+7. Optionally add an image, availability rules or set the method as default.
+8. Click **Add Return Method**.
 
 <Warning>
-  After adding a country, always check under **Return Shipping Service** that a matching address exists for the carrier. If the country is missing at the carrier, no label can be created.
+  After adding a carrier method, always check under **Return Shipping Service** that a matching address exists for the carrier. If the country is missing at the carrier, no label can be created.
 </Warning>
+
+### Default method and availability rules
+
+**Default option**: The default method is pre-selected in the portal. It's also used as a fallback if no other method matches the order's tag rules. There is one default per country and flow. If you set a new default that shares a flow with the current one, the current one stops being the default. The dialog tells you before you save.
+
+**Availability rules**: You can limit a method based on the tags of the order. Either offer it only if the order has one of the tags, or block it if the order has one of them.
+
+### European Union fallback
+
+Select **European Union** as the country to create a method for all EU member states at once. An EU country uses these methods for a flow when it has no methods of its own for that flow. For example, if you only set up a claims method for France, French customers still get the EU methods for their regular returns.
+
+### Return methods table
+
+The table lists all your methods with their country, type, flows, fees, rules and status. A star marks the default method. The **Flows** column shows **All flows** or the flows the method is limited to.
+
+Filter the table by type, flow and country, or search by name, country or carrier. Use the flow filter to check exactly which methods your customers see in a claim or a withdrawal.
+
+## Return countries
+
+**Return Countries** is a read-only overview of the countries you've set up return methods for. For each country, it shows per flow whether your customers can start a return, a claim or a withdrawal there:
+
+1. **Number of methods**: Customers choose from these active methods.
+2. **Via EU**: The country has no methods of its own for this flow, so customers get the European Union methods.
+3. **Inactive**: All methods of the country for this flow are deactivated.
+4. **Not offered**: No method of the country is offered for this flow.
+
+![Return countries](/images/docs/Settings/ReturnNew02.png)
+
+If a country shows **Inactive** or **Not offered** for a flow, customers from that country can't log in to that portal. They see a message that their country isn't supported. To change which countries are supported, add or edit return methods.
+
+<Note>
+  Withdrawals also need the country to be enabled under [Withdrawal Countries](/en/withdrawal/withdrawal-settings#withdrawal-countries).
+</Note>
 
 ### Limitations
 
-- You need to add every country for return registration individually in the country mapping.
+- A country is only supported for a flow if it has an active return method for that flow, or if it's an EU country and the European Union has one.
 - For DHL and DPD, you also need to select or create the matching locations for each country in the settings.
 - For Quivo, the corresponding countries must be configured in the Quivo settings.
 

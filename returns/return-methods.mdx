@@ -1,6 +1,6 @@
 ---
 title: "Retourenmethoden"
-description: "Lege fest, wie Kunden ihre Retoure zurücksenden: Versanddienstleister, Retourenländer, Label-Einstellungen und Retourenschein."
+description: "Lege fest, wie Kunden ihre Retoure zurücksenden: Versanddienstleister, Retourenmethoden pro Land und Prozess, Label-Einstellungen und Retourenschein."
 ---
 
 Damit deine Kunden ihre Retouren bequem zurückschicken können, erstellt toern idealerweise automatisch Versandlabels. Dafür verknüpfst du dein Dashboard direkt mit deinem Versanddienstleister. Alternativ kannst du auch ohne integrierten Versandservice arbeiten. In diesem Fall senden deine Kunden die Retoure selbst an eine Adresse, die du festlegst.
@@ -14,6 +14,8 @@ toern bietet native Integrationen für die gängigsten Carrier an. Wähle den Di
 3. **GLS Shop Returns**
 4. **PostNord Return Drop Off**
 5. **Quivo Logistics**: Falls Quivo dein Fulfiller ist, nutzt toern direkt die Quivo Shipping API. Das beschleunigt den Setup-Prozess erheblich.
+6. **Exporto**: Für grenzüberschreitende Retouren, z. B. aus der Schweiz und Großbritannien.
+7. **Post AT**: Die Österreichische Post, für Rücksendungen nach Österreich.
 
 Unter **Settings → Return Shipping Service** wählst du zwischen den verfügbaren Versanddienstleistern aus und kannst jederzeit zwischen ihnen wechseln.
 
@@ -43,52 +45,100 @@ Für jeden Dienstleister gibt es eine eigene Schritt-für-Schritt-Anleitung, mit
   <Card title="Quivo" icon="truck" href="/carriers/quivo">
     Credentials und Einrichtung
   </Card>
+  <Card title="Exporto" icon="truck" href="/carriers/exporto">
+    Grenzüberschreitende Retouren
+  </Card>
+  <Card title="Post AT" icon="truck" href="/carriers/post-at">
+    Rücksendungen nach Österreich
+  </Card>
 </CardGroup>
 
 <Note>
   Nur mit einem aktiven Versanddienstleister kann toern Retourenlabels automatisch im Retourenprozess erstellen.
 </Note>
 
-## Retourenländer (Return Countries)
+## Retourenmethoden (Return Methods)
 
-Über das Country-Mapping legst du fest, aus welchen Ländern Retouren überhaupt erlaubt sind. Pro Land bestimmst du außerdem, ob ein Label erstellt wird und welche Gebühren anfallen.
+Retourenmethoden legen fest, wie deine Kunden ihre Artikel zurückschicken. Du legst sie pro Land unter **Settings → Return → Return Methods** an. Ein Land kann mehrere Methoden haben, auch mehrere vom selben Carrier. Deine Kunden wählen dann im Portal eine davon aus.
 
-Die Tabelle enthält folgende Spalten:
+Jede Methode hat einen der folgenden Typen:
 
-1. **Country**: Das Land, aus dem über toern retourniert werden kann.
-2. **Type**: Die Art der Retourenanmeldung. Entweder erstellt toern automatisch ein Label, oder deine Kunden kümmern sich selbst um den Versand an eine bestimmte Adresse.
-3. **Description**: Entweder die Adresse, an die die Retoure gesendet wird, oder der Carrier.
-4. **Label Fee**: Die Labelgebühr, falls du eine berechnest.
-5. **Return Fee**: Die allgemeine Retourengebühr, falls du eine berechnest.
-6. **Actions**: Hier bearbeitest oder löschst du ein Mapping.
+1. **Carrier**: toern erstellt das Label automatisch über einen deiner integrierten Versanddienstleister.
+2. **Self ship**: Deine Kunden versenden die Retoure selbst an eine Adresse, die du festlegst.
+3. **In store**: Deine Kunden geben die Artikel in einem deiner Geschäfte ab. Ein Versand ist nicht nötig.
+4. **Brand Upload**: Du lädst für jede Retoure selbst ein Label auf der Retouren-Detailseite hoch. toern schickt es deinen Kunden dann per E-Mail.
 
-**Label Fee**: Gebühr, die du deinen Kunden für die automatische Erstellung des Labels abziehst. So gibst du deine Labelkosten weiter.
+### Gebühren
 
-**Return Fee**: Gebühr, die du deinen Kunden für die Retoure an sich abziehst, weil dir dadurch Kosten entstehen. Sie ist unabhängig vom Label und den Labelkosten.
+Jede Methode hat zwei Gebühren:
 
-Je nachdem, ob deine Kunden ein Label genutzt haben oder nicht, wird nur die Return Fee oder beide Gebühren vom Erstattungsbetrag abgezogen.
+**Label Fee**: Gebühr, die du deinen Kunden für das Label abziehst. So gibst du deine Labelkosten weiter.
 
-![Country Mapping](/images/docs/Settings/ReturnNew02.png)
+**Return Fee**: Gebühr, die du deinen Kunden für die Retoure an sich abziehst, weil dir dadurch Kosten entstehen. Sie ist unabhängig vom Label.
 
-### Land hinzufügen
+Beide Gebühren zusammen ergeben die gesamte Retourengebühr der Methode. Sie wird vom Erstattungsbetrag abgezogen. Die Gebühren gibst du immer in Euro an, egal für welches Land. Mit `0` bietest du die Methode kostenlos an.
 
-1. Klicke auf **Add New Country Mapping**.
-2. Suche das Land im Dropdown und wähle es aus.
-3. Wähle die Art der Retoure:
-   - **Digital Label**: Wähle den Carrier aus. Er sollte unter **Return Shipping Service** aktiviert sein.
-   - **No Label**: Gib die Adresse ein, an die deine Kunden die Retoure selbst schicken.
-4. Gib optional die Label Fee oder die allgemeine Return Fee an. Die Gebühr gibst du immer in Euro an, egal für welches Land.
-5. Klicke auf **Add Mapping**. Das Land steht jetzt für die Retourenanmeldung zur Verfügung.
+### Prozesse (Flows)
 
-![Mapping hinzufügen](/images/docs/Settings/ReturnSettings04.png)
+toern kennt drei Prozesse: reguläre Retouren (**Returns**), Reklamationen (**Claims**) und Widerrufe (**Withdrawals**). Unter **Available in** legst du fest, in welchen dieser Prozesse eine Methode angeboten wird. Eine neue Methode ist standardmäßig in allen drei verfügbar.
+
+Deaktiviere einen Prozess, wenn du ihn anders abwickeln möchtest. Zum Beispiel bietest du deine DHL-Methode für Deutschland nur für Retouren an, mit Label Fee. Eine zweite DHL-Methode für Deutschland bietest du nur für Reklamationen an, ganz ohne Gebühren. Deine Kunden sehen immer nur die Methoden des Prozesses, in dem sie sich befinden.
+
+Eine Methode braucht immer mindestens einen Prozess. Willst du eine Methode gar nicht mehr anbieten, deaktiviere sie stattdessen über **Active**.
+
+![Retourenmethode hinzufügen](/images/docs/Settings/ReturnSettings04.png)
+
+### Retourenmethode hinzufügen
+
+1. Klicke auf **Add Return Method**.
+2. Wähle das Land und den Typ aus.
+3. Lass unter **Available in** alle Prozesse aktiv oder deaktiviere die, in denen die Methode nicht angeboten werden soll.
+4. Fülle die Angaben zum Typ aus. Bei **Carrier** wählst du den Versanddienst aus. Bei **Self ship** und **In store** gibst du eine Adresse, Hinweise oder beides an.
+5. Gib für jede Portalsprache einen Namen und optional eine Beschreibung ein.
+6. Gib die Label Fee und die Return Fee an.
+7. Füge optional ein Bild und Verfügbarkeitsregeln hinzu oder lege die Methode als Standard fest.
+8. Klicke auf **Add Return Method**.
 
 <Warning>
-  Wenn du ein Land hinzugefügt hast, prüfe unbedingt unter **Return Shipping Service**, ob es beim jeweiligen Carrier eine passende Adresse gibt. Fehlt das Land beim Carrier, kann kein Label erstellt werden.
+  Wenn du eine Carrier-Methode hinzugefügt hast, prüfe unbedingt unter **Return Shipping Service**, ob es beim jeweiligen Carrier eine passende Adresse gibt. Fehlt das Land beim Carrier, kann kein Label erstellt werden.
 </Warning>
+
+### Standardmethode und Verfügbarkeitsregeln
+
+**Default option**: Die Standardmethode ist im Portal vorausgewählt. Außerdem wird sie verwendet, wenn keine andere Methode zu den Tag-Regeln der Bestellung passt. Pro Land und Prozess gibt es eine Standardmethode. Legst du eine neue Standardmethode fest, die einen Prozess mit der bisherigen teilt, ist die bisherige keine Standardmethode mehr. Der Dialog weist dich vor dem Speichern darauf hin.
+
+**Verfügbarkeitsregeln**: Du kannst eine Methode anhand der Tags der Bestellung einschränken. Entweder bietest du sie nur an, wenn die Bestellung einen der Tags hat, oder du sperrst sie, wenn die Bestellung einen davon hat.
+
+### Rückfall auf die Europäische Union
+
+Wähle **European Union** als Land, um eine Methode für alle EU-Mitgliedstaaten auf einmal anzulegen. Ein EU-Land nutzt diese Methoden für einen Prozess, wenn es für diesen Prozess keine eigenen Methoden hat. Hast du für Frankreich zum Beispiel nur eine Reklamationsmethode angelegt, erhalten deine Kunden aus Frankreich für reguläre Retouren trotzdem die EU-Methoden.
+
+### Tabelle der Retourenmethoden
+
+Die Tabelle listet alle deine Methoden mit Land, Typ, Prozessen, Gebühren, Regeln und Status. Ein Stern markiert die Standardmethode. Die Spalte **Flows** zeigt **All flows** oder die Prozesse, auf die die Methode beschränkt ist.
+
+Du kannst die Tabelle nach Typ, Prozess und Land filtern oder nach Name, Land oder Carrier suchen. Mit dem Prozess-Filter prüfst du genau, welche Methoden deine Kunden bei einer Reklamation oder einem Widerruf sehen.
+
+## Retourenländer (Return Countries)
+
+**Return Countries** ist eine reine Übersicht der Länder, für die du Retourenmethoden angelegt hast. Pro Land zeigt sie für jeden Prozess, ob deine Kunden dort eine Retoure, eine Reklamation oder einen Widerruf starten können:
+
+1. **Anzahl der Methoden**: Deine Kunden wählen aus diesen aktiven Methoden.
+2. **Via EU**: Das Land hat für diesen Prozess keine eigenen Methoden, deshalb erhalten deine Kunden die Methoden der Europäischen Union.
+3. **Inactive**: Alle Methoden des Landes für diesen Prozess sind deaktiviert.
+4. **Not offered**: Keine Methode des Landes wird für diesen Prozess angeboten.
+
+![Retourenländer](/images/docs/Settings/ReturnNew02.png)
+
+Zeigt ein Land für einen Prozess **Inactive** oder **Not offered**, können sich Kunden aus diesem Land nicht im zugehörigen Portal anmelden. Sie sehen dann einen Hinweis, dass ihr Land nicht unterstützt wird. Welche Länder unterstützt werden, änderst du über die Retourenmethoden.
+
+<Note>
+  Für Widerrufe muss das Land zusätzlich unter [Withdrawal Countries](/withdrawal/withdrawal-settings#withdrawal-countries) aktiviert sein.
+</Note>
 
 ### Einschränkungen
 
-- Du musst jedes Land für die Retourenanmeldung einzeln im Country-Mapping hinzufügen.
+- Ein Land wird für einen Prozess nur unterstützt, wenn es eine aktive Retourenmethode für diesen Prozess hat oder ein EU-Land ist und die Europäische Union eine hat.
 - Bei DHL und DPD musst du für jedes Land auch die zugehörigen Locations in den Einstellungen auswählen bzw. anlegen.
 - Bei Quivo müssen die entsprechenden Länder in den Einstellungen von Quivo hinterlegt sein.
 

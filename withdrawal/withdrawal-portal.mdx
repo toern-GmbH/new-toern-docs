@@ -20,7 +20,7 @@ Beim Login prüft toern zuerst, ob die Bestellung im Widerrufsportal verarbeitet
 toern prüft unter anderem:
 
 1. Ist das Widerrufsportal für deine Brand aktiviert?
-2. Ist das Bestellland für Widerrufe freigegeben?
+2. Ist das Bestellland für Widerrufe freigegeben, und hat es eine aktive Retourenmethode, die für Widerrufe angeboten wird?
 3. Stimmen Bestellnummer und E-Mail-Adresse oder Postleitzahl?
 4. Ist die Widerrufsfrist noch gültig?
 5. Ist die Bestellung nicht bereits storniert?
@@ -92,7 +92,7 @@ Für deinen Kunden ist der Widerruf keine normale Retoure. In toern wird er aber
 
 Im Widerrufsportal ist der Retourengrund optional. Wird kein Grund abgefragt, ordnet toern den Vorgang trotzdem als Widerruf ein. So bleiben Dashboard und Auswertungen konsistent.
 
-Die Auswahl der Rücksendemethode ist so kurz wie möglich:
+Dein Kunde sieht nur die Rücksendemethoden, die du für **Withdrawals** anbietest. Die Auswahl ist so kurz wie möglich:
 
 1. Gibt es nur eine Methode, wird sie automatisch ausgewählt.
 2. Gibt es eine Standardmethode, wird sie automatisch ausgewählt.
@@ -120,7 +120,7 @@ Beide Regeln gelten nur für Widerrufe. Normale Retouren bleiben davon unberühr
 Ein Widerruf kann schon vor dem Start blockiert werden. Typische Gründe sind:
 
 1. Das Widerrufsportal ist deaktiviert.
-2. Das Bestellland ist nicht für Widerrufe freigegeben.
+2. Das Bestellland ist nicht für Widerrufe freigegeben oder hat keine aktive Retourenmethode für Widerrufe.
 3. Die Widerrufsfrist ist abgelaufen.
 4. Die Bestellung wurde bereits storniert.
 5. Es gibt bereits eine normale Retoure.
