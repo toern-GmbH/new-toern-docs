@@ -144,9 +144,9 @@ Empty fields are not shown to your customers. These URLs only apply to the withd
 
 Under **Withdrawal Countries**, you define from which countries your customers can register a withdrawal.
 
-EU countries are prepared by default. However, a country can only be used in the withdrawal portal if it's also supported in your brand's regular return countries. If a country isn't set up in the return countries, the table shows **No return assignment** and the toggle is disabled.
+EU countries are prepared by default. However, a country can only be used in the withdrawal portal if it has an active [return method](/en/returns/return-methods#flows) offered for **Withdrawals**. EU countries without a withdrawal method of their own can also use the methods you created for the **European Union**. If a country has no withdrawal method, the table shows **No withdrawal return method** and the toggle is disabled. Your setting is kept and applies again as soon as the country has a withdrawal method.
 
-Use **Add country** to add more countries, as long as they're available in your [return settings](/en/returns/return-settings). You can enable, disable, or remove individual countries from the list.
+Use **Add country** to add more countries that have a withdrawal method. You can enable, disable, or remove individual countries from the list.
 
 <Frame>
   <img src="/images/docs/Widerruf/widerruf-countries.png" alt="Withdrawal Countries in the dashboard" />
@@ -159,7 +159,7 @@ You currently can't set up custom reasons for withdrawals in toern. The reason i
 ## Limitations
 
 - The withdrawal portal must be unlocked as a feature for your brand.
-- The countries in the withdrawal portal depend on your brand's regular return countries.
+- The countries in the withdrawal portal depend on your return methods offered for withdrawals.
 - Direct cancellation only works for eligible Shopify orders that haven't been fulfilled or shipped.
 - Exchange and FlexShare are disabled in the withdrawal portal.
 - The withdrawal fee and shipping refund settings don't apply to regular returns.

@@ -20,7 +20,7 @@ At login, toern first checks whether the order may be processed in the withdrawa
 Among other things, toern checks:
 
 1. Is the withdrawal portal enabled for your brand?
-2. Is the order country enabled for withdrawals?
+2. Is the order country enabled for withdrawals, and does it have an active return method offered for withdrawals?
 3. Do the order number and email address or postal code match?
 4. Is the withdrawal period still valid?
 5. Is the order not already cancelled?
@@ -92,7 +92,7 @@ For your customer, the withdrawal is not a regular return. In toern, however, it
 
 In the withdrawal portal, the return reason is optional. If no reason is requested, toern still classifies the case as a withdrawal. This keeps the dashboard and analytics consistent.
 
-Choosing the return method is kept as short as possible:
+Your customer only sees the return methods you offer for **Withdrawals**. Choosing one is kept as short as possible:
 
 1. If only one method is available, it's selected automatically.
 2. If a default method exists, it's selected automatically.
@@ -120,7 +120,7 @@ Both rules apply only to withdrawals. Regular returns are not affected.
 A withdrawal can be blocked before it starts. Typical reasons are:
 
 1. The withdrawal portal is disabled.
-2. The order country is not enabled for withdrawals.
+2. The order country is not enabled for withdrawals, or has no active return method offered for withdrawals.
 3. The withdrawal period has expired.
 4. The order has already been cancelled.
 5. A regular return already exists.
