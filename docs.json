@@ -100,7 +100,8 @@
                   "carriers/postnord",
                   "carriers/post-at",
                   "carriers/quivo",
-                  "carriers/exporto"
+                  "carriers/exporto",
+                  "carriers/sendcloud"
                 ]
               },
               {
@@ -111,7 +112,6 @@
                   "integrations/xentral",
                   "integrations/pickware",
                   "integrations/zendesk",
-                  "integrations/sendcloud",
                   "integrations/ffn-connect-jtl-partner"
                 ]
               },
@@ -235,7 +235,8 @@
                   "en/carriers/postnord",
                   "en/carriers/post-at",
                   "en/carriers/quivo",
-                  "en/carriers/exporto"
+                  "en/carriers/exporto",
+                  "en/carriers/sendcloud"
                 ]
               },
               {
@@ -246,7 +247,6 @@
                   "en/integrations/xentral",
                   "en/integrations/pickware",
                   "en/integrations/zendesk",
-                  "en/integrations/sendcloud",
                   "en/integrations/ffn-connect-jtl-partner"
                 ]
               },
@@ -329,6 +329,14 @@
     }
   },
   "redirects": [
+    {
+      "source": "/integrations/sendcloud",
+      "destination": "/carriers/sendcloud"
+    },
+    {
+      "source": "/en/integrations/sendcloud",
+      "destination": "/en/carriers/sendcloud"
+    },
     {
       "source": "/quickstart-2",
       "destination": "/getting-started/shopify-integration"

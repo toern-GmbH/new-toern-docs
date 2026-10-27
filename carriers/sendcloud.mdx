@@ -1,0 +1,242 @@
+---
+title: "Sendcloud"
+description: "Erstelle Retourenlabels mit Tracking und Versandlabels für Umtauschartikel über dein eigenes Sendcloud-Konto."
+---
+
+Mit der **Sendcloud-Integration** erstellt toern Labels über dein eigenes Sendcloud-Konto. Dabei nutzt toern die Versanddienstleister, die du in Sendcloud aktiviert hast, entweder mit deinen eigenen Verträgen oder zu den Sendcloud-Konditionen.
+
+Die Integration deckt zwei Anwendungsfälle ab:
+
+- **Retourenlabels:** toern erstellt die Rücksendelabels für deine Kund:innen automatisch und verfolgt die Sendungen. Pro Herkunftsland legst du fest, welcher Versanddienstleister genutzt wird und an welche Adresse die Retoure geht, z. B. DHL für Deutschland und UPS für das restliche EU-Ausland.
+- **Versandlabels für Umtauschartikel:** Tauschen Kund:innen einen Artikel um, bekommt der Ersatzartikel automatisch ein eigenes Versandlabel. Mehr dazu unter [Versandlabels für Umtauschartikel](#versandlabels-für-umtauschartikel).
+
+Für beide Anwendungsfälle nutzt du **dieselben API-Zugangsdaten**. Du verbindest dein Sendcloud-Konto also nur einmal.
+
+Allgemeine Infos zu Rücksendemethoden und Retourenländern findest du unter [Rücksendemethoden](/returns/return-methods).
+
+<Warning>
+  Retourenlabels über Sendcloud sind aktuell nur für **Rücksendungen innerhalb der EU** möglich. Sowohl das Herkunftsland der Retoure als auch die Rücksendeadresse müssen in der EU liegen.
+</Warning>
+
+## Voraussetzungen
+
+- Ein Sendcloud-Konto.
+- Eine **API-Integration** in Sendcloud mit **Public Key** und **Secret Key**.
+- Die gewünschten Versanddienstleister sind in Sendcloud aktiviert. Wenn du eigene Verträge nutzen möchtest, sind sie in Sendcloud hinterlegt.
+- Mindestens eine **Absender- bzw. Rücksendeadresse** in Sendcloud, an die deine Retouren gehen sollen.
+- Die Sendcloud-Retourenfunktion ist für dein Konto in toern freigeschaltet. Siehst du die Einstellungen nicht, schreib uns an support@re-toern.de.
+
+## Sendcloud vorbereiten
+
+### API-Zugangsdaten erstellen
+
+1. Öffne in Sendcloud **Einstellungen → Integrationen**.
+2. Suche **Sendcloud API** und klicke auf **Verbinden**.
+3. Vergib einen Namen für die Integration und speichere.
+4. Kopiere den **Public Key** und den **Secret Key**.
+
+Der [Quick Start Guide von Sendcloud](https://support.sendcloud.com/hc/en-us/articles/360024967012-Sendcloud-API-documentation-and-Quick-Start-Guide) zeigt dir diesen Schritt im Detail.
+
+<Warning>
+  Ein Key ist nur direkt nach der Erstellung sichtbar. Kopiere ihn daher sofort.
+</Warning>
+
+<Frame caption="Das Menü Integrationen in Sendcloud">
+  <img src="/images/docs/Sendcloud/integrations-page.png" alt="Sendcloud-Konto mit dem Menü Integrationen, in dem API-Integrationen verwaltet werden" />
+</Frame>
+
+<Frame caption="Hier findest du deine API-Keys in Sendcloud">
+  <img src="/images/docs/Sendcloud/api-keys.png" alt="Sendcloud-Konto mit dem Public Key und Secret Key einer Integration" />
+</Frame>
+
+### Versanddienstleister und Verträge
+
+toern zeigt dir nur die Versandoptionen an, die in deinem Sendcloud-Konto verfügbar sind. Aktiviere daher in Sendcloud alle Versanddienstleister, die du für Retouren nutzen möchtest.
+
+- **Sendcloud-Konditionen:** Du nutzt die Tarife von Sendcloud. Es reicht, den Versanddienstleister in Sendcloud zu aktivieren.
+- **Eigene Verträge:** Du verbindest deinen bestehenden Vertrag mit dem Versanddienstleister in Sendcloud. toern nutzt dann automatisch deine Konditionen.
+
+<Note>
+  Verträge mit UPS kannst du nur direkt im Sendcloud-Panel hinzufügen.
+</Note>
+
+### Absender- und Rücksendeadressen
+
+Die Adresse, an die eine Retoure geschickt wird, wählst du in toern aus deinen Sendcloud-Absenderadressen aus. Lege daher alle Lager- oder Rücksendeadressen, die du nutzen möchtest, vorher in Sendcloud an.
+
+## Einrichtung in toern
+
+Öffne im toern Dashboard die [Sendcloud-Einstellungen](https://www.admin.re-toern.de/settings/shipping-services) (Settings → Shipping Services → Sendcloud).
+
+<Steps>
+  <Step title="Zugangsdaten hinterlegen">
+    Trage **Public Key** und **Secret Key** ein und speichere. Hast du Sendcloud bereits für Umtauschlabels verbunden, sind die Zugangsdaten schon hinterlegt.
+
+    <Frame caption="Sendcloud-Zugangsdaten in den Einstellungen eintragen">
+      <img src="/images/docs/Sendcloud/access_credentials.png" alt="Einstellungsseite, auf der Public Key und Secret Key von Sendcloud eingetragen werden" />
+    </Frame>
+  </Step>
+  <Step title="Verbindung testen">
+    Teste die Verbindung. toern prüft deine Zugangsdaten und zeigt dir die Verträge und die Anzahl der Absenderadressen in deinem Sendcloud-Konto an.
+  </Step>
+  <Step title="Länder zuordnen">
+    Lege für jedes Land, aus dem Retouren über Sendcloud möglich sein sollen, eine Zuordnung an:
+
+    1. Wähle die **Rücksendeadresse** aus deinen Sendcloud-Absenderadressen. An diese Adresse gehen die Retouren.
+    2. Wähle das **Herkunftsland**. Ausschlaggebend ist das Land, aus dem deine Kund:innen die Retoure verschicken.
+    3. Wähle die **Versandoption**. toern zeigt dir alle Versandoptionen mit Retourenfunktion an, die Sendcloud für genau diese Strecke anbietet, inklusive Versanddienstleister und Vertrag.
+
+    Du richtest ein Land nach dem anderen ein, damit du für jedes Land die passende Versandoption wählen kannst. Mit **Speichern & nächstes Land** bleibt die Rücksendeadresse ausgewählt und du kannst direkt das nächste Land anlegen. Bereits angelegte Länder kannst du jederzeit bearbeiten oder löschen.
+  </Step>
+  <Step title="Optionen festlegen">
+    - **Papierformat:** A4 (Standard) oder A6 für Etikettendrucker.
+    - **Sendcloud-Marke:** Optional. Wählst du eine Marke aus deinem Sendcloud-Konto, wird die Sendcloud-Trackingseite in deinem Branding angezeigt.
+    - **Tracking-E-Mails von Sendcloud:** Standardmäßig deaktiviert. Aktiviere die Option nur, wenn Sendcloud deinen Kund:innen zusätzlich eigene Tracking-E-Mails schicken soll.
+  </Step>
+  <Step title="Aktivieren">
+    Aktiviere die Sendcloud-Retourenlabels und speichere.
+  </Step>
+</Steps>
+
+### Beispiel
+
+Du möchtest Retouren aus Deutschland mit DHL und Retouren aus dem restlichen EU-Ausland mit UPS abwickeln. Alle Retouren gehen an dein Lager in Berlin.
+
+| Herkunftsländer         | Rücksendeadresse | Versandoption       |
+| ----------------------- | ---------------- | ------------------- |
+| Deutschland             | Lager Berlin     | DHL Retoure         |
+| Jedes weitere EU-Land   | Lager Berlin     | UPS Standard Return |
+
+Die genauen Namen der Versandoptionen hängen von deinem Sendcloud-Konto und deinen Verträgen ab.
+
+## Sendcloud als Rücksendemethode nutzen
+
+Die Länderzuordnung aktiviert die Rücksendemethode nicht automatisch. Lege Sendcloud zusätzlich unter **Returns → Return Methods** als [Rücksendemethode](/returns/return-methods) an:
+
+1. Lege eine Rücksendemethode vom Typ **Carrier** an und wähle **Sendcloud** als Versanddienstleister.
+2. Wähle das Land, für das die Methode gilt.
+3. Hinterlege bei Bedarf wie gewohnt Gebühren für die Labels.
+
+<Info>
+  Du kannst nur Länder auswählen, für die du in den Sendcloud-Einstellungen eine Zuordnung angelegt hast. Eine Rücksendemethode für die gesamte **EU** setzt voraus, dass **alle EU-Länder** zugeordnet sind. Ohne passende Zuordnung ist Sendcloud in der Auswahl deaktiviert.
+</Info>
+
+Solange eine Sendcloud-Rücksendemethode ein Land nutzt, kannst du die Zuordnung für dieses Land nicht löschen.
+
+## Tracking
+
+toern aktualisiert den Sendungsstatus deiner Sendcloud-Retouren automatisch **einmal täglich**. Dafür musst du nichts einrichten.
+
+### Webhook für Echtzeit-Updates (optional)
+
+Möchtest du Statusänderungen nahezu in Echtzeit in toern sehen, richte zusätzlich einen Webhook in Sendcloud ein:
+
+1. Kopiere die **Webhook-URL** aus den Sendcloud-Einstellungen in toern.
+2. Öffne in Sendcloud **Einstellungen → Integrationen** und wähle deine API-Integration.
+3. Aktiviere **Webhook feedback** und füge die kopierte URL ein.
+4. Speichere die Integration.
+
+In den Sendcloud-Einstellungen in toern siehst du, wann zuletzt ein Webhook empfangen wurde.
+
+<Note>
+  Sendcloud schickt Webhooks nur für Sendungen, die über diese API-Integration erstellt wurden. Nutze daher dieselbe Integration, deren Keys du in toern hinterlegt hast.
+</Note>
+
+## Versandlabels für Umtauschartikel
+
+Tauscht ein Kunde im Rahmen seiner Retoure einen Artikel um, erstellt toern über Sendcloud automatisch ein Versandlabel für den Ersatzartikel. Das Label wird an die Bestellung in Shopify angehängt und in den Retourendetails angezeigt. So weißt du jederzeit, wie und wohin der Ersatzartikel verschickt wird.
+
+<Note>
+  Damit Sendcloud-Labels für Umtauschartikel erstellt werden, muss die **Versandlabel-Erstellung in deinen Umtauscheinstellungen aktiviert** sein. Das verwaltest du in den [Umtauscheinstellungen](/returns/exchange).
+</Note>
+
+### Wann wird das Versandlabel erstellt?
+
+Das Label wird während des Umtauschprozesses erstellt. Der genaue Zeitpunkt hängt von deiner Umtauschkonfiguration ab. Sobald der Umtauschprozess läuft, passiert Folgendes:
+
+1. Das Label wird generiert.
+2. Die Ersatzbestellung wird als erfüllt markiert.
+3. Die Sendungsverfolgung ist verfügbar.
+
+Wo du das siehst, hängt von deiner Umtauschmethode ab. Mehr dazu findest du [weiter unten](#label-in-shopify-anzeigen).
+
+### Länder für Umtauschlabels konfigurieren
+
+Die Zugangsdaten für Umtauschlabels sind dieselben wie für Retourenlabels. Die Länderkonfiguration für Umtauschlabels ist dagegen eigenständig, denn hier geht die Sendung in die andere Richtung: von deinem Lager zu deinen Kund:innen.
+
+Ein Ersatzartikel für ein Land muss eventuell aus einem anderen Lager oder mit einem anderen Versanddienst verschickt werden als für ein anderes Land. Deshalb richtest du für **jedes Land**, in das du versendest, eine eigene Konfiguration ein. Nutzt du für alle Länder dieselbe Konfiguration, legst du einfach eine Standardadresse fest.
+
+Für jedes Land gibst du drei Werte aus deinem Sendcloud-Konto an:
+
+- **Absenderadresse**: Die ID der Adresse, von der der Ersatzartikel verschickt wird (dein Lager oder die in Sendcloud hinterlegte Absenderadresse).
+- **Versandoption**: Der Versanddienst oder die Versandmethode, mit der das Label erstellt wird.
+- **Vertrag**: Die ID des Carrier-Vertrags, der zur Versandoption gehört. Lässt du das Feld leer, wählt Sendcloud automatisch den passendsten Vertrag aus.
+
+Diese Werte ermittelst du über API-Aufrufe an dein Sendcloud-Konto. Nutze dafür dieselben API-Zugangsdaten wie oben.
+
+- **Absenderadressen-ID**: Sende einen `GET`-Request an [`/api/v3/addresses/sender-addresses`](https://sendcloud.dev/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses). Die Antwort listet alle Absenderadressen in deinem Konto auf. Jeder Eintrag hat ein `id`-Feld. Nutze die ID der Adresse, von der du versenden möchtest.
+- **Versandoption**: Sende einen `POST`-Request an [`/api/v3/shipping-options`](https://sendcloud.dev/api/v3/shipping-options/return-a-list-of-available-shipping-options) mit den Ländercodes von Absender und Empfänger. Die Antwort listet alle verfügbaren Versandmethoden für diese Route auf. Wähle die Methode, mit der du den Ersatzartikel verschicken möchtest.
+- **Vertrags-ID (optional)**: Sende einen `GET`-Request an [`/api/v3/contracts`](https://sendcloud.dev/api/v3/contracts/retrieve-a-list-of-contracts). Die Antwort listet alle Verträge in deinem Konto auf, jeweils mit `id`-Feld, Carrier und Land. Nutze die ID des Vertrags, der zu deiner Versandoption passt.
+
+<Frame caption="Die Zuordnung von Ländern zu Adressen in deinen Einstellungen">
+  <img src="/images/docs/Sendcloud/country-address-map.png" alt="Einstellungsseite mit der länderspezifischen Adresszuordnung nach der Konfiguration" />
+</Frame>
+
+### Label in Shopify anzeigen
+
+Sobald ein Label erstellt wurde, passieren in Shopify zwei Dinge:
+
+- Der Ersatzartikel wird als **fulfilled** markiert und bekommt **Sendungsnummer und Tracking-Link**.
+- Das **Versandlabel als PDF** wird in deine Shopify-Dateien hochgeladen und der Bestellung als **Metafeld** hinzugefügt. Du siehst es dort oder auf der Retourendetailseite.
+
+Nutzt du die **native Umtauschmethode von Shopify**, siehst du das direkt auf der Bestellseite, zu der die Retoure gehört.
+
+<Frame caption="Fulfillment und Tracking an der Bestellung (native Umtauschmethode von Shopify)">
+  <img src="/images/docs/Sendcloud/fulfillment-shopify-exchange.png" alt="Shopify-Bestellseite mit erfülltem Umtausch, Sendungsnummer und Tracking-Link" />
+</Frame>
+
+Nutzt du die Umtauschmethode **neue Bestellung**, siehst du den Fulfillment-Status auf der neu erstellten Bestellung für die Ersatzartikel.
+
+<Frame caption="Fulfillment und Tracking an der neuen Umtauschbestellung">
+  <img src="/images/docs/Sendcloud/fulfillment-new-exchange-order.png" alt="Neue Umtauschbestellung in Shopify mit erfüllten Ersatzartikeln, Sendungsnummer und Tracking-Link" />
+</Frame>
+
+Im Fulfillment-Status öffnest du den Tracking-Link mit einem Klick auf die Sendungsnummer.
+
+In beiden Fällen findest du das hochgeladene Label in den Metafeldern der Bestellung.
+
+<Frame caption="Das Versandlabel als Metafeld an der Bestellung">
+  <img src="/images/docs/Sendcloud/metafield-label.png" alt="Shopify-Bestellseite mit dem Versandlabel für den Umtausch als Metafeld" />
+</Frame>
+
+### Label auf der Retourendetailseite anzeigen
+
+Das Versandlabel für den Ersatzartikel und die Tracking-Informationen siehst du auch direkt auf der **Retourendetailseite** im toern Dashboard. Hat eine Retoure sowohl ein Rücksendelabel als auch ein Versandlabel für den Umtausch, werden beide untereinander angezeigt.
+
+<Frame caption="Versandlabel und Tracking für den Umtausch in den Retourendetails">
+  <img src="/images/docs/Sendcloud/return_details_shipping_label.png" alt="Retourendetailseite mit dem Versandlabel für den Umtausch und den Tracking-Informationen" />
+</Frame>
+
+## Einschränkungen
+
+- **Nur EU-Retouren:** Retourenlabels über Sendcloud sind aktuell nur innerhalb der EU möglich. Für Retouren aus Nicht-EU-Ländern wären Zolldaten nötig, die toern noch nicht an Sendcloud übermittelt.
+- **Rücksendemethoden werden in toern verwaltet:** Das Retourenportal von Sendcloud sowie Funktionen wie Drop-off-Punkte, QR-Codes oder Rückgabe im Geschäft werden nicht genutzt. Deine Rücksendemethoden legst du wie gewohnt in toern fest.
+- **Stornierung und Abrechnung:** Ob ein Label storniert werden kann und wann es abgerechnet wird, legen Sendcloud und der jeweilige Versanddienstleister fest. Manche Retourenoptionen rechnet Sendcloud zum Beispiel erst beim ersten Scan ab, andere bereits bei der Labelerstellung. Manche Labels lassen sich gar nicht stornieren. Details findest du in deinem Sendcloud-Konto bzw. in deinem Vertrag.
+- **Umtauschlabels:** Das Versandlabel für den Umtausch kann aktuell nur erstellt werden, indem der Umtauschprozess ausgeführt wird.
+
+## Fehlerbehebung
+
+<AccordionGroup>
+  <Accordion title="Es werden keine Versandoptionen angezeigt">
+    toern zeigt nur Versandoptionen an, die Sendcloud für die gewählte Strecke mit Retourenfunktion anbietet. Prüfe Folgendes:
+
+    - Ist der gewünschte Versanddienstleister in deinem Sendcloud-Konto aktiviert bzw. ist dein eigener Vertrag dort hinterlegt?
+    - Unterstützt der Versanddienstleister Retouren vom gewählten Herkunftsland an deine Rücksendeadresse? Nicht jeder Versanddienstleister bietet jede Strecke an.
+  </Accordion>
+  <Accordion title="Sendcloud lehnt die API-Keys ab">
+    Prüfe, ob du **Public Key** und **Secret Key** vollständig und ohne Leerzeichen kopiert hast und ob die API-Integration in Sendcloud noch aktiv ist. Erstelle im Zweifel neue Keys in Sendcloud, trage sie in toern ein und teste die Verbindung erneut.
+  </Accordion>
+  <Accordion title="Bei DHL mit eigenem Vertrag kommt die Retoure an eine andere Adresse">
+    Nutzt du DHL mit deinem eigenen Vertrag, gehen Retouren an die Adresse, die bei DHL mit deiner **Receiver ID** verknüpft ist. Die in toern gewählte Rücksendeadresse hat in diesem Fall keinen Einfluss. Passe die Adresse bei Bedarf in deinem DHL-Geschäftskundenkonto an.
+  </Accordion>
+</AccordionGroup>

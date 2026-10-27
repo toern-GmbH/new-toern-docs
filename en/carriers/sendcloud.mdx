@@ -1,0 +1,242 @@
+---
+title: "Sendcloud"
+description: "Create return labels with tracking and shipping labels for exchange items through your own Sendcloud account."
+---
+
+With the **Sendcloud integration**, toern creates labels through your own Sendcloud account. toern uses the carriers you've enabled in Sendcloud, either with your own contracts or at Sendcloud's rates.
+
+The integration covers two use cases:
+
+- **Return labels:** toern automatically creates return labels for your customers and tracks the shipments. For each origin country, you decide which carrier is used and which address the return goes to, e.g. DHL for Germany and UPS for the rest of the EU.
+- **Shipping labels for exchange items:** When customers exchange an item, the replacement automatically gets its own shipping label. Learn more under [Shipping labels for exchange items](#shipping-labels-for-exchange-items).
+
+Both use cases share **the same API credentials**, so you only connect your Sendcloud account once.
+
+For general information on return methods and return countries, see [Return methods](/en/returns/return-methods).
+
+<Warning>
+  Return labels via Sendcloud are currently only available for **returns within the EU**. Both the origin country of the return and the return address must be in the EU.
+</Warning>
+
+## Prerequisites
+
+- A Sendcloud account.
+- An **API integration** in Sendcloud with a **public key** and a **secret key**.
+- The carriers you want to use are enabled in Sendcloud. If you want to use your own contracts, they're added in Sendcloud.
+- At least one **sender or return address** in Sendcloud that your returns should go to.
+- The Sendcloud return feature is enabled for your account in toern. If you don't see the settings, contact us at support@re-toern.de.
+
+## Prepare Sendcloud
+
+### Create API credentials
+
+1. In Sendcloud, open **Settings → Integrations**.
+2. Find **Sendcloud API** and click **Connect**.
+3. Give the integration a name and save.
+4. Copy the **public key** and the **secret key**.
+
+Sendcloud's [Quick Start Guide](https://support.sendcloud.com/hc/en-us/articles/360024967012-Sendcloud-API-documentation-and-Quick-Start-Guide) walks you through this step in detail.
+
+<Warning>
+  A key is only visible right after it's generated. Copy it right away.
+</Warning>
+
+<Frame caption="The Integrations menu in Sendcloud">
+  <img src="/images/docs/Sendcloud/integrations-page.png" alt="Sendcloud account showing the Integrations menu where API integrations are managed" />
+</Frame>
+
+<Frame caption="Where to find your API keys in Sendcloud">
+  <img src="/images/docs/Sendcloud/api-keys.png" alt="Sendcloud account showing the public and secret API keys of an integration" />
+</Frame>
+
+### Carriers and contracts
+
+toern only shows you the shipping options that are available in your Sendcloud account. So enable every carrier you want to use for returns in Sendcloud.
+
+- **Sendcloud rates:** You use Sendcloud's rates. Enabling the carrier in Sendcloud is enough.
+- **Own contracts:** You connect your existing contract with the carrier in Sendcloud. toern then automatically uses your rates.
+
+<Note>
+  UPS contracts can only be added directly in the Sendcloud panel.
+</Note>
+
+### Sender and return addresses
+
+In toern, you pick the address a return is sent to from your Sendcloud sender addresses. So add every warehouse or return address you want to use in Sendcloud first.
+
+## Setup in toern
+
+In your toern dashboard, open the [Sendcloud settings](https://www.admin.re-toern.de/settings/shipping-services) (Settings → Shipping Services → Sendcloud).
+
+<Steps>
+  <Step title="Add your credentials">
+    Enter the **public key** and **secret key** and save. If you've already connected Sendcloud for exchange labels, your credentials are already in place.
+
+    <Frame caption="Entering your Sendcloud credentials in the settings">
+      <img src="/images/docs/Sendcloud/access_credentials.png" alt="Settings page where the Sendcloud public key and secret key are entered" />
+    </Frame>
+  </Step>
+  <Step title="Test the connection">
+    Test the connection. toern checks your credentials and shows you the contracts and the number of sender addresses in your Sendcloud account.
+  </Step>
+  <Step title="Map countries">
+    Create a mapping for every country you want to accept Sendcloud returns from:
+
+    1. Choose the **return address** from your Sendcloud sender addresses. Returns are sent to this address.
+    2. Choose the **origin country**. What counts is the country your customers send the return from.
+    3. Choose the **shipping option**. toern shows you all return-capable shipping options Sendcloud offers for exactly this route, including carrier and contract.
+
+    You set up one country at a time, so you can pick the right shipping option for each country. **Save & add next country** keeps the return address selected so you can go straight on to the next country. You can edit or delete existing countries at any time.
+  </Step>
+  <Step title="Set the options">
+    - **Paper size:** A4 (default) or A6 for label printers.
+    - **Sendcloud brand:** Optional. If you pick a brand from your Sendcloud account, the Sendcloud tracking page shows your branding.
+    - **Sendcloud tracking emails:** Off by default. Only turn this on if Sendcloud should send its own tracking emails to your customers in addition.
+  </Step>
+  <Step title="Activate">
+    Activate Sendcloud return labels and save.
+  </Step>
+</Steps>
+
+### Example
+
+You want to handle returns from Germany with DHL and returns from the rest of the EU with UPS. All returns go to your warehouse in Berlin.
+
+| Origin countries        | Return address    | Shipping option     |
+| ----------------------- | ----------------- | ------------------- |
+| Germany                 | Berlin warehouse  | DHL Retoure         |
+| Each other EU country   | Berlin warehouse  | UPS Standard Return |
+
+The exact names of the shipping options depend on your Sendcloud account and your contracts.
+
+## Use Sendcloud as a return method
+
+The country mapping doesn't activate the return method automatically. Also add Sendcloud as a [return method](/en/returns/return-methods) under **Returns → Return Methods**:
+
+1. Create a return method of type **Carrier** and choose **Sendcloud** as the shipping provider.
+2. Choose the country the method applies to.
+3. Add label fees as usual, if needed.
+
+<Info>
+  You can only choose countries you've mapped in the Sendcloud settings. A return method for the whole **EU** requires **all EU countries** to be mapped. Without a matching mapping, Sendcloud is disabled in the dropdown.
+</Info>
+
+As long as a Sendcloud return method uses a country, you can't delete the mapping for that country.
+
+## Tracking
+
+toern automatically updates the shipment status of your Sendcloud returns **once a day**. There's nothing you need to set up for this.
+
+### Webhook for real-time updates (optional)
+
+If you want to see status changes in toern in near real time, also set up a webhook in Sendcloud:
+
+1. Copy the **webhook URL** from the Sendcloud settings in toern.
+2. In Sendcloud, open **Settings → Integrations** and select your API integration.
+3. Enable **Webhook feedback** and paste the copied URL.
+4. Save the integration.
+
+The Sendcloud settings in toern show when a webhook was last received.
+
+<Note>
+  Sendcloud only sends webhooks for shipments created through that API integration. So use the same integration whose keys you've added in toern.
+</Note>
+
+## Shipping labels for exchange items
+
+Whenever a customer exchanges an item during their return, toern automatically creates a shipping label for the replacement through Sendcloud. The label is attached to the order in Shopify and shown in the return details. This way, you always know how and where the replacement is being shipped.
+
+<Note>
+  For Sendcloud labels to be created for exchange items, **shipping label creation must be enabled in your exchange settings**. You manage this in the [exchange settings](/en/returns/exchange).
+</Note>
+
+### When is the shipping label created?
+
+The label is created during the exchange process. The exact moment depends on your exchange configuration. Once the exchange process runs, the following happens:
+
+1. The label is generated.
+2. The replacement order is marked as fulfilled.
+3. Tracking becomes available.
+
+Where you see this depends on your exchange method. You'll find more details [further below](#view-the-label-in-shopify).
+
+### Configure countries for exchange labels
+
+Exchange labels use the same credentials as return labels. The country configuration for exchange labels is separate, though, because the shipment goes the other way: from your warehouse to your customers.
+
+A replacement shipped to a customer in one country may need to go out from a different warehouse or use a different carrier service than one in another country. That's why you set up a separate configuration for **each country** you ship to. If you use the same configuration for all countries, simply set the default address.
+
+For every country, you provide three values from your Sendcloud account:
+
+- **Sender address**: The ID of the address the replacement is shipped from (your warehouse or the sender address registered in Sendcloud).
+- **Shipping option**: The carrier service or shipping method used to create the label.
+- **Contract**: The ID of the carrier contract tied to the shipping option. If you leave this blank, Sendcloud automatically picks the most suitable contract.
+
+You find these values through API calls to your Sendcloud account. Use the same API credentials as above.
+
+- **Sender address ID**: Make a `GET` request to [`/api/v3/addresses/sender-addresses`](https://sendcloud.dev/api/v3/sender-addresses/retrieve-a-list-of-sender-addresses). The response lists all sender addresses in your account. Each entry has an `id` field. Use the ID of the address you want to ship from.
+- **Shipping option**: Make a `POST` request to [`/api/v3/shipping-options`](https://sendcloud.dev/api/v3/shipping-options/return-a-list-of-available-shipping-options) with your origin and destination country codes. The response lists all available shipping methods for that route. Pick the one you want to use for the replacement.
+- **Contract ID (optional)**: Make a `GET` request to [`/api/v3/contracts`](https://sendcloud.dev/api/v3/contracts/retrieve-a-list-of-contracts). The response lists all contracts in your account, each with an `id` field, carrier and country. Use the ID of the contract that matches your shipping option.
+
+<Frame caption="The country-to-address mapping in your settings">
+  <img src="/images/docs/Sendcloud/country-address-map.png" alt="Settings page showing the per-country address mapping after configuration" />
+</Frame>
+
+### View the label in Shopify
+
+Once a label is created, two things happen in Shopify:
+
+- The replacement is marked as **fulfilled**, with the **tracking number and tracking link** added.
+- The **shipping label PDF** is uploaded to your Shopify Files and attached to the order as a **metafield**. You can view it there or on the return detail page.
+
+If you use **Shopify's native exchange method**, you see this directly on the order page the return belongs to.
+
+<Frame caption="Fulfillment and tracking on the order (Shopify's native exchange method)">
+  <img src="/images/docs/Sendcloud/fulfillment-shopify-exchange.png" alt="Shopify order page showing the exchange fulfilled with a tracking number and tracking link" />
+</Frame>
+
+If you use the **new order** exchange method, you see the fulfillment information on the new order created for the replacement items.
+
+<Frame caption="Fulfillment and tracking on the new exchange order">
+  <img src="/images/docs/Sendcloud/fulfillment-new-exchange-order.png" alt="New exchange order in Shopify showing the replacement items fulfilled with a tracking number and tracking link" />
+</Frame>
+
+In the fulfillment information, click the tracking number to open the tracking link.
+
+In both cases, you find the uploaded label in the order's metafields.
+
+<Frame caption="The shipping label attached to the order as a metafield">
+  <img src="/images/docs/Sendcloud/metafield-label.png" alt="Shopify order page showing the exchange shipping label attached as a metafield" />
+</Frame>
+
+### View the label on the return detail page
+
+The shipping label for the replacement and its tracking information are also shown directly on the **return detail page** in your toern dashboard. If a return has both a return label and an exchange shipping label, both are shown stacked one above the other.
+
+<Frame caption="The exchange shipping label and tracking in the return details">
+  <img src="/images/docs/Sendcloud/return_details_shipping_label.png" alt="Return detail page displaying the exchange shipping label with its tracking information" />
+</Frame>
+
+## Limitations
+
+- **EU returns only:** Return labels via Sendcloud are currently only available within the EU. Returns from non-EU countries would require customs data, which toern doesn't send to Sendcloud yet.
+- **Return methods are managed in toern:** Sendcloud's return portal and features such as drop-off points, QR codes or in-store returns aren't used. You set up your return methods in toern as usual.
+- **Cancellation and billing:** Whether a label can be cancelled and when it's billed is defined by Sendcloud and the respective carrier. For example, Sendcloud bills some return options only on first scan and others as soon as the label is created. Some labels can't be cancelled at all. You find the details in your Sendcloud account or your contract.
+- **Exchange labels:** Currently, the only way to create the exchange shipping label is by running the exchange process.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="No shipping options are shown">
+    toern only shows shipping options that Sendcloud offers with return functionality for the selected route. Check the following:
+
+    - Is the carrier enabled in your Sendcloud account, or is your own contract added there?
+    - Does the carrier support returns from the selected origin country to your return address? Not every carrier offers every route.
+  </Accordion>
+  <Accordion title="Sendcloud rejects the API keys">
+    Check that you've copied the **public key** and **secret key** completely and without spaces, and that the API integration is still active in Sendcloud. If in doubt, create new keys in Sendcloud, add them in toern and test the connection again.
+  </Accordion>
+  <Accordion title="With DHL on my own contract, the return arrives at a different address">
+    If you use DHL with your own contract, returns go to the address linked to your **Receiver ID** at DHL. The return address selected in toern has no effect in this case. Update the address in your DHL business customer account if needed.
+  </Accordion>
+</AccordionGroup>
