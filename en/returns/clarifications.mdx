@@ -1,0 +1,109 @@
+---
+title: "Clarification cases"
+description: "What a clarification case is, when it happens and how you solve it in the toern dashboard."
+---
+
+Most returns run through toern automatically: create the label, create the return in your shop, start the exchange, refund. Sometimes that doesn't work, or you want to check a return yourself on purpose. Then a **clarification case** is created.
+
+A clarification case pauses the automation of the return until you have taken care of it. That way nothing is refunded or shipped that isn't right.
+
+## When is a clarification case created?
+
+There are three ways:
+
+1. **A step failed.** For example, your carrier rejects the customer address, Shopify doesn't accept a refund, or Xentral can't be reached.
+2. **A return should be checked on purpose.** You set this in your settings, for example above a certain return value, for certain discount codes, or for a certain classification by your fulfillment (see [Settings that create clarification cases](#settings-that-create-clarification-cases)).
+3. **Someone puts the return into clarification.** You or your team in the dashboard with **Create Clarification**, or another system via the API, for example your fulfillment service.
+
+You can find an overview of all clarification cases with cause and solution in the [FAQ](/en/faq#clarification-cases-and-how-to-solve-them).
+
+## How to spot a clarification case
+
+**In the return overview** the return has the status **needs review** or **Clarification**. With **All Clarifications** you see all clarification cases, independent of the selected time range. Use the **Issue** filter to narrow them down by kind of problem, for example only return label problems or only refunds. That way everyone on your team can take care of the cases they're responsible for.
+
+| Kind of problem | What it's about |
+| --- | --- |
+| Return label | The return or exchange label could not be created. |
+| Shop sync | The return could not be created or updated in your shop. |
+| Fulfillment | Your shop has nothing returnable for the items, usually because they aren't marked as fulfilled yet. |
+| Exchange | The exchange or the exchange order could not be processed. |
+| Refund | The refund didn't run automatically, or it was stopped on purpose so you can check it. |
+| Xentral | The return, exchange order or credit note could not be synced with Xentral. |
+| Needs review | Nothing failed, but you should look at the return before it continues. |
+| Inspection | The inspection of the returned items needs a decision from you. |
+| System | A temporary or internal error on our side. |
+| Manual | The return was put into clarification by hand in the dashboard or via the API. |
+
+**In the return** you see the notice **Return needs review** at the top. Below it there is a separate **clarification card** for every open issue. Each card tells you in plain words:
+
+- **what happened**, for example "Customer address is incomplete",
+- **where to fix it**, for example "Customer Information › Edit customer" or "in Shopify",
+- **what to click afterwards.**
+
+A return can have several open issues at the same time. Then you see, for example, **Return needs review · 2 open issues**. The automation, including the automatic refund, only continues once **all** issues are resolved.
+
+**In the return portal** your customers see the status **Clarification required** in the tracking. They don't see details about the problem. As soon as the clarification case is resolved, the notice disappears (see [Return portal](/en/returns/return-portal)).
+
+## How to solve a clarification case
+
+Each card has exactly **one** button. It shows you how the return gets out of clarification:
+
+| Button | When you see it | What happens |
+| --- | --- | --- |
+| **Retry** | A step failed, for example the label or the return in Shopify. | First fix the cause named on the card, then click the button. toern restarts the failed step. If it works, the issue closes by itself. Steps that are already done are not repeated, so a refund that already went through is not paid out twice. |
+| **Mark resolved** | Nothing failed technically, but you have to check or decide something. | Take care of the issue, then click the button. Optionally write a short **note** on what you did. It appears on the timeline of the return. |
+| **Refund manually** | The automatic refund was stopped, for example because of a blocked discount code or because the return value is above your limit. | The button opens the manual refund. Check the amount and items and refund. As soon as the refund goes through, the issue closes by itself. |
+| **Mention @ToernBot in the chat** | You can't solve the problem yourself, for example because an item was deleted in your shop. | Mention **@ToernBot** in the chat of the return. This notifies toern support, who will look into the problem. |
+
+<Tip>
+  Many clarification cases come from missing or wrong settings, for example missing access credentials of your carrier. The card always names the exact place in the settings. If you fix the cause there, the error won't happen again for the next returns.
+</Tip>
+
+### If it fails again
+
+Some errors aren't on your side, for example when your shop or your carrier is briefly unavailable. Wait a few minutes and try again. If it still doesn't work, mention **@ToernBot** in the chat of the return.
+
+### Close all issues at once
+
+If you handled the return completely outside toern, for example refunded it directly in Shopify, click **Mark complete** at the top of the return. This closes the return and all open clarification issues. Only do this if nothing more is owed to the customer.
+
+## Create a clarification case yourself
+
+You can put a return into clarification at any time, for example when you have a question for the customer or a refund shouldn't run automatically yet.
+
+1. Open the return under **Manage Returns**.
+2. Click **Create Clarification** at the top.
+3. Enter a reason. It appears as the text on the clarification card.
+
+All automations of the return pause until you close the issue with **Mark resolved**.
+
+This also works if the return is already in clarification. Your own issue is added to the others. The return stays in clarification until your issue is resolved too, even if the other issues have closed in the meantime, for example through **Retry**.
+
+Systems connected via the toern API, for example your fulfillment service, can create clarification cases as well. They appear as **Set to clarification via the API** with the reason that was sent along.
+
+## Timeline
+
+On the timeline of the return you see when a clarification case was created, who resolved it and how, and the note if one was entered. Resolved issues stay visible there, so your team can trace later what happened.
+
+## Settings that create clarification cases
+
+With these settings you decide which returns are stopped on purpose so you can check them:
+
+| Setting | What creates a clarification case | More |
+| --- | --- | --- |
+| **Inspection based Clarifications** | Your fulfillment classifies an item with a classification (A–D) you selected. | [Return settings](/en/returns/return-settings) |
+| **Fulfillment based Clarifications** | Your fulfillment sends a note you added, for example "acceptance refused". | [Return settings](/en/returns/return-settings) |
+| **Automatic Refund Limit** | The return value is above your limit for automatic refunds. | [Refund](/en/returns/refund) |
+| **Discount Code Clarifications** | The order contains a discount code you blocked. | [Refund](/en/returns/refund) |
+| **Gift Card Configuration** | The gift card value including bonus is above your limit for automatic gift card refunds. | [Gift card refund](/en/returns/gift-card-refund) |
+
+In addition, toern always stops a return in these cases:
+
+- Your return portal asks about the condition of the items, and the customer states that they are no longer in original condition (for example worn or opened). The customer doesn't get a return label until you have decided.
+- The return contains a set item that toern can't process automatically (see [Sets](/en/returns/sets)).
+- The items of a return are changed after it has already been refunded.
+- During the inspection items are missing, other items come back than registered, or a return is inspected more than once.
+
+## Older clarification cases
+
+Clarification cases created before the switch to the new system still show the former, technical error message as text and no card with a button. Check the return, do the necessary steps and then close it with **Mark complete**. If you're stuck, mention **@ToernBot** in the chat of the return.

@@ -182,656 +182,713 @@ Hier findest du Antworten auf die häufigsten Fragen rund um toern. Im zweiten T
 
 ## Klärfälle und wie du sie löst
 
-Wenn toern eine Retoure, eine Rückerstattung oder einen Umtausch nicht automatisch verarbeiten kann, entsteht ein **Klärfall**. Die Retoure bekommt dann den Status **Needs review** bzw. **Clarification** und du siehst die Fehlermeldung in der Retoure unter [Retouren verwalten](/dashboard/manage-returns).
+Wenn toern eine Retoure nicht automatisch weiterverarbeiten kann oder du sie bewusst prüfen sollst, entsteht ein **Klärfall**. Die Retoure bekommt den Status **needs review** bzw. **Clarification**, und in der Retoure siehst du für jedes offene Problem eine eigene Klärfall-Karte. Wie Klärfälle grundsätzlich funktionieren, erfährst du unter [Klärfälle](/returns/clarifications).
 
-Unten findest du alle Klärfälle, sortiert nach Vorgang (Anlegen von Retouren, Rückerstattung, Umtausch) und System (allgemein, Shopify, Xentral). Der Titel jedes Eintrags ist die Fehlermeldung, die du in toern siehst.
+Unten findest du alle Klärfälle, sortiert nach der Art des Problems, wie im Filter **Issue** in der Retourenübersicht. Der Titel jedes Eintrags ist der Titel der Klärfall-Karte. Werte in eckigen Klammern, zum Beispiel [Land] oder [Artikel], füllt toern auf der Karte mit den Daten der Retoure.
 
 <Tip>
-  Viele Klärfälle löst du, indem du die Ursache behebst und den Vorgang in der Retoure erneut startest, z. B. mit **Retry failed return** unter **Actions**, **Retry failed refund** oder **Execute exchange processing**.
+  Jede Klärfall-Karte zeigt genau einen Button:
+
+  - **Erneut versuchen**: Behebe die Ursache und starte den fehlgeschlagenen Schritt neu. Klappt es, schließt sich der Punkt von selbst.
+  - **Als erledigt markieren**: Prüfe die Retoure und schließe den Punkt, optional mit einer Notiz für den Verlauf.
+  - **Manuell erstatten**: Erstatte die Retoure selbst. Sobald die Erstattung durchgeht, schließt sich der Punkt von selbst.
+  - **@ToernBot im Chat erwähnen**: Der toern Support muss sich das Problem ansehen.
+
+  Die automatische Verarbeitung läuft erst weiter, wenn alle Punkte einer Retoure erledigt sind.
 </Tip>
 
-### Allgemeine Klärfälle beim Anlegen von Retouren
+### Rücksendeetikett
+
+Das Rücksende- oder Umtauschetikett konnte nicht erstellt werden.
 
 <AccordionGroup>
-  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
-    **Ursache:** Dein Shopsystem wird von toern nicht unterstützt.
+  <Accordion title="Kundenadresse ist unvollständig">
+    Das Rücksendeetikett konnte nicht erstellt werden, weil in der Kundenadresse etwas fehlt, zum Beispiel Straße, Hausnummer oder Postleitzahl. Ergänze sie unter Kundeninformationen › Kunde bearbeiten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Hinterlege die nötigen Daten für die Nutzung mit Shopify (siehe [Shopify-Integration](/getting-started/shopify-integration)) oder kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Error during label creation. Our support team is already on it. For further questions contact support@re-toern.de.">
-    **Ursache:** Wegen eines technischen Problems konnte das Retourenlabel nicht erstellt und die Retoure nicht angelegt werden.
+  <Accordion title="Versanddienstleister hat die Adresse abgelehnt">
+    Dein Versanddienstleister hat die Kundenadresse nicht akzeptiert. Straße, Hausnummer, Postleitzahl und Ort müssen stimmen, und kein Feld darf zu lang sein. Korrigiere sie unter Kundeninformationen › Kunde bearbeiten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Prüfe die Adresse der KundInnen, die Ländereinstellungen im Country-Mapping und die Carrier-Einstellungen (siehe [Retourenmethoden](/returns/return-methods)). Behebe die Fehler und führe die Retoure mit **Retry failed return** erneut aus.
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Return status not found">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Versanddienstleister ist nicht eingerichtet">
+    Das Rücksendeetikett konnte nicht erstellt werden, weil die Zugangsdaten deines Versanddienstleisters fehlen, unvollständig oder ungültig sind. Prüfe sie unter Einstellungen › Versanddienste für Retouren in den Zugangsdaten deines Versanddienstleisters und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No email event created, could not send email notification">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Anmeldung beim Versanddienstleister fehlgeschlagen">
+    Dein Versanddienstleister hat deine Zugangsdaten abgelehnt. Sie müssen stimmen und deine Live-Zugangsdaten sein, nicht die für Tests. Prüfe sie unter Einstellungen › Versanddienste für Retouren in den Zugangsdaten deines Versanddienstleisters und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Error creating RMA PDF">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Versanddienstleister ist für dieses Land nicht eingerichtet">
+    Für Retouren aus [Land] ist bei deinem Versanddienstleister keine Rücksendeadresse hinterlegt. Ergänze sie unter Einstellungen › Versanddienste für Retouren in den Ländereinstellungen deines Versanddienstleisters und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Return contains Set item requiring clarification">
-    **Ursache:** Die Retoure enthält ein Set. Sets kann toern nicht automatisiert verarbeiten.
+  <Accordion title="Rücksendemethode ist nicht richtig eingerichtet">
+    Die Rücksendemethode dieser Retoure hat keinen Versanddienstleister, oder er ist nicht richtig eingerichtet. Prüfe die Rücksendemethode unter Einstellungen › Retouren › Rücksendemethoden und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Bearbeite die Retoure manuell in toern (siehe [Sets](/returns/sets)).
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Internal Error in Return Processing (collecting database ressources). Please contact support@re-toern.de for help">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht angelegt werden.
+  <Accordion title="Kein Etikett aus diesem Land möglich">
+    Dein Versanddienstleister kann kein Rücksendeetikett aus [Land] erstellen, weil diese Retouren Zolldokumente brauchen, die noch nicht unterstützt werden. Schicke dem Kunden die Rücksendeanleitung selbst und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**. Damit das nicht wieder passiert, biete für [Land] unter Einstellungen › Retouren › Rücksendemethoden eine andere Rücksendemethode an.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Versanddienstleister vorübergehend nicht erreichbar">
+    Dein Versanddienstleister hat beim Erstellen des Etiketts nicht geantwortet oder einen vorübergehenden Fehler gemeldet. Warte ein paar Minuten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Etikett hat keine Sendungsnummer">
+    Dein Versanddienstleister hat das Rücksendeetikett ohne Sendungsnummer erstellt, deshalb konnte sie nicht bei der Retoure in deinem Shop eingetragen werden. Erwähne **@ToernBot** im Chat, damit wir das Etikett prüfen.
+
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
+  </Accordion>
+  <Accordion title="Rücksendeetikett konnte nicht erstellt werden">
+    Beim Erstellen des Rücksendeetiketts ist ein unbekannter Fehler aufgetreten. Prüfe die Kundenadresse unter Kundeninformationen › Kunde bearbeiten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    Hast du das Etikett selbst unter Versandetiketten erstellt, zeigt die Karte stattdessen **Als erledigt markieren**: Behebe die Ursache, erstelle das Etikett unter **Versandetiketten › Neues Rücksendeetikett erstellen** neu und markiere den Punkt danach als erledigt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Sendcloud ist für Umtauschetiketten nicht eingerichtet">
+    Das Versandetikett für die Umtauschartikel konnte nicht erstellt werden, weil deine Sendcloud-Zugangsdaten fehlen. Ergänze sie unter Einstellungen › Integrationen › Sendcloud › Zugangsdaten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Anmeldung bei Sendcloud fehlgeschlagen">
+    Sendcloud hat deine Zugangsdaten abgelehnt, deshalb konnte das Versandetikett für die Umtauschartikel nicht erstellt werden. Prüfe sie unter Einstellungen › Integrationen › Sendcloud › Zugangsdaten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Keine Sendcloud-Absenderadresse für dieses Land">
+    Für [Land] ist keine Sendcloud-Absenderadresse hinterlegt, deshalb konnte das Versandetikett für die Umtauschartikel nicht erstellt werden. Ergänze sie unter Einstellungen › Integrationen › Sendcloud › Absenderadressen und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Sendcloud hat das Umtauschetikett abgelehnt">
+    Sendcloud hat das Versandetikett für die Umtauschartikel nicht erstellt. Meist ist die Kundenadresse unvollständig, oder keine deiner Versandregeln in Sendcloud passt zu dieser Sendung. Prüfe die Adresse unter Kundeninformationen › Kunde bearbeiten und deine Versandregeln in Sendcloud und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Meldung von Sendcloud: „[Meldung]“
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Umtauschetikett konnte nicht erstellt werden">
+    Das Versandetikett für die Umtauschartikel konnte nicht erstellt werden, und Sendcloud hat keinen Grund genannt. Prüfe die Adresse unter Kundeninformationen › Kunde bearbeiten und deine Sendcloud-Einstellungen unter Einstellungen › Integrationen › Sendcloud und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Umtauschetikett nicht an der Bestellung">
+    Das Versandetikett für die Umtauschartikel wurde erstellt, konnte aber nicht an die Bestellung in Shopify angehängt werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**, das Etikett wird dabei nicht neu erstellt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
 </AccordionGroup>
 
-### Shopify-spezifische Klärfälle beim Anlegen von Retouren
+### Shop-Abgleich
+
+Die Retoure konnte nicht in deinem Shop angelegt oder aktualisiert werden.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
-    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+  <Accordion title="Shop-Verbindung fehlt">
+    Die Zugangsdaten deines Shops fehlen, deshalb konnten wir ihn nicht erreichen. Verbinde deinen Shop unter Einstellungen › Shop-Anbindung › Shopify-Zugangsdaten neu und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No successful fulfillments found for the order. Please check that order line items are marked as successfully fulfilled">
-    **Ursache:** Die Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+  <Accordion title="Shop hat den Zugriff verweigert">
+    Dein Shop hat unsere Anfrage abgelehnt. Meist wurde die toern-App deinstalliert, ihre Berechtigungen wurden geändert oder der Shop ist pausiert. Prüfe in Shopify unter Apps, ob die toern-App installiert ist und alle Berechtigungen hat, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Some return items have no fulfillmentLineItemId. Please check the fulfillments in your shop. This might indicate that an item was not fulfilled or the fulfillment line item variant was deleted.">
-    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+  <Accordion title="Shop vorübergehend nicht erreichbar">
+    Dein Shop hat nicht geantwortet oder ist gerade ausgelastet. Warte ein paar Minuten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No variant id found for exchange item. Please check the exchange variant id in your return item.">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Shopsystem ist nicht eingestellt">
+    Für deine Marke ist kein unterstütztes Shopsystem eingestellt, deshalb konnte die Retoure an keinen Shop übertragen werden. Erwähne **@ToernBot** im Chat, damit wir deine Shop-Einstellungen prüfen.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
-  <Accordion title="No return id found in the response from Shopify. This might indicate that the return creation failed or the return was not created successfully">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Retoure konnte nicht im Shop erstellt werden">
+    Die Retoure konnte in deinem Shop nicht angelegt werden, und dein Shop hat keinen Grund genannt. Prüfe in Shopify, ob die Bestellung existiert und ihre Artikel versendet (fulfilled) und noch nicht retourniert sind, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
-    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+  <Accordion title="Shopify hat die Retoure abgelehnt">
+    Shopify hat diese Retoure nicht angelegt. Meist wurden ihre Artikel dort schon retourniert oder erstattet, die Bestellung wurde storniert oder die Artikel sind noch nicht versendet (fulfilled). Öffne die Bestellung in Shopify, behebe das dort und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Meldung von Shopify: „[Meldung]“
 
-    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="The original currency of the order could not be found. For this reason the return creation stopped to prevent wrong label & return fees from occuring">
-    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+  <Accordion title="Sendungsverfolgung konnte nicht im Shop ergänzt werden">
+    Die Retoure wurde in deinem Shop erstellt, aber Rücksendeetikett und Sendungsnummer konnten nicht hinzugefügt werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing variantId or countryCode. Could not get presentment money for product variant">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Rücksendegebühr konnte nicht berechnet werden">
+    Die Rücksendegebühr dieser Retoure konnte nicht berechnet werden, zum Beispiel weil für das Land des Kunden keine Gebühr oder Währung hinterlegt ist. Prüfe die Rücksendegebühren unter Einstellungen › Retouren › Rücksendemethoden und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Unsupported presentment currency for return fee calculation">
-    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+  <Accordion title="Retoure konnte in deinem Shop nicht angepasst werden">
+    Die Artikel dieser Retoure wurden geändert, aber die Retoure in deinem Shop konnte nicht angepasst werden, deshalb wurde die Erstattung nicht gestartet. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Exchange process failed in Shopify">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
+  <Accordion title="Retoure in deinem Shop kann nicht mehr geändert werden">
+    Die Artikel dieser Retoure wurden geändert, aber die Retoure in Shopify hat den Status „[Status]“ und kann nicht mehr angepasst werden. Passe sie selbst in Shopify an. Klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error requesting fulfillments from Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
+  <Accordion title="Retoure konnte in deinem Shop nicht storniert werden">
+    Das Stornieren dieser Retoure ist in Shopify fehlgeschlagen, deshalb wurde sie auch in toern nicht storniert. In Shopify ist sie eventuell schon erstattet, umgetauscht oder abgeschlossen. Prüfe die Retoure in Shopify, und falls sie noch storniert werden muss, storniere sie erneut unter Aktionen › Retoure stornieren. Klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error requesting return creation in Shopify">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Shopify angelegt werden.
-
-    **Lösung:** Prüfe die Retoure in Shopify und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error processing exchange items in Shopify.">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
-
-    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Could not get price for exchange variant">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht in Shopify durchgeführt werden.
-
-    **Lösung:** Prüfe den Vorgang in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
 </AccordionGroup>
 
-### Xentral-spezifische Klärfälle beim Anlegen von Retouren
+### Versand
+
+Dein Shop hat für die Artikel der Bestellung nichts, was retourniert werden kann.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key).">
-    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+  <Accordion title="Bestellung hat keine retournierbaren Artikel im Shop">
+    Dein Shop meldet für diese Bestellung keine Artikel, die retourniert werden können. Meist ist die Bestellung noch nicht versendet (fulfilled), ihre Artikel wurden schon retourniert oder die Bestellung wurde storniert. Markiere die Artikel in Shopify als versendet und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Xentral activated, but missing return reason mapping">
-    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+  <Accordion title="Einige Artikel sind nicht versendet">
+    Diese Artikel können in deinem Shop noch nicht retourniert werden, weil sie nicht versendet (fulfilled) oder schon retourniert wurden: [Artikel]. Markiere sie in Shopify als versendet und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Wurden sie storniert und nie verschickt, klicke oben in der Retoure auf **Als erhalten markieren**, entferne sie unter Retournierte Artikel und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
-    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+  <Accordion title="Bestellartikel im Shop nicht gefunden">
+    Ein Artikel dieser Bestellung wurde in deinem Shop nicht gefunden, zum Beispiel weil er gelöscht wurde. Erwähne **@ToernBot** im Chat, damit wir die Bestellung prüfen.
 
-    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
-  </Accordion>
-  <Accordion title="No return items to create return in Xentral">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
-
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="No return data returned from Xentral API">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
-
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing salesOrderId for Xentral return creation">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Invalid return item id for Xentral return">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Invalid return item quantity for Xentral return">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Retoure konnte nicht angelegt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Create return in Xentral failed">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Xentral angelegt werden.
-
-    **Lösung:** Prüfe die Retoure in Xentral und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
 </AccordionGroup>
 
-### Allgemeine Klärfälle bei der Rückerstattung
+### Umtausch
+
+Der Umtausch oder die Umtauschbestellung konnte nicht verarbeitet werden.
 
 <AccordionGroup>
-  <Accordion title="Brand settings not found">
-    **Ursache:** Die Refund-Einstellungen deiner Brand wurden nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+  <Accordion title="Umtauschartikel hat keinen Ersatzartikel">
+    Ein Artikel dieser Retoure ist zum Umtausch markiert, aber es ist kein Ersatzartikel hinterlegt. Erwähne **@ToernBot** im Chat, damit wir den Umtausch prüfen.
 
-    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an.
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
-  <Accordion title="Return items not found">
-    **Ursache:** Die angemeldeten Retourenartikel wurden nicht in der Datenbank gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+  <Accordion title="Ersatzartikel nicht verfügbar">
+    Der Preis des Ersatzartikels konnte nicht aus Shopify geladen werden. Möglicherweise wurde der Artikel gelöscht oder wird im Markt des Kunden nicht verkauft. Prüfe den Artikel in Shopify und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch und schließe die Retoure danach in toern manuell ab.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Return status not found">
-    **Ursache:** Der Retourenstatus wurde im System nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Umtausch konnte in Shopify nicht geprüft werden">
+    Die Retoure wurde in Shopify erstellt, aber ihre Umtauschbestellung konnte danach nicht geprüft werden. Prüfe die Umtauschbestellung in Shopify und erwähne **@ToernBot** im Chat, bevor du auf **Erneut versuchen** klickst, damit die Retoure nicht doppelt erstellt wird.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
-  <Accordion title="Refund item not found">
-    **Ursache:** Der Artikel für die Rückerstattung wurde im System nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Umtauschbestellung konnte nicht erstellt werden">
+    Die Bestellung für die Ersatzartikel konnte in deinem Shop nicht angelegt werden, und dein Shop hat keinen Grund genannt. Prüfe in Shopify, ob alle Ersatzartikel noch existieren und auf Lager sind, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Refund not found">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Shopify hat die Umtauschbestellung abgelehnt">
+    Shopify hat die Bestellung für die Ersatzartikel dieses Umtauschs nicht angelegt. Meist ist ein Ersatzartikel nicht auf Lager, wurde gelöscht oder wird im Markt des Kunden nicht mehr verkauft. Prüfe die Ersatzartikel in Shopify und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Meldung von Shopify: „[Meldung]“
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Preferred refund method could not be found">
-    **Ursache:** Die hinterlegte Rückerstattungsmethode wurde nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+  <Accordion title="Ersatzartikel nicht auf Lager">
+    Mindestens ein Ersatzartikel dieses Umtauschs ist in Shopify nicht auf Lager, deshalb konnte die Umtauschbestellung nicht angelegt werden. Sorge dafür, dass alle Ersatzartikel in Shopify auf Lager sind, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch und schließe die Retoure danach in toern manuell ab.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No refund settings found. Please update the settings to include refund configurations">
-    **Ursache:** Die Refund-Einstellungen wurden nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+  <Accordion title="Ersatzartikel gibt es im Shop nicht mehr">
+    Einen oder mehrere Ersatzartikel dieses Umtauschs gibt es in Shopify nicht mehr, deshalb konnte die Umtauschbestellung nicht erstellt werden. Lege sie in Shopify wieder an und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls das nicht möglich ist, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an. Wenn das nicht hilft, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Shop system currently not supported for auto refund. Contact support for further assistance (support@re-toern.de).">
-    **Ursache:** Automatische Rückerstattungen unterstützt toern aktuell nur für Shopify.
+  <Accordion title="Umtauschartikel noch nicht versandbereit">
+    Shopify hat die Umtauschartikel dieser Retoure noch nicht für den Versand vorbereitet, deshalb konnten sie nicht freigegeben werden. Warte ein paar Minuten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Wurde der Umtausch außerhalb von toern abgewickelt, zum Beispiel weil die Retoure direkt in Shopify erstattet wurde, klicke stattdessen oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Führe die Rückerstattung manuell in deinem Shopsystem durch.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Unknown refund service used for auto refund. Contact support for further assistance (support@re-toern.de)">
-    **Ursache:** Die Rückerstattungsmethode ist in toern noch nicht für die Automatisierung freigegeben. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Umtauschartikel konnten nicht für den Versand freigegeben werden">
+    Die Umtauschartikel sind in Shopify zurückgehalten, und das konnte nicht aufgehoben werden, deshalb werden sie noch nicht verschickt. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, gib die Umtauschbestellung selbst in Shopify frei und klicke danach noch einmal in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de), damit die Methode freigegeben wird.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Refund failed">
-    **Ursache:** Bei der Rückerstattung ist etwas schiefgelaufen. Weitere Informationen wurden nicht an toern übermittelt.
+  <Accordion title="Reservierte Umtauschbestellung konnte nicht freigegeben werden">
+    Das Reservierungs-Tag konnte nicht von der Umtauschbestellung in Shopify entfernt werden, deshalb wird die Bestellung eventuell noch nicht verschickt. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, entferne das Tag selbst von der Bestellung in Shopify und klicke danach noch einmal in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Prüfe in deinem Shopsystem, warum die Rückerstattung fehlgeschlagen ist, und führe sie manuell erneut aus.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Line items have changed, but this return includes exchange items. Automatic updates in Shopify are not possible. Please update the return manually in Shopify to ensure accurate tracking. The refund must also be processed manually">
-    **Ursache:** Die Artikel der Retoure wurden geändert, obwohl sie einen Umtausch enthält. Das kann zu einer falschen Rückerstattung führen.
+  <Accordion title="Retoure nicht rechtzeitig erhalten, Umtauschbestellung storniert">
+    Die Retoure ist nicht innerhalb von X Tagen angekommen, deshalb wurde die dafür reservierte Umtauschbestellung in Shopify storniert und der Bestand freigegeben. Falls die Retoure doch noch ankommt, entscheide, wie es mit dem Umtausch weitergeht, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Prüfe die Artikel und was erstattet werden soll. Führe die Rückerstattung manuell in Shopify durch.
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Line items have changed, but this return already has a return created in Xentral. Automatic updates in Xentral are not possible. Please update the return manually in Xentral and Shopify to ensure accurate tracking. The refund must also be processed manually.">
-    **Ursache:** Die Artikel der Retoure wurden geändert, obwohl bereits eine Retoure in Xentral angelegt wurde. Diese Änderung kann nicht automatisch in Xentral übernommen werden.
+  <Accordion title="Umtauschartikel geändert">
+    Ein Umtauschartikel dieser Retoure wurde geändert. Die verschickten Ersatzartikel passen deshalb eventuell nicht mehr zur Retoure, und die Erstattung kann falsch sein. Prüfe die Umtauschbestellung in Shopify und die Erstattung unter Retourenerstattungen und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Führe die (noch offene) Rückerstattung manuell in Shopify durch und passe die Retoure in Xentral entsprechend an.
-  </Accordion>
-  <Accordion title="The total return value exceeds the maximum refund threshold specified in the settings. The refund must be processed manually.">
-    **Ursache:** In den [Refund-Einstellungen](/returns/refund) kannst du einen Maximalbetrag für automatische Rückerstattungen festlegen. Diese Retoure überschreitet ihn, deshalb musst du sie manuell erstatten.
-
-    **Lösung:** Wenn du keine manuelle Rückerstattung möchtest, erhöhe den Maximalbetrag in den Einstellungen.
-  </Accordion>
-  <Accordion title="The total gift card value (including bonus) exceeds the gift card threshold specified in the settings. The refund must be processed manually.">
-    **Ursache:** In den [Refund-Einstellungen](/returns/refund) kannst du einen Maximalbetrag für Erstattungen per Gutschein festlegen. Diese Retoure überschreitet ihn, deshalb musst du sie manuell erstatten.
-
-    **Lösung:** Wenn du keine manuelle Rückerstattung möchtest, erhöhe den Maximalbetrag in den Einstellungen.
-  </Accordion>
-  <Accordion title="Order ID is required. Please contact support for further help (support@re-toern.de).">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="An error occurred while checking blocked discount codes. Please contact support for further help (support@re-toern.de).">
-    **Ursache:** Der verwendete Rabattcode ist in den Einstellungen blockiert. Die Rückerstattung wird nicht automatisch durchgeführt, weil sie vom Vorschlag von Shopify abweicht. Du musst sie manuell durchführen.
-
-    **Lösung:** Wenn der Rabattcode doch nicht blockiert sein soll, entferne ihn aus der Liste der blockierten Rabattcodes in den [Refund-Einstellungen](/returns/refund).
-  </Accordion>
-  <Accordion title="Internal Error in Refund Processing (collecting database resources). Please contact support@re-toern.de for help.">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
 </AccordionGroup>
 
-### Shopify-spezifische Klärfälle bei der Rückerstattung
+### Erstattung
+
+Die Erstattung konnte nicht automatisch durchgeführt werden, oder sie wurde bewusst angehalten, damit du sie prüfst.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly.">
-    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+  <Accordion title="Keine Erstattungsmethode ausgewählt">
+    Für diese Retoure ist keine Erstattungsmethode hinterlegt, deshalb konnte sie nicht automatisch erstattet werden. Klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="The original currency of the order could not be found. For this reason the refund creation stopped to prevent wrong refund amounts from occuring.">
-    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+  <Accordion title="Retoure von außerhalb der EU">
+    Diese Retoure kommt aus [Land], also von außerhalb der EU. Wie mit dir vereinbart, werden solche Retouren nicht automatisch erstattet. Prüfe die Retoure und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Cannot find return with the given external return ID in Shopify">
-    **Ursache:** Die Retoure für die Rückerstattung wurde nicht gefunden. Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Retourenwert über der Grenze für automatische Erstattungen">
+    Der Wert dieser Retoure liegt über deiner Grenze für automatische Erstattungen unter Einstellungen › Erstattung › Grenze für automatische Erstattungen. Prüfe die Retoure und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="No returnable fulfillments found for the order. Please check the order and fulfillments in your shop">
-    **Ursache:** Die Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+  <Accordion title="Gutscheinwert über der Grenze für automatische Erstattungen">
+    Der Gutscheinwert dieser Retoure liegt einschließlich Bonus über deiner Grenze für automatische Gutscheinerstattungen unter Einstellungen › Erstattung › Gutschein-Konfiguration. Prüfe die Retoure und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
-    **Ursache:** Ein Artikel der Bestellung ist in Shopify noch nicht als ausgeführt („fulfilled“) markiert. Deshalb kann toern in Shopify keine Retoure starten und keine Rückerstattung durchführen.
+  <Accordion title="Ampeln des Kunden nicht alle grün">
+    Nicht alle Ampeln dieses Kunden sind grün, deshalb wurde die automatische Erstattung gestoppt. Prüfe den Kunden unter Kundeninformationen und klicke dann in der Klärfall-Karte auf **Manuell erstatten** und passe dort bei Bedarf die Rücksendegebühr an. Danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Aktualisiere in Shopify den Fulfillment-Status der Bestellung. Klicke danach in toern unter **Actions** auf **Retry failed return**. Die Retoure wird neu angelegt und der Prozess läuft normal weiter.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Customer ID not found for gift card issuance">
-    **Ursache:** Die Kunden-ID wurde nicht gefunden. Deshalb kann keine Rückerstattung durchgeführt werden.
+  <Accordion title="Rabattcode von automatischen Erstattungen ausgeschlossen">
+    Diese Bestellung nutzt den Rabattcode „[Rabattcode]“, den du unter Einstellungen › Erstattung › Rabattcode-Klärungen von automatischen Erstattungen ausgeschlossen hast. Klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe in Shopify, ob die Kundin oder der Kunde noch existiert, und kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Shopify order was already cancelled">
-    **Ursache:** Die Bestellung wurde in Shopify bereits storniert. Deshalb kann toern keine Retoure erstellen.
+  <Accordion title="Rabattcode erfordert eine manuelle Erstattung">
+    Wie mit dir vereinbart, werden Bestellungen mit dem Rabattcode „[Rabattcode]“ nicht automatisch erstattet. Prüfe die Retoure und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Storniere die Retoure auch in toern, indem du auf **Cancel** klickst.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Order is not refundable. Please make sure that the order is fully paid before issuing a refund">
-    **Ursache:** Die Bestellung ist in Shopify als nicht erstattungsfähig markiert. Deshalb kann toern keine Rückerstattung durchführen.
+  <Accordion title="Kaufe-X-erhalte-Y-Rabatt von automatischen Erstattungen ausgeschlossen">
+    Diese Bestellung nutzt den Kaufe-X-erhalte-Y-Rabatt „[Rabatt]“, und du hast solche Rabatte unter Einstellungen › Erstattung › BuyXGetY-Rabatte blockieren von automatischen Erstattungen ausgeschlossen. Klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe den Status der Bestellung in Shopify. Stelle sicher, dass die Bestellung vollständig bezahlt ist, und führe die Retoure dann erneut mit **Retry failed return** aus.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="This order cannot be refunded because its payment status is not eligible for refunds">
-    **Ursache:** Die Bestellung ist in Shopify als nicht erstattungsfähig markiert. Deshalb kann toern keine Rückerstattung durchführen.
+  <Accordion title="Rabatte können nicht automatisch erstattet werden">
+    Diese Bestellung kombiniert den Kaufe-X-erhalte-Y-Rabatt „[Rabatt]“ mit anderen Rabatten, deshalb kann der Erstattungsbetrag nicht automatisch berechnet werden. Klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe den Status der Bestellung in Shopify. Stelle sicher, dass die Bestellung vollständig bezahlt ist, und führe die Retoure dann erneut mit **Retry failed return** aus.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Shopify order had more than 50 items. Shopify limits refunds to 50 items per request">
-    **Ursache:** Die Bestellung enthält in Shopify mehr als 50 Artikel. Über das Retourenportal kann toern maximal 50 Artikel abdecken.
+  <Accordion title="Rabatte der Bestellung konnten nicht geprüft werden">
+    Die Rabatte dieser Bestellung konnten nicht aus Shopify geladen werden, deshalb ließ sich der Erstattungsbetrag nicht sicher berechnen. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erstatte sie manuell über **Neue Erstattung erstellen** unter Retourenerstattungen.
 
-    **Lösung:** Kläre direkt mit den KundInnen, wie viele Artikel erstattet werden sollen, und führe die Rückerstattung manuell in Shopify durch.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Return status is either canceled or declined, can't proceed with the refund">
-    **Ursache:** Die Retoure ist in Shopify entweder storniert („canceled“) oder abgelehnt („declined“). Deshalb kann toern den Retourenprozess nicht fortsetzen.
+  <Accordion title="Geänderte Retoure mit Umtauschartikeln">
+    Die Artikel dieser Retoure wurden geändert, sie enthält aber Umtauschartikel, deshalb konnte die Retoure in Shopify nicht automatisch angepasst werden. Passe die Retoure selbst in Shopify an, prüfe, ob der Ersatzartikel noch stimmt, und melde dich bei Bedarf beim Kunden. Klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe die Retoure in Shopify und schließe sie danach in toern ab.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Insufficient transaction amounts to fulfill the refund">
-    **Ursache:** Das Guthaben, z. B. bei PayPal, reicht für die Rückerstattung nicht aus.
+  <Accordion title="Retoure nach dem Anlegen in Xentral geändert">
+    Die Artikel oder die Rücksendegebühr dieser Retoure wurden geändert, nachdem sie in Xentral angelegt wurde. Das lässt sich nicht automatisch nachziehen. Passe die Retoure selbst in Xentral und in Shopify an. Klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Lade das Guthaben auf und versuche die Rückerstattung erneut mit **Retry failed refund**.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error during requesting Shopify for refund">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Retoure konnte vor der Erstattung nicht geprüft werden">
+    Wir konnten in deinem Shop nicht prüfen, ob die Artikel dieser Retoure geändert wurden, deshalb wurde die Erstattung nicht gestartet. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Error requesting order info from Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Prüfung vor der automatischen Erstattung fehlgeschlagen">
+    Die mit dir vereinbarte zusätzliche Prüfung vor automatischen Erstattungen konnte nicht abgeschlossen werden, deshalb wurde die Retoure nicht erstattet. Prüfe die Retoure selbst und klicke danach in der Klärfall-Karte auf **Erneut versuchen**, um sie zu erstatten.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Error requesting returnProcess from Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Erstattungseinstellungen fehlen">
+    Für deine Marke sind keine Erstattungseinstellungen eingerichtet, deshalb konnte die Retoure nicht erstattet werden. Richte sie unter Einstellungen › Erstattung ein und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Error creating gift card in Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Gutscheinerstattungen sind ausgeschaltet">
+    Diese Retoure soll als Gutschein erstattet werden, aber Gutscheinerstattungen sind ausgeschaltet. Schalte sie unter Einstellungen › Erstattung › Gutscheinerstattungen ein und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Oder erstatte sie manuell über **Neue Erstattung erstellen** unter Retourenerstattungen.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Return update failed. Updated shop return not connected. Please check the return and return items in your shop">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Gutscheinbetrag ist 0">
+    Der Gutschein hätte einen Wert von 0 oder weniger gehabt, deshalb hat Shopify ihn nicht erstellt. Das passiert, wenn die retournierten Artikel nichts gekostet haben, zum Beispiel Gratisartikel, oder wenn ein Umtausch ihren Wert bereits abdeckt. Die Retoure selbst wurde in Shopify schon verarbeitet. Wenn dem Kunden nichts zusteht, klicke oben in der Retoure auf **Als abgeschlossen markieren**. Andernfalls klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Return cannot be canceled. Return status is not cancelable. Therefore return can not by synced with adjusted return items">
-    **Ursache:** Die Retoure kann nicht storniert werden. **Cancel** kann deshalb nicht im verbundenen Shopsystem ausgeführt werden.
+  <Accordion title="Bestellung wurde in Shopify storniert">
+    Die Bestellung wurde in Shopify storniert, deshalb kann sie nicht automatisch erstattet werden. Prüfe die Bestellung in Shopify. Falls noch etwas offen ist, klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst. Ist nichts offen, klicke oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Prüfe den Zustand der Retoure im Shopsystem und schließe sie dort ab.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error during canceling return in Shopify. Return was not canceled & synced successfully">
-    **Ursache:** Die Retoure kann nicht storniert werden. **Cancel** kann deshalb nicht im verbundenen Shopsystem ausgeführt werden.
+  <Accordion title="Bestellung hat bereits andere Erstattungen">
+    Die Bestellung hat in Shopify bereits Erstattungen, die nicht über toern erstellt wurden. Damit der Kunde nicht doppelt Geld bekommt, wurde sie nicht automatisch erstattet. Prüfe diese Erstattungen in Shopify. Falls noch etwas offen ist, klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst. Ist nichts offen, klicke oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Prüfe den Zustand der Retoure im Shopsystem und schließe sie dort ab.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error during recreating return in Shopify. Return was not created successfully">
-    **Ursache:** Aus technischen Gründen konnte die Retoure nicht in Shopify angelegt werden.
+  <Accordion title="Zahlungsstatus erlaubt keine Erstattung">
+    Der Zahlungsstatus der Bestellung in Shopify ist „[Status]“ und erlaubt keine Erstattung. Prüfe die Bestellung in Shopify. Hat der Kunde bezahlt und steht ihm Geld zu, klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst. Ist nichts offen, klicke oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Prüfe die Retoure in Shopify und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error during recreating return in Shopify. Original currency of the order was not found">
-    **Ursache:** Die Währung der Bestellung ist in toern noch nicht hinterlegt. Deshalb wurde der Vorgang gestoppt, um falsche Beträge und Gebühren zu vermeiden.
+  <Accordion title="Bestellung kann in Shopify nicht erstattet werden">
+    Shopify meldet, dass diese Bestellung nicht erstattet werden kann. Prüfe die Bestellung in Shopify und erstatte dem Kunden, falls etwas offen ist, auf anderem Weg, zum Beispiel bei deinem Zahlungsanbieter. Klicke danach oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de) und bitte darum, die Währung hinzuzufügen.
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Error during requesting Shopify. Return was not requested, canceled or created successfully">
-    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+  <Accordion title="Zahlungsart kann nicht automatisch erstattet werden">
+    Die Bestellung wurde mit [Zahlungsart] bezahlt, das nicht automatisch erstattet werden kann. Erstatte dem Kunden das Geld bei deinem Zahlungsanbieter und klicke danach oben in der Retoure auf **Als abgeschlossen markieren**.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Missing returnProcess in response">
-    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+  <Accordion title="Shopify hat die Erstattung abgelehnt">
+    Shopify hat die Erstattung abgelehnt, es wurde also kein Geld ausgezahlt. Meist ist der Betrag höher als das, was auf der Bestellung noch erstattet werden kann, die Artikel wurden dort schon erstattet oder die Zahlung kann nicht mehr erstattet werden. Prüfe die Bestellung und ihre Erstattungen in Shopify und klicke danach in der Klärfall-Karte auf **Erneut versuchen** oder erstatte sie manuell über **Neue Erstattung erstellen** unter Retourenerstattungen. Meldung von Shopify: „[Meldung]“
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="GraphQL Error occurred">
-    **Ursache:** Wahrscheinlich liegt ein Überlastungsfehler („Overload“) vor. Die Rückerstattung konnte nicht durchgeführt werden.
+  <Accordion title="Zahlungen decken den Erstattungsbetrag nicht">
+    Die Zahlungen der Bestellung decken den Erstattungsbetrag nicht, deshalb konnte er nicht automatisch auf sie verteilt werden. Prüfe den Betrag und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
   </Accordion>
-  <Accordion title="Unexpected error during refund">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Shopify erstattet werden.
+  <Accordion title="Ausgewählte Artikel passen nicht zur Retoure">
+    Die für die manuelle Erstattung ausgewählten Artikel passen nicht mehr zu dieser Retoure. Klicke in der Klärfall-Karte auf **Manuell erstatten** und prüfe die Auswahl, danach schließt sich dieser Punkt von selbst.
 
-    **Lösung:** Prüfe die Rückerstattung in Shopify und versuche es danach in toern erneut mit **Retry failed refund**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Retoure für die ausgewählten Artikel konnte nicht erstellt werden">
+    Einige ausgewählte Artikel gehören zu keiner Retoure, und Shopify hat für sie keine neue Retoure angelegt. Prüfe in Shopify, ob sie noch retournierbar und nicht schon erstattet sind, und erstatte sie direkt in Shopify. Für den Rest klicke in der Klärfall-Karte auf **Manuell erstatten** und wähle diese Artikel nicht aus, danach schließt sich dieser Punkt von selbst.
+
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Erstattung konnte nicht durchgeführt werden">
+    Die Erstattung konnte nicht durchgeführt werden, und Shopify hat keinen Grund genannt. Prüfe zuerst die Bestellung und ihre Erstattungen in Shopify, damit der Kunde nicht doppelt Geld bekommt. Klicke danach in der Klärfall-Karte auf **Erneut versuchen** oder erstatte sie manuell über **Neue Erstattung erstellen** unter Retourenerstattungen. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Zahlungsanbieter hat die Erstattung abgelehnt">
+    Die Erstattung wurde gestartet, aber der Zahlungsanbieter hat sie abgelehnt, deshalb hat der Kunde das Geld nicht erhalten. Details findest du bei der Erstattung unter Retourenerstattungen. Shopify zählt ihre Artikel trotzdem als erstattet, deshalb erscheinen sie in der manuellen Erstattung als bereits erstattet und du kannst sie nicht auswählen: Gib einfach nur den Betrag ein. Klicke in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
+
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Umtauschretoure wurde bereits erstattet">
+    Diese Retoure gehört zu einer Umtauschbestellung und wird über die ursprüngliche Bestellung erstattet, die dafür bereits eine Erstattung hat. Damit der Kunde nicht doppelt Geld bekommt, wurde nichts erstattet. Prüfe die Erstattungen der ursprünglichen Bestellung in Shopify. Falls noch etwas offen ist, erstatte es in der Retoure der ursprünglichen Bestellung über **Neue Erstattung erstellen**. Klicke danach oben in der Retoure auf **Als abgeschlossen markieren**.
+
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Erstattung für den Umtausch konnte nicht ermittelt werden">
+    Diese Retoure gehört zu einer Umtauschbestellung, aber die ursprüngliche Bestellung oder Retoure oder der daraus einbehaltene Wert wurde nicht gefunden. Der Erstattungsbetrag ist deshalb unbekannt und es wurde nichts erstattet. Erwähne **@ToernBot** im Chat, damit wir den Umtausch prüfen.
+
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
+  </Accordion>
+  <Accordion title="Retoure in Shopify nicht gefunden">
+    Die Retoure wurde in der Bestellung in Shopify nicht gefunden, zum Beispiel weil sie dort gelöscht oder storniert wurde. Es wurde deshalb nichts erstattet. Prüfe die Bestellung in Shopify und klicke dann in der Klärfall-Karte auf **Manuell erstatten**, danach schließt sich dieser Punkt von selbst.
+
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Bestellung hat keinen Kunden für den Gutschein">
+    Ein Gutschein wird immer einem Kunden ausgestellt, aber diese Bestellung hat in Shopify keinen Kunden, deshalb wurde kein Gutschein erstellt. Klicke in der Klärfall-Karte auf **Manuell erstatten** und erstatte auf die ursprüngliche Zahlungsart, danach schließt sich dieser Punkt von selbst.
+
+    **Button in der Klärfall-Karte:** Manuell erstatten (Refund manually)
+  </Accordion>
+  <Accordion title="Erstattete Retoure konnte im Shop nicht abgeschlossen werden">
+    Die Erstattung ist durchgegangen, aber die Retoure konnte in deinem Shop nicht abgeschlossen werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Artikel nach der Erstattung geändert">
+    Die Artikel dieser Retoure wurden geändert, nachdem sie erstattet oder abgeschlossen war. Die Erstattung stimmt deshalb eventuell nicht mehr, zum Beispiel fehlt ein Artikel oder es wurde zu viel erstattet. Prüfe die Erstattung unter Retourenerstattungen, korrigiere sie bei Bedarf und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
 </AccordionGroup>
 
-### Xentral-spezifische Klärfälle bei der Rückerstattung
+### Xentral
+
+Die Retoure, die Umtauschbestellung oder die Gutschrift konnte nicht mit Xentral abgeglichen werden.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key)">
-    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+  <Accordion title="Xentral-Verbindung ist unvollständig">
+    Deine Xentral-Zugangsdaten fehlen. Ergänze sie unter Einstellungen › Integrationen › Xentral › Zugangsdaten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Xentral activated, but missing return reason mapping">
-    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+  <Accordion title="Xentral hat den Zugriff verweigert">
+    Xentral hat deine Zugangsdaten abgelehnt. Prüfe unter Einstellungen › Integrationen › Xentral › Zugangsdaten, ob dein Zugangstoken gültig ist und alle nötigen Berechtigungen hat, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
-    **Ursache:** In den Xentral-Einstellungen ist kein Standard-Mapping für Retourengründe hinterlegt. Ohne dieses Mapping kann toern keine Retouren in Xentral anlegen.
+  <Accordion title="Xentral vorübergehend nicht erreichbar">
+    Xentral hat nicht geantwortet oder einen vorübergehenden Fehler gemeldet. Warte ein paar Minuten und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Öffne die [Xentral-Einstellungen](/integrations/xentral) und klicke auf **Query Return Reasons**. Wähle aus der Liste der Xentral-Gründe eine ID aus und hinterlege sie in toern als Standard.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No return items to create return in Xentral">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Bestellung in Xentral nicht gefunden">
+    Diese Bestellung gibt es in Xentral nicht. Prüfe in Xentral, ob die Bestellung importiert wurde, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing return ID in return data">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Kein Standard-Retourengrund für Xentral">
+    Die Retoure konnte nicht in Xentral angelegt werden, weil kein Standard-Retourengrund für Xentral eingestellt ist. Lege ihn unter Einstellungen › Integrationen › Xentral › Retourengrund-Zuordnung fest und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing invoice ID in order data">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Artikel nicht im Xentral-Auftrag gefunden">
+    Ein retournierter Artikel wurde im Auftrag in Xentral nicht gefunden. Prüfe in Xentral, ob der Auftrag diesen Artikel enthält, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing salesOrderId">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Xentral hat die Retoure nicht bestätigt">
+    Xentral hat nicht bestätigt, dass die Retoure angelegt wurde. Prüfe in Xentral, ob es sie gibt, und erwähne **@ToernBot** im Chat, bevor du auf **Erneut versuchen** klickst, damit sie nicht doppelt angelegt wird.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
-  <Accordion title="Invalid item id">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Retoure konnte nicht in Xentral angelegt werden">
+    Die Retoure konnte in Xentral nicht angelegt werden, und Xentral hat keinen Grund genannt. Prüfe in Xentral, ob der Auftrag zu dieser Bestellung existiert und die retournierten Artikel enthält, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Invalid item quantity">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Xentral-Umtauscheinstellungen fehlen">
+    Die Umtauschbestellung konnte nicht in Xentral angelegt werden, weil deine Xentral-Umtauscheinstellungen fehlen. Prüfe und speichere sie unter Einstellungen › Integrationen › Xentral › Umtauschaufträge und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No return data returned from Xentral API">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Keine Xentral-Versandart für dieses Land">
+    Für [Land] ist keine Xentral-Versandart eingestellt, deshalb konnte die Umtauschbestellung nicht in Xentral angelegt werden. Ergänze sie unter Einstellungen › Integrationen › Xentral › Umtauschaufträge und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing credit note ID in response">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Ersatzartikel nicht in Xentral gefunden">
+    Der Ersatzartikel mit der SKU [SKU] wurde in Xentral nicht gefunden oder ist nicht mit dem Shopify-Artikel verknüpft, deshalb konnte die Umtauschbestellung dort nicht angelegt werden. Synchronisiere den Artikel in Xentral aus Shopify und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing success confirmation in response">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Xentral hat die Umtauschbestellung nicht bestätigt">
+    Xentral hat nicht bestätigt, dass die Umtauschbestellung angelegt wurde. Prüfe in Xentral, ob es sie gibt, und erwähne **@ToernBot** im Chat, bevor du auf **Erneut versuchen** klickst, damit sie nicht doppelt angelegt wird.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
   </Accordion>
-  <Accordion title="Create return in Xentral failed">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure nicht in Xentral angelegt werden.
+  <Accordion title="Umtauschbestellung konnte nicht in Xentral angelegt werden">
+    Die Bestellung für die Ersatzartikel konnte in Xentral nicht angelegt werden, und Xentral hat keinen Grund genannt. Prüfe in Xentral, ob die Ersatzartikel existieren und mit Shopify verknüpft sind, und klicke danach in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Prüfe die Retoure in Xentral und versuche es danach in toern erneut mit **Retry failed return**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Close return in Xentral failed">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Retoure in Xentral nicht geschlossen werden.
+  <Accordion title="Bestellung hat keine Xentral-Rechnung">
+    Die Erstattung ist durchgegangen, aber die Gutschrift konnte nicht angelegt werden, weil diese Bestellung in Xentral keine Rechnung hat. Erstelle die Rechnung in Xentral und klicke danach in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt.
 
-    **Lösung:** Prüfe die Retoure in Xentral und versuche danach in toern erneut, sie mit **Retry failed refund** zu schließen. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="View return in Xentral failed">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Die Rückerstattung kann nicht durchgeführt werden.
+  <Accordion title="Xentral-Servicegebühr ist nicht vollständig eingerichtet">
+    Bei einer Xentral-Servicegebühr fehlen Artikel, Betrag oder Währung, deshalb konnte die Gutschrift nicht angelegt werden. Ergänze sie unter Einstellungen › Integrationen › Xentral › Servicegebühren für Gutschriften und klicke danach in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Create credit note in Xentral failed">
-    **Ursache:** Aus unbekannten technischen Gründen konnte die Gutschrift (Credit Note) nicht in Xentral angelegt werden.
+  <Accordion title="Xentral hat die Gutschrift nicht bestätigt">
+    Xentral hat nicht bestätigt, dass die Gutschrift angelegt wurde. Prüfe in Xentral, ob es sie gibt, und erwähne **@ToernBot** im Chat, bevor du auf **Erneut versuchen** klickst, damit sie nicht doppelt angelegt wird.
 
-    **Lösung:** Prüfe die Retoure in Xentral und versuche danach in toern erneut, die Credit Note mit **Retry failed refund** anzulegen. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** @ToernBot im Chat erwähnen
+  </Accordion>
+  <Accordion title="Gutschrift konnte nicht in Xentral angelegt werden">
+    Die Erstattung ist durchgegangen, aber die Gutschrift konnte nicht in Xentral angelegt werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Alte Xentral-Retoure konnte nicht ersetzt werden">
+    Die Artikel dieser Retoure wurden geändert, aber Xentral konnte die alte Retoure [Retouren-Nr.] nicht löschen, um sie neu anzulegen: „[Meldung]“. Lösche oder korrigiere sie in Xentral und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Retoure gibt es in Xentral nicht">
+    Die Retoure konnte in Xentral nicht abgeschlossen werden, weil sie dort nie angelegt wurde. Lege die Retoure in Xentral an und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Kein Xentral-Lagerplatz für diesen Zustand">
+    Die Retoure wurde in Xentral abgeschlossen, aber ein Artikel konnte nicht eingelagert werden, weil für den Zustand „[Zustand]“ kein Lager oder Lagerplatz eingestellt ist. Ergänze ihn unter Einstellungen › Integrationen › Xentral › Lager- und Lagerplatzzuordnung und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Retoure konnte in Xentral nicht abgeschlossen werden">
+    Die Erstattung ist durchgegangen, aber die Retoure konnte in Xentral nicht abgeschlossen werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
+  </Accordion>
+  <Accordion title="Bestellung konnte nicht aus Xentral geladen werden">
+    Die Erstattung ist durchgegangen, aber die Bestellung konnte für die nächsten Schritte nicht aus Xentral geladen werden. Klicke in der Klärfall-Karte auf **Erneut versuchen**, die Erstattung wird dabei nicht wiederholt. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
+
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
 </AccordionGroup>
 
-### Allgemeine Klärfälle bei Umtauschen
+### Prüfung nötig
+
+Es ist nichts fehlgeschlagen, aber du solltest dir die Retoure ansehen, bevor sie weiterläuft.
 
 <AccordionGroup>
-  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
-    **Ursache:** Dein Shopsystem wird von toern nicht unterstützt.
+  <Accordion title="Artikel eventuell nicht im Originalzustand">
+    Der Kunde hat angegeben, dass diese Artikel nicht ungetragen, ungewaschen oder ungeöffnet sind: [Artikel]. Es wurden kein Rücksendeetikett und keine Rücksendeanleitung verschickt. Entscheide, wie du mit der Retoure umgehst, gib dem Kunden Bescheid und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Hinterlege die nötigen Daten für die Nutzung mit Shopify (siehe [Shopify-Integration](/getting-started/shopify-integration)) oder kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Brand settings not found for the provided brand ID">
-    **Ursache:** Die Einstellungen deiner Brand für den Umtausch wurden nicht gefunden. Deshalb kann kein Umtausch durchgeführt werden.
+  <Accordion title="Retoure enthält einen Set-Artikel">
+    Diese Retoure enthält den Set-Artikel „[Artikel]“, deshalb wurde sie angehalten, damit du sie von Hand prüfen kannst. Wenn du die Retoure geprüft hast, klicke in der Klärfall-Karte auf **Erneut versuchen**: Der Set-Artikel gilt dann als geprüft und die Verarbeitung läuft weiter.
 
-    **Lösung:** Öffne die [Refund-Einstellungen](/returns/refund) und passe sie an.
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="ReturnStatus data not found for the provided order ID">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Retoure enthält einen Poolsofa-Artikel">
+    Diese Retoure enthält den Poolsofa-Artikel „[Artikel]“, deshalb wurde sie angehalten, damit du sie von Hand prüfen kannst. Wenn du die Retoure geprüft hast, klicke in der Klärfall-Karte auf **Erneut versuchen**: Der Artikel gilt dann als geprüft und die Verarbeitung läuft weiter.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Order not found for the provided order ID">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Reklamation ist nicht freigegeben">
+    Diese Reklamation ist noch nicht freigegeben, deshalb konnte die Retoure nicht verarbeitet werden. Gib sie in dieser Retoure unter Reklamation genehmigen oder ablehnen frei und klicke danach in der Klärfall-Karte auf **Erneut versuchen**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Return items not found for the provided order ID">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Customer not found for the provided customer ID">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Customer ID not found in return status">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Fulfillment order not found in Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Unexpected fulfillment order status">
-    **Ursache:** Der Fulfillment-Auftrag des Umtauschartikels sollte auf **Hold** stehen. Das ist nicht der Fall. Wahrscheinlich wurde er manuell in Shopify geändert.
-
-    **Lösung:** Prüfe den Fulfillment-Auftrag des Umtauschartikels in Shopify. Wenn er nicht deinen Erwartungen entspricht, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Failed to release fulfillment hold">
-    **Ursache:** Bei Umtauschen innerhalb einer Bestellung wird der neue Fulfillment-Auftrag für den Ersatz zunächst auf **On hold** gesetzt und nach der Klassifizierung freigegeben („released“). Diese Freigabe ist aus technischen Gründen fehlgeschlagen.
-
-    **Lösung:** Prüfe den Umtausch in Shopify und gib den Fulfillment-Auftrag manuell frei. Schließe den Umtausch danach in toern ab.
-  </Accordion>
-  <Accordion title="Failed to fetch fulfillment orders from Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error releasing fulfillment hold">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Klicke auf **Retry failed refund**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Internal Error in Exchange Processing (collecting database resources). Please contact support@re-toern.de for help">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht durchgeführt werden.
-
-    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
 </AccordionGroup>
 
-### Shopify-spezifische Klärfälle bei Umtauschen
+### Wareneingangsprüfung
+
+Die Prüfung der zurückgeschickten Artikel braucht eine Entscheidung von dir.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
-    **Ursache:** In den allgemeinen Einstellungen fehlen der Shopify-Shopname und/oder der API-Key. Ohne diese Daten kann toern in Shopify nichts ausführen.
+  <Accordion title="Geprüfte Artikel gehören nicht zur Bestellung">
+    Bei der Prüfung wurden Artikel gemeldet, die nicht zu dieser Bestellung gehören: [Artikel]. Details findest du im Chat. Prüfe, was tatsächlich zurückgekommen ist, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Ergänze Shopname und API-Key in den Einstellungen deiner Shopify-Anbindung (siehe [Shopify-Integration](/getting-started/shopify-integration)).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Invalid exchange items: missing exchange_variant_id_extern">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Artikelzustand erfordert eine Entscheidung">
+    Bei der Prüfung haben Artikel dieser Retoure einen Zustand bekommen, für den du unter Einstellungen › Retouren › Klassifizierungseinstellungen eine Klärung eingestellt hast. Prüfe die Artikel unter Retournierte Artikel, entscheide, wie es weitergeht, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="GraphQL Error occurred while creating exchange order.">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Prüfkommentar erfordert eine Entscheidung">
+    Bei der Prüfung wurden Kommentare hinterlegt, für die du unter Einstellungen › Retouren › Fulfillment-basierte Klärungen eine Klärung eingestellt hast: [Kommentare]. Prüfe die Retoure und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Error creating exchange order">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht angelegt werden.
+  <Accordion title="Umtauschartikel bei der Prüfung geändert">
+    Bei der Prüfung wurden Umtauschartikel hinzugefügt, entfernt oder als fehlend markiert. Prüfe unter Retournierte Artikel, ob der Umtausch noch stimmt, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="No order ID returned from Shopify">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Retoure wurde X-mal geprüft">
+    Diese Retoure wurde X-mal geprüft. Die Artikel der letzten Prüfung wurden hinzugefügt, die Artikel früherer Prüfungen blieben unverändert. Prüfe die Prüfungen im Chat, passe die Artikel bei Bedarf unter Retournierte Artikel an und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="HTTP error while creating exchange order">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Prüfung passt nicht zur Erstattung">
+    Diese Retoure wurde ohne Prüfung bereits erstattet oder abgeschlossen, und die jetzt eingegangene Prüfung enthält nicht alle ihre Artikel. Prüfe, was tatsächlich zurückgekommen ist, korrigiere die Erstattung bei Bedarf unter Retourenerstattungen und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Shopify tag addition failed">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Geprüfte Artikel ohne SKU">
+    Bei der Prüfung wurden Artikel ohne SKU gemeldet, deshalb konnten sie nicht zur Retoure hinzugefügt werden. Prüfe, was tatsächlich zurückgekommen ist, passe die Artikel unter Retournierte Artikel an und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Failed to create return note after Shopify tag failure">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Artikel als unzustellbar gemeldet">
+    Bei der Prüfung wurden Artikel dieser Retoure als unzustellbar gemeldet. Details findest du im Chat. Prüfe die Retoure und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="No external order ID found. Skipping Shopify tag creation">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Keiner der Artikel ist angekommen">
+    Dein Fulfillment-Dienstleister hat die Retoure abgeschlossen, ohne einen ihrer Artikel zu erhalten, deshalb wurden alle als fehlend markiert. Prüfe die Retoure, bevor du sie erstattest, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
-  <Accordion title="Error during requesting Shopify for exchange">
-    **Ursache:** Aus unbekannten technischen Gründen konnte der Umtausch nicht angelegt werden.
+  <Accordion title="Retoure erneut von Pickware abgeschlossen">
+    Pickware hat diese Retoure ein zweites Mal abgeschlossen, die neuen Daten wurden nicht übernommen. Prüfe die Retoure in Pickware und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
 
-    **Lösung:** Prüfe den Umtausch in Shopify und versuche es danach in toern erneut mit **Execute exchange processing**. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Retoure war bereits geprüft">
+    Pickware hat diese Retoure abgeschlossen, nachdem sie bereits geprüft war, deshalb wurden die Pickware-Daten nicht übernommen. Prüfe die Retoure in Pickware und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Importierte Retourendaten passen nicht zur Retoure">
+    Die Retourendaten deines Fulfillment-Dienstleisters passen nicht zu dieser Retoure: Ein Teil eines Sets fehlt, oder ein Artikel kam öfter zurück, als er retourniert werden kann. Die importierten Daten findest du im Chat. Korrigiere die Artikel unter Retournierte Artikel und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Anmerkung des Fulfillment-Dienstleisters erfordert eine Entscheidung">
+    Dein Fulfillment-Dienstleister hat bei dieser Retoure eine Anmerkung hinterlassen, die eine Entscheidung erfordert. Die Anmerkung findest du im Chat. Prüfe die Retoure und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Artikel als C oder D klassifiziert">
+    Ein Artikel dieser Retoure wurde als C oder D klassifiziert. Prüfe den Artikel unter Retournierte Artikel, entscheide, wie es weitergeht, und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
   </Accordion>
 </AccordionGroup>
 
-### Xentral-spezifische Klärfälle bei Umtauschen
+### System
+
+Ein vorübergehender oder interner Fehler auf unserer Seite.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated but access data (xentral_id or api_key) is missing">
-    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+  <Accordion title="Vorübergehender Fehler">
+    Ein vorübergehender Fehler hat die Verarbeitung dieser Retoure unterbrochen. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Xentral meta settings not found for brand.">
-    **Ursache:** Die Xentral-Einstellungen sind unvollständig. Deshalb ist toern nicht berechtigt, in Xentral etwas auszuführen.
+  <Accordion title="Retoure konnte nicht verarbeitet werden">
+    Ein interner Fehler hat die Verarbeitung dieser Retoure gestoppt. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="Missing exchange order ID in Xentral response">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
+  <Accordion title="Umtausch konnte nicht verarbeitet werden">
+    Ein interner Fehler hat den Umtausch dieser Retoure gestoppt. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
-  <Accordion title="No shipping method mapping found for country code in Xentral meta settings">
-    **Ursache:** Um einen Ersatzauftrag in Xentral anzulegen, braucht toern eine Versandart (Shipping Method). Diese hinterlegst du in den Xentral-Einstellungen in toern.
+  <Accordion title="Erstattung konnte nicht verarbeitet werden">
+    Ein interner Fehler hat die Erstattung dieser Retoure gestoppt. Klicke in der Klärfall-Karte auf **Erneut versuchen**. Falls es erneut fehlschlägt, erwähne **@ToernBot** im Chat.
 
-    **Lösung:** Vervollständige die [Xentral-Einstellungen](/integrations/xentral).
-  </Accordion>
-  <Accordion title="Invalid number of exchange items (min 1, max 50)">
-    **Ursache:** Die Anzahl der Umtauschartikel ist ungültig. Erlaubt sind mindestens 1 und höchstens 50 Artikel.
-
-    **Lösung:** Führe den Umtausch manuell in Xentral durch und schließe ihn danach in toern ab. Alternativ kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Product not found in Xentral for external reference number">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Import sales order in Xentral failed">
-    **Ursache:** Ein externer Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Klicke auf **Execute exchange processing**. Wenn der Fehler bleibt, kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing required fields for Xentral order">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing required fields: xentral_product_id or product_quantity">
-    **Ursache:** Ein interner Fehler ist aufgetreten. Der Umtausch konnte nicht durchgeführt werden.
-
-    **Lösung:** Kontaktiere den Support unter [support@re-toern.de](mailto:support@re-toern.de).
+    **Button in der Klärfall-Karte:** Erneut versuchen (Retry)
   </Accordion>
 </AccordionGroup>
 
+### Manuell
+
+Du oder dein Team habt die Retoure selbst in Klärung gesetzt, im Dashboard oder über die API.
+
+<AccordionGroup>
+  <Accordion title="Manuell in Klärung gesetzt">
+    Jemand aus deinem Team hat die Retoure im Dashboard über **Klärfall erstellen** (Create Clarification) in Klärung gesetzt. Als Text siehst du die Begründung, die dabei eingegeben wurde. Kläre den Punkt und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+  <Accordion title="Über die API in Klärung gesetzt">
+    Die Retoure wurde über die toern-API in Klärung gesetzt, zum Beispiel von deinem Fulfillment-Dienstleister oder einem eigenen System. Als Text siehst du die mitgeschickte Begründung. Kläre den Punkt und klicke danach in der Klärfall-Karte auf **Als erledigt markieren**.
+
+    **Button in der Klärfall-Karte:** Als erledigt markieren (Mark resolved)
+  </Accordion>
+</AccordionGroup>

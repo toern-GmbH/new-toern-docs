@@ -23,7 +23,7 @@ You can filter returns by these statuses:
 - **inspected**: The items of the return have been classified. This often triggers an automatic refund.
 - **refunded**: The return has been refunded. It is then automatically set to **completed**.
 - **completed**: The return is completed.
-- **needs review**: The return is a clarification case and needs a manual check. This can concern an item, an input, information from the fulfiller, or a technical issue. Usually you get information about what exactly the case is about.
+- **needs review**: The return is a clarification case and needs a manual check. This can concern an item, an input, information from the fulfiller, or a technical issue. In the return, a clarification card shows you what happened and how to solve it (see [Clarification cases](/en/returns/clarifications)).
 
 ![Returns overview](/images/docs/Dashboardprozess/Managereturns04.png)
 
@@ -36,6 +36,7 @@ Besides the status, you can filter by:
 3. Gift cards
 4. Withdrawals
 5. Custom tags (see [Return tags](#return-tags))
+6. Kind of clarification case via **Issue**, for example return label, refund or Xentral. The filter appears as soon as you show clarification cases.
 
 ### Export
 
@@ -97,7 +98,7 @@ Next to the status in the header you see icons for **exchange**, **gift card ret
 At the top right you see the status of the return and the actions available in this status. In the **Registered** status these are:
 
 - **Mark Received**: Sets the status from **Registered** to **Received**. Nothing else changes.
-- **Create Clarification**: Creates a clarification case from the return with its own reason. All automations for this return are stopped. You carry out the next steps manually.
+- **Create Clarification**: Creates a clarification case from the return with its own reason. All automations for this return are stopped until you mark the clarification as resolved. This also works if the return is already in clarification (see [Clarification cases](/en/returns/clarifications)).
 - **Cancel Return**: Deletes the return, also in Shopify.
 
 ![Return details with timeline](/images/docs/Dashboardprozess/ManageReturns12.png)
@@ -285,7 +286,7 @@ After completion you see the details and the corresponding invoice in the return
 - The dashboard is currently only available in English.
 - **Filters**
   - You can filter by return status, payment method, exchange, and gift card. Not by return reason, input, or comment.
-  - Only clarification cases can be filtered independently of the selected time range, using **All Clarifications**.
+  - Only clarification cases can be filtered independently of the selected time range, using **All Clarifications**. With **Issue** you can narrow them down further by kind of problem.
 - **Export**
   - The export only contains the predefined columns. You can't customize them beforehand.
 - **Create New Return**

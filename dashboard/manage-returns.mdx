@@ -23,7 +23,7 @@ Du kannst die Retouren nach diesen Status filtern:
 - **inspected**: Die Artikel der Retoure wurden klassifiziert. Oft löst das automatisch eine Rückerstattung aus.
 - **refunded**: Die Retoure wurde erstattet. Danach wird sie automatisch auf **completed** gesetzt.
 - **completed**: Die Retoure ist abgeschlossen.
-- **needs review**: Die Retoure ist ein Klärfall und muss manuell geprüft werden. Das kann einen Artikel, einen Input, Informationen vom Fulfiller oder ein technisches Problem betreffen. Meistens bekommst du Informationen dazu, worum es genau geht.
+- **needs review**: Die Retoure ist ein Klärfall und muss manuell geprüft werden. Das kann einen Artikel, einen Input, Informationen vom Fulfiller oder ein technisches Problem betreffen. In der Retoure zeigt dir eine Klärfall-Karte, was passiert ist und wie du es löst (siehe [Klärfälle](/returns/clarifications)).
 
 ![Übersicht der Retouren](/images/docs/Dashboardprozess/Managereturns04.png)
 
@@ -36,6 +36,7 @@ Neben dem Status kannst du filtern nach:
 3. Gutscheinen
 4. Widerrufen
 5. Individuellen Tags (siehe [Retouren-Tags](#retouren-tags))
+6. Art des Klärfalls über **Issue**, zum Beispiel Rücksendeetikett, Erstattung oder Xentral. Der Filter erscheint, sobald du Klärfälle anzeigst.
 
 ### Export
 
@@ -97,7 +98,7 @@ Neben dem Status im Header siehst du Symbole für **Umtausch**, **Gutschein-Reto
 Oben rechts siehst du den Status der Retoure und die Aktionen, die in diesem Status möglich sind. Im Status **Registered** sind das:
 
 - **Mark Received**: Setzt den Status von **Registered** auf **Received**. Sonst ändert sich nichts.
-- **Create Clarification**: Erstellt aus der Retoure einen Klärfall mit eigener Begründung. Alle Automatisierungen für diese Retoure werden gestoppt. Die weiteren Schritte führst du manuell durch.
+- **Create Clarification**: Erstellt aus der Retoure einen Klärfall mit eigener Begründung. Alle Automatisierungen für diese Retoure werden gestoppt, bis du den Klärfall als erledigt markierst. Das geht auch, wenn die Retoure schon in Klärung ist (siehe [Klärfälle](/returns/clarifications)).
 - **Cancel Return**: Löscht die Retoure, auch in Shopify.
 
 ![Retourendetails mit Timeline](/images/docs/Dashboardprozess/ManageReturns12.png)
@@ -285,7 +286,7 @@ Nach Abschluss siehst du die Details und die zugehörige Rechnung in der Retoure
 - Das Dashboard ist aktuell nur auf Englisch verfügbar.
 - **Filter**
   - Du kannst nach Retourenstatus, Bezahlmethode, Umtausch und Gutschein filtern. Nicht nach Retourengrund, Input oder Kommentar.
-  - Nur Klärfälle lassen sich mit **All Clarifications** unabhängig vom gewählten Zeitraum filtern.
+  - Nur Klärfälle lassen sich mit **All Clarifications** unabhängig vom gewählten Zeitraum filtern. Mit **Issue** grenzt du sie zusätzlich nach Art des Problems ein.
 - **Export**
   - Der Export enthält nur die vordefinierten Spalten. Du kannst sie vorab nicht anpassen.
 - **Create New Return**

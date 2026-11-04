@@ -41,6 +41,7 @@
                   "returns/exchange",
                   "returns/return-portal",
                   "returns/return-settings",
+                  "returns/clarifications",
                   "returns/sets"
                 ]
               },
@@ -172,6 +173,7 @@
                   "en/returns/exchange",
                   "en/returns/return-portal",
                   "en/returns/return-settings",
+                  "en/returns/clarifications",
                   "en/returns/sets"
                 ]
               },

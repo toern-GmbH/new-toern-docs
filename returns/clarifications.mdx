@@ -1,0 +1,109 @@
+---
+title: "Klärfälle"
+description: "Was ein Klärfall ist, wann er entsteht und wie du ihn im toern Dashboard löst."
+---
+
+Die meisten Retouren laufen bei toern automatisch durch: Etikett erstellen, Retoure im Shop anlegen, Umtausch auslösen, erstatten. Manchmal geht das nicht, oder du möchtest eine Retoure bewusst selbst prüfen. Dann entsteht ein **Klärfall**.
+
+Ein Klärfall pausiert die Automatisierung der Retoure, bis du dich darum gekümmert hast. So wird nichts erstattet oder verschickt, was nicht stimmt.
+
+## Wann entsteht ein Klärfall?
+
+Es gibt drei Wege:
+
+1. **Ein Schritt ist fehlgeschlagen.** Zum Beispiel lehnt dein Versanddienstleister die Kundenadresse ab, Shopify nimmt eine Erstattung nicht an oder Xentral ist nicht erreichbar.
+2. **Eine Retoure soll bewusst geprüft werden.** Das legst du in deinen Einstellungen fest, zum Beispiel ab einem bestimmten Retourenwert, bei bestimmten Rabattcodes oder bei einer bestimmten Klassifizierung durch dein Fulfillment (siehe unten unter „Einstellungen, die Klärfälle auslösen“).
+3. **Jemand setzt die Retoure selbst in Klärung.** Du oder dein Team im Dashboard mit **Create Clarification**, oder ein anderes System, zum Beispiel dein Fulfillment-Dienstleister, über die API.
+
+Eine Übersicht aller Klärfälle mit Ursache und Lösung findest du in den [häufigen Fragen](/faq).
+
+## So erkennst du einen Klärfall
+
+**In der Retourenübersicht** hat die Retoure den Status **needs review** bzw. **Clarification**. Mit **All Clarifications** siehst du alle Klärfälle, unabhängig vom gewählten Zeitraum. Über den Filter **Issue** grenzt du sie nach Art des Problems ein, zum Beispiel nur Probleme mit dem Rücksendeetikett oder nur Erstattungen. So kann sich jede Person in deinem Team um die Fälle kümmern, für die sie zuständig ist.
+
+| Art des Problems | Worum es geht |
+| --- | --- |
+| Rücksendeetikett | Das Rücksende- oder Umtauschetikett konnte nicht erstellt werden. |
+| Shop-Abgleich | Die Retoure konnte nicht in deinem Shop angelegt oder aktualisiert werden. |
+| Versand | Dein Shop hat für die Artikel nichts, was retourniert werden kann, meist weil sie noch nicht als versendet markiert sind. |
+| Umtausch | Der Umtausch oder die Umtauschbestellung konnte nicht verarbeitet werden. |
+| Erstattung | Die Erstattung lief nicht automatisch, oder sie wurde bewusst angehalten, damit du sie prüfst. |
+| Xentral | Die Retoure, die Umtauschbestellung oder die Gutschrift konnte nicht mit Xentral abgeglichen werden. |
+| Prüfung nötig | Nichts ist fehlgeschlagen, aber du solltest dir die Retoure ansehen, bevor sie weiterläuft. |
+| Wareneingangsprüfung | Die Prüfung der zurückgeschickten Artikel braucht eine Entscheidung von dir. |
+| System | Ein vorübergehender oder interner Fehler auf unserer Seite. |
+| Manuell | Die Retoure wurde von Hand im Dashboard oder über die API in Klärung gesetzt. |
+
+**In der Retoure** siehst du oben den Hinweis **Retoure muss geprüft werden**. Darunter steht für jedes offene Problem eine eigene **Klärfall-Karte**. Jede Karte sagt dir in einfachen Worten:
+
+- **was passiert ist**, zum Beispiel „Kundenadresse ist unvollständig“,
+- **wo du es behebst**, zum Beispiel „Kundeninformationen › Kunde bearbeiten“ oder „in Shopify“,
+- **was du danach klickst.**
+
+Eine Retoure kann mehrere offene Punkte gleichzeitig haben. Dann siehst du zum Beispiel **Retoure muss geprüft werden · 2 offene Punkte**. Die Automatisierung, auch die automatische Erstattung, läuft erst weiter, wenn **alle** Punkte erledigt sind.
+
+**Im Retourenportal** sehen deine Kunden in der Sendungsverfolgung den Status **Klärung erforderlich**. Details zum Problem sehen sie nicht. Sobald der Klärfall gelöst ist, verschwindet der Hinweis (siehe [Retourenportal](/returns/return-portal)).
+
+## So löst du einen Klärfall
+
+Jede Karte hat genau **einen** Button. Er zeigt dir, wie die Retoure aus der Klärung kommt:
+
+| Button | Wann du ihn siehst | Was passiert |
+| --- | --- | --- |
+| **Erneut versuchen** (Retry) | Ein Schritt ist fehlgeschlagen, zum Beispiel das Etikett oder die Retoure in Shopify. | Behebe zuerst die Ursache, die auf der Karte steht, und klicke dann auf den Button. toern startet den fehlgeschlagenen Schritt neu. Klappt es, schließt sich der Punkt von selbst. Schritte, die schon erledigt sind, werden nicht wiederholt. Eine bereits durchgeführte Erstattung wird also nicht doppelt ausgezahlt. |
+| **Als erledigt markieren** (Mark resolved) | Nichts ist technisch fehlgeschlagen, aber du musst etwas prüfen oder entscheiden. | Kümmere dich um den Punkt und klicke dann auf den Button. Optional schreibst du eine kurze **Notiz**, was du gemacht hast. Sie erscheint im Verlauf der Retoure. |
+| **Manuell erstatten** (Refund manually) | Die automatische Erstattung wurde gestoppt, zum Beispiel wegen eines blockierten Rabattcodes oder weil der Retourenwert über deinem Limit liegt. | Der Button öffnet die manuelle Erstattung. Prüfe Betrag und Artikel und erstatte. Sobald die Erstattung durchgeht, schließt sich der Punkt von selbst. |
+| **@ToernBot im Chat erwähnen** | Das Problem kannst du nicht selbst lösen, zum Beispiel weil ein Artikel in deinem Shop gelöscht wurde. | Erwähne **@ToernBot** im Chat der Retoure. Damit benachrichtigst du den toern Support, der sich das Problem ansieht. |
+
+<Tip>
+  Viele Klärfälle entstehen durch fehlende oder falsche Einstellungen, zum Beispiel fehlende Zugangsdaten deines Versanddienstleisters. Die Karte nennt dir immer den genauen Ort in den Einstellungen. Wenn du die Ursache dort behebst, passiert der Fehler bei den nächsten Retouren nicht mehr.
+</Tip>
+
+### Falls es erneut fehlschlägt
+
+Manche Fehler liegen nicht bei dir, zum Beispiel wenn dein Shop oder dein Versanddienstleister kurz nicht erreichbar ist. Warte dann ein paar Minuten und versuche es noch einmal. Klappt es weiterhin nicht, erwähne **@ToernBot** im Chat der Retoure.
+
+### Alle Punkte auf einmal abschließen
+
+Hast du die Retoure komplett außerhalb von toern abgewickelt, zum Beispiel direkt in Shopify erstattet, klickst du oben in der Retoure auf **Als abgeschlossen markieren** (Mark complete). Damit schließt du die Retoure und alle offenen Klärfall-Punkte. Mach das nur, wenn dem Kunden nichts mehr zusteht.
+
+## Klärfall selbst erstellen
+
+Du kannst eine Retoure jederzeit selbst in Klärung setzen, zum Beispiel wenn du eine Rückfrage beim Kunden hast oder eine Erstattung noch nicht automatisch laufen soll.
+
+1. Öffne die Retoure unter **Manage Returns**.
+2. Klicke oben auf **Create Clarification**.
+3. Gib eine Begründung ein. Sie erscheint als Text auf der Klärfall-Karte.
+
+Alle Automatisierungen der Retoure pausieren, bis du den Punkt mit **Als erledigt markieren** schließt.
+
+Das geht auch, wenn die Retoure schon in Klärung ist. Dein eigener Punkt kommt dann zu den anderen hinzu. Die Retoure bleibt so lange in Klärung, bis auch dein Punkt erledigt ist, selbst wenn sich die anderen Punkte inzwischen zum Beispiel durch **Erneut versuchen** geschlossen haben.
+
+Systeme, die über die toern-API angebunden sind, zum Beispiel dein Fulfillment-Dienstleister, können ebenfalls Klärfälle erstellen. Sie erscheinen als **Über die API in Klärung gesetzt** mit der mitgeschickten Begründung.
+
+## Verlauf
+
+Im Verlauf (Timeline) der Retoure siehst du, wann ein Klärfall entstanden ist, wer ihn wie gelöst hat und, falls eingegeben, die Notiz dazu. Gelöste Punkte bleiben dort sichtbar. So kann dein Team später nachvollziehen, was passiert ist.
+
+## Einstellungen, die Klärfälle auslösen
+
+Mit diesen Einstellungen legst du fest, welche Retouren bewusst angehalten werden, damit du sie prüfst:
+
+| Einstellung | Was einen Klärfall auslöst | Mehr dazu |
+| --- | --- | --- |
+| **Inspection based Clarifications** | Dein Fulfillment klassifiziert einen Artikel mit einer Klassifizierung (A–D), die du ausgewählt hast. | [Retoureneinstellungen](/returns/return-settings) |
+| **Fulfillment based Clarifications** | Dein Fulfillment überträgt einen Hinweis, den du hinterlegt hast, zum Beispiel „Annahme verweigert“. | [Retoureneinstellungen](/returns/return-settings) |
+| **Automatic Refund Limit** | Der Retourenwert liegt über deinem Limit für automatische Erstattungen. | [Rückerstattung](/returns/refund) |
+| **Discount Code Clarifications** | Die Bestellung enthält einen Rabattcode, den du blockiert hast. | [Rückerstattung](/returns/refund) |
+| **Gift Card Configuration** | Der Gutscheinwert inklusive Bonus liegt über deinem Limit für automatische Gutscheinerstattungen. | [Erstattung per Gutschein](/returns/gift-card-refund) |
+
+Außerdem hält toern eine Retoure in diesen Fällen immer an:
+
+- Dein Retourenportal fragt nach dem Zustand der Artikel, und der Kunde gibt an, dass sie nicht mehr im Originalzustand sind (zum Beispiel getragen oder geöffnet). Der Kunde bekommt dann noch kein Rücksendeetikett, bis du entschieden hast.
+- Die Retoure enthält einen Set-Artikel, den toern nicht automatisch verarbeiten kann (siehe [Sets](/returns/sets)).
+- Die Artikel einer Retoure werden geändert, nachdem sie schon erstattet wurde.
+- Bei der Wareneingangsprüfung fehlen Artikel, es kommen andere Artikel zurück als angemeldet, oder eine Retoure wird mehrfach geprüft.
+
+## Ältere Klärfälle
+
+Klärfälle, die vor der Umstellung auf das neue System entstanden sind, zeigen noch die frühere, technische Fehlermeldung als Text und keine Karte mit Button. Prüfe die Retoure, erledige die nötigen Schritte und schließe sie dann mit **Als abgeschlossen markieren**. Wenn du nicht weiterweißt, erwähne **@ToernBot** im Chat der Retoure.

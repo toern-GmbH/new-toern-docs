@@ -182,656 +182,713 @@ Here you'll find answers to the most common questions about toern. The second pa
 
 ## Clarification cases and how to solve them
 
-If toern can't process a return, refund or exchange automatically, a **clarification case** is created. The return then gets the status **Needs review** or **Clarification**, and you see the error message in the return under [Manage returns](/en/dashboard/manage-returns).
+If toern can't continue processing a return automatically, or you should check it on purpose, a **clarification case** is created. The return gets the status **needs review** or **Clarification**, and in the return you see a separate clarification card for every open issue. How clarification cases work in general is explained under [Clarification cases](/en/returns/clarifications).
 
-Below you'll find all clarification cases, sorted by process (creating returns, refunds, exchanges) and system (general, Shopify, Xentral). The title of each entry is the error message you see in toern.
+Below you'll find all clarification cases, sorted by kind of problem, as in the **Issue** filter of the return overview. The title of each entry is the title of the clarification card. Values in square brackets, for example [country] or [items], are filled in on the card with the data of the return.
 
 <Tip>
-  You solve many clarification cases by fixing the cause and restarting the process in the return, e.g. with **Retry failed return** under **Actions**, **Retry failed refund** or **Execute exchange processing**.
+  Each clarification card shows exactly one button:
+
+  - **Retry**: Fix the cause and restart the failed step. If it works, the issue closes by itself.
+  - **Mark resolved**: Check the return and close the issue, optionally with a note for the timeline.
+  - **Refund manually**: Refund the return yourself. As soon as the refund goes through, the issue closes by itself.
+  - **Mention @ToernBot in the chat**: toern support needs to look into the problem.
+
+  Automated processing only continues once all issues of a return are resolved.
 </Tip>
 
-### General clarification cases when creating returns
+### Return label
+
+The return or exchange label could not be created.
 
 <AccordionGroup>
-  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
-    **Cause:** Your shop system is not supported by toern.
+  <Accordion title="Customer address is incomplete">
+    The return label could not be created because the customer address is missing something, for example the street, house number or postal code. Complete it under Customer Information › Edit customer, then click **Retry** on the clarification card.
 
-    **Solution:** Add the details needed to use Shopify (see [Shopify integration](/en/getting-started/shopify-integration)) or contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Error during label creation. Our support team is already on it. For further questions contact support@re-toern.de.">
-    **Cause:** Due to a technical problem, the return label could not be created and the return was not created.
+  <Accordion title="Carrier rejected the address">
+    Your carrier did not accept the customer address. Street, house number, postal code and city have to be right, and no field may be too long. Correct it under Customer Information › Edit customer, then click **Retry** on the clarification card.
 
-    **Solution:** Check the customer's address, the country settings in the country mapping and the carrier settings (see [Return methods](/en/returns/return-methods)). Fix the errors and run the return again with **Retry failed return**.
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Return status not found">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Carrier is not set up">
+    The return label could not be created because the access credentials of your carrier are missing, incomplete or invalid. Check them under Settings › Returns Shipping Services, in the Access Credentials of your carrier, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No email event created, could not send email notification">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Carrier login failed">
+    Your carrier rejected your access credentials. They have to be right and be your live credentials, not test ones. Check them under Settings › Returns Shipping Services, in the Access Credentials of your carrier, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Error creating RMA PDF">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Carrier is not set up for this country">
+    Your carrier has no return address for returns from [country]. Add one under Settings › Returns Shipping Services, in the country settings of your carrier, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Return contains Set item requiring clarification">
-    **Cause:** The return contains a set. toern can't process sets automatically.
+  <Accordion title="Return method is not set up correctly">
+    The return method of this return has no carrier, or its carrier is not set up correctly. Check the return method under Settings › Returns › Return Methods, then click **Retry** on the clarification card.
 
-    **Solution:** Process the return manually in toern (see [Sets](/en/returns/sets)).
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Internal Error in Return Processing (collecting database ressources). Please contact support@re-toern.de for help">
-    **Cause:** The return could not be created for unknown technical reasons.
+  <Accordion title="No label possible from this country">
+    Your carrier cannot create a return label from [country], because these returns need customs documents, which are not supported yet. Send the customer return instructions yourself, then click **Mark resolved** on the clarification card. To avoid this, offer a different return method for [country] under Settings › Returns › Return Methods.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Carrier temporarily unavailable">
+    Your carrier did not respond or reported a temporary error while creating the label. Wait a few minutes, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
+
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Label has no tracking number">
+    Your carrier created the return label without a tracking number, so it could not be added to the return in your shop. Mention **@ToernBot** in the chat so we can check the label.
+
+    **Button on the clarification card:** Mention @ToernBot in the chat
+  </Accordion>
+  <Accordion title="Return label could not be created">
+    Creating the return label failed for an unknown reason. Check the customer address under Customer Information › Edit customer, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
+
+    If you generated the label yourself under Shipping Labels, the card shows **Mark resolved** instead: fix the cause, generate the label again under **Shipping Labels › Generate New Return Label**, then mark the issue as resolved.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Sendcloud is not set up for exchange labels">
+    The shipping label for the exchange items could not be created because your Sendcloud access credentials are missing. Add them under Settings › Integrations › Sendcloud › Access Credentials, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Sendcloud login failed">
+    Sendcloud rejected your access credentials, so the shipping label for the exchange items could not be created. Check them under Settings › Integrations › Sendcloud › Access Credentials, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="No Sendcloud sender address for this country">
+    No Sendcloud sender address is set for [country], so the shipping label for the exchange items could not be created. Add one under Settings › Integrations › Sendcloud › Sender Addresses, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Sendcloud rejected the exchange label">
+    Sendcloud did not create the shipping label for the exchange items. Usually the customer address is incomplete, or none of your shipping rules in Sendcloud fits this shipment. Check the address under Customer Information › Edit customer and your shipping rules in Sendcloud, then click **Retry** on the clarification card. Message from Sendcloud: "[message]"
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Exchange label could not be created">
+    The shipping label for the exchange items could not be created, and Sendcloud gave no reason. Check the address under Customer Information › Edit customer and your Sendcloud settings under Settings › Integrations › Sendcloud, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Exchange label not added to the order">
+    The shipping label for the exchange items was created, but could not be added to the order in Shopify. Click **Retry** on the clarification card; the label is not created again.
+
+    **Button on the clarification card:** Retry
   </Accordion>
 </AccordionGroup>
 
-### Shopify-specific clarification cases when creating returns
+### Shop sync
+
+The return could not be created or updated in your shop.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
-    **Cause:** The Shopify shop name and/or API key are missing in your general settings. Without them, toern can't do anything in Shopify.
+  <Accordion title="Shop connection is missing">
+    The access credentials of your shop are missing, so we could not reach it. Reconnect your shop under Settings › Shop Integration › Shopify Access Credentials, then click **Retry** on the clarification card.
 
-    **Solution:** Add the shop name and API key in your Shopify connection settings (see [Shopify integration](/en/getting-started/shopify-integration)).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No successful fulfillments found for the order. Please check that order line items are marked as successfully fulfilled">
-    **Cause:** The order is not yet marked as **fulfilled** in Shopify. That's why toern can't start a return in Shopify or issue a refund.
+  <Accordion title="Shop denied access">
+    Your shop rejected our request. Usually the toern app was uninstalled, its permissions were changed, or the shop is paused. In Shopify, check under Apps that the toern app is installed and has all permissions, then click **Retry** on the clarification card.
 
-    **Solution:** Update the order's fulfillment status in Shopify. Then click **Retry failed return** under **Actions** in toern. The return is created again and the process continues as usual.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Some return items have no fulfillmentLineItemId. Please check the fulfillments in your shop. This might indicate that an item was not fulfilled or the fulfillment line item variant was deleted.">
-    **Cause:** An item of the order is not yet marked as **fulfilled** in Shopify. That's why toern can't start a return in Shopify or issue a refund.
+  <Accordion title="Shop temporarily unavailable">
+    Your shop did not respond or is busy right now. Wait a few minutes, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Update the order's fulfillment status in Shopify. Then click **Retry failed return** under **Actions** in toern. The return is created again and the process continues as usual.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No variant id found for exchange item. Please check the exchange variant id in your return item.">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Shop system is not set">
+    No supported shop system is set for your brand, so the return could not be synced to your shop. Mention **@ToernBot** in the chat so we can check your shop settings.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
-  <Accordion title="No return id found in the response from Shopify. This might indicate that the return creation failed or the return was not created successfully">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Return could not be created in your shop">
+    The return could not be created in your shop, and your shop gave no reason. Check in Shopify that the order exists and that its items are shipped (fulfilled) and not returned yet, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
-    **Cause:** An item of the order is not yet marked as **fulfilled** in Shopify. That's why toern can't start a return in Shopify or issue a refund.
+  <Accordion title="Shopify rejected the return">
+    Shopify did not create this return. Usually its items were already returned or refunded there, the order was canceled, or the items are not shipped (fulfilled) yet. Open the order in Shopify and fix it there, then click **Retry** on the clarification card. Message from Shopify: "[message]"
 
-    **Solution:** Update the order's fulfillment status in Shopify. Then click **Retry failed return** under **Actions** in toern. The return is created again and the process continues as usual.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="The original currency of the order could not be found. For this reason the return creation stopped to prevent wrong label & return fees from occuring">
-    **Cause:** The order's currency is not yet set up in toern. The process was stopped to prevent wrong amounts and fees.
+  <Accordion title="Tracking could not be added in your shop">
+    The return was created in your shop, but the return label and tracking number could not be added to it. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de) and ask the team to add the currency.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing variantId or countryCode. Could not get presentment money for product variant">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Return fee could not be calculated">
+    The return fee of this return could not be calculated, for example because no fee or currency is set for the customer's country. Check the return fees under Settings › Returns › Return Methods, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Unsupported presentment currency for return fee calculation">
-    **Cause:** The order's currency is not yet set up in toern. The process was stopped to prevent wrong amounts and fees.
+  <Accordion title="Return could not be updated in your shop">
+    The items of this return were changed, but the return in your shop could not be updated, so the refund was not started. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de) and ask the team to add the currency.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Exchange process failed in Shopify">
-    **Cause:** The exchange could not be processed in Shopify for unknown technical reasons.
+  <Accordion title="Return in your shop can no longer be changed">
+    The items of this return were changed, but the return in Shopify has the status "[status]" and can no longer be updated. Update it in Shopify yourself. Then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Check the process in Shopify, then try again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error requesting fulfillments from Shopify">
-    **Cause:** An internal error occurred. The return could not be created.
+  <Accordion title="Return could not be canceled in your shop">
+    Canceling this return failed in Shopify, so it was not canceled in toern either. In Shopify it may already be refunded, exchanged or closed. Check the return in Shopify, and if it still needs to be canceled, cancel it again under Actions › Cancel Return. Then click **Mark resolved** on the clarification card.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error requesting return creation in Shopify">
-    **Cause:** The return could not be created in Shopify for unknown technical reasons.
-
-    **Solution:** Check the return in Shopify, then try again in toern with **Retry failed return**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error processing exchange items in Shopify.">
-    **Cause:** The exchange could not be processed in Shopify for unknown technical reasons.
-
-    **Solution:** Check the process in Shopify, then try again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Could not get price for exchange variant">
-    **Cause:** The exchange could not be processed in Shopify for unknown technical reasons.
-
-    **Solution:** Check the process in Shopify, then try again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
 </AccordionGroup>
 
-### Xentral-specific clarification cases when creating returns
+### Fulfillment
+
+Your shop has nothing returnable for the items of the order.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key).">
-    **Cause:** Your Xentral settings are incomplete. That's why toern isn't authorized to do anything in Xentral.
+  <Accordion title="Order has nothing to return in your shop">
+    Your shop reports no items of this order that can be returned. Usually the order is not shipped (fulfilled) yet, its items were already returned, or the order was canceled. Mark the items as fulfilled in Shopify, then click **Retry** on the clarification card.
 
-    **Solution:** Complete your [Xentral settings](/en/integrations/xentral).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Xentral activated, but missing return reason mapping">
-    **Cause:** There is no default return reason mapping in your Xentral settings. Without this mapping, toern can't create returns in Xentral.
+  <Accordion title="Some items are not fulfilled">
+    These items cannot be returned in your shop yet, because they are not shipped (fulfilled) or were already returned: [items]. Mark them as fulfilled in Shopify, then click **Retry** on the clarification card. If they were canceled and never sent, click **Mark received** at the top of the return, remove them under Returned Items, then click **Retry** on the clarification card.
 
-    **Solution:** Open the [Xentral settings](/en/integrations/xentral) and click **Query Return Reasons**. Pick an ID from the list of Xentral reasons and set it as the default in toern.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
-    **Cause:** There is no default return reason mapping in your Xentral settings. Without this mapping, toern can't create returns in Xentral.
+  <Accordion title="Order item not found in your shop">
+    An item of this order could not be found in your shop, for example because it was deleted. Mention **@ToernBot** in the chat so we can check the order.
 
-    **Solution:** Open the [Xentral settings](/en/integrations/xentral) and click **Query Return Reasons**. Pick an ID from the list of Xentral reasons and set it as the default in toern.
-  </Accordion>
-  <Accordion title="No return items to create return in Xentral">
-    **Cause:** An internal error occurred. The return could not be created.
-
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="No return data returned from Xentral API">
-    **Cause:** An internal error occurred. The return could not be created.
-
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing salesOrderId for Xentral return creation">
-    **Cause:** An internal error occurred. The return could not be created.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Invalid return item id for Xentral return">
-    **Cause:** An internal error occurred. The return could not be created.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Invalid return item quantity for Xentral return">
-    **Cause:** An internal error occurred. The return could not be created.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Create return in Xentral failed">
-    **Cause:** The return could not be created in Xentral for unknown technical reasons.
-
-    **Solution:** Check the return in Xentral, then try again in toern with **Retry failed return**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
 </AccordionGroup>
 
-### General clarification cases during refunds
+### Exchange
+
+The exchange or the exchange order could not be processed.
 
 <AccordionGroup>
-  <Accordion title="Brand settings not found">
-    **Cause:** Your brand's refund settings were not found. That's why no refund can be processed.
+  <Accordion title="Exchange item has no replacement">
+    An item of this return is marked for exchange, but no replacement item is set. Mention **@ToernBot** in the chat so we can check the exchange.
 
-    **Solution:** Open the [refund settings](/en/returns/refund) and adjust them.
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
-  <Accordion title="Return items not found">
-    **Cause:** The registered return items were not found in the database. That's why no refund can be processed.
+  <Accordion title="Replacement item not available">
+    The price of the replacement item could not be loaded from Shopify. The item may have been deleted or is not sold in the customer's market. Check the item in Shopify, then click **Retry** on the clarification card.
 
-    **Solution:** Process the refund manually in your shop system, then close the return manually in toern.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Return status not found">
-    **Cause:** The return status was not found in the system. An internal error occurred. The refund can't be processed.
+  <Accordion title="Exchange could not be checked in Shopify">
+    The return was created in Shopify, but its exchange order could not be checked afterwards. Check the exchange order in Shopify, and mention **@ToernBot** in the chat before you click **Retry**, so the return is not created twice.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
-  <Accordion title="Refund item not found">
-    **Cause:** The item to be refunded was not found in the system. An internal error occurred. The refund can't be processed.
+  <Accordion title="Exchange order could not be created">
+    The order for the replacement items could not be created in your shop, and your shop gave no reason. Check in Shopify that every replacement item still exists and is in stock, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Refund not found">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Shopify rejected the exchange order">
+    Shopify did not create the order for the replacement items of this exchange. Usually a replacement item is out of stock, was deleted or is no longer sold in the customer's market. Check the replacement items in Shopify, then click **Retry** on the clarification card. Message from Shopify: "[message]"
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Preferred refund method could not be found">
-    **Cause:** The stored refund method was not found. That's why no refund can be processed.
+  <Accordion title="Replacement item out of stock">
+    At least one replacement item of this exchange is out of stock in Shopify, so the exchange order could not be created. Make sure every replacement item is in stock in Shopify, then click **Retry** on the clarification card.
 
-    **Solution:** Process the refund manually in your shop system, then close the return manually in toern.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No refund settings found. Please update the settings to include refund configurations">
-    **Cause:** The refund settings were not found. That's why no refund can be processed.
+  <Accordion title="Replacement item no longer exists in your shop">
+    One or more replacement items of this exchange no longer exist in Shopify, so the exchange order could not be created. Add them back in Shopify, then click **Retry** on the clarification card. If that is not possible, mention **@ToernBot** in the chat.
 
-    **Solution:** Open the [refund settings](/en/returns/refund) and adjust them. If that doesn't help, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Shop system currently not supported for auto refund. Contact support for further assistance (support@re-toern.de).">
-    **Cause:** toern currently supports automatic refunds for Shopify only.
+  <Accordion title="Exchange items not ready for shipping yet">
+    Shopify has not prepared the exchange items of this return for shipping yet, so they could not be released. Wait a few minutes, then click **Retry** on the clarification card. If the exchange was handled outside toern, for example because the return was refunded directly in Shopify, click **Mark complete** at the top of the return instead.
 
-    **Solution:** Process the refund manually in your shop system.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Unknown refund service used for auto refund. Contact support for further assistance (support@re-toern.de)">
-    **Cause:** The refund method is not yet enabled for automation in toern. The refund can't be processed.
+  <Accordion title="Exchange items could not be released for shipping">
+    The exchange items are on hold in Shopify, and the hold could not be released, so they are not sent yet. Click **Retry** on the clarification card. If it fails again, release the hold on the exchange order in Shopify yourself, then click **Retry** on the clarification card again.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de) so the method gets enabled.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Refund failed">
-    **Cause:** Something went wrong during the refund. No further information was passed to toern.
+  <Accordion title="Reserved exchange order could not be released">
+    The reservation tag could not be removed from the exchange order in Shopify, so the order may still be held back from shipping. Click **Retry** on the clarification card. If it fails again, remove the tag from the order in Shopify yourself, then click **Retry** on the clarification card again.
 
-    **Solution:** Check in your shop system why the refund failed and run it again manually.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Line items have changed, but this return includes exchange items. Automatic updates in Shopify are not possible. Please update the return manually in Shopify to ensure accurate tracking. The refund must also be processed manually">
-    **Cause:** The return's items were changed although it includes an exchange. This can lead to an incorrect refund.
+  <Accordion title="Return not received in time, exchange order canceled">
+    The return did not arrive within X days, so the exchange order reserved for it was canceled in Shopify and its stock released. If the return still arrives, decide how to continue with the exchange, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Check the items and what should be refunded. Process the refund manually in Shopify.
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Line items have changed, but this return already has a return created in Xentral. Automatic updates in Xentral are not possible. Please update the return manually in Xentral and Shopify to ensure accurate tracking. The refund must also be processed manually.">
-    **Cause:** The return's items were changed although a return was already created in Xentral. This change can't be applied to Xentral automatically.
+  <Accordion title="Exchange items changed">
+    An exchange item of this return was changed, so the replacement items being sent may no longer match the return, and the refund may be wrong. Check the exchange order in Shopify and the refund under Return Refunds, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Process the (remaining) refund manually in Shopify and update the return in Xentral accordingly.
-  </Accordion>
-  <Accordion title="The total return value exceeds the maximum refund threshold specified in the settings. The refund must be processed manually.">
-    **Cause:** In the [refund settings](/en/returns/refund) you can set a maximum amount for automatic refunds. This return exceeds it, so you have to refund it manually.
-
-    **Solution:** If you don't want a manual refund, raise the maximum amount in the settings.
-  </Accordion>
-  <Accordion title="The total gift card value (including bonus) exceeds the gift card threshold specified in the settings. The refund must be processed manually.">
-    **Cause:** In the [refund settings](/en/returns/refund) you can set a maximum amount for gift card refunds. This return exceeds it, so you have to refund it manually.
-
-    **Solution:** If you don't want a manual refund, raise the maximum amount in the settings.
-  </Accordion>
-  <Accordion title="Order ID is required. Please contact support for further help (support@re-toern.de).">
-    **Cause:** An internal error occurred. The refund can't be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="An error occurred while checking blocked discount codes. Please contact support for further help (support@re-toern.de).">
-    **Cause:** The discount code used is blocked in your settings. The refund isn't processed automatically because it differs from Shopify's suggestion. You have to process it manually.
-
-    **Solution:** If the discount code shouldn't be blocked, remove it from the list of blocked discount codes in the [refund settings](/en/returns/refund).
-  </Accordion>
-  <Accordion title="Internal Error in Refund Processing (collecting database resources). Please contact support@re-toern.de for help.">
-    **Cause:** An internal error occurred. The refund can't be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
 </AccordionGroup>
 
-### Shopify-specific clarification cases during refunds
+### Refund
+
+The refund could not be carried out automatically, or it was stopped on purpose so you can check it.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly.">
-    **Cause:** The Shopify shop name and/or API key are missing in your general settings. Without them, toern can't do anything in Shopify.
+  <Accordion title="No refund method selected">
+    This return has no refund method, so it could not be refunded automatically. Click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Add the shop name and API key in your Shopify connection settings (see [Shopify integration](/en/getting-started/shopify-integration)).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="The original currency of the order could not be found. For this reason the refund creation stopped to prevent wrong refund amounts from occuring.">
-    **Cause:** The order's currency is not yet set up in toern. The process was stopped to prevent wrong amounts and fees.
+  <Accordion title="Return from outside the EU">
+    This return comes from [country], outside the EU. As agreed with you, these returns are not refunded automatically. Check the return, then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de) and ask the team to add the currency.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Cannot find return with the given external return ID in Shopify">
-    **Cause:** The return for the refund was not found. An internal error occurred. The refund can't be processed.
+  <Accordion title="Return value above the automatic refund limit">
+    The value of this return is above your limit for automatic refunds under Settings › Refund › Automatic Refund Limit. Check the return, then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="No returnable fulfillments found for the order. Please check the order and fulfillments in your shop">
-    **Cause:** The order is not yet marked as **fulfilled** in Shopify. That's why toern can't start a return in Shopify or issue a refund.
+  <Accordion title="Gift card value above the automatic refund limit">
+    The gift card value of this return, including the bonus, is above your limit for automatic gift card refunds under Settings › Refund › Gift Card Configuration. Check the return, then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Update the order's fulfillment status in Shopify. Then click **Retry failed return** under **Actions** in toern. The return is created again and the process continues as usual.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="No variant id or fulfillment line item id found for returnable fulfillment line item. This might indicate that the returnable fulfillment line item is not properly set up in Shopify">
-    **Cause:** An item of the order is not yet marked as **fulfilled** in Shopify. That's why toern can't start a return in Shopify or issue a refund.
+  <Accordion title="Customer traffic lights not all green">
+    Not all traffic lights of this customer are green, so the automatic refund was stopped. Check the customer under Customer Information, then click **Refund manually** on the clarification card and change the return fee there if needed; this issue then closes by itself.
 
-    **Solution:** Update the order's fulfillment status in Shopify. Then click **Retry failed return** under **Actions** in toern. The return is created again and the process continues as usual.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Customer ID not found for gift card issuance">
-    **Cause:** The customer ID was not found. That's why no refund can be processed.
+  <Accordion title="Discount code excluded from automatic refunds">
+    This order uses the discount code "[discount code]", which you excluded from automatic refunds under Settings › Refund › Discount Code Clarifications. Click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Check in Shopify whether the customer still exists and contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Shopify order was already cancelled">
-    **Cause:** The order was already canceled in Shopify. That's why toern can't create a return.
+  <Accordion title="Discount code needs a manual refund">
+    As agreed with you, orders with the discount code "[discount code]" are not refunded automatically. Check the return, then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Cancel the return in toern as well by clicking **Cancel**.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Order is not refundable. Please make sure that the order is fully paid before issuing a refund">
-    **Cause:** The order is marked as not refundable in Shopify. That's why toern can't issue a refund.
+  <Accordion title="Buy X get Y discount excluded from automatic refunds">
+    This order uses the buy X get Y discount "[discount]", and you excluded these discounts from automatic refunds under Settings › Refund › Block BuyXGetY Discounts. Click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Check the order status in Shopify. Make sure the order is fully paid, then run the return again with **Retry failed return**.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="This order cannot be refunded because its payment status is not eligible for refunds">
-    **Cause:** The order is marked as not refundable in Shopify. That's why toern can't issue a refund.
+  <Accordion title="Discounts cannot be refunded automatically">
+    This order combines the buy X get Y discount "[discount]" with other discounts, so the refund amount cannot be calculated automatically. Click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Check the order status in Shopify. Make sure the order is fully paid, then run the return again with **Retry failed return**.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Shopify order had more than 50 items. Shopify limits refunds to 50 items per request">
-    **Cause:** The order contains more than 50 items in Shopify. Through the return portal, toern can cover at most 50 items.
+  <Accordion title="Discounts of the order could not be checked">
+    The discounts of this order could not be loaded from Shopify, so the refund amount could not be calculated safely. Click **Retry** on the clarification card. If it fails again, refund it manually with **Create New Refund** under Return Refunds.
 
-    **Solution:** Check directly with the customer how many items should be refunded and process the refund manually in Shopify.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Return status is either canceled or declined, can't proceed with the refund">
-    **Cause:** The return is either canceled or declined in Shopify. That's why toern can't continue the return process.
+  <Accordion title="Changed return with exchange items">
+    The items of this return were changed, but it includes exchange items, so the return in Shopify could not be updated automatically. Update the return in Shopify yourself, check that the replacement item is still right and let the customer know if needed. Then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Check the return in Shopify, then close it in toern.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Insufficient transaction amounts to fulfill the refund">
-    **Cause:** The available balance, for example in PayPal, isn't enough for the refund.
+  <Accordion title="Return changed after it was created in Xentral">
+    The items or the return fee of this return were changed after it was created in Xentral, and that cannot be updated automatically. Update the return in Xentral and in Shopify yourself. Then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Top up the balance and try the refund again with **Retry failed refund**.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error during requesting Shopify for refund">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Return could not be checked before the refund">
+    We could not check in your shop whether the items of this return were changed, so the refund was not started. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Error requesting order info from Shopify">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Check before the automatic refund failed">
+    The extra check agreed with you before automatic refunds could not be completed, so the return was not refunded. Check the return yourself, then click **Retry** on the clarification card to refund it.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Error requesting returnProcess from Shopify">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Refund settings are missing">
+    No refund settings are set up for your brand, so the return could not be refunded. Set them up under Settings › Refund, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Error creating gift card in Shopify">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Gift card refunds are turned off">
+    This return should be refunded as a gift card, but gift card refunds are turned off. Turn them on under Settings › Refund › Gift Card Refunds, then click **Retry** on the clarification card. Or refund it manually with **Create New Refund** under Return Refunds.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Return update failed. Updated shop return not connected. Please check the return and return items in your shop">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Gift card amount is 0">
+    The gift card would have been worth 0 or less, so Shopify did not create it. This happens when the returned items cost nothing, for example free add-ons, or when an exchange already covers their value. The return itself was already processed in Shopify. If nothing is owed to the customer, click **Mark complete** at the top of the return. Otherwise click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Return cannot be canceled. Return status is not cancelable. Therefore return can not by synced with adjusted return items">
-    **Cause:** The return can't be canceled. That's why **Cancel** can't be executed in the connected shop system.
+  <Accordion title="Order was canceled in Shopify">
+    The order was canceled in Shopify, so it cannot be refunded automatically. Check the order in Shopify. If anything is still owed, click **Refund manually** on the clarification card; this issue then closes by itself. If nothing is owed, click **Mark complete** at the top of the return.
 
-    **Solution:** Check the state of the return in your shop system and close it there.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error during canceling return in Shopify. Return was not canceled & synced successfully">
-    **Cause:** The return can't be canceled. That's why **Cancel** can't be executed in the connected shop system.
+  <Accordion title="Order already has other refunds">
+    The order already has refunds in Shopify that were not made by toern, so it was not refunded automatically, to avoid paying the customer twice. Check these refunds in Shopify. If anything is still owed, click **Refund manually** on the clarification card; this issue then closes by itself. If nothing is owed, click **Mark complete** at the top of the return.
 
-    **Solution:** Check the state of the return in your shop system and close it there.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error during recreating return in Shopify. Return was not created successfully">
-    **Cause:** The return could not be created in Shopify for technical reasons.
+  <Accordion title="Payment status does not allow a refund">
+    The payment status of the order in Shopify is "[status]", which does not allow a refund. Check the order in Shopify. If the customer paid and is owed money, click **Refund manually** on the clarification card; this issue then closes by itself. If nothing is owed, click **Mark complete** at the top of the return.
 
-    **Solution:** Check the return in Shopify, then try again in toern with **Retry failed return**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error during recreating return in Shopify. Original currency of the order was not found">
-    **Cause:** The order's currency is not yet set up in toern. The process was stopped to prevent wrong amounts and fees.
+  <Accordion title="Order cannot be refunded in Shopify">
+    Shopify reports that this order cannot be refunded. Check the order in Shopify and, if anything is owed, refund the customer another way, for example with your payment provider. Then click **Mark complete** at the top of the return.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de) and ask the team to add the currency.
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Error during requesting Shopify. Return was not requested, canceled or created successfully">
-    **Cause:** There is probably an overload error. The refund could not be processed.
+  <Accordion title="Payment method cannot be refunded automatically">
+    The order was paid with [payment method], which cannot be refunded automatically. Refund the customer with your payment provider, then click **Mark complete** at the top of the return.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Missing returnProcess in response">
-    **Cause:** There is probably an overload error. The refund could not be processed.
+  <Accordion title="Shopify rejected the refund">
+    Shopify refused the refund, so no money was paid out. Usually the amount is higher than what is still refundable on the order, the items were already refunded there, or the payment can no longer be refunded. Check the order and its refunds in Shopify, then click **Retry** on the clarification card or refund it manually with **Create New Refund** under Return Refunds. Message from Shopify: "[message]"
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="GraphQL Error occurred">
-    **Cause:** There is probably an overload error. The refund could not be processed.
+  <Accordion title="Payments do not cover the refund amount">
+    The payments of the order do not cover the refund amount, so it could not be split across them automatically. Check the amount, then click **Refund manually** on the clarification card; this issue then closes by itself.
 
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
   </Accordion>
-  <Accordion title="Unexpected error during refund">
-    **Cause:** The return could not be refunded in Shopify for unknown technical reasons.
+  <Accordion title="Selected items do not match the return">
+    The items selected for the manual refund no longer match this return. Click **Refund manually** on the clarification card and check the selection; this issue then closes by itself.
 
-    **Solution:** Check the refund in Shopify, then try again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Return for the selected items could not be created">
+    Some selected items are not part of any return, and Shopify did not accept a new return for them. Check in Shopify that they can still be returned and are not refunded yet, and refund them directly in Shopify. For the rest, click **Refund manually** on the clarification card and leave these items unselected; this issue then closes by itself.
+
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Refund could not be carried out">
+    The refund could not be carried out, and Shopify gave no reason. First check the order and its refunds in Shopify, so the customer is not paid twice. Then click **Retry** on the clarification card or refund it manually with **Create New Refund** under Return Refunds. If it fails again, mention **@ToernBot** in the chat.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Payment provider rejected the refund">
+    The refund was started, but the payment provider rejected it, so the customer did not get the money. The refund under Return Refunds has the details. Shopify still counts its items as refunded, so the manual refund shows them as already refunded and you won't be able to select them: just enter the amount. Click **Refund manually** on the clarification card; this issue then closes by itself.
+
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Exchange return was already refunded">
+    This return is on an exchange order and is refunded through the original order, which already has a refund for it. To avoid paying the customer twice, nothing was refunded. Check the refunds of the original order in Shopify. If anything is still owed, refund it from the return of the original order with **Create New Refund**. Then click **Mark complete** at the top of the return.
+
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Refund for the exchange could not be determined">
+    This return is on an exchange order, but the original order or return it came from, or the value kept from it, could not be found. So the refund amount is unknown and nothing was refunded. Mention **@ToernBot** in the chat so we can check the exchange.
+
+    **Button on the clarification card:** Mention @ToernBot in the chat
+  </Accordion>
+  <Accordion title="Return not found in Shopify">
+    The return could not be found on the order in Shopify, for example because it was deleted or canceled there, so nothing was refunded. Check the order in Shopify, then click **Refund manually** on the clarification card; this issue then closes by itself.
+
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Order has no customer for the gift card">
+    A gift card is always issued to a customer, but this order has no customer in Shopify, so no gift card was created. Click **Refund manually** on the clarification card and refund to the original payment method; this issue then closes by itself.
+
+    **Button on the clarification card:** Refund manually
+  </Accordion>
+  <Accordion title="Refunded return could not be closed in your shop">
+    The refund went through, but the return could not be closed in your shop. Click **Retry** on the clarification card; the refund is not repeated.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Items changed after the refund">
+    The items of this return were changed after it was refunded or completed, so the refund may no longer be right, for example an item is missing or was refunded too much. Check the refund under Return Refunds and correct it if needed, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
   </Accordion>
 </AccordionGroup>
 
-### Xentral-specific clarification cases during refunds
+### Xentral
+
+The return, exchange order or credit note could not be synced with Xentral.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated, but missing Xentral access data (xentral_id or api_key)">
-    **Cause:** Your Xentral settings are incomplete. That's why toern isn't authorized to do anything in Xentral.
+  <Accordion title="Xentral connection is incomplete">
+    Your Xentral access credentials are missing. Add them under Settings › Integrations › Xentral › Access Credentials, then click **Retry** on the clarification card.
 
-    **Solution:** Complete your [Xentral settings](/en/integrations/xentral).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Xentral activated, but missing return reason mapping">
-    **Cause:** There is no default return reason mapping in your Xentral settings. Without this mapping, toern can't create returns in Xentral.
+  <Accordion title="Xentral denied access">
+    Xentral rejected your access credentials. Check under Settings › Integrations › Xentral › Access Credentials that your access token is valid and has all required permissions, then click **Retry** on the clarification card.
 
-    **Solution:** Open the [Xentral settings](/en/integrations/xentral) and click **Query Return Reasons**. Pick an ID from the list of Xentral reasons and set it as the default in toern.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing Xentral return reason ID for return reason and no default return reason ID set in Xentral meta settings">
-    **Cause:** There is no default return reason mapping in your Xentral settings. Without this mapping, toern can't create returns in Xentral.
+  <Accordion title="Xentral temporarily unavailable">
+    Xentral did not respond or reported a temporary error. Wait a few minutes, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Open the [Xentral settings](/en/integrations/xentral) and click **Query Return Reasons**. Pick an ID from the list of Xentral reasons and set it as the default in toern.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No return items to create return in Xentral">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Order not found in Xentral">
+    This order does not exist in Xentral. Check in Xentral that the order was imported, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing return ID in return data">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="No default Xentral return reason">
+    The return could not be created in Xentral because no default return reason for Xentral is set. Set one under Settings › Integrations › Xentral › Return Reason Mapping, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing invoice ID in order data">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Item not found in the Xentral order">
+    A returned item could not be found in the order in Xentral. Check in Xentral that the order contains this item, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing salesOrderId">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Xentral did not confirm the return">
+    Xentral did not confirm that the return was created. Check in Xentral whether it exists, and mention **@ToernBot** in the chat before you click **Retry**, so it is not created twice.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
-  <Accordion title="Invalid item id">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Return could not be created in Xentral">
+    The return could not be created in Xentral, and Xentral gave no reason. Check in Xentral that the order exists and contains the returned items, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Invalid item quantity">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Xentral exchange settings are missing">
+    The exchange order could not be created in Xentral because your Xentral exchange settings are missing. Check and save them under Settings › Integrations › Xentral › Exchange Orders, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No return data returned from Xentral API">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="No Xentral shipping method for this country">
+    No Xentral shipping method is set for [country], so the exchange order could not be created in Xentral. Add one under Settings › Integrations › Xentral › Exchange Orders, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing credit note ID in response">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Replacement item not found in Xentral">
+    The replacement item with SKU [SKU] was not found in Xentral or is not linked to the Shopify item, so the exchange order could not be created there. Sync the item from Shopify in Xentral, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing success confirmation in response">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Xentral did not confirm the exchange order">
+    Xentral did not confirm that the exchange order was created. Check in Xentral whether it exists, and mention **@ToernBot** in the chat before you click **Retry**, so it is not created twice.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
   </Accordion>
-  <Accordion title="Create return in Xentral failed">
-    **Cause:** The return could not be created in Xentral for unknown technical reasons.
+  <Accordion title="Exchange order could not be created in Xentral">
+    The order for the replacement items could not be created in Xentral, and Xentral gave no reason. Check in Xentral that the replacement items exist and are linked to Shopify, then click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Check the return in Xentral, then try again in toern with **Retry failed return**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Close return in Xentral failed">
-    **Cause:** The return could not be closed in Xentral for unknown technical reasons.
+  <Accordion title="Order has no Xentral invoice">
+    The refund went through, but the credit note could not be created because this order has no invoice in Xentral. Create the invoice in Xentral, then click **Retry** on the clarification card; the refund is not repeated.
 
-    **Solution:** Check the return in Xentral, then try closing it again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="View return in Xentral failed">
-    **Cause:** An internal error occurred. The refund can't be processed.
+  <Accordion title="Xentral service fee is not set up completely">
+    A Xentral service fee is missing its item, amount or currency, so the credit note could not be created. Complete it under Settings › Integrations › Xentral › Service Fees Credit Note, then click **Retry** on the clarification card; the refund is not repeated.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Create credit note in Xentral failed">
-    **Cause:** The credit note could not be created in Xentral for unknown technical reasons.
+  <Accordion title="Xentral did not confirm the credit note">
+    Xentral did not confirm that the credit note was created. Check in Xentral whether it exists, and mention **@ToernBot** in the chat before you click **Retry**, so it is not created twice.
 
-    **Solution:** Check the return in Xentral, then try creating the credit note again in toern with **Retry failed refund**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mention @ToernBot in the chat
+  </Accordion>
+  <Accordion title="Credit note could not be created in Xentral">
+    The refund went through, but the credit note could not be created in Xentral. Click **Retry** on the clarification card; the refund is not repeated. If it fails again, mention **@ToernBot** in the chat.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Old Xentral return could not be replaced">
+    The items of this return were changed, but Xentral could not delete the old return [return number] to create it again: "[message]". Delete or correct it in Xentral, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Return does not exist in Xentral">
+    The return could not be closed in Xentral because it was never created there. Create the return in Xentral, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="No Xentral storage location for this condition">
+    The return was closed in Xentral, but an item could not be restocked because no warehouse or storage location is set for the condition "[condition]". Add it under Settings › Integrations › Xentral › Restock Warehouse and Storage Location Map, then click **Retry** on the clarification card.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Return could not be closed in Xentral">
+    The refund went through, but the return could not be closed in Xentral. Click **Retry** on the clarification card; the refund is not repeated. If it fails again, mention **@ToernBot** in the chat.
+
+    **Button on the clarification card:** Retry
+  </Accordion>
+  <Accordion title="Order could not be loaded from Xentral">
+    The refund went through, but the order could not be loaded from Xentral for the next steps. Click **Retry** on the clarification card; the refund is not repeated. If it fails again, mention **@ToernBot** in the chat.
+
+    **Button on the clarification card:** Retry
   </Accordion>
 </AccordionGroup>
 
-### General clarification cases for exchanges
+### Needs review
+
+Nothing failed, but you should look at the return before it continues.
 
 <AccordionGroup>
-  <Accordion title="Unsupported shop type. Adjust your brand settings accordingly">
-    **Cause:** Your shop system is not supported by toern.
+  <Accordion title="Items may not be in original condition">
+    The customer stated that these items are not unworn, unwashed or unopened: [items]. No return label or instructions were sent. Decide how to handle the return and let the customer know, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Add the details needed to use Shopify (see [Shopify integration](/en/getting-started/shopify-integration)) or contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Brand settings not found for the provided brand ID">
-    **Cause:** Your brand's settings for the exchange were not found. That's why no exchange can be processed.
+  <Accordion title="Return contains a set item">
+    This return contains the set item "[item]", so it was paused for you to check by hand. Once you have checked the return, click **Retry** on the clarification card: the set item then counts as checked and the processing continues.
 
-    **Solution:** Open the [refund settings](/en/returns/refund) and adjust them.
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="ReturnStatus data not found for the provided order ID">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Return contains a pool sofa item">
+    This return contains the pool sofa item "[item]", so it was paused for you to check by hand. Once you have checked the return, click **Retry** on the clarification card: the item then counts as checked and the processing continues.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Order not found for the provided order ID">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Claim is not approved">
+    This claim is not approved yet, so the return could not be processed. Approve it under Approve or decline claim on this return, then click **Retry** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Return items not found for the provided order ID">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Customer not found for the provided customer ID">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Customer ID not found in return status">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Fulfillment order not found in Shopify">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Unexpected fulfillment order status">
-    **Cause:** The fulfillment order of the exchange item should be on **Hold**. It isn't. It was probably changed manually in Shopify.
-
-    **Solution:** Check the fulfillment order of the exchange item in Shopify. If it isn't what you expect, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Failed to release fulfillment hold">
-    **Cause:** For exchanges within an order, the new fulfillment order for the replacement is first set to **On hold** and released after classification. This release failed for technical reasons.
-
-    **Solution:** Check the exchange in Shopify and release the fulfillment order manually. Then close the exchange in toern.
-  </Accordion>
-  <Accordion title="Failed to fetch fulfillment orders from Shopify">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Error releasing fulfillment hold">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Click **Retry failed refund**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Internal Error in Exchange Processing (collecting database resources). Please contact support@re-toern.de for help">
-    **Cause:** The exchange could not be processed for unknown technical reasons.
-
-    **Solution:** Check the exchange in Shopify, then try again in toern with **Execute exchange processing**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
 </AccordionGroup>
 
-### Shopify-specific clarification cases for exchanges
+### Inspection
+
+The inspection of the returned items needs a decision from you.
 
 <AccordionGroup>
-  <Accordion title="Your Shopify shop name or API key is missing in brand settings. Adjust your brand settings accordingly">
-    **Cause:** The Shopify shop name and/or API key are missing in your general settings. Without them, toern can't do anything in Shopify.
+  <Accordion title="Inspected items are not in the order">
+    The inspection reported items that are not part of this order: [items]. The details are in the chat. Check what actually came back, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Add the shop name and API key in your Shopify connection settings (see [Shopify integration](/en/getting-started/shopify-integration)).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Invalid exchange items: missing exchange_variant_id_extern">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Item condition needs a decision">
+    The inspection gave items of this return a condition that you set to need clarification under Settings › Returns › Classification Settings. Check the items under Returned Items and decide how to continue, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="GraphQL Error occurred while creating exchange order.">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Inspection comment needs a decision">
+    The inspection added comments that you set to need clarification under Settings › Returns › Fulfillment based Clarifications: [comments]. Check the return, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Error creating exchange order">
-    **Cause:** The exchange could not be created for unknown technical reasons.
+  <Accordion title="Exchange items changed during inspection">
+    The inspection added or removed exchange items, or marked them as missing. Check under Returned Items that the exchange is still right, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Check the exchange in Shopify, then try again in toern with **Execute exchange processing**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="No order ID returned from Shopify">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Return was inspected X times">
+    This return was inspected X times. Items from the latest inspection were added to it, items from earlier inspections were left as they were. Check the inspections in the chat and update the items under Returned Items if needed, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="HTTP error while creating exchange order">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Inspection does not match the refund">
+    This return was already refunded or completed without an inspection, and the inspection now received does not include all of its items. Check what actually came back and correct the refund under Return Refunds if needed, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Shopify tag addition failed">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Inspected items without SKU">
+    The inspection reported items without a SKU, so they could not be added to the return. Check what actually came back and update the items under Returned Items, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Failed to create return note after Shopify tag failure">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Items reported as not deliverable">
+    The inspection reported items of this return as not deliverable. The details are in the chat. Check the return, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="No external order ID found. Skipping Shopify tag creation">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="None of the items arrived">
+    Your fulfillment service completed the return without receiving any of its items, so they were all marked as missing. Check the return before you refund it, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
   </Accordion>
-  <Accordion title="Error during requesting Shopify for exchange">
-    **Cause:** The exchange could not be created for unknown technical reasons.
+  <Accordion title="Return completed again by Pickware">
+    Pickware completed this return a second time, and the new data was not applied. Check the return in Pickware, then click **Mark resolved** on the clarification card.
 
-    **Solution:** Check the exchange in Shopify, then try again in toern with **Execute exchange processing**. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Return was already inspected">
+    Pickware completed this return after it was already inspected, so the Pickware data was not applied. Check the return in Pickware, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Imported return data does not fit the return">
+    The return data from your fulfillment service does not fit this return: part of a set is missing, or an item came back more often than it can be returned. The imported data is in the chat. Correct the items under Returned Items, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Fulfillment remark needs a decision">
+    Your fulfillment service left a remark on this return that needs a decision. The remark is in the chat. Check the return, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Item classified as C or D">
+    An item of this return was classified as C or D. Check the item under Returned Items and decide how to continue, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
   </Accordion>
 </AccordionGroup>
 
-### Xentral-specific clarification cases for exchanges
+### System
+
+A temporary or internal error on our side.
 
 <AccordionGroup>
-  <Accordion title="Xentral activated but access data (xentral_id or api_key) is missing">
-    **Cause:** Your Xentral settings are incomplete. That's why toern isn't authorized to do anything in Xentral.
+  <Accordion title="Temporary error">
+    A temporary error interrupted the processing of this return. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Complete your [Xentral settings](/en/integrations/xentral).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Xentral meta settings not found for brand.">
-    **Cause:** Your Xentral settings are incomplete. That's why toern isn't authorized to do anything in Xentral.
+  <Accordion title="Return could not be processed">
+    An internal error stopped the processing of this return. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Complete your [Xentral settings](/en/integrations/xentral).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="Missing exchange order ID in Xentral response">
-    **Cause:** An internal error occurred. The exchange could not be processed.
+  <Accordion title="Exchange could not be processed">
+    An internal error stopped the exchange of this return. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
-  <Accordion title="No shipping method mapping found for country code in Xentral meta settings">
-    **Cause:** To create a replacement order in Xentral, toern needs a shipping method. You set it in the Xentral settings in toern.
+  <Accordion title="Refund could not be processed">
+    An internal error stopped the refund of this return. Click **Retry** on the clarification card. If it fails again, mention **@ToernBot** in the chat.
 
-    **Solution:** Complete your [Xentral settings](/en/integrations/xentral).
-  </Accordion>
-  <Accordion title="Invalid number of exchange items (min 1, max 50)">
-    **Cause:** The number of exchange items is invalid. At least 1 and at most 50 items are allowed.
-
-    **Solution:** Process the exchange manually in Xentral, then close it in toern. Alternatively, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Product not found in Xentral for external reference number">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Import sales order in Xentral failed">
-    **Cause:** An external error occurred. The exchange could not be processed.
-
-    **Solution:** Click **Execute exchange processing**. If the error persists, contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing required fields for Xentral order">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
-  </Accordion>
-  <Accordion title="Missing required fields: xentral_product_id or product_quantity">
-    **Cause:** An internal error occurred. The exchange could not be processed.
-
-    **Solution:** Contact support at [support@re-toern.de](mailto:support@re-toern.de).
+    **Button on the clarification card:** Retry
   </Accordion>
 </AccordionGroup>
 
+### Manual
+
+You or your team put the return into clarification yourselves, in the dashboard or via the API.
+
+<AccordionGroup>
+  <Accordion title="Set to clarification by hand">
+    Someone from your team put the return into clarification in the dashboard with **Create Clarification**. The text shows the reason they entered. Handle it, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+  <Accordion title="Set to clarification via the API">
+    The return was put into clarification via the toern API, for example by your fulfillment service or one of your own systems. The text shows the reason that was sent along. Handle it, then click **Mark resolved** on the clarification card.
+
+    **Button on the clarification card:** Mark resolved
+  </Accordion>
+</AccordionGroup>
